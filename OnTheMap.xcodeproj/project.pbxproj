@@ -79,6 +79,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B154718A1DE0437D000226D7 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				B154718B1DE04384000226D7 /* storyboards */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		B154718B1DE04384000226D7 /* storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				B1A15B491DE040FD002A4307 /* Main.storyboard */,
+				B1A15B4E1DE040FD002A4307 /* LaunchScreen.storyboard */,
+			);
+			name = storyboards;
+			sourceTree = "<group>";
+		};
+		B154718C1DE043AB000226D7 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				B1A15B4C1DE040FD002A4307 /* Assets.xcassets */,
+				B1A15B511DE040FD002A4307 /* Info.plist */,
+			);
+			name = resources;
+			sourceTree = "<group>";
+		};
+		B154718D1DE043D2000226D7 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				B1A15B471DE040FD002A4307 /* ViewController.swift */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		B154718E1DE043E4000226D7 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 		B1A15B391DE040FD002A4307 = {
 			isa = PBXGroup;
 			children = (
@@ -104,12 +145,11 @@
 		B1A15B441DE040FD002A4307 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				B154718E1DE043E4000226D7 /* model */,
+				B154718A1DE0437D000226D7 /* view */,
+				B154718D1DE043D2000226D7 /* controller */,
+				B154718C1DE043AB000226D7 /* resources */,
 				B1A15B451DE040FD002A4307 /* AppDelegate.swift */,
-				B1A15B471DE040FD002A4307 /* ViewController.swift */,
-				B1A15B491DE040FD002A4307 /* Main.storyboard */,
-				B1A15B4C1DE040FD002A4307 /* Assets.xcassets */,
-				B1A15B4E1DE040FD002A4307 /* LaunchScreen.storyboard */,
-				B1A15B511DE040FD002A4307 /* Info.plist */,
 			);
 			path = OnTheMap;
 			sourceTree = "<group>";
@@ -425,6 +465,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -475,6 +516,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
