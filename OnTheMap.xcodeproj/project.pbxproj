@@ -162,6 +162,7 @@
 				B1A15B401DE040FD002A4307 /* Resources */,
 				508544A0EC678293C9529647 /* [CP] Embed Pods Frameworks */,
 				6466B18D6A9DC99BEA8E59F6 /* [CP] Copy Pods Resources */,
+				B15471891DE0425F000226D7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -329,6 +330,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OnTheMap/Pods-OnTheMap-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B15471891DE0425F000226D7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./xcode-build-bump.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
