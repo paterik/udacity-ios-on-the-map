@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="height" constant="58" id="Ezm-1v-ak7"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="yBP-hp-cII" userLabel="Login Udacity">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="yBP-hp-cII" userLabel="ui_btn_login_udacity">
                                 <color key="backgroundColor" red="0.08235294118" green="0.64313725489999995" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="nhu-c6-a6x"/>
@@ -33,8 +33,11 @@
                                 <state key="normal" title="Udacity Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginUdacityAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vM6-eU-EEn"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="1P8-fJ-QZa" userLabel="Login Facebook">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="1P8-fJ-QZa" userLabel="ui_btn_login_facebook">
                                 <color key="backgroundColor" red="0.17254901960784313" green="0.2627450980392157" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0xi-KY-85Z"/>
@@ -43,8 +46,11 @@
                                 <state key="normal" title="Facebook Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginFacebookAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gPe-wi-lqS"/>
+                                </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" placeholder="udacity username" textAlignment="center" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="ymc-OA-Wcr" userLabel="ui_inp_username">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" text="patrick.paechnatz@gmail.com" placeholder="udacity username" textAlignment="center" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="ymc-OA-Wcr" userLabel="ui_inp_username">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ibB-I1-D96"/>
@@ -82,6 +88,12 @@
                             <constraint firstAttribute="leadingMargin" secondItem="ymc-OA-Wcr" secondAttribute="leading" id="wri-27-fFb"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnLoginFacebook" destination="1P8-fJ-QZa" id="f1K-ro-yOi"/>
+                        <outlet property="btnLoginUdactiy" destination="yBP-hp-cII" id="3oI-JJ-FhU"/>
+                        <outlet property="inpUdacityPassword" destination="Ti6-RH-nRt" id="ZWs-mv-fVk"/>
+                        <outlet property="inpUdacityUser" destination="ymc-OA-Wcr" id="Txe-vo-UYM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

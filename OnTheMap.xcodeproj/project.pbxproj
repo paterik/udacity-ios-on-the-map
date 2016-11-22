@@ -10,6 +10,10 @@
 		4339B69E1DDA64F1E487EFB3 /* Pods_OnTheMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF126A51B3920E5D6565196C /* Pods_OnTheMap.framework */; };
 		B11812811DE4377500C1C91C /* UITextViewUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11812801DE4377500C1C91C /* UITextViewUnderline.swift */; };
 		B11812851DE4388200C1C91C /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11812841DE4388200C1C91C /* UIColor.swift */; };
+		B118128C1DE4664600C1C91C /* LoginViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B118128B1DE4664600C1C91C /* LoginViewControllerExtension.swift */; };
+		B118128F1DE467B100C1C91C /* GDCBlackbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B118128E1DE467B100C1C91C /* GDCBlackbox.swift */; };
+		B11812911DE4682900C1C91C /* UDCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11812901DE4682900C1C91C /* UDCClient.swift */; };
+		B11812941DE4699B00C1C91C /* UDCClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11812931DE4699B00C1C91C /* UDCClientExtension.swift */; };
 		B1A15B461DE040FD002A4307 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B451DE040FD002A4307 /* AppDelegate.swift */; };
 		B1A15B481DE040FD002A4307 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B471DE040FD002A4307 /* LoginViewController.swift */; };
 		B1A15B4B1DE040FD002A4307 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1A15B491DE040FD002A4307 /* Main.storyboard */; };
@@ -41,6 +45,10 @@
 		AF126A51B3920E5D6565196C /* Pods_OnTheMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnTheMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B11812801DE4377500C1C91C /* UITextViewUnderline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewUnderline.swift; sourceTree = "<group>"; };
 		B11812841DE4388200C1C91C /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		B118128B1DE4664600C1C91C /* LoginViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerExtension.swift; sourceTree = "<group>"; };
+		B118128E1DE467B100C1C91C /* GDCBlackbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDCBlackbox.swift; sourceTree = "<group>"; };
+		B11812901DE4682900C1C91C /* UDCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDCClient.swift; sourceTree = "<group>"; };
+		B11812931DE4699B00C1C91C /* UDCClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDCClientExtension.swift; sourceTree = "<group>"; };
 		B1A15B421DE040FD002A4307 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1A15B451DE040FD002A4307 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1A15B471DE040FD002A4307 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +115,64 @@
 			name = extensions;
 			sourceTree = "<group>";
 		};
+		B11812861DE465E900C1C91C /* clients */ = {
+			isa = PBXGroup;
+			children = (
+				B11812871DE465F000C1C91C /* udacity.com */,
+				B11812881DE465F800C1C91C /* facebook.com */,
+			);
+			name = clients;
+			sourceTree = "<group>";
+		};
+		B11812871DE465F000C1C91C /* udacity.com */ = {
+			isa = PBXGroup;
+			children = (
+				B11812921DE4698900C1C91C /* extension */,
+				B11812901DE4682900C1C91C /* UDCClient.swift */,
+			);
+			name = udacity.com;
+			sourceTree = "<group>";
+		};
+		B11812881DE465F800C1C91C /* facebook.com */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = facebook.com;
+			sourceTree = "<group>";
+		};
+		B11812891DE4661B00C1C91C /* loginView */ = {
+			isa = PBXGroup;
+			children = (
+				B118128A1DE4663600C1C91C /* extension */,
+				B1A15B471DE040FD002A4307 /* LoginViewController.swift */,
+			);
+			name = loginView;
+			sourceTree = "<group>";
+		};
+		B118128A1DE4663600C1C91C /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				B118128B1DE4664600C1C91C /* LoginViewControllerExtension.swift */,
+			);
+			name = extension;
+			sourceTree = "<group>";
+		};
+		B118128D1DE4679C00C1C91C /* gdc */ = {
+			isa = PBXGroup;
+			children = (
+				B118128E1DE467B100C1C91C /* GDCBlackbox.swift */,
+			);
+			name = gdc;
+			sourceTree = "<group>";
+		};
+		B11812921DE4698900C1C91C /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				B11812931DE4699B00C1C91C /* UDCClientExtension.swift */,
+			);
+			name = extension;
+			sourceTree = "<group>";
+		};
 		B154718A1DE0437D000226D7 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,7 +203,7 @@
 		B154718D1DE043D2000226D7 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				B1A15B471DE040FD002A4307 /* LoginViewController.swift */,
+				B11812891DE4661B00C1C91C /* loginView */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -145,6 +211,8 @@
 		B154718E1DE043E4000226D7 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				B118128D1DE4679C00C1C91C /* gdc */,
+				B11812861DE465E900C1C91C /* clients */,
 				B11812821DE4385600C1C91C /* common */,
 			);
 			name = model;
@@ -421,9 +489,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B11812911DE4682900C1C91C /* UDCClient.swift in Sources */,
 				B1A15B481DE040FD002A4307 /* LoginViewController.swift in Sources */,
 				B11812851DE4388200C1C91C /* UIColor.swift in Sources */,
+				B11812941DE4699B00C1C91C /* UDCClientExtension.swift in Sources */,
+				B118128C1DE4664600C1C91C /* LoginViewControllerExtension.swift in Sources */,
 				B1A15B461DE040FD002A4307 /* AppDelegate.swift in Sources */,
+				B118128F1DE467B100C1C91C /* GDCBlackbox.swift in Sources */,
 				B11812811DE4377500C1C91C /* UITextViewUnderline.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

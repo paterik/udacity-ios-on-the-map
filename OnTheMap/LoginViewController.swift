@@ -10,16 +10,30 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var inpUdacityUser: UITextField!
+    @IBOutlet weak var inpUdacityPassword: UITextField!
+    @IBOutlet weak var btnLoginUdactiy: UIButton!
+    @IBOutlet weak var btnLoginFacebook: UIButton!
+    
+    let UDCClientInstance = UDCClient.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func loginUdacityAction(_ sender: AnyObject) {
+        
+        activateUI(enabled: false)
+        UDCClientInstance.username = inpUdacityUser.text!
+        UDCClientInstance.password = inpUdacityPassword.text!
+        UDCClientInstance.getSession { (success, errorMessage, sessionToken) in
+            self.activateUI(enabled: true)
+            // print("\(success), \(errorMessage), \(sessionToken)")
+        }
     }
-
-
+    
+    @IBAction func loginFacebookAction(_ sender: AnyObject) {
+        
+    }
 }
 
