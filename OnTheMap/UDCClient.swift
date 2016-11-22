@@ -24,10 +24,8 @@ class UDCClient: NSObject {
     //
     // MARK: Properties
     //
-    
     var username: String?
     var password: String?
-
     var jsonBody: String = "{}"
     var errorDomain: String = ""
     var errorDomainPrefix: String = "UDCClient"
@@ -120,9 +118,6 @@ class UDCClient: NSObject {
         data: NSData,
         completionHandlerForConvertData: (_ result: Any?, _ error: NSError?) -> Void) {
         
-        errorDomain = "\(self.errorDomainPrefix)_convertDataWithCompletionHandler"
-        errorUserInfo = [NSLocalizedDescriptionKey  : "Up's, could not parse the data as JSON: '\(data)'"]
-        
         var parsedResult: Any!
         
         do {
@@ -130,6 +125,9 @@ class UDCClient: NSObject {
             parsedResult = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments)
             
         } catch {
+            
+            errorDomain = "\(self.errorDomainPrefix)_convertDataWithCompletionHandler"
+            errorUserInfo = [NSLocalizedDescriptionKey  : "Up's, could not parse the data as JSON: '\(data)'"]
             
             completionHandlerForConvertData(nil, NSError(domain: errorDomain, code: 1, userInfo: errorUserInfo))
             
