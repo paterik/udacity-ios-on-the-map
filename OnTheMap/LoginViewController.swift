@@ -26,9 +26,9 @@ class LoginViewController: UIViewController {
         activateUI(enabled: false)
         UDCClientInstance.username = inpUdacityUser.text!
         UDCClientInstance.password = inpUdacityPassword.text!
-        UDCClientInstance.getSession { (success, errorMessage, sessionToken) in
+        UDCClientInstance.getSession { (success, sessionToken, errorMessage) in
             self.activateUI(enabled: true)
-            // print("\(success), \(errorMessage), \(sessionToken)")
+            print("\n ---- RESULT --- \n\n \(success),\n \(sessionToken),\n \(errorMessage)")
         }
     }
     

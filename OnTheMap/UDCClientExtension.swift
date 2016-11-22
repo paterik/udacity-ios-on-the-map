@@ -16,7 +16,7 @@ extension UDCClient {
         return ("{\"udacity\": {\"username\": \"\(username!)\", \"password\": \"\(password!)\"}}")
     }
     
-    func getSession(completionHandlerForToken: @escaping (_ success: Bool, _ requestToken: String?, _ errorString: String?) -> Void) {
+    func getSession(completionHandlerForToken: @escaping (_ success: Bool, _ sessionToken: String?, _ errorString: String?) -> Void) {
         
         let jsonAuthBody = renderJSONAuthBody()
         
@@ -24,17 +24,12 @@ extension UDCClient {
             
             if let error = error {
                 
-                if self.debugMode {
-                    print(error)
-                }
-                
-                completionHandlerForToken(false, nil, "Login Failed (Request Token).")
+                completionHandlerForToken(false, nil, "Login Failed (SessionToken not available), Error: \(error)")
                 
             } else {
                 
-                if self.debugMode {
-                    print( "Login successfully done!" )
-                }
+                completionHandlerForToken(true, nil, "Login successfully done! (SessionToken available).")
+    
             }
         }
     }
