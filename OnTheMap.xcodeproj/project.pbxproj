@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4339B69E1DDA64F1E487EFB3 /* Pods_OnTheMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF126A51B3920E5D6565196C /* Pods_OnTheMap.framework */; };
+		B11812811DE4377500C1C91C /* UITextViewUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11812801DE4377500C1C91C /* UITextViewUnderline.swift */; };
+		B11812851DE4388200C1C91C /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11812841DE4388200C1C91C /* UIColor.swift */; };
 		B1A15B461DE040FD002A4307 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B451DE040FD002A4307 /* AppDelegate.swift */; };
-		B1A15B481DE040FD002A4307 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B471DE040FD002A4307 /* ViewController.swift */; };
+		B1A15B481DE040FD002A4307 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B471DE040FD002A4307 /* LoginViewController.swift */; };
 		B1A15B4B1DE040FD002A4307 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1A15B491DE040FD002A4307 /* Main.storyboard */; };
 		B1A15B4D1DE040FD002A4307 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1A15B4C1DE040FD002A4307 /* Assets.xcassets */; };
 		B1A15B501DE040FD002A4307 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1A15B4E1DE040FD002A4307 /* LaunchScreen.storyboard */; };
@@ -37,9 +39,11 @@
 /* Begin PBXFileReference section */
 		5F6793BE2EE06FD20412526D /* Pods-OnTheMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheMap/Pods-OnTheMap.debug.xcconfig"; sourceTree = "<group>"; };
 		AF126A51B3920E5D6565196C /* Pods_OnTheMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnTheMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B11812801DE4377500C1C91C /* UITextViewUnderline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewUnderline.swift; sourceTree = "<group>"; };
+		B11812841DE4388200C1C91C /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		B1A15B421DE040FD002A4307 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1A15B451DE040FD002A4307 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B1A15B471DE040FD002A4307 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B1A15B471DE040FD002A4307 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B1A15B4A1DE040FD002A4307 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B1A15B4C1DE040FD002A4307 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B1A15B4F1DE040FD002A4307 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -79,9 +83,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B118127F1DE4375400C1C91C /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				B11812801DE4377500C1C91C /* UITextViewUnderline.swift */,
+			);
+			name = ui;
+			sourceTree = "<group>";
+		};
+		B11812821DE4385600C1C91C /* common */ = {
+			isa = PBXGroup;
+			children = (
+				B11812831DE4386700C1C91C /* extensions */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		B11812831DE4386700C1C91C /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B11812841DE4388200C1C91C /* UIColor.swift */,
+			);
+			name = extensions;
+			sourceTree = "<group>";
+		};
 		B154718A1DE0437D000226D7 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				B118127F1DE4375400C1C91C /* ui */,
 				B154718B1DE04384000226D7 /* storyboards */,
 			);
 			name = view;
@@ -108,7 +137,7 @@
 		B154718D1DE043D2000226D7 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				B1A15B471DE040FD002A4307 /* ViewController.swift */,
+				B1A15B471DE040FD002A4307 /* LoginViewController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -116,6 +145,7 @@
 		B154718E1DE043E4000226D7 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				B11812821DE4385600C1C91C /* common */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -391,8 +421,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1A15B481DE040FD002A4307 /* ViewController.swift in Sources */,
+				B1A15B481DE040FD002A4307 /* LoginViewController.swift in Sources */,
+				B11812851DE4388200C1C91C /* UIColor.swift in Sources */,
 				B1A15B461DE040FD002A4307 /* AppDelegate.swift in Sources */,
+				B11812811DE4377500C1C91C /* UITextViewUnderline.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,6 +578,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5F6793BE2EE06FD20412526D /* Pods-OnTheMap.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QYU36A8NKN;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
@@ -560,6 +593,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E474849C56D370264FFAD133 /* Pods-OnTheMap.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QYU36A8NKN;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
@@ -573,7 +607,7 @@
 		B1A15B6E1DE040FD002A4307 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = QYU36A8NKN;
 				INFOPLIST_FILE = OnTheMapTests/Info.plist;
@@ -588,7 +622,7 @@
 		B1A15B6F1DE040FD002A4307 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = QYU36A8NKN;
 				INFOPLIST_FILE = OnTheMapTests/Info.plist;
@@ -603,7 +637,7 @@
 		B1A15B711DE040FD002A4307 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				DEVELOPMENT_TEAM = QYU36A8NKN;
 				INFOPLIST_FILE = OnTheMapUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -617,7 +651,7 @@
 		B1A15B721DE040FD002A4307 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				DEVELOPMENT_TEAM = QYU36A8NKN;
 				INFOPLIST_FILE = OnTheMapUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
