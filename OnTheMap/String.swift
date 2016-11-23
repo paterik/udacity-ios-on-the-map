@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+extension String {
+    
+    func chopPrefix(_ count: Int = 1) -> String {
+        return self.substring(from: self.characters.index(self.startIndex, offsetBy: count))
+    }
+    
+    func chopSuffix(_ count: Int = 1) -> String {
+        return self.substring(to: self.characters.index(self.startIndex, offsetBy: count))
+    }
+}
