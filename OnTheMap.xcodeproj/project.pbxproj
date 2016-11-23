@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		4339B69E1DDA64F1E487EFB3 /* Pods_OnTheMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF126A51B3920E5D6565196C /* Pods_OnTheMap.framework */; };
-		B11812811DE4377500C1C91C /* UITextViewUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11812801DE4377500C1C91C /* UITextViewUnderline.swift */; };
 		B11812851DE4388200C1C91C /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11812841DE4388200C1C91C /* UIColor.swift */; };
 		B118128C1DE4664600C1C91C /* LoginViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B118128B1DE4664600C1C91C /* LoginViewControllerExtension.swift */; };
 		B118128F1DE467B100C1C91C /* GDCBlackbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B118128E1DE467B100C1C91C /* GDCBlackbox.swift */; };
 		B11812911DE4682900C1C91C /* UDCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11812901DE4682900C1C91C /* UDCClient.swift */; };
 		B11812941DE4699B00C1C91C /* UDCClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11812931DE4699B00C1C91C /* UDCClientExtension.swift */; };
+		B119B5861DE591F5002AF6AF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B119B5851DE591F5002AF6AF /* String.swift */; };
+		B119B58A1DE5A5F7002AF6AF /* UDCSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B119B5891DE5A5F7002AF6AF /* UDCSession.swift */; };
 		B1A15B461DE040FD002A4307 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B451DE040FD002A4307 /* AppDelegate.swift */; };
 		B1A15B481DE040FD002A4307 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B471DE040FD002A4307 /* LoginViewController.swift */; };
 		B1A15B4B1DE040FD002A4307 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1A15B491DE040FD002A4307 /* Main.storyboard */; };
@@ -43,12 +44,13 @@
 /* Begin PBXFileReference section */
 		5F6793BE2EE06FD20412526D /* Pods-OnTheMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheMap/Pods-OnTheMap.debug.xcconfig"; sourceTree = "<group>"; };
 		AF126A51B3920E5D6565196C /* Pods_OnTheMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnTheMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B11812801DE4377500C1C91C /* UITextViewUnderline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewUnderline.swift; sourceTree = "<group>"; };
 		B11812841DE4388200C1C91C /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		B118128B1DE4664600C1C91C /* LoginViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerExtension.swift; sourceTree = "<group>"; };
 		B118128E1DE467B100C1C91C /* GDCBlackbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDCBlackbox.swift; sourceTree = "<group>"; };
 		B11812901DE4682900C1C91C /* UDCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDCClient.swift; sourceTree = "<group>"; };
 		B11812931DE4699B00C1C91C /* UDCClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDCClientExtension.swift; sourceTree = "<group>"; };
+		B119B5851DE591F5002AF6AF /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		B119B5891DE5A5F7002AF6AF /* UDCSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDCSession.swift; sourceTree = "<group>"; };
 		B1A15B421DE040FD002A4307 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1A15B451DE040FD002A4307 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1A15B471DE040FD002A4307 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -91,14 +93,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B118127F1DE4375400C1C91C /* ui */ = {
-			isa = PBXGroup;
-			children = (
-				B11812801DE4377500C1C91C /* UITextViewUnderline.swift */,
-			);
-			name = ui;
-			sourceTree = "<group>";
-		};
 		B11812821DE4385600C1C91C /* common */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				B11812841DE4388200C1C91C /* UIColor.swift */,
+				B119B5851DE591F5002AF6AF /* String.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -129,6 +124,7 @@
 			children = (
 				B11812921DE4698900C1C91C /* extension */,
 				B11812901DE4682900C1C91C /* UDCClient.swift */,
+				B119B5891DE5A5F7002AF6AF /* UDCSession.swift */,
 			);
 			name = udacity.com;
 			sourceTree = "<group>";
@@ -176,7 +172,6 @@
 		B154718A1DE0437D000226D7 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				B118127F1DE4375400C1C91C /* ui */,
 				B154718B1DE04384000226D7 /* storyboards */,
 			);
 			name = view;
@@ -490,13 +485,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B11812911DE4682900C1C91C /* UDCClient.swift in Sources */,
+				B119B58A1DE5A5F7002AF6AF /* UDCSession.swift in Sources */,
 				B1A15B481DE040FD002A4307 /* LoginViewController.swift in Sources */,
 				B11812851DE4388200C1C91C /* UIColor.swift in Sources */,
 				B11812941DE4699B00C1C91C /* UDCClientExtension.swift in Sources */,
 				B118128C1DE4664600C1C91C /* LoginViewControllerExtension.swift in Sources */,
 				B1A15B461DE040FD002A4307 /* AppDelegate.swift in Sources */,
+				B119B5861DE591F5002AF6AF /* String.swift in Sources */,
 				B118128F1DE467B100C1C91C /* GDCBlackbox.swift in Sources */,
-				B11812811DE4377500C1C91C /* UITextViewUnderline.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
