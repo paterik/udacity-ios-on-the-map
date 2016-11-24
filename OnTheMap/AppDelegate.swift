@@ -12,7 +12,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var udacitySession: UDCSession? = nil
+    var isAuthByUdacity: Bool = false
+    var isAuthByFacebook: Bool = false
+    
+    func setUdacitySession(_ _udacitySession: UDCSession) {
+        udacitySession = _udacitySession
+    }
+    
+    func getUdacitySession() -> UDCSession {
+        
+        return udacitySession!
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
