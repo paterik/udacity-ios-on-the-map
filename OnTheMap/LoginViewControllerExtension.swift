@@ -11,7 +11,23 @@ import UIKit
 
 extension LoginViewController {
 
-    func activateUI(enabled: Bool) {
+    func showErrorMessage(_ _message: String) {
+    
+        // Create the subMenu controller (using alertViewController)
+        let alertController = UIAlertController(
+            title: "Login Failed",
+            message: _message,
+            preferredStyle: .alert)
+        
+        // Add Cancel action
+        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) {
+            UIAlertAction in return
+        })
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func activateUI(_ enabled: Bool) {
         
         inpUdacityUser.isEnabled = enabled
         inpUdacityPassword.isEnabled = enabled
