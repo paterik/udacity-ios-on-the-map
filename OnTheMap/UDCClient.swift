@@ -68,23 +68,25 @@ class UDCClient: NSObject {
                 return
             }
             
-            let statusCode = (response as? HTTPURLResponse)?.statusCode
+            /* UNWRAP: http status code available? */
+            if let statusCode = (response as? HTTPURLResponse)?.statusCode {
             
-            if statusCode == 403 {
-                sendError(error: "Up's, the account was not found or invalid credentials given!")
-                return
-            }
-            
-            /* sometimes status code 400 returned, we've to check what kind of error this code is involved with */
-            if statusCode == 400 {
-                sendError(error: "Up's, your request returned a status code other than 2xx! Service downtime possible")
-                if self.debugMode {
-                    print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
+                if statusCode == 403 {
+                    sendError(error: "Up's, the account was not found or invalid credentials provided!")
+                    return
                 }
                 
-                return
+                /* sometimes status code 400 returned, we've to check what kind of error this code is involved with */
+                if statusCode == 400 || statusCode == 404 || statusCode == 500 {
+                    sendError(error: "Up's, your request returned a status code other than 2xx or 403! A service downtime may possible :(")
+                    if self.debugMode {
+                        print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
+                    }
+                    
+                    return
+                }
             }
-
+            
             let range = Range(uncheckedBounds: (self.apiSkipCharCount, data.count))
             let newData = data.subdata(in: range)
             
