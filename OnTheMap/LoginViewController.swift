@@ -14,6 +14,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var inpUdacityPassword: UITextField!
     @IBOutlet weak var btnLoginUdactiy: UIButton!
     @IBOutlet weak var btnLoginFacebook: UIButton!
+    @IBOutlet weak var btnCreateUdacityAccount: UIButton!
+    @IBOutlet weak var btnForgotUdacityPassword: UIButton!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let UDCClientInstance = UDCClient.sharedInstance
@@ -21,20 +23,42 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    @IBAction func createUdacityAccountAction(_ sender: AnyObject) {
+        UIApplication.shared.open(
+            NSURL(string: "https://auth.udacity.com/sign-up?next=https%3A%2F%2Fclassroom.udacity.com%2Fauthenticated")! as URL,
+            options: [:],
+            completionHandler: nil
+        )
+    }
+    
+    @IBAction func forgotUdacityPasswordAction(_ sender: AnyObject) {
+        UIApplication.shared.open(
+            NSURL(string: "https://auth.udacity.com/sign-in?next=https%3A%2F%2Fclassroom.udacity.com%2Fauthenticated")! as URL,
+            options: [:],
+            completionHandler: nil
+        )
+    }
 
     @IBAction func loginUdacityAction(_ sender: AnyObject) {
+        /* deactivate ui during http rest call */
+        activateUI(false)
         
-        activateUI(enabled: false)
         UDCClientInstance.username = inpUdacityUser.text!
         UDCClientInstance.password = inpUdacityPassword.text!
         UDCClientInstance.getUserSessionToken { (success: Bool?, udcSession: UDCSession?, message: String?) in
             
-            if success == true {
+            if success! == true {
+                /* persist udacity session model and provide it inside appDelegate globaly */
                 self.appDelegate.isAuthByUdacity = true
                 self.appDelegate.setUdacitySession(udcSession!)
+            
+            } else {
+                self.showErrorMessage(message!)
             }
             
-            self.activateUI(enabled: true)
+            /* (re)activate ui after http rest call result handling */
+            self.activateUI(true)
         }
     }
     
