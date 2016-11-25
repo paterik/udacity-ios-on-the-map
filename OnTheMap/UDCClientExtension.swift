@@ -10,7 +10,6 @@ import Foundation
 
 extension UDCClient {
 
-
     private func getJSONAuthBody() -> String! {
         
         return ("{\"udacity\": {\"username\": \"\(username!)\", \"password\": \"\(password!)\"}}")
@@ -31,7 +30,9 @@ extension UDCClient {
         _ = taskForPOSTMethod(jsonBody: getJSONAuthBody()!) { (results, _error) in
             
             if let error = _error {
-                completionHandlerForToken(false, nil, "Login Failed (SessionToken not available), Error: \(error)")
+                // I'll handle error.localizedDescription only here (so their will be no error.localizedFailureReason
+                // or error.localizedRecoverySuggestion to handle yet)
+                completionHandlerForToken(false, nil, "\(error.localizedDescription)")
                 return
             }
             
