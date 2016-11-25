@@ -68,27 +68,59 @@
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEQ-b1-BLD" userLabel="ui_btn_create_account">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="KXc-Xh-elH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="Don't have an account?">
+                                    <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="createUdacityAccountAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H5D-rw-BPw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QoF-NS-iI0" userLabel="ui_btn_password_lost">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="9pE-Fa-JHJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="Forgot your password?">
+                                    <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="forgotUdacityPasswordAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nbx-ok-fmV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Plq-Al-0Cn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="32" id="4ef-xD-l15"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="YEQ-b1-BLD" secondAttribute="leading" id="6hk-eW-DSv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ti6-RH-nRt" secondAttribute="trailing" id="745-Mv-aQK"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Plq-Al-0Cn" secondAttribute="leading" id="Acg-fM-Hi1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1P8-fJ-QZa" secondAttribute="trailing" id="Aq3-SR-UcB"/>
+                            <constraint firstItem="QoF-NS-iI0" firstAttribute="top" secondItem="YEQ-b1-BLD" secondAttribute="bottom" constant="8" id="DU2-ni-TEj"/>
                             <constraint firstItem="ymc-OA-Wcr" firstAttribute="top" secondItem="Plq-Al-0Cn" secondAttribute="bottom" constant="26" id="JDe-FC-hes"/>
                             <constraint firstAttribute="leadingMargin" secondItem="1P8-fJ-QZa" secondAttribute="leading" id="Zhg-Wh-J8d"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ymc-OA-Wcr" secondAttribute="trailing" id="az6-Sf-b0T"/>
                             <constraint firstItem="1P8-fJ-QZa" firstAttribute="top" secondItem="yBP-hp-cII" secondAttribute="bottom" constant="8" id="bR7-Dl-O25"/>
                             <constraint firstAttribute="leadingMargin" secondItem="yBP-hp-cII" secondAttribute="leading" id="cI8-pQ-PV8"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Ti6-RH-nRt" secondAttribute="leading" id="cNI-7o-8Xq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QoF-NS-iI0" secondAttribute="trailing" id="fjd-JS-wgv"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="QoF-NS-iI0" secondAttribute="leading" id="gCA-ST-W3h"/>
                             <constraint firstItem="Ti6-RH-nRt" firstAttribute="top" secondItem="ymc-OA-Wcr" secondAttribute="bottom" constant="8" id="kNs-On-vkX"/>
+                            <constraint firstItem="YEQ-b1-BLD" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="279" id="nC6-Hb-vhH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Plq-Al-0Cn" secondAttribute="trailing" id="sBb-C4-xoh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YEQ-b1-BLD" secondAttribute="trailing" id="sLO-dV-xNl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yBP-hp-cII" secondAttribute="trailing" id="u78-d6-A6M"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1P8-fJ-QZa" secondAttribute="bottom" constant="20" id="v6A-5r-VSo"/>
                             <constraint firstAttribute="leadingMargin" secondItem="ymc-OA-Wcr" secondAttribute="leading" id="wri-27-fFb"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnCreateUdacityAccount" destination="YEQ-b1-BLD" id="6Yd-em-Mc8"/>
+                        <outlet property="btnForgotUdacityPassword" destination="QoF-NS-iI0" id="YOI-bO-0RE"/>
                         <outlet property="btnLoginFacebook" destination="1P8-fJ-QZa" id="f1K-ro-yOi"/>
                         <outlet property="btnLoginUdactiy" destination="yBP-hp-cII" id="3oI-JJ-FhU"/>
                         <outlet property="inpUdacityPassword" destination="Ti6-RH-nRt" id="ZWs-mv-fVk"/>
