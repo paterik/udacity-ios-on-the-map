@@ -12,6 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
     var udacitySession: UDCSession? = nil
     var isAuthByUdacity: Bool = false
     var isAuthByFacebook: Bool = false
