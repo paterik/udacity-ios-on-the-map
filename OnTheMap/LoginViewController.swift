@@ -25,18 +25,20 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func createUdacityAccountAction(_ sender: AnyObject) {
-        UIApplication.shared.open(
-            NSURL(string: "https://auth.udacity.com/sign-up?next=https%3A%2F%2Fclassroom.udacity.com%2Fauthenticated")! as URL,
-            options: [:],
-            completionHandler: nil
+        
+        /* show redirect message dialog for create new udacity account */
+        showRedirectMessage(
+            "You have no udacity account yet? No Problem, create a new account right now ...",
+            "https://auth.udacity.com/sign-up?next=https%3A%2F%2Fclassroom.udacity.com%2Fauthenticated"
         )
     }
     
     @IBAction func forgotUdacityPasswordAction(_ sender: AnyObject) {
-        UIApplication.shared.open(
-            NSURL(string: "https://auth.udacity.com/sign-in?next=https%3A%2F%2Fclassroom.udacity.com%2Fauthenticated")! as URL,
-            options: [:],
-            completionHandler: nil
+        
+        /* show redirect message dialog for lost credentials of udactiy account */
+        showRedirectMessage(
+            "You've lost your password? No problem, accept this redirect to your udacity login page and click the forgot password link",
+            "https://auth.udacity.com/sign-in?next=https%3A%2F%2Fclassroom.udacity.com%2Fauthenticated"
         )
     }
 
