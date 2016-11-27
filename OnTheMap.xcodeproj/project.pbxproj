@@ -51,6 +51,7 @@
 		B11812931DE4699B00C1C91C /* UDCClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDCClientExtension.swift; sourceTree = "<group>"; };
 		B119B5851DE591F5002AF6AF /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B119B5891DE5A5F7002AF6AF /* UDCSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDCSession.swift; sourceTree = "<group>"; };
+		B13CFC5A1DEB0C6300C08272 /* OnTheMap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnTheMap.entitlements; sourceTree = "<group>"; };
 		B1A15B421DE040FD002A4307 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1A15B451DE040FD002A4307 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1A15B471DE040FD002A4307 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -238,6 +239,7 @@
 		B1A15B441DE040FD002A4307 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				B13CFC5A1DEB0C6300C08272 /* OnTheMap.entitlements */,
 				B154718E1DE043E4000226D7 /* model */,
 				B154718A1DE0437D000226D7 /* view */,
 				B154718D1DE043D2000226D7 /* controller */,
@@ -356,6 +358,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = QYU36A8NKN;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					B1A15B551DE040FD002A4307 = {
 						CreatedOnToolsVersion = 8.0;
@@ -648,6 +655,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = OnTheMap/OnTheMap.entitlements;
 				DEVELOPMENT_TEAM = QYU36A8NKN;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -663,6 +671,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = OnTheMap/OnTheMap.entitlements;
 				DEVELOPMENT_TEAM = QYU36A8NKN;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
