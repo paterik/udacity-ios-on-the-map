@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKShareKit
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
 
@@ -19,6 +22,8 @@ class LoginViewController: UIViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let UDCClientInstance = UDCClient.sharedInstance
+    
+    var dict : [String : AnyObject]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +69,51 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func getFBUserData() {
+        
+        if((FBSDKAccessToken.current()) != nil) {
+
+            print ("\n\n=================================================================================================")
+            print (FBSDKAccessToken.current().expirationDate)
+            print (FBSDKAccessToken.current().appID)
+            print (FBSDKAccessToken.current().refreshDate)
+            print (FBSDKAccessToken.current().tokenString)
+            print (FBSDKAccessToken.current().userID)
+            print (FBSDKAccessToken.current().appID)
+            print (FBSDKAccessToken.current().permissions)
+            print (FBSDKAccessToken.current().description)
+            print ("=================================================================================================\n\n")
+            
+            FBSDKGraphRequest(graphPath: "me", parameters: [
+                "fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error)
+                    -> Void in
+                    if (error == nil){
+                        self.dict = result as! [String : AnyObject]
+                        print(result!)
+                        print(self.dict)
+                    }
+                }
+            )
+            
+        }
+    }
+    
     @IBAction func loginFacebookAction(_ sender: AnyObject) {
         
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
+            if (error == nil){
+                let fbloginresult : FBSDKLoginManagerLoginResult = result!
+                if fbloginresult.grantedPermissions != nil {
+                    if(fbloginresult.grantedPermissions.contains("email"))
+                    {
+                        self.getFBUserData()
+                        fbLoginManager.logOut()
+                    }
+                }
+            } else {
+                self.showErrorMessage((error?.localizedDescription)!)
+            }
+        }
     }
 }
