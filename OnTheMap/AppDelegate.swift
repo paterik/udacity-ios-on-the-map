@@ -16,12 +16,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    var facebookSession: FBSession? = nil
     var udacitySession: UDCSession? = nil
     var isAuthByUdacity: Bool = false
     var isAuthByFacebook: Bool = false
     
     func setUdacitySession(_ _udacitySession: UDCSession) {
+        
         udacitySession = _udacitySession
+    }
+    
+    func setFacebookSession(_ _facebookSession: FBSession) {
+        
+        facebookSession = _facebookSession
     }
     
     func getUdacitySession() -> UDCSession {
@@ -29,17 +36,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return udacitySession!
     }
     
+    func getFacebookSession() -> FBSession {
+    
+        return facebookSession!
+    }
+    
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
     // --
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
+        
         FBSDKAppEvents.activateApp()
     }
     
