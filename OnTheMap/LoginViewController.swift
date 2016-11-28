@@ -71,30 +71,42 @@ class LoginViewController: UIViewController {
     
     func getFBUserData() {
         
-        if((FBSDKAccessToken.current()) != nil) {
-
-            print ("\n\n=================================================================================================")
-            print (FBSDKAccessToken.current().expirationDate)
-            print (FBSDKAccessToken.current().appID)
-            print (FBSDKAccessToken.current().refreshDate)
-            print (FBSDKAccessToken.current().tokenString)
-            print (FBSDKAccessToken.current().userID)
-            print (FBSDKAccessToken.current().appID)
-            print (FBSDKAccessToken.current().permissions)
-            print (FBSDKAccessToken.current().description)
-            print ("=================================================================================================\n\n")
+        if let currentFBAccessToken = FBSDKAccessToken.current() {
             
             FBSDKGraphRequest(graphPath: "me", parameters: [
-                "fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error)
+                "fields": "id, picture.type(large), email"]).start(completionHandler: { (connection, result, error)
                     -> Void in
-                    if (error == nil){
+                    
+                    if (error == nil) {
+                        
+                        let fbSession = FBSession(
+                        
+                            tokenString: currentFBAccessToken.tokenString!,
+                            email: "foo@bar.baz",
+                            userID: currentFBAccessToken.userID!,
+                            userImgUrl: "test.jpg",
+                            appID: currentFBAccessToken.appID!,
+                            permissions: currentFBAccessToken.permissions,
+                            expirationDate: currentFBAccessToken.expirationDate!,
+                            refreshDate: currentFBAccessToken.refreshDate!,
+                            created: Date()
+                        )
+                        
                         self.dict = result as! [String : AnyObject]
-                        print(result!)
-                        print(self.dict)
+                        
+                        /* persist udacity session model and provide it inside appDelegate globaly */
+                        self.appDelegate.isAuthByFacebook = true
+                        self.appDelegate.setFacebookSession(fbSession)
+                        
+                        print("\n\n================================================\n")
+                        print(fbSession.tokenString)
+                        print("\n==================================================\n\n")
+                        
+                    } else {
+                        self.showErrorMessage(error!.localizedDescription)
                     }
                 }
             )
-            
         }
     }
     
