@@ -22,8 +22,7 @@ class LoginViewController: UIViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let UDCClientInstance = UDCClient.sharedInstance
-    
-    var dict : [String : AnyObject]!
+    let FBClientInstance = FBClient.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,9 +71,32 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginFacebookAction(_ sender: AnyObject) {
         
+        // -- info : https://discussions.udacity.com/t/login-with-facebook-as-in/44828/3
+        // --      : https://github.com/muddybarefeet/on-the-map/blob/master/onTheMap/UdacityClient.swift
+        
+        // -- new
+        
         /* deactivate ui during http rest call */
         activateUI(false)
         
+        let login: FBSDKLoginManager = FBSDKLoginManager()
+        login.logIn(withReadPermissions: ["public_profile"], from: self) { (FBSDKLoginManagerLoginResult, error) in
+            
+            if error != nil {
+                print("Process error", error)
+            }
+            else if (FBSDKLoginManagerLoginResult?.isCancelled)! {
+                print("Cancelled")
+            }
+            else {
+                print("=== Logged in", FBSDKLoginManagerLoginResult?.token.tokenString)
+                // self.Udacity.fbAuthToken = FBSDKLoginManagerLoginResult.token.tokenString
+                //now call login method with the auth token
+                // self.Udacity.fbLogin()
+            }
+        }
+        
+        // -- old
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
         
         fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
