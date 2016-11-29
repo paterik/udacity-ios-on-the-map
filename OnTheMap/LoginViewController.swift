@@ -48,6 +48,7 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginUdacityAction(_ sender: AnyObject) {
+        
         /* deactivate ui during http rest call */
         activateUI(false)
         
@@ -69,22 +70,65 @@ class LoginViewController: UIViewController {
         }
     }
     
+    @IBAction func loginFacebookAction(_ sender: AnyObject) {
+        
+        /* deactivate ui during http rest call */
+        activateUI(false)
+        
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        
+        fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
+            
+            if (error == nil) {
+                
+                let fbloginresult : FBSDKLoginManagerLoginResult = result!
+                if fbloginresult.grantedPermissions != nil {
+                    
+                    if(fbloginresult.grantedPermissions.contains("email"))
+                    {
+                        self.getFBUserData()
+                        fbLoginManager.logOut()
+                    }
+                }
+                
+            } else {
+                
+                self.showErrorMessage((error?.localizedDescription)!)
+                
+            }
+            
+            /* (re)activate ui after http rest call result handling */
+            self.activateUI(true)
+        }
+    }
+    
     func getFBUserData() {
         
         if let currentFBAccessToken = FBSDKAccessToken.current() {
             
             FBSDKGraphRequest(graphPath: "me", parameters: [
-                "fields": "id, picture.type(large), email"]).start(completionHandler: { (connection, result, error)
+                "fields": "picture.type(large), email"]).start(completionHandler: { (connection, result, error)
                     -> Void in
                     
                     if (error == nil) {
                         
-                        let fbSession = FBSession(
+                        guard let resultBlock = result as? [String: AnyObject],
+                            let fbPictureBlock = resultBlock["picture"] as? [String: AnyObject],
+                            let fbPictureDataBlock = fbPictureBlock["data"] as? [String: AnyObject],
+                            let _fbPictureUrl = fbPictureDataBlock["url"] as? String,
+                            let _fbEmail = resultBlock["email"] as? String
+                            
+                            else {
+                                self.showErrorMessage("unable to get facebook profile information")
+                                
+                                return
+                        }
                         
+                        let fbSession = FBSession(
                             tokenString: currentFBAccessToken.tokenString!,
-                            email: "foo@bar.baz",
+                            email: _fbEmail,
                             userID: currentFBAccessToken.userID!,
-                            userImgUrl: "test.jpg",
+                            userImgUrl: _fbPictureUrl,
                             appID: currentFBAccessToken.appID!,
                             permissions: currentFBAccessToken.permissions,
                             expirationDate: currentFBAccessToken.expirationDate!,
@@ -92,40 +136,17 @@ class LoginViewController: UIViewController {
                             created: Date()
                         )
                         
-                        self.dict = result as! [String : AnyObject]
-                        
                         /* persist udacity session model and provide it inside appDelegate globaly */
                         self.appDelegate.isAuthByFacebook = true
                         self.appDelegate.setFacebookSession(fbSession)
                         
-                        print("\n\n================================================\n")
-                        print(fbSession.tokenString)
-                        print("\n==================================================\n\n")
-                        
                     } else {
+                        
                         self.showErrorMessage(error!.localizedDescription)
+                        
                     }
                 }
             )
-        }
-    }
-    
-    @IBAction func loginFacebookAction(_ sender: AnyObject) {
-        
-        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
-        fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
-            if (error == nil){
-                let fbloginresult : FBSDKLoginManagerLoginResult = result!
-                if fbloginresult.grantedPermissions != nil {
-                    if(fbloginresult.grantedPermissions.contains("email"))
-                    {
-                        self.getFBUserData()
-                        fbLoginManager.logOut()
-                    }
-                }
-            } else {
-                self.showErrorMessage((error?.localizedDescription)!)
-            }
         }
     }
 }
