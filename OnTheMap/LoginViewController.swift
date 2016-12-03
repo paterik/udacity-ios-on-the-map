@@ -30,7 +30,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func createUdacityAccountAction(_ sender: AnyObject) {
         
-        /* show redirect message dialog for create new udacity account */
+        /* show redirect message dialog for creating new udacity account */
         showRedirectMessage(
             "You have no udacity account yet? No Problem, create a new account right now ...",
             "https://auth.udacity.com/sign-up?next=https%3A%2F%2Fclassroom.udacity.com%2Fauthenticated"
@@ -39,7 +39,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func forgotUdacityPasswordAction(_ sender: AnyObject) {
         
-        /* show redirect message dialog for lost credentials of udactiy account */
+        /* show redirect message dialog for credential lost of your udactiy account */
         showRedirectMessage(
             "You've lost your password? No problem, accept this redirect to your udacity login page and click the forgot password link",
             "https://auth.udacity.com/sign-in?next=https%3A%2F%2Fclassroom.udacity.com%2Fauthenticated"
@@ -71,104 +71,22 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginFacebookAction(_ sender: AnyObject) {
         
-        // -- info : https://discussions.udacity.com/t/login-with-facebook-as-in/44828/3
-        // --      : https://github.com/muddybarefeet/on-the-map/blob/master/onTheMap/UdacityClient.swift
-        
-        // -- new
-        
         /* deactivate ui during http rest call */
         activateUI(false)
-        
-        let login: FBSDKLoginManager = FBSDKLoginManager()
-        login.logIn(withReadPermissions: ["public_profile"], from: self) { (FBSDKLoginManagerLoginResult, error) in
-            
-            if error != nil {
-                print("Process error", error)
-            }
-            else if (FBSDKLoginManagerLoginResult?.isCancelled)! {
-                print("Cancelled")
-            }
-            else {
-                print("=== Logged in", FBSDKLoginManagerLoginResult?.token.tokenString)
-                // self.Udacity.fbAuthToken = FBSDKLoginManagerLoginResult.token.tokenString
-                //now call login method with the auth token
-                // self.Udacity.fbLogin()
-            }
-        }
-        
-        // -- old
-        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
-        
-        fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
-            
-            if (error == nil) {
-                
-                let fbloginresult : FBSDKLoginManagerLoginResult = result!
-                if fbloginresult.grantedPermissions != nil {
-                    
-                    if(fbloginresult.grantedPermissions.contains("email"))
-                    {
-                        self.getFBUserData()
-                        fbLoginManager.logOut()
-                    }
-                }
-                
+
+        FBClientInstance.getUserSessionToken (viewController: self) { (success: Bool?, fbSession: FBSession?, message: String?) in
+
+            if success! == true {
+                /* persist udacity session model and provide it inside appDelegate globaly */
+                self.appDelegate.isAuthByFacebook = true
+                self.appDelegate.setFacebookSession(fbSession!)
+
             } else {
-                
-                self.showErrorMessage((error?.localizedDescription)!)
-                
+                self.showErrorMessage(message!)
             }
-            
+
             /* (re)activate ui after http rest call result handling */
             self.activateUI(true)
-        }
-    }
-    
-    func getFBUserData() {
-        
-        if let currentFBAccessToken = FBSDKAccessToken.current() {
-            
-            FBSDKGraphRequest(graphPath: "me", parameters: [
-                "fields": "picture.type(large), email"]).start(completionHandler: { (connection, result, error)
-                    -> Void in
-                    
-                    if (error == nil) {
-                        
-                        guard let resultBlock = result as? [String: AnyObject],
-                            let fbPictureBlock = resultBlock["picture"] as? [String: AnyObject],
-                            let fbPictureDataBlock = fbPictureBlock["data"] as? [String: AnyObject],
-                            let _fbPictureUrl = fbPictureDataBlock["url"] as? String,
-                            let _fbEmail = resultBlock["email"] as? String
-                            
-                            else {
-                                self.showErrorMessage("unable to get facebook profile information")
-                                
-                                return
-                        }
-                        
-                        let fbSession = FBSession(
-                            tokenString: currentFBAccessToken.tokenString!,
-                            email: _fbEmail,
-                            userID: currentFBAccessToken.userID!,
-                            userImgUrl: _fbPictureUrl,
-                            appID: currentFBAccessToken.appID!,
-                            permissions: currentFBAccessToken.permissions,
-                            expirationDate: currentFBAccessToken.expirationDate!,
-                            refreshDate: currentFBAccessToken.refreshDate!,
-                            created: Date()
-                        )
-                        
-                        /* persist udacity session model and provide it inside appDelegate globaly */
-                        self.appDelegate.isAuthByFacebook = true
-                        self.appDelegate.setFacebookSession(fbSession)
-                        
-                    } else {
-                        
-                        self.showErrorMessage(error!.localizedDescription)
-                        
-                    }
-                }
-            )
         }
     }
 }
