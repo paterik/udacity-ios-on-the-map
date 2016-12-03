@@ -35,6 +35,7 @@ class FBClient: NSObject {
     var errorDomainPrefix: String = "FBClient"
     var errorUserInfo: [String: String] = ["": ""]
     
+    //* handle facebook graph request result and persist facebook session object inside app delegate */
     func getFacebookUserData(completionHandlerForGraph: @escaping (_ success: Bool, _ fbSession: FBSession?, _ message: String?) -> Void) {
         
         guard let currentFBAccessToken = FBSDKAccessToken.current() else {
@@ -83,22 +84,15 @@ class FBClient: NSObject {
         completionHandlerForToken: @escaping (_ success: Bool, _ fbSession: FBSession?, _ message: String?) -> Void) {
 
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        
         fbLoginManager.logIn(withReadPermissions: self.fbReqPermissions, from: viewController) { (FBSDKLoginManagerLoginResult, error) in
             
             if error != nil {
                 completionHandlerForToken(false, nil, "\(error?.localizedDescription)")
-            }
-            else if (FBSDKLoginManagerLoginResult?.isCancelled)! {
+            } else if (FBSDKLoginManagerLoginResult?.isCancelled)! {
                 completionHandlerForToken(false, nil, "Facebook authorization process was cancelled!")
-            }
-            else if ((FBSDKLoginManagerLoginResult?.declinedPermissions) != nil) {
-                completionHandlerForToken(false, nil, "Required Facebook permissions \(self.fbReqPermissions.joined(separator: ",")) not granted!")
-            }
-            else if ((FBSDKLoginManagerLoginResult?.grantedPermissions) != nil) {
+            } else {
                 
-                print("=== Logged in", FBSDKLoginManagerLoginResult?.token.tokenString)
-                
-                /* handle facebook graph request result and persist facebook session object inside app delegate */
                 self.getFacebookUserData { (success: Bool?, fbSession: FBSession?, message: String?) in
                     
                     if success == false {
@@ -108,12 +102,6 @@ class FBClient: NSObject {
                     
                     completionHandlerForToken(true, fbSession, message)
                 }
-                
-            } else {
-                
-                print("=== unknown state", FBSDKLoginManagerLoginResult?.token.tokenString)
-                
-                
             }
         }
     }
