@@ -11,16 +11,19 @@ import Foundation
 class UDCClient: NSObject {
     
     //
-    // MARK: Constants
+    // MARK: Constants (Statics)
     //
     static let sharedInstance = UDCClient()
-    
+
+    //
+    // MARK: Constants (Normal)
+    //
+    let debugMode: Bool = true
+    let dateFormatter = DateFormatter()
+    let session = URLSession.shared
     let apiURL: String = "https://www.udacity.com/api/session"
     let apiSkipCharCount: Int = 5
-    let debugMode: Bool = true
-    let session = URLSession.shared
-    let dateFormatter = DateFormatter()
-    
+
     //
     // MARK: Properties
     //
