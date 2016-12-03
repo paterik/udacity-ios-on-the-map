@@ -35,7 +35,7 @@ class FBClient: NSObject {
     var errorDomainPrefix: String = "FBClient"
     var errorUserInfo: [String: String] = ["": ""]
     
-    func getFacebookUserData(completionHandlerForGraph: @escaping (_ success: Bool, _ udcSession: FBSession?, _ message: String?) -> Void) {
+    func getFacebookUserData(completionHandlerForGraph: @escaping (_ success: Bool, _ fbSession: FBSession?, _ message: String?) -> Void) {
         
         guard let currentFBAccessToken = FBSDKAccessToken.current() else {
             return
@@ -80,8 +80,41 @@ class FBClient: NSObject {
     
     func getUserSessionToken(
         viewController: UIViewController!,
-        completionHandlerForToken: @escaping (_ success: Bool, _ udcSession: FBSession?, _ message: String?) -> Void) {
+        completionHandlerForToken: @escaping (_ success: Bool, _ fbSession: FBSession?, _ message: String?) -> Void) {
 
-        
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager.logIn(withReadPermissions: self.fbReqPermissions, from: viewController) { (FBSDKLoginManagerLoginResult, error) in
+            
+            if error != nil {
+                completionHandlerForToken(false, nil, "\(error?.localizedDescription)")
+            }
+            else if (FBSDKLoginManagerLoginResult?.isCancelled)! {
+                completionHandlerForToken(false, nil, "Facebook authorization process was cancelled!")
+            }
+            else if ((FBSDKLoginManagerLoginResult?.declinedPermissions) != nil) {
+                completionHandlerForToken(false, nil, "Required Facebook permissions \(self.fbReqPermissions.joined(separator: ",")) not granted!")
+            }
+            else if ((FBSDKLoginManagerLoginResult?.grantedPermissions) != nil) {
+                
+                print("=== Logged in", FBSDKLoginManagerLoginResult?.token.tokenString)
+                
+                /* handle facebook graph request result and persist facebook session object inside app delegate */
+                self.getFacebookUserData { (success: Bool?, fbSession: FBSession?, message: String?) in
+                    
+                    if success == false {
+                        completionHandlerForToken(false, nil, message)
+                        return
+                    }
+                    
+                    completionHandlerForToken(true, fbSession, message)
+                }
+                
+            } else {
+                
+                print("=== unknown state", FBSDKLoginManagerLoginResult?.token.tokenString)
+                
+                
+            }
+        }
     }
 }
