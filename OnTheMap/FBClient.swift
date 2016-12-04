@@ -27,13 +27,6 @@ class FBClient: NSObject {
     let dateFormatter = DateFormatter()
     let fbReqPermissions = ["public_profile", "email"]
     let fbGraphProperties = ["picture.type(large)", "email"]
-
-    //
-    // MARK: Properties
-    //
-    var errorDomain: String = ""
-    var errorDomainPrefix: String = "FBClient"
-    var errorUserInfo: [String: String] = ["": ""]
     
     //* handle facebook graph request result and persist facebook session object inside app delegate */
     func getFacebookUserData(completionHandlerForGraph: @escaping (_ success: Bool, _ fbSession: FBSession?, _ message: String?) -> Void) {
