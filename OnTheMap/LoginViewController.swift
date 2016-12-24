@@ -56,6 +56,9 @@ class LoginViewController: UIViewController {
         UDCClientInstance.getUserSessionToken { (success: Bool?, udcSession: UDCSession?, message: String?) in
             
             if success! == true {
+                
+                print("UDC LOGIN -> SUCCESS !!!")
+                
                 /* persist udacity session model and provide it inside appDelegate globaly */
                 self.appDelegate.isAuthByUdacity = true
                 self.appDelegate.setUdacitySession(udcSession!)
@@ -77,6 +80,9 @@ class LoginViewController: UIViewController {
         FBClientInstance.getUserSessionToken (viewController: self) { (success: Bool?, fbSession: FBSession?, message: String?) in
 
             if success! == true {
+                
+                print("FB LOGIN -> SUCCESS !!!")
+                
                 /* persist udacity session model and provide it inside appDelegate globaly */
                 self.appDelegate.isAuthByFacebook = true
                 self.appDelegate.setFacebookSession(fbSession!)

@@ -29,9 +29,10 @@ class FBClient: NSObject {
     let fbGraphProperties = ["picture.type(large)", "email"]
     
     //* handle facebook graph request result and persist facebook session object inside app delegate */
-    func getFacebookUserData(completionHandlerForGraph: @escaping (_ success: Bool, _ fbSession: FBSession?, _ message: String?) -> Void) {
+    func getFacebookUserData(
+         completionHandlerForGraph: @escaping (_ success: Bool, _ fbSession: FBSession?, _ message: String?) -> Void) {
         
-        /* error 04: facebbok token not available anymore */
+        /* error 04: facebook token not available anymore */
         guard let currentFBAccessToken = FBSDKAccessToken.current() else {
             completionHandlerForGraph(false, nil, "Facebook token lost during graph api call!")
             return
@@ -78,42 +79,50 @@ class FBClient: NSObject {
     }
     
     func getUserSessionToken(
-        viewController: UIViewController!,
-        completionHandlerForToken: @escaping (_ success: Bool, _ fbSession: FBSession?, _ message: String?) -> Void) {
+         viewController: UIViewController!,
+         completionHandlerForToken: @escaping (_ success: Bool, _ fbSession: FBSession?, _ message: String?) -> Void) {
 
         if FBSDKAccessToken.current() != nil {
         
-            print("!!! usertoken already fetched !!!")
-            
-        } else {
-            
-            let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
-                fbLoginManager.logIn(withReadPermissions: self.fbReqPermissions, from: viewController) { (FBSDKLoginManagerLoginResult, error) in
-                
-                if error != nil {
-                    /* error 01: general exception/error during facebook login detected */
-                    completionHandlerForToken(false, nil, "\(error?.localizedDescription)")
+            print ("!!! facebook accesstoken already available and present !!!")
+            self.getFacebookUserData { (success: Bool?, fbSession: FBSession?, message: String?) in
+                /* error 03: general exception/error during facebook graph call detected */
+                if success == false {
+                    completionHandlerForToken(false, nil, message)
                     return
-                    
-                } else if (FBSDKLoginManagerLoginResult?.isCancelled)! {
-                    /* error 02: authorization cancelled during facebook login */
-                    completionHandlerForToken(false, nil, "Facebook authorization process was cancelled!")
-                    return
-                    
-                } else {
-                    
-                    self.getFacebookUserData { (success: Bool?, fbSession: FBSession?, message: String?) in
-                        
-                        /* error 03: general exception/error during facebook graph call detected */
-                        if success == false {
-                            completionHandlerForToken(false, nil, message)
-                            return
-                        }
-                        
-                        /* everything went fine, save the facebook session token object using lambda result of previously graph call function */
-                        completionHandlerForToken(true, fbSession, message)
-                    }
                 }
+                
+                /* authentication already done no 2nd login api call necessary, override result message for debugging/dev logs */
+                completionHandlerForToken(true, fbSession, "Facebook authentication already done!")
+                return
+            }
+        }
+        
+        print ("!!! facebook accesstoken not available will be refreshed now !!!")
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+            fbLoginManager.logIn(withReadPermissions: self.fbReqPermissions, from: viewController) { (FBSDKLoginManagerLoginResult, error) in
+                
+            if error != nil {
+                /* error 01: general exception/error during facebook login detected */
+                completionHandlerForToken(false, nil, "\(error?.localizedDescription)")
+                return
+                    
+            } else if (FBSDKLoginManagerLoginResult?.isCancelled)! {
+                /* error 02: authorization cancelled during facebook login */
+                completionHandlerForToken(false, nil, "Facebook authorization process was cancelled!")
+                return
+                    
+            }
+                    
+            self.getFacebookUserData { (success: Bool?, fbSession: FBSession?, message: String?) in
+                /* error 03: general exception/error during facebook graph call detected */
+                if success == false {
+                    completionHandlerForToken(false, nil, message)
+                    return
+                }
+                        
+                /* everything went fine, save the facebook session token object using lambda result of previously graph call function */
+                completionHandlerForToken(true, fbSession, message)
             }
         }
     }
