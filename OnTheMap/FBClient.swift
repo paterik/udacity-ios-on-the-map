@@ -82,23 +82,22 @@ class FBClient: NSObject {
          viewController: UIViewController!,
          completionHandlerForToken: @escaping (_ success: Bool, _ fbSession: FBSession?, _ message: String?) -> Void) {
 
+        /* check if auth token still valid and return otherwise refresh FB Login */
         if FBSDKAccessToken.current() != nil {
         
-            print ("!!! facebook accesstoken already available and present !!!")
             self.getFacebookUserData { (success: Bool?, fbSession: FBSession?, message: String?) in
                 /* error 03: general exception/error during facebook graph call detected */
                 if success == false {
                     completionHandlerForToken(false, nil, message)
-                    return
                 }
                 
                 /* authentication already done no 2nd login api call necessary, override result message for debugging/dev logs */
                 completionHandlerForToken(true, fbSession, "Facebook authentication already done!")
-                return
             }
+            
+            return
         }
         
-        print ("!!! facebook accesstoken not available will be refreshed now !!!")
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
             fbLoginManager.logIn(withReadPermissions: self.fbReqPermissions, from: viewController) { (FBSDKLoginManagerLoginResult, error) in
                 
