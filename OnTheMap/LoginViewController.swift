@@ -62,6 +62,7 @@ class LoginViewController: UIViewController {
                 /* persist udacity session model and provide it inside appDelegate globaly */
                 self.appDelegate.isAuthByUdacity = true
                 self.appDelegate.setUdacitySession(udcSession!)
+                self.loadLocationViewController()
             
             } else {
                 self.showErrorMessage(message!)
@@ -86,6 +87,7 @@ class LoginViewController: UIViewController {
                 /* persist udacity session model and provide it inside appDelegate globaly */
                 self.appDelegate.isAuthByFacebook = true
                 self.appDelegate.setFacebookSession(fbSession!)
+                self.loadLocationViewController()
 
             } else {
                 self.showErrorMessage(message!)
@@ -94,5 +96,15 @@ class LoginViewController: UIViewController {
             /* (re)activate ui after http rest call result handling */
             self.activateUI(true)
         }
+    }
+    
+    private func loadLocationViewController() {
+    
+        let locationViewController = self.storyboard!.instantiateViewController(
+            withIdentifier: "LocationViewController") as! LocationViewController
+        
+        locationViewController.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+        
+        self.present(locationViewController, animated: true, completion: nil)
     }
 }
