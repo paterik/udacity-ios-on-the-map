@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,11 +23,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UdacityLogo_v2" translatesAutoresizingMaskIntoConstraints="NO" id="Plq-Al-0Cn">
+                                <rect key="frame" x="16" y="52" width="343" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="Ezm-1v-ak7"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="yBP-hp-cII" userLabel="ui_btn_login_udacity">
+                                <rect key="frame" x="16" y="559" width="343" height="40"/>
                                 <color key="backgroundColor" red="0.08235294118" green="0.64313725489999995" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="nhu-c6-a6x"/>
@@ -38,6 +43,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="1P8-fJ-QZa" userLabel="ui_btn_login_facebook">
+                                <rect key="frame" x="16" y="607" width="343" height="40"/>
                                 <color key="backgroundColor" red="0.17254901960784313" green="0.2627450980392157" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0xi-KY-85Z"/>
@@ -51,6 +57,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" text="patrick.paechnatz@gmail.com" placeholder="udacity username" textAlignment="center" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="ymc-OA-Wcr" userLabel="ui_inp_username">
+                                <rect key="frame" x="16" y="136" width="343" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ibB-I1-D96"/>
@@ -60,6 +67,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" placeholder="udacity password" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Ti6-RH-nRt" userLabel="ui_inp_password">
+                                <rect key="frame" x="16" y="184" width="343" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="pVo-Pv-qOr"/>
@@ -69,6 +77,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEQ-b1-BLD" userLabel="ui_btn_create_account">
+                                <rect key="frame" x="16" y="299" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="KXc-Xh-elH"/>
                                 </constraints>
@@ -81,6 +90,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QoF-NS-iI0" userLabel="ui_btn_password_lost">
+                                <rect key="frame" x="16" y="337" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="9pE-Fa-JHJ"/>
                                 </constraints>
@@ -131,8 +141,110 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
         </scene>
+        <!--LocationTableViewController-->
+        <scene sceneID="BOo-8A-Q0z">
+            <objects>
+                <viewController title="LocationTableViewController" id="9CU-nN-4mc" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wMa-49-uly"/>
+                        <viewControllerLayoutGuide type="bottom" id="dc8-d7-KWA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9uU-k6-b9j">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xhJ-2d-OjN">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="On The Map" id="mOL-s8-fyF">
+                                        <barButtonItem key="leftBarButtonItem" image="icnAddPosition_v1" id="kHS-vC-YlV">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" tag="1" image="icnLogout_v1" id="YqY-i8-iZT">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="xhJ-2d-OjN" secondAttribute="trailing" id="kGi-ww-rq2"/>
+                            <constraint firstItem="xhJ-2d-OjN" firstAttribute="leading" secondItem="9uU-k6-b9j" secondAttribute="leading" id="wlL-vO-yMC"/>
+                            <constraint firstItem="xhJ-2d-OjN" firstAttribute="top" secondItem="wMa-49-uly" secondAttribute="bottom" id="yOo-n6-aFx"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" tag="2" title="List" image="icnTableView_v1" selectedImage="icnTableView_v1" id="mxF-Vw-foc"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jor-8y-smy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1751" y="448"/>
+        </scene>
+        <!--LocationMapViewController-->
+        <scene sceneID="haW-oT-1GN">
+            <objects>
+                <viewController title="LocationMapViewController" id="54A-vp-Lv2" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RLH-Ie-Q1t"/>
+                        <viewControllerLayoutGuide type="bottom" id="dWV-2g-fNo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Pej-jr-eon">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLZ-WZ-G6Z">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="On The Map" id="Qxb-hW-9wy">
+                                        <barButtonItem key="leftBarButtonItem" image="icnAddPosition_v1" id="4y9-J9-5Hr">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" tag="1" image="icnLogout_v1" id="5m5-OE-Vop">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zLZ-WZ-G6Z" firstAttribute="top" secondItem="RLH-Ie-Q1t" secondAttribute="bottom" id="3OK-wG-PbZ"/>
+                            <constraint firstItem="zLZ-WZ-G6Z" firstAttribute="leading" secondItem="Pej-jr-eon" secondAttribute="leading" id="e4t-Kx-F14"/>
+                            <constraint firstAttribute="trailing" secondItem="zLZ-WZ-G6Z" secondAttribute="trailing" id="hTI-UJ-NPk"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" tag="2" title="Map" image="icnMapView_v1" selectedImage="icnMapView_v1" id="zQh-bK-gYu"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sCZ-ua-sT7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1750" y="-384"/>
+        </scene>
+        <!--LocationViewController-->
+        <scene sceneID="3Yh-4P-UBk">
+            <objects>
+                <tabBarController storyboardIdentifier="LocationViewController" title="LocationViewController" id="FGE-Mk-xaD" customClass="LocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="jev-HJ-9Oq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="54A-vp-Lv2" kind="relationship" relationship="viewControllers" id="egL-ah-uMr"/>
+                        <segue destination="9CU-nN-4mc" kind="relationship" relationship="viewControllers" id="5IL-b5-3MS"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YkD-Ct-E61" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="855" y="37"/>
+        </scene>
     </scenes>
     <resources>
         <image name="UdacityLogo_v2" width="256" height="256"/>
+        <image name="icnAddPosition_v1" width="25" height="25"/>
+        <image name="icnLogout_v1" width="25" height="25"/>
+        <image name="icnMapView_v1" width="25" height="25"/>
+        <image name="icnTableView_v1" width="25" height="25"/>
     </resources>
 </document>
