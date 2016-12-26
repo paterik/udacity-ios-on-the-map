@@ -689,7 +689,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5F6793BE2EE06FD20412526D /* Pods-OnTheMap.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = OnTheMap/OnTheMap.entitlements;
 				DEVELOPMENT_TEAM = QYU36A8NKN;
@@ -705,7 +705,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E474849C56D370264FFAD133 /* Pods-OnTheMap.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = OnTheMap/OnTheMap.entitlements;
 				DEVELOPMENT_TEAM = QYU36A8NKN;
@@ -720,7 +720,7 @@
 		B1A15B6E1DE040FD002A4307 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = QYU36A8NKN;
 				INFOPLIST_FILE = OnTheMapTests/Info.plist;
@@ -735,7 +735,7 @@
 		B1A15B6F1DE040FD002A4307 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = QYU36A8NKN;
 				INFOPLIST_FILE = OnTheMapTests/Info.plist;
@@ -750,7 +750,7 @@
 		B1A15B711DE040FD002A4307 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				DEVELOPMENT_TEAM = QYU36A8NKN;
 				INFOPLIST_FILE = OnTheMapUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -764,7 +764,7 @@
 		B1A15B721DE040FD002A4307 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				DEVELOPMENT_TEAM = QYU36A8NKN;
 				INFOPLIST_FILE = OnTheMapUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
