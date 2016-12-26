@@ -16,6 +16,7 @@
 		B119B5861DE591F5002AF6AF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B119B5851DE591F5002AF6AF /* String.swift */; };
 		B119B58A1DE5A5F7002AF6AF /* UDCSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B119B5891DE5A5F7002AF6AF /* UDCSession.swift */; };
 		B12DBEC41DECD0B100C5988A /* FBSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DBEC31DECD0B100C5988A /* FBSession.swift */; };
+		B13384321E113DB300A23201 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13384311E113DB300A23201 /* LocationViewController.swift */; };
 		B1886DEB1DEE1DC5004026BE /* FBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1886DEA1DEE1DC5004026BE /* FBClient.swift */; };
 		B1A15B461DE040FD002A4307 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B451DE040FD002A4307 /* AppDelegate.swift */; };
 		B1A15B481DE040FD002A4307 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B471DE040FD002A4307 /* LoginViewController.swift */; };
@@ -54,6 +55,7 @@
 		B119B5851DE591F5002AF6AF /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B119B5891DE5A5F7002AF6AF /* UDCSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDCSession.swift; sourceTree = "<group>"; };
 		B12DBEC31DECD0B100C5988A /* FBSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBSession.swift; sourceTree = "<group>"; };
+		B13384311E113DB300A23201 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		B13CFC5A1DEB0C6300C08272 /* OnTheMap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnTheMap.entitlements; sourceTree = "<group>"; };
 		B1886DEA1DEE1DC5004026BE /* FBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBClient.swift; sourceTree = "<group>"; };
 		B1A15B421DE040FD002A4307 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +178,28 @@
 			name = extension;
 			sourceTree = "<group>";
 		};
+		B13384301E113D5300A23201 /* locationView */ = {
+			isa = PBXGroup;
+			children = (
+				B13384311E113DB300A23201 /* LocationViewController.swift */,
+			);
+			name = locationView;
+			sourceTree = "<group>";
+		};
+		B13384331E113DE600A23201 /* locationMapView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = locationMapView;
+			sourceTree = "<group>";
+		};
+		B13384341E113DF700A23201 /* locationTableView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = locationTableView;
+			sourceTree = "<group>";
+		};
 		B154718A1DE0437D000226D7 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +229,9 @@
 		B154718D1DE043D2000226D7 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				B13384341E113DF700A23201 /* locationTableView */,
+				B13384331E113DE600A23201 /* locationMapView */,
+				B13384301E113D5300A23201 /* locationView */,
 				B11812891DE4661B00C1C91C /* loginView */,
 			);
 			name = controller;
@@ -500,6 +527,7 @@
 				B12DBEC41DECD0B100C5988A /* FBSession.swift in Sources */,
 				B11812911DE4682900C1C91C /* UDCClient.swift in Sources */,
 				B119B58A1DE5A5F7002AF6AF /* UDCSession.swift in Sources */,
+				B13384321E113DB300A23201 /* LocationViewController.swift in Sources */,
 				B1886DEB1DEE1DC5004026BE /* FBClient.swift in Sources */,
 				B1A15B481DE040FD002A4307 /* LoginViewController.swift in Sources */,
 				B11812851DE4388200C1C91C /* UIColor.swift in Sources */,
