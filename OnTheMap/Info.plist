@@ -26,7 +26,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>214</string>
+	<string>226</string>
 	<key>FacebookAppID</key>
 	<string>365362206864879</string>
 	<key>FacebookDisplayName</key>
@@ -40,8 +40,12 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>the app requires access to your media library</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>this app requires access to your location service</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>the app require access to your photo stock</string>
+	<string>this app requires access to your photo library</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
