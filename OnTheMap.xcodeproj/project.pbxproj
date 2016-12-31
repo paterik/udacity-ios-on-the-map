@@ -25,6 +25,12 @@
 		B1A15B501DE040FD002A4307 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1A15B4E1DE040FD002A4307 /* LaunchScreen.storyboard */; };
 		B1A15B5B1DE040FD002A4307 /* OnTheMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B5A1DE040FD002A4307 /* OnTheMapTests.swift */; };
 		B1A15B661DE040FD002A4307 /* OnTheMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B651DE040FD002A4307 /* OnTheMapUITests.swift */; };
+		B1DB86251E126029006D827A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB86241E126029006D827A /* MapViewController.swift */; };
+		B1DB86271E1260E2006D827A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB86261E1260E2006D827A /* TableViewController.swift */; };
+		B1DB862B1E1262BB006D827A /* PRSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB862A1E1262BB006D827A /* PRSClient.swift */; };
+		B1DB862D1E126397006D827A /* PRSStudentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB862C1E126397006D827A /* PRSStudentData.swift */; };
+		B1DB862F1E17A89B006D827A /* PRSClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB862E1E17A89B006D827A /* PRSClientExtension.swift */; };
+		B1DB86311E17B38B006D827A /* RequestBaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB86301E17B38B006D827A /* RequestBaseClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +77,13 @@
 		B1A15B611DE040FD002A4307 /* OnTheMapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheMapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1A15B651DE040FD002A4307 /* OnTheMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapUITests.swift; sourceTree = "<group>"; };
 		B1A15B671DE040FD002A4307 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1AEC7F01E125D5800EDAD47 /* LGSideMenuController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LGSideMenuController.framework; path = "Pods/../build/Debug-iphoneos/LGSideMenuController/LGSideMenuController.framework"; sourceTree = "<group>"; };
+		B1DB86241E126029006D827A /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		B1DB86261E1260E2006D827A /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		B1DB862A1E1262BB006D827A /* PRSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSClient.swift; sourceTree = "<group>"; };
+		B1DB862C1E126397006D827A /* PRSStudentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSStudentData.swift; sourceTree = "<group>"; };
+		B1DB862E1E17A89B006D827A /* PRSClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSClientExtension.swift; sourceTree = "<group>"; };
+		B1DB86301E17B38B006D827A /* RequestBaseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestBaseClient.swift; sourceTree = "<group>"; };
 		E474849C56D370264FFAD133 /* Pods-OnTheMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheMap/Pods-OnTheMap.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,8 +133,10 @@
 		B11812861DE465E900C1C91C /* clients */ = {
 			isa = PBXGroup;
 			children = (
+				B1DB86281E126295006D827A /* parse.com */,
 				B11812871DE465F000C1C91C /* udacity.com */,
 				B11812881DE465F800C1C91C /* facebook.com */,
+				B1DB86301E17B38B006D827A /* RequestBaseClient.swift */,
 			);
 			name = clients;
 			sourceTree = "<group>";
@@ -189,6 +204,7 @@
 		B13384331E113DE600A23201 /* locationMapView */ = {
 			isa = PBXGroup;
 			children = (
+				B1DB86241E126029006D827A /* MapViewController.swift */,
 			);
 			name = locationMapView;
 			sourceTree = "<group>";
@@ -196,6 +212,7 @@
 		B13384341E113DF700A23201 /* locationTableView */ = {
 			isa = PBXGroup;
 			children = (
+				B1DB86261E1260E2006D827A /* TableViewController.swift */,
 			);
 			name = locationTableView;
 			sourceTree = "<group>";
@@ -229,6 +246,7 @@
 		B154718D1DE043D2000226D7 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				B1DF14EB1E1258E20001D54C /* LeftSidebarView */,
 				B13384341E113DF700A23201 /* locationTableView */,
 				B13384331E113DE600A23201 /* locationMapView */,
 				B13384301E113D5300A23201 /* locationView */,
@@ -300,6 +318,31 @@
 			path = OnTheMapUITests;
 			sourceTree = "<group>";
 		};
+		B1DB86281E126295006D827A /* parse.com */ = {
+			isa = PBXGroup;
+			children = (
+				B1DB86291E12629F006D827A /* extension */,
+				B1DB862A1E1262BB006D827A /* PRSClient.swift */,
+				B1DB862C1E126397006D827A /* PRSStudentData.swift */,
+			);
+			name = parse.com;
+			sourceTree = "<group>";
+		};
+		B1DB86291E12629F006D827A /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				B1DB862E1E17A89B006D827A /* PRSClientExtension.swift */,
+			);
+			name = extension;
+			sourceTree = "<group>";
+		};
+		B1DF14EB1E1258E20001D54C /* LeftSidebarView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = LeftSidebarView;
+			sourceTree = "<group>";
+		};
 		B83D26EEAD6452E5A30FAB3D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,6 +355,7 @@
 		E86AAD8DE0A7D1C9A4B17F6A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B1AEC7F01E125D5800EDAD47 /* LGSideMenuController.framework */,
 				AF126A51B3920E5D6565196C /* Pods_OnTheMap.framework */,
 			);
 			name = Frameworks;
@@ -525,11 +569,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				B12DBEC41DECD0B100C5988A /* FBSession.swift in Sources */,
+				B1DB862F1E17A89B006D827A /* PRSClientExtension.swift in Sources */,
+				B1DB86271E1260E2006D827A /* TableViewController.swift in Sources */,
 				B11812911DE4682900C1C91C /* UDCClient.swift in Sources */,
 				B119B58A1DE5A5F7002AF6AF /* UDCSession.swift in Sources */,
 				B13384321E113DB300A23201 /* LocationViewController.swift in Sources */,
+				B1DB862B1E1262BB006D827A /* PRSClient.swift in Sources */,
+				B1DB86311E17B38B006D827A /* RequestBaseClient.swift in Sources */,
 				B1886DEB1DEE1DC5004026BE /* FBClient.swift in Sources */,
+				B1DB862D1E126397006D827A /* PRSStudentData.swift in Sources */,
 				B1A15B481DE040FD002A4307 /* LoginViewController.swift in Sources */,
+				B1DB86251E126029006D827A /* MapViewController.swift in Sources */,
 				B11812851DE4388200C1C91C /* UIColor.swift in Sources */,
 				B11812941DE4699B00C1C91C /* UDCClientExtension.swift in Sources */,
 				B118128C1DE4664600C1C91C /* LoginViewControllerExtension.swift in Sources */,
@@ -693,6 +743,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = OnTheMap/OnTheMap.entitlements;
 				DEVELOPMENT_TEAM = QYU36A8NKN;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/LGSideMenuController",
+				);
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dunkelfrosch.ios.OnTheMap;
@@ -709,6 +763,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = OnTheMap/OnTheMap.entitlements;
 				DEVELOPMENT_TEAM = QYU36A8NKN;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/LGSideMenuController",
+				);
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dunkelfrosch.ios.OnTheMap;
