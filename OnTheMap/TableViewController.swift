@@ -6,4 +6,9 @@
 //  Copyright © 2016 Patrick Paechnatz. All rights reserved.
 //
 
-import Foundation
+
+import UIKit
+
+class TableViewController: UITableViewController {
+
+}

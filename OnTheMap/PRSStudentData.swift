@@ -1,5 +1,5 @@
 //
-//  PRSData.swift
+//  PRSStudentData.swift
 //  OnTheMap
 //
 //  Created by Patrick Paechnatz on 27.12.16.
@@ -8,13 +8,14 @@
 
 import Foundation
 
-struct PRSData {
+struct PRSStudentData {
     
+    // basic student meta data
     let firstName: String!
     let lastName: String!
     let latitude: Double!
     let longitude: Double!
-    
+
     // the URL provided by the student
     let mediaURL: String!
     

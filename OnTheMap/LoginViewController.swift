@@ -56,16 +56,16 @@ class LoginViewController: UIViewController {
         UDCClientInstance.getUserSessionToken { (success: Bool?, udcSession: UDCSession?, message: String?) in
             
             if success! == true {
-                
-                print("UDC LOGIN -> SUCCESS !!!")
-                
+
                 /* persist udacity session model and provide it inside appDelegate globaly */
                 self.appDelegate.isAuthByUdacity = true
                 self.appDelegate.setUdacitySession(udcSession!)
                 self.loadLocationViewController()
             
             } else {
+                
                 self.showErrorMessage(message!)
+                
             }
             
             /* (re)activate ui after http rest call result handling */
@@ -82,15 +82,15 @@ class LoginViewController: UIViewController {
 
             if success! == true {
                 
-                print("FB LOGIN -> SUCCESS !!!")
-                
                 /* persist udacity session model and provide it inside appDelegate globaly */
                 self.appDelegate.isAuthByFacebook = true
                 self.appDelegate.setFacebookSession(fbSession!)
                 self.loadLocationViewController()
 
             } else {
+                
                 self.showErrorMessage(message!)
+                
             }
 
             /* (re)activate ui after http rest call result handling */

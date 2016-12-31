@@ -60,7 +60,7 @@ class UDCClient: NSObject {
             }
             
             /* GUARD: Was there an error? */
-            guard (error == nil) else {
+            guard error == nil else {
                 sendError(error: "Up's, there was an error with your request: \(error)")
                 return
             }

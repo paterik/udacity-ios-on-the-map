@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //
     // MARK: Functions for API SessionHandling
     //
+    var studentLocations: [PRSStudentData]
+    var studentLocation: PRSStudentData? = nil
     var facebookSession: FBSession? = nil
     var udacitySession: UDCSession? = nil
     var isAuthByUdacity: Bool = false
@@ -45,6 +47,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func getFacebookSession() -> FBSession {
 
         return facebookSession!
+    }
+    
+    func setStudentLocation(_ _studentLocation: PRSStudentData) {
+        
+        studentLocation = _studentLocation
+    }
+    
+    func getStudentLocation() -> PRSStudentData {
+        
+        return studentLocation!
     }
 
     //
