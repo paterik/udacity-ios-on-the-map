@@ -2,9 +2,15 @@
 //  RequestBaseClient.swift
 //  OnTheMap
 //
+//  ClassMethod(s)
+//
 //  - func requestPossible () -> Bool       :: check request/network connection
 //  - func requestPrepare  () -> URLRequest :: prepare global request object for upcoming request
 //  - func requestExecute  () -> [void]     :: execute the prepared base request used for helper methods (get, post, patch ...)
+//
+//
+//  Extension(s)
+//
 //  - func convertDataWithCompletionHandler :: special json converter / completion handler for handling json results
 //
 //  Created by Patrick Paechnatz on 31.12.16.
@@ -12,13 +18,14 @@
 //
 
 import Foundation
+import SystemConfiguration
 
-class RequestBaseClient {
+class RequestClient {
     
     //
     // MARK: Constants (Statics)
     //
-    static let sharedInstance = RequestBaseClient()
+    static let sharedInstance = RequestClient()
     
     //
     // MARK: Constants (Normal)
@@ -27,6 +34,7 @@ class RequestBaseClient {
     let session = URLSession.shared
     let _udcApiSkipCharCount: Int = 5
     let _udcApiIdentUrls: [String] = ["https://www.udacity.com/api/session"]
+    let _transportMethods: [String] = ["POST", "PUT", "PATCH", "DELETE"]
     
     //
     // MARK: Properties
@@ -45,6 +53,7 @@ class RequestBaseClient {
     func requestPossible () -> Bool {
     
         var zeroAddress = sockaddr_in()
+        var flags = SCNetworkReachabilityFlags()
         
         zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
         zeroAddress.sin_family = sa_family_t(AF_INET)
@@ -54,8 +63,6 @@ class RequestBaseClient {
                 SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
             }
         }
-        
-        var flags = SCNetworkReachabilityFlags()
         
         if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
             return false
@@ -76,7 +83,9 @@ class RequestBaseClient {
         _ url: String,
         _ method: String,
           headers: [String : String],
-          jsonDataBody: [String : AnyObject]?) -> URLRequest {
+          jsonDataBody: [String : AnyObject]?)
+        
+        -> URLRequest {
         
         let request = NSMutableURLRequest(url: URL(string: url)!)
         
@@ -84,14 +93,14 @@ class RequestBaseClient {
         request.addValue("no-cache", forHTTPHeaderField: "Cache-Control")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
-        if transportMethods.contains(method) {
+        if _transportMethods.contains(method) {
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         }
         
         request.httpMethod = method
         
         /* identify udacity url requests and tag them as such 'special' request */
-        if _udcApiIdentUrls.contains(_url) {
+        if _udcApiIdentUrls.contains(url) {
             isUdacityRequest = true
         }
         
@@ -103,7 +112,7 @@ class RequestBaseClient {
         }
         
         /* body dictionary data not empty? Handle this data as json-compatible type */
-        if !jsonDataBody?.values.flatten().isEmpty {
+        if !(jsonDataBody?.values.isEmpty)! {
             
             if let requestBodyDictionary = jsonDataBody {
                 
@@ -127,13 +136,14 @@ class RequestBaseClient {
      */
     func requestExecute (
          _ request: URLRequest,
-           completionHandlerForRequest: @escaping (_ data: AnyObject?, _ response: HTTPURLResponse?, _ errorString: String?) -> Void) {
+           completionHandlerForRequest: @escaping (_ data: AnyObject?, _ errorString: String?)
+        
+        -> Void) {
         
         /* check connection availability and execute request process */
-        if false === requestPossible() {
+        if false == requestPossible() {
         
-            completionHandlerForRequest(nil, nil, "Device not connected to the internet, check your connection state!")
-            return
+            completionHandlerForRequest(nil, "Device not connected to the internet, check your connection state!")
             
         } else {
             
@@ -141,11 +151,7 @@ class RequestBaseClient {
                 
                 func sendError(error: String) {
                     
-                    self.errorDomain = "\(self.errorDomainPrefix)_completionHandlerForRequest"
-                    self.errorUserInfo =  [NSLocalizedDescriptionKey : error]
-                    
-                    completionHandlerForRequest(nil, NSError(domain: self.errorDomain, code: 1, userInfo: self.errorUserInfo))
-                    
+                    completionHandlerForRequest(nil, error)
                     if self.debugMode {
                         print(error)
                     }
@@ -159,7 +165,7 @@ class RequestBaseClient {
                 
                 /* GUARD: Was there any data returned? */
                 guard let data = data else {
-                    sendError(error: "Up's, no data was returned by the request!")
+                    sendError(error: "Up's, no data was returned by your request!")
                     return
                 }
                 
@@ -182,50 +188,20 @@ class RequestBaseClient {
                     }
                 }
 
-                let newData = data
-                if self.isUdacityRequest {
+                var newData = data
+                if true == self.isUdacityRequest {
                     newData = data.subdata(in: Range(uncheckedBounds: (self._udcApiSkipCharCount, data.count)))
                 }
                 
                 /* now parse the data and use the data in completion handler */
                 self.convertDataWithCompletionHandler(
                     data: newData as NSData,
-                    completionHandlerForConvertData: completionHandlerForRequest
+                    completionHandlerForConvertData: completionHandlerForRequest as! (Any?, String?) -> Void
                 )
             }
             
             /* Finaly start the corresponding request */
             task.resume()
-            
-            /* and return task object */
-            return task
-            
-        }
-        
-        // take a raw JSON NSData object and return a (real) usable foundation object
-        func convertDataWithCompletionHandler(
-             data: NSData,
-             completionHandlerForConvertData: (_ result: Any?, _ error: NSError?) -> Void) {
-            
-            var parsedResult: Any!
-            
-            do {
-                
-                parsedResult = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments)
-                
-            } catch {
-                
-                errorDomain = "\(self.errorDomainPrefix)_convertDataWithCompletionHandler"
-                errorUserInfo = [NSLocalizedDescriptionKey : "Up's, could not parse the data as JSON: '\(data)'"]
-                
-                completionHandlerForConvertData(nil, NSError(domain: errorDomain, code: 1, userInfo: errorUserInfo))
-                
-                if self.debugMode {
-                    print(error)
-                }
-            }
-            
-            completionHandlerForConvertData(parsedResult, nil)
         }
     }
 }
