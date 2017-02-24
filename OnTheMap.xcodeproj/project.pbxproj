@@ -16,6 +16,7 @@
 		B119B5861DE591F5002AF6AF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B119B5851DE591F5002AF6AF /* String.swift */; };
 		B119B58A1DE5A5F7002AF6AF /* UDCSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B119B5891DE5A5F7002AF6AF /* UDCSession.swift */; };
 		B12DBEC41DECD0B100C5988A /* FBSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DBEC31DECD0B100C5988A /* FBSession.swift */; };
+		B12EB42B1E290F7D0048526A /* RequestClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */; };
 		B13384321E113DB300A23201 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13384311E113DB300A23201 /* LocationViewController.swift */; };
 		B1886DEB1DEE1DC5004026BE /* FBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1886DEA1DEE1DC5004026BE /* FBClient.swift */; };
 		B1A15B461DE040FD002A4307 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B451DE040FD002A4307 /* AppDelegate.swift */; };
@@ -30,7 +31,7 @@
 		B1DB862B1E1262BB006D827A /* PRSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB862A1E1262BB006D827A /* PRSClient.swift */; };
 		B1DB862D1E126397006D827A /* PRSStudentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB862C1E126397006D827A /* PRSStudentData.swift */; };
 		B1DB862F1E17A89B006D827A /* PRSClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB862E1E17A89B006D827A /* PRSClientExtension.swift */; };
-		B1DB86311E17B38B006D827A /* RequestBaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB86301E17B38B006D827A /* RequestBaseClient.swift */; };
+		B1DB86311E17B38B006D827A /* RequestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB86301E17B38B006D827A /* RequestClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		B119B5851DE591F5002AF6AF /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B119B5891DE5A5F7002AF6AF /* UDCSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDCSession.swift; sourceTree = "<group>"; };
 		B12DBEC31DECD0B100C5988A /* FBSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBSession.swift; sourceTree = "<group>"; };
+		B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestClientExtension.swift; sourceTree = "<group>"; };
 		B13384311E113DB300A23201 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		B13CFC5A1DEB0C6300C08272 /* OnTheMap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnTheMap.entitlements; sourceTree = "<group>"; };
 		B1886DEA1DEE1DC5004026BE /* FBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBClient.swift; sourceTree = "<group>"; };
@@ -83,7 +85,7 @@
 		B1DB862A1E1262BB006D827A /* PRSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSClient.swift; sourceTree = "<group>"; };
 		B1DB862C1E126397006D827A /* PRSStudentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSStudentData.swift; sourceTree = "<group>"; };
 		B1DB862E1E17A89B006D827A /* PRSClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSClientExtension.swift; sourceTree = "<group>"; };
-		B1DB86301E17B38B006D827A /* RequestBaseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestBaseClient.swift; sourceTree = "<group>"; };
+		B1DB86301E17B38B006D827A /* RequestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestClient.swift; sourceTree = "<group>"; };
 		E474849C56D370264FFAD133 /* Pods-OnTheMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheMap/Pods-OnTheMap.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,10 +135,10 @@
 		B11812861DE465E900C1C91C /* clients */ = {
 			isa = PBXGroup;
 			children = (
+				B12EB4281E290F4D0048526A /* base */,
 				B1DB86281E126295006D827A /* parse.com */,
 				B11812871DE465F000C1C91C /* udacity.com */,
 				B11812881DE465F800C1C91C /* facebook.com */,
-				B1DB86301E17B38B006D827A /* RequestBaseClient.swift */,
 			);
 			name = clients;
 			sourceTree = "<group>";
@@ -189,6 +191,23 @@
 			isa = PBXGroup;
 			children = (
 				B11812931DE4699B00C1C91C /* UDCClientExtension.swift */,
+			);
+			name = extension;
+			sourceTree = "<group>";
+		};
+		B12EB4281E290F4D0048526A /* base */ = {
+			isa = PBXGroup;
+			children = (
+				B1DB86301E17B38B006D827A /* RequestClient.swift */,
+				B12EB4291E290F5D0048526A /* extension */,
+			);
+			name = base;
+			sourceTree = "<group>";
+		};
+		B12EB4291E290F5D0048526A /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */,
 			);
 			name = extension;
 			sourceTree = "<group>";
@@ -575,11 +594,12 @@
 				B119B58A1DE5A5F7002AF6AF /* UDCSession.swift in Sources */,
 				B13384321E113DB300A23201 /* LocationViewController.swift in Sources */,
 				B1DB862B1E1262BB006D827A /* PRSClient.swift in Sources */,
-				B1DB86311E17B38B006D827A /* RequestBaseClient.swift in Sources */,
+				B1DB86311E17B38B006D827A /* RequestClient.swift in Sources */,
 				B1886DEB1DEE1DC5004026BE /* FBClient.swift in Sources */,
 				B1DB862D1E126397006D827A /* PRSStudentData.swift in Sources */,
 				B1A15B481DE040FD002A4307 /* LoginViewController.swift in Sources */,
 				B1DB86251E126029006D827A /* MapViewController.swift in Sources */,
+				B12EB42B1E290F7D0048526A /* RequestClientExtension.swift in Sources */,
 				B11812851DE4388200C1C91C /* UIColor.swift in Sources */,
 				B11812941DE4699B00C1C91C /* UDCClientExtension.swift in Sources */,
 				B118128C1DE4664600C1C91C /* LoginViewControllerExtension.swift in Sources */,
@@ -743,10 +763,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = OnTheMap/OnTheMap.entitlements;
 				DEVELOPMENT_TEAM = QYU36A8NKN;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/LGSideMenuController",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dunkelfrosch.ios.OnTheMap;
@@ -763,10 +780,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = OnTheMap/OnTheMap.entitlements;
 				DEVELOPMENT_TEAM = QYU36A8NKN;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/LGSideMenuController",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dunkelfrosch.ios.OnTheMap;
