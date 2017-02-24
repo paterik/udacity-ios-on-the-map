@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //
     // MARK: Functions for API SessionHandling
     //
-    var studentLocations: [PRSStudentData]
+    var studentLocations: [PRSStudentData] = []
     var studentLocation: PRSStudentData? = nil
     var facebookSession: FBSession? = nil
     var udacitySession: UDCSession? = nil
