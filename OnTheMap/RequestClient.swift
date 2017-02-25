@@ -34,7 +34,8 @@ class RequestClient {
     let session = URLSession.shared
     let _udcApiSkipCharCount: Int = 5
     let _udcApiIdentUrls: [String] = ["https://www.udacity.com/api/session"]
-    let _transportMethods: [String] = ["POST", "PUT", "PATCH", "DELETE"]
+    let _httpVerbsRead: [String] = ["POST", "PUT", "PATCH", "DELETE"]
+    let _httpVerbsWrite: [String] = ["OPTIONS", "GET", "HEAD", "TRACE"]
     
     //
     // MARK: Properties
@@ -93,7 +94,7 @@ class RequestClient {
         request.addValue("no-cache", forHTTPHeaderField: "Cache-Control")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
-        if _transportMethods.contains(method) {
+        if _httpVerbsWrite.contains(method) {
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         }
         
@@ -149,6 +150,7 @@ class RequestClient {
             
             let task = session.dataTask(with: request as URLRequest) { data, response, error in
                 
+                /* our internal error handling / logging method */
                 func sendError(error: String) {
                     
                     completionHandlerForRequest(nil, error)
