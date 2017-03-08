@@ -18,6 +18,7 @@
 		B12DBEC41DECD0B100C5988A /* FBSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DBEC31DECD0B100C5988A /* FBSession.swift */; };
 		B12EB42B1E290F7D0048526A /* RequestClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */; };
 		B13384321E113DB300A23201 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13384311E113DB300A23201 /* LocationViewController.swift */; };
+		B1682AB91E70422F004CB17C /* PRSStudentLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1682AB81E70422F004CB17C /* PRSStudentLocations.swift */; };
 		B1886DEB1DEE1DC5004026BE /* FBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1886DEA1DEE1DC5004026BE /* FBClient.swift */; };
 		B1A15B461DE040FD002A4307 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B451DE040FD002A4307 /* AppDelegate.swift */; };
 		B1A15B481DE040FD002A4307 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B471DE040FD002A4307 /* LoginViewController.swift */; };
@@ -65,6 +66,7 @@
 		B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestClientExtension.swift; sourceTree = "<group>"; };
 		B13384311E113DB300A23201 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		B13CFC5A1DEB0C6300C08272 /* OnTheMap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnTheMap.entitlements; sourceTree = "<group>"; };
+		B1682AB81E70422F004CB17C /* PRSStudentLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSStudentLocations.swift; sourceTree = "<group>"; };
 		B1886DEA1DEE1DC5004026BE /* FBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBClient.swift; sourceTree = "<group>"; };
 		B1A15B421DE040FD002A4307 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1A15B451DE040FD002A4307 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				B1DB86291E12629F006D827A /* extension */,
 				B1DB862A1E1262BB006D827A /* PRSClient.swift */,
 				B1DB862C1E126397006D827A /* PRSStudentData.swift */,
+				B1682AB81E70422F004CB17C /* PRSStudentLocations.swift */,
 			);
 			name = parse.com;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1682AB91E70422F004CB17C /* PRSStudentLocations.swift in Sources */,
 				B12DBEC41DECD0B100C5988A /* FBSession.swift in Sources */,
 				B1DB862F1E17A89B006D827A /* PRSClientExtension.swift in Sources */,
 				B1DB86271E1260E2006D827A /* TableViewController.swift in Sources */,
