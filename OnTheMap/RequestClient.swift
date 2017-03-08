@@ -108,7 +108,7 @@ class RequestClient {
         /* extend header by defined parametric values */
         if !headers.isEmpty {
             for (key, value) in headers {
-                request.addValue(key, forHTTPHeaderField: value)
+                request.addValue(value, forHTTPHeaderField: key)
             }
         }
         
@@ -147,6 +147,11 @@ class RequestClient {
             completionHandlerForRequest(nil, "Device not connected to the internet, check your connection state!")
             
         } else {
+            
+            print("-------------")
+            print(request.allHTTPHeaderFields!)
+            // print(NSString(data: request.httpBody!, encoding:String.Encoding.utf8.rawValue)!)
+            print("-------------")
             
             let task = session.dataTask(with: request as URLRequest) { data, response, error in
                 
