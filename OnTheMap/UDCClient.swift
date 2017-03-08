@@ -19,9 +19,13 @@ class UDCClient: NSObject {
     // MARK: Constants (Normal)
     //
     let debugMode: Bool = true
-    let dateFormatter = DateFormatter()
     let session = URLSession.shared
     let client = RequestClient.sharedInstance
+    let dateFormatter = DateFormatter()
+    
+    //
+    // MARK: Constants (API)
+    //
     let apiURL: String = "https://www.udacity.com/api/session"
     
     func getUserSessionToken (
