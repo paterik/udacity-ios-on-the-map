@@ -5,6 +5,8 @@
 //  Created by Patrick Paechnatz on 27.12.16.
 //  Copyright © 2016 Patrick Paechnatz. All rights reserved.
 //
+//  this client will use the unity.com parse adaption due to the inavailability of parse.com
+//
 
 import Foundation
 
@@ -37,7 +39,14 @@ class PRSClient: NSObject {
         "X-Parse-REST-API-Key": "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
     ]
     
-    func getAllStudentLocations (_ completionHandlerForGetAllLocations: @escaping (_ success: Bool?, _ error: String?) -> Void) {
+    /**
+     * get all available students ordered by last update and limit by the first 100 entities and persisting results into
+     * struct base collection if data seems plausible (firstname / lastname / location not empty)
+     */
+    func getAllStudentLocations (
+        _ completionHandlerForGetAllLocations: @escaping (_ success: Bool?, _ error: String?)
+        
+        -> Void) {
         
         let apiRequestURL = NSString(format: "%@?%@=%@&%@=%@", apiURL, apiOrderParam, apiOrderValue, apiLimitParam, apiLimitValue)
         
@@ -55,6 +64,8 @@ class PRSClient: NSObject {
                 }
                 
                 self.students.locations.removeAll()
+                // for this time, I'll add almost everything fetched from API - later a plausible check will
+                // (re)evaluate the incoming meta-lines for "reasons" ...
                 for dictionary in results as [NSDictionary] {
                     self.students.locations.append(PRSStudentData(dictionary))
                 }
