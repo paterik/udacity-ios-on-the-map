@@ -11,12 +11,13 @@ import Foundation
 extension RequestClient {
     
     /*
-     * base GET method for our request base client
+     * base "GET" method for our request base client
      */
     func get (
         _ url: String,
           headers: [String:String],
           completionHandlerForGet: @escaping (_ data: AnyObject?, _ errorString: String?)
+        
         -> Void) {
         
         requestExecute(
@@ -26,45 +27,52 @@ extension RequestClient {
     }
     
     /*
-     * base POST method for our request base client
+     * base "POST" method for our request base client
      */
     func post (
         _ url: String,
           headers: [String:String],
+          jsonBody: [String : AnyObject]?,
           completionHandlerForPost: @escaping (_ data: AnyObject?, _ errorString: String?)
-        -> Void) {
         
+        -> Void) {
+    
         requestExecute(
-            requestPrepare(url, "POST", headers: headers, jsonDataBody:[:]),
+            requestPrepare(url, "POST", headers: headers, jsonDataBody:jsonBody),
             completionHandlerForRequest: completionHandlerForPost
         )
     }
     
     /*
-     * base PUT method for our request base client
+     * base "PUT" method for our request base client
      */
     func put (
         _ url: String,
           headers: [String:String],
+          jsonBody: [String : AnyObject]?,
           completionHandlerForPut: @escaping (_ data: AnyObject?, _ errorString: String?)
+        
         -> Void) {
         
         requestExecute(
-            requestPrepare(url, "PUT", headers: headers, jsonDataBody:[:]),
+            requestPrepare(url, "PUT", headers: headers, jsonDataBody:jsonBody),
             completionHandlerForRequest: completionHandlerForPut
         )
     }
     
     /*
-     * base PATCH method for our request base client
+     * base "PATCH" method for our request base client
      */
     func patch (
         _ url: String,
           headers: [String:String],
-          completionHandlerForPatch: @escaping (_ data: AnyObject?, _ errorString: String?) -> Void) {
+          jsonBody: [String : AnyObject]?,
+          completionHandlerForPatch: @escaping (_ data: AnyObject?, _ errorString: String?)
+        
+        -> Void) {
         
         requestExecute(
-            requestPrepare(url, "PATCH", headers: headers, jsonDataBody:[:]),
+            requestPrepare(url, "PATCH", headers: headers, jsonDataBody:jsonBody),
             completionHandlerForRequest: completionHandlerForPatch
         )
     }
@@ -74,7 +82,9 @@ extension RequestClient {
      */
     func convertDataWithCompletionHandler(
         data: NSData,
-        completionHandlerForConvertData: (_ result: Any?, _ errorString: String?) -> Void) {
+        completionHandlerForConvertData: (_ result: Any?, _ errorString: String?)
+        
+        -> Void) {
         
         var parsedResult: Any!
         
