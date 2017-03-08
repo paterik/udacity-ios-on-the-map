@@ -51,24 +51,29 @@ class LoginViewController: UIViewController {
         /* deactivate ui during http rest call */
         activateUI(false)
         
-        UDCClientInstance.username = inpUdacityUser.text!
-        UDCClientInstance.password = inpUdacityPassword.text!
-        UDCClientInstance.getUserSessionToken { (success: Bool?, udcSession: UDCSession?, message: String?) in
+        UDCClientInstance.getUserSessionToken(
             
-            if success! == true {
-
-                /* persist udacity session model and provide it inside appDelegate globaly */
+            inpUdacityUser.text!,
+            inpUdacityPassword.text!) { (udcSession, error) in
+                
+            if error == nil {
+                    
                 self.appDelegate.isAuthByUdacity = true
                 self.appDelegate.setUdacitySession(udcSession!)
                 self.loadLocationViewController()
-            
+                    
+                // cleanOut username and password after login done successfully
+                OperationQueue.main.addOperation {
+                    self.inpUdacityUser.text = ""
+                    self.inpUdacityPassword.text = ""
+                }
+                    
             } else {
-                
-                self.showErrorMessage(message!)
-                
+
+                self.showErrorMessage(error!)
             }
-            
-            /* (re)activate ui after http rest call result handling */
+                
+            // (re)activate ui after http rest call result handling
             self.activateUI(true)
         }
     }
