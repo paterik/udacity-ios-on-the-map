@@ -55,32 +55,19 @@ class PRSClient: NSObject {
                     return
                 }
                 
-                self.parseUserLocations(results as [NSDictionary])
+                self.saveStudentLocations(results as [NSDictionary])
                 
                 completionHandlerForGetAllLocations(true, nil)
             }
         }
     }
     
-    func parseUserLocations (_ data: [NSDictionary]) -> Void {
+    private func saveStudentLocations (_ data: [NSDictionary]) -> Void {
         
         students.locations.removeAll()
         
         for dictionary in data {
-            
-            let _student = PRSStudentData(
-                firstName: (dictionary["firstName"] as? String!) ?? "-",
-                lastName:  (dictionary["lastName"] as? String!) ?? "-",
-                latitude:  (dictionary["latitude"] as? Double!) ?? nil,
-                longitude: (dictionary["longitude"] as? Double!) ?? nil,
-                mediaURL:  (dictionary["mediaURL"] as? String!) ?? "-",
-                mapString: (dictionary["mapString"] as? String!) ?? "-",
-                objectId:  (dictionary["objectId"] as? String!) ?? "-",
-                uniqueKey: (dictionary["uniqueKey"] as? String!) ?? "-",
-                evaluated: Date()
-            )
-            
-            students.locations.append(_student)
+            students.locations.append(PRSStudentData(dictionary))
         }
     }
 }
