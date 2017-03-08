@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -154,7 +154,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xhJ-2d-OjN">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="On The Map" id="mOL-s8-fyF">
                                         <barButtonItem key="leftBarButtonItem" image="icnMenu_v1" id="kHS-vC-YlV">
@@ -169,9 +169,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="xhJ-2d-OjN" secondAttribute="trailing" id="kGi-ww-rq2"/>
-                            <constraint firstItem="xhJ-2d-OjN" firstAttribute="leading" secondItem="9uU-k6-b9j" secondAttribute="leading" id="wlL-vO-yMC"/>
-                            <constraint firstItem="xhJ-2d-OjN" firstAttribute="top" secondItem="wMa-49-uly" secondAttribute="bottom" id="yOo-n6-aFx"/>
+                            <constraint firstAttribute="trailing" secondItem="xhJ-2d-OjN" secondAttribute="trailing" id="MfG-pL-Nqh"/>
+                            <constraint firstItem="xhJ-2d-OjN" firstAttribute="top" secondItem="wMa-49-uly" secondAttribute="bottom" id="Pd4-p8-eAh"/>
+                            <constraint firstItem="xhJ-2d-OjN" firstAttribute="leading" secondItem="9uU-k6-b9j" secondAttribute="leading" id="oa8-xY-64v"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ii6-sd-plE"/>
@@ -193,7 +193,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLZ-WZ-G6Z">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="On The Map" id="Qxb-hW-9wy">
                                         <barButtonItem key="leftBarButtonItem" tag="1" image="icnMenu_v1" id="5m5-OE-Vop">
@@ -208,9 +208,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zLZ-WZ-G6Z" firstAttribute="top" secondItem="RLH-Ie-Q1t" secondAttribute="bottom" id="3OK-wG-PbZ"/>
-                            <constraint firstItem="zLZ-WZ-G6Z" firstAttribute="leading" secondItem="Pej-jr-eon" secondAttribute="leading" id="e4t-Kx-F14"/>
-                            <constraint firstAttribute="trailing" secondItem="zLZ-WZ-G6Z" secondAttribute="trailing" id="hTI-UJ-NPk"/>
+                            <constraint firstItem="zLZ-WZ-G6Z" firstAttribute="top" secondItem="RLH-Ie-Q1t" secondAttribute="bottom" id="O4Z-s4-qui"/>
+                            <constraint firstAttribute="trailing" secondItem="zLZ-WZ-G6Z" secondAttribute="trailing" id="hTU-Sa-rvT"/>
+                            <constraint firstItem="zLZ-WZ-G6Z" firstAttribute="leading" secondItem="Pej-jr-eon" secondAttribute="leading" id="sOx-L7-fbr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Uci-wh-T3S"/>
@@ -242,7 +242,7 @@
         <!--Map-->
         <scene sceneID="wlT-lN-hkd">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UsZ-LU-Vy0" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="UsZ-LU-Vy0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="2" title="Map" image="icnMapView_v1" selectedImage="icnMapView_v1" id="zQh-bK-gYu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gO1-Yb-zmp">
@@ -261,7 +261,7 @@
         <!--List-->
         <scene sceneID="FyU-SH-bra">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wRj-sZ-OJA" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="wRj-sZ-OJA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="2" title="List" image="icnTableView_v1" selectedImage="icnTableView_v1" id="mxF-Vw-foc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qbr-gs-qDs">
