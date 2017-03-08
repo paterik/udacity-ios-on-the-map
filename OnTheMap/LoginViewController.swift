@@ -49,9 +49,12 @@ class LoginViewController: UIViewController {
     @IBAction func loginUdacityAction(_ sender: AnyObject) {
         
         /* deactivate ui during http rest call */
-        activateUI(false)
+        // activateUI(false)
         
-        UDCClientInstance.getUserSessionToken(
+        loadLocationViewController()
+        
+        // ----------------------------------------------------------------------------- override for fast development
+        /* UDCClientInstance.getUserSessionToken(
             
             inpUdacityUser.text!,
             inpUdacityPassword.text!) { (udcSession, error) in
@@ -75,7 +78,7 @@ class LoginViewController: UIViewController {
                 
             // (re)activate ui after http rest call result handling
             self.activateUI(true)
-        }
+        } */
     }
     
     @IBAction func loginFacebookAction(_ sender: AnyObject) {
