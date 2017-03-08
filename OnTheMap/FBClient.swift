@@ -60,7 +60,8 @@ class FBClient: NSObject {
                     return
                 }
                 
-               let fbSession = FBSession(
+                // will be normalized like PRSStudentData entity later!
+                let fbSession = FBSession(
                     tokenString: currentFBAccessToken.tokenString!,
                     email: _fbEmail,
                     userID: currentFBAccessToken.userID!,
