@@ -60,7 +60,7 @@ class FBClient: NSObject {
                     return
                 }
                 
-                let fbSession = FBSession(
+               let fbSession = FBSession(
                     tokenString: currentFBAccessToken.tokenString!,
                     email: _fbEmail,
                     userID: currentFBAccessToken.userID!,
