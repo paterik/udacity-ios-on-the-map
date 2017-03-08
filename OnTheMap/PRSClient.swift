@@ -37,7 +37,6 @@ class PRSClient: NSObject {
         "X-Parse-REST-API-Key": "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
     ]
     
-    //the the locations of all the students
     func getAllStudentLocations (_ completionHandlerForGetAllLocations: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
         let apiRequestURL = NSString(format: "%@?%@=%@&%@=%@", apiURL, apiOrderParam, apiOrderValue, apiLimitParam, apiLimitValue)
@@ -55,19 +54,13 @@ class PRSClient: NSObject {
                     return
                 }
                 
-                self.saveStudentLocations(results as [NSDictionary])
+                self.students.locations.removeAll()
+                for dictionary in results as [NSDictionary] {
+                    self.students.locations.append(PRSStudentData(dictionary))
+                }
                 
                 completionHandlerForGetAllLocations(true, nil)
             }
-        }
-    }
-    
-    private func saveStudentLocations (_ data: [NSDictionary]) -> Void {
-        
-        students.locations.removeAll()
-        
-        for dictionary in data {
-            students.locations.append(PRSStudentData(dictionary))
         }
     }
 }
