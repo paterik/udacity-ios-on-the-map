@@ -34,8 +34,8 @@ class RequestClient {
     let session = URLSession.shared
     let _udcApiSkipCharCount: Int = 5
     let _udcApiIdentUrls: [String] = ["https://www.udacity.com/api/session"]
-    let _httpVerbsRead: [String] = ["POST", "PUT", "PATCH", "DELETE"]
-    let _httpVerbsWrite: [String] = ["OPTIONS", "GET", "HEAD", "TRACE"]
+    let _httpVerbsWrite: [String] = ["POST", "PUT", "PATCH", "DELETE"]
+    let _httpVerbsRead: [String] = ["OPTIONS", "GET", "HEAD", "TRACE"]
     
     //
     // MARK: Properties
@@ -78,7 +78,7 @@ class RequestClient {
     /*
      * prepare the main request for all api calls within this app, cache will be disabled,
      * standard cahrsat will be utf-8 and we'll always await json as response type. If any
-     * none-idempotent http verb will found, application/json willbe set as body/data-type
+     * none-idempotent http verb will found, application/json will be set as body/data-type
      */
     func requestPrepare (
         _ url: String,
@@ -93,8 +93,8 @@ class RequestClient {
         request.addValue("UTF-8", forHTTPHeaderField: "Accept-Charset")
         request.addValue("no-cache", forHTTPHeaderField: "Cache-Control")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        if _httpVerbsWrite.contains(method) {
+            
+        if _httpVerbsWrite.contains(method.uppercased()) {
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         }
         
@@ -150,7 +150,10 @@ class RequestClient {
             
             let task = session.dataTask(with: request as URLRequest) { data, response, error in
                 
-                /* our internal error handling / logging method */
+                var parsedResult: Any!
+                var newData: Data!
+                
+                /* our internal error logging method */
                 func sendError(error: String) {
                     
                     completionHandlerForRequest(nil, error)
@@ -180,7 +183,8 @@ class RequestClient {
                     }
                     
                     /* sometimes status code 400 returned, we've to check what kind of error this code is involved with */
-                    if statusCode == 400 || statusCode == 404 || (statusCode >= 500 || statusCode <= 599) {
+                    if (statusCode == 400 || statusCode == 404) || (statusCode >= 500 && statusCode <= 599) {
+                        
                         sendError(error: "Up's, your request returned a status code other than 2xx or 403! A service downtime may possible :(")
                         if self.debugMode {
                             print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
@@ -190,16 +194,24 @@ class RequestClient {
                     }
                 }
 
-                var newData = data
+                newData = data
                 if true == self.isUdacityRequest {
                     newData = data.subdata(in: Range(uncheckedBounds: (self._udcApiSkipCharCount, data.count)))
                 }
                 
-                /* now parse the data and use the data in completion handler */
-                self.convertDataWithCompletionHandler(
-                    data: newData as NSData,
-                    completionHandlerForConvertData: completionHandlerForRequest as! (Any?, String?) -> Void
-                )
+                do {
+                    parsedResult = try JSONSerialization.jsonObject(with: newData as Data, options: .allowFragments)
+                } catch {
+                    completionHandlerForRequest(nil, "Up's, could not parse the data as JSON: '\(data)'")
+                    if self.debugMode {
+                        print(error)
+                    }
+                    
+                    return
+                }
+            
+                completionHandlerForRequest(parsedResult as AnyObject?, nil)
+                
             }
             
             /* Finaly start the corresponding request */
