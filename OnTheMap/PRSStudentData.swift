@@ -29,12 +29,14 @@ struct PRSStudentData {
         
         firstName = (dictionary["firstName"] as? String!) ?? "-"
         lastName  = (dictionary["lastName"] as? String!)  ?? "-"
-        latitude  = (dictionary["latitude"] as? Double!)  ?? nil
-        longitude = (dictionary["longitude"] as? Double!) ?? nil
         mediaURL  = (dictionary["mediaURL"] as? String!)  ?? "-"
         mapString = (dictionary["mapString"] as? String!) ?? "-"
         objectId  = (dictionary["objectId"] as? String!)  ?? "-"
         uniqueKey = (dictionary["uniqueKey"] as? String!) ?? "-"
+
+        latitude  = (dictionary["latitude"] as? Double!)  ?? nil
+        longitude = (dictionary["longitude"] as? Double!) ?? nil
+
         evaluated = Date()
     }
 }
