@@ -51,7 +51,9 @@ class RequestClient {
     /**
      * check network reachability and connection state of current device
      */
-    func requestPossible () -> Bool {
+    func requestPossible ()
+        
+        -> Bool {
     
         var zeroAddress = sockaddr_in()
         var flags = SCNetworkReachabilityFlags()
@@ -144,14 +146,9 @@ class RequestClient {
         /* check connection availability and execute request process */
         if false == requestPossible() {
         
-            completionHandlerForRequest(nil, "Device not connected to the internet, check your connection state!")
+            completionHandlerForRequest(nil, "Up's, Your device seems not connected to the web, check your connection state!")
             
         } else {
-            
-            print("-------------")
-            print(request.allHTTPHeaderFields!)
-            // print(NSString(data: request.httpBody!, encoding:String.Encoding.utf8.rawValue)!)
-            print("-------------")
             
             let task = session.dataTask(with: request as URLRequest) { data, response, error in
                 
@@ -169,13 +166,13 @@ class RequestClient {
                 
                 /* GUARD: Was there an error? */
                 guard error == nil else {
-                    sendError(error: "Up's, there was an error with your request: \(error)")
+                    sendError(error: "Up's, there was a general error with your request: \(error)")
                     return
                 }
                 
                 /* GUARD: Was there any data returned? */
                 guard let data = data else {
-                    sendError(error: "Up's, no data was returned by your request!")
+                    sendError(error: "Up's, no data returned after your request!")
                     return
                 }
                 
@@ -183,14 +180,14 @@ class RequestClient {
                 if let statusCode = (response as? HTTPURLResponse)?.statusCode {
                     
                     if statusCode == 403 {
-                        sendError(error: "Up's, the account was not found or invalid credentials provided!")
+                        sendError(error: "Up's, the api authantication failed may be invalid credentials provided!")
                         return
                     }
                     
                     /* sometimes status code 400 returned, we've to check what kind of error this code is involved with */
                     if (statusCode == 400 || statusCode == 404) || (statusCode >= 500 && statusCode <= 599) {
                         
-                        sendError(error: "Up's, your request returned a status code other than 2xx or 403! A service downtime may possible :(")
+                        sendError(error: "Up's, your request returned a status code other than 2xx! A service downtime may possible - try later")
                         if self.debugMode {
                             print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
                         }
@@ -207,7 +204,7 @@ class RequestClient {
                 do {
                     parsedResult = try JSONSerialization.jsonObject(with: newData as Data, options: .allowFragments)
                 } catch {
-                    completionHandlerForRequest(nil, "Up's, could not parse the data as JSON: '\(data)'")
+                    completionHandlerForRequest(nil, "Up's, could not parse the api result data as JSON: '\(data)'")
                     if self.debugMode {
                         print(error)
                     }
