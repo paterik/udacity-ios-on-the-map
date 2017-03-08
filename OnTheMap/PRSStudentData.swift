@@ -29,5 +29,5 @@ struct PRSStudentData {
     let uniqueKey: String!
     
     // the fetch date of this structural object
-    let evaluationDate: Date!
+    let evaluated: Date!
 }
