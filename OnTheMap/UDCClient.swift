@@ -21,14 +21,54 @@ class UDCClient: NSObject {
     let debugMode: Bool = true
     let dateFormatter = DateFormatter()
     let session = URLSession.shared
+    let client = RequestClient.sharedInstance
     let apiURL: String = "https://www.udacity.com/api/session"
-    let apiSkipCharCount: Int = 5
-
-    //
-    // MARK: Properties
-    //
-    var username: String?
-    var password: String?
-    var jsonBody: String = "{}"
-
+    
+    func getUserSessionToken (
+        _ username: String,
+        _ password: String,
+          completionHandlerForAuth: @escaping (_ udcSession: UDCSession?, _ error: String?)
+        
+        -> Void) {
+        
+        let jsonBodyLogin = [
+            "udacity" : [
+                "username": username,
+                "password": password
+            ]
+        ]
+        
+        client.post(apiURL, headers: [:], jsonBody: jsonBodyLogin as [String : AnyObject]?) { (data, error) in
+            
+            self.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            
+            if (error != nil) {
+                
+                completionHandlerForAuth(nil, error)
+                
+            } else {
+                
+                guard let decodeJsonAccount = data!["account"] as? NSDictionary else {
+                    completionHandlerForAuth(nil, "There was no account key in the response")
+                    return
+                }
+                
+                guard let decodeJsonSession = data!["session"] as? NSDictionary else {
+                    completionHandlerForAuth(nil, "There was no session key in the response")
+                    return
+                }
+                
+                // create an internal udacity session object and provide this entity to our completion handler
+                let _udcSession = UDCSession(
+                     accountKey: decodeJsonAccount["key"]! as! String,
+                     accountRegistered: decodeJsonAccount["registered"] as? Bool,
+                     sessionId: decodeJsonSession["id"] as! String,
+                     sessionExpirationDate: self.dateFormatter.date(from: decodeJsonSession["expiration"] as! String),
+                     created: Date()
+                )
+                
+                completionHandlerForAuth(_udcSession, nil)
+            }
+        }
+    }
 }
