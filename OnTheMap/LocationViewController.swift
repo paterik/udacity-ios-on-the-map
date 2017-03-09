@@ -15,10 +15,7 @@ class LocationViewController: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        client.getAllStudentLocations() { (success, error) in
-            
-            
-            
-        }
+        /*client.getAllStudentLocations() { (success, error) in
+        }*/
     }
 }
