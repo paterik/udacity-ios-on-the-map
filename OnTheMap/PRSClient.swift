@@ -64,10 +64,19 @@ class PRSClient: NSObject {
                 }
                 
                 self.students.locations.removeAll()
+                
                 // for this time, I'll add almost everything fetched from API - later a plausible check will
                 // (re)evaluate the incoming meta-lines for "reasons" ...
                 for dictionary in results as [NSDictionary] {
-                    self.students.locations.append(PRSStudentData(dictionary))
+                    let meta = PRSStudentData(dictionary)
+                    
+                    if self.validateStudentMeta(meta) == true {
+                        
+                        self.students.locations.append(meta)
+                        if self.debugMode == true {
+                            print ("\(meta)\n--")
+                        }
+                    }
                 }
                 
                 completionHandlerForGetAllLocations(true, nil)
