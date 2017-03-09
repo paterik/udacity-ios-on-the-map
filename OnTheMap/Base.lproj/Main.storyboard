@@ -183,7 +183,7 @@
         <!--LocationMapViewController-->
         <scene sceneID="haW-oT-1GN">
             <objects>
-                <viewController title="LocationMapViewController" id="54A-vp-Lv2" sceneMemberID="viewController">
+                <viewController title="LocationMapViewController" id="54A-vp-Lv2" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RLH-Ie-Q1t"/>
                         <viewControllerLayoutGuide type="bottom" id="dWV-2g-fNo"/>
@@ -205,15 +205,25 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Qwt-vA-MdB">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zLZ-WZ-G6Z" firstAttribute="top" secondItem="RLH-Ie-Q1t" secondAttribute="bottom" id="O4Z-s4-qui"/>
-                            <constraint firstAttribute="trailing" secondItem="zLZ-WZ-G6Z" secondAttribute="trailing" id="hTU-Sa-rvT"/>
-                            <constraint firstItem="zLZ-WZ-G6Z" firstAttribute="leading" secondItem="Pej-jr-eon" secondAttribute="leading" id="sOx-L7-fbr"/>
+                            <constraint firstItem="Qwt-vA-MdB" firstAttribute="top" secondItem="zLZ-WZ-G6Z" secondAttribute="bottom" id="FdH-nX-Bl6"/>
+                            <constraint firstItem="Qwt-vA-MdB" firstAttribute="leading" secondItem="zLZ-WZ-G6Z" secondAttribute="leading" id="SRW-jj-H7v"/>
+                            <constraint firstItem="Qwt-vA-MdB" firstAttribute="bottom" secondItem="dWV-2g-fNo" secondAttribute="top" id="W2Y-cZ-Mbl"/>
+                            <constraint firstAttribute="trailing" secondItem="zLZ-WZ-G6Z" secondAttribute="trailing" id="Yx9-IK-Boa"/>
+                            <constraint firstItem="Qwt-vA-MdB" firstAttribute="trailing" secondItem="zLZ-WZ-G6Z" secondAttribute="trailing" id="dZD-su-UUy"/>
+                            <constraint firstItem="zLZ-WZ-G6Z" firstAttribute="leading" secondItem="Pej-jr-eon" secondAttribute="leading" id="eEw-s4-DWe"/>
+                            <constraint firstItem="zLZ-WZ-G6Z" firstAttribute="top" secondItem="RLH-Ie-Q1t" secondAttribute="bottom" id="qYx-f7-u8X"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Uci-wh-T3S"/>
+                    <connections>
+                        <outlet property="mapView" destination="Qwt-vA-MdB" id="gQi-dr-xSv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sCZ-ua-sT7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
