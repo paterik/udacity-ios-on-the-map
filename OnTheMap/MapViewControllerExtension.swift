@@ -56,20 +56,32 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         let students = PRSStudentLocations.sharedInstance
         
-        let currentLocation = self.currentLocations.first
-        let sourceLocation = CLLocation(latitude: (currentLocation?.latitude)!, longitude: (currentLocation?.longitude)!)
+        var renderDistance: Bool = false
+        var currentLocation: MapViewLocation?
+        var sourceLocation: CLLocation?
+        var targetLocation: CLLocation?
+        
+        if self.currentLocations.count > 0 {
+            currentLocation = self.currentLocations.first
+            sourceLocation = CLLocation(latitude: (currentLocation?.latitude)!, longitude: (currentLocation?.longitude)!)
+            
+            renderDistance = true
+        }
         
         for dictionary in students.locations {
             
-            let coordinate = CLLocationCoordinate2D(latitude: dictionary.latitude, longitude: dictionary.longitude)
+            let coordinate = CLLocationCoordinate2D(latitude: dictionary.latitude!, longitude: dictionary.longitude!)
             let annotation = PRSStudentMapAnnotation(coordinate)
-            
-            let targetLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
             
             annotation.title = NSString(format: "%@ %@", dictionary.firstName, dictionary.lastName) as String
             annotation.url = dictionary.mediaURL
-            annotation.subtitle = getPrintableDistanceBetween(sourceLocation, targetLocation)
             annotation.image = dictionary.studentImage
+            annotation.subtitle = annotation.url
+            
+            if renderDistance {
+                targetLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                annotation.subtitle = getPrintableDistanceBetween(sourceLocation, targetLocation)
+            }
             
             annotations.append(annotation)
         }
