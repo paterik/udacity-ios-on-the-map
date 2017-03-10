@@ -15,7 +15,6 @@ class PRSStudentMapAnnotation: NSObject, MKAnnotation {
     var title: String?
     var subtitle: String?
     var url: String?
-    var eta: String?
     var distance: String?
     var image: UIImage?
     var evaluated: Date?
