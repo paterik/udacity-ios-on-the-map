@@ -20,20 +20,18 @@ class MapViewController: UIViewController {
     //
     // MARK: Constants (Normal)
     //
+    let debugMode: Bool = false
     let clientParse = PRSClient.sharedInstance
     let clientUdacity = UDCClient.sharedInstance
-    let debugMode: Bool = false
-    
     let mapViewLocationManager = MapViewLocationManager.sharedInstance
     
-    let locationAccuracy : CLLocationAccuracy = 10
-    let locationCheckTimeout : TimeInterval = 10
-    let locationMapZoom : CLLocationDegrees = 10 // 0.03
-    let locationDistanceDivider : Double = 1000.0 // for metric conversion (m -> km)
-    
-    let locationFetchMode = 1 // 1: saveMode, 2: quickMode
-    var locationFetchTrying = false
-    var locationFetchSuccess = false
+    let locationAccuracy : CLLocationAccuracy = 10 // accuracy factor for device location
+    let locationCheckTimeout : TimeInterval = 10   // timeout for device location fetch
+    let locationMapZoom : CLLocationDegrees = 10   // zoom factor (0.03 seems best for max zoom)
+    let locationDistanceDivider : Double = 1000.0  // rate for metric conversion (m -> km)
+    let locationFetchMode : Int8 = 1               // 1: saveMode, 2: quickMode
+    var locationFetchTrying : Bool = false
+    var locationFetchSuccess : Bool = false
     var locationFetchStartTime : Date!
     var locationManager : CLLocationManager { return self.mapViewLocationManager.locationManager }
     var currentLocations = MapViewLocations.sharedInstance.currentLocations

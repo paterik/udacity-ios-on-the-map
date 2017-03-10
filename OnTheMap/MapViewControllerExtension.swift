@@ -269,7 +269,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             return nil
         }
         
-        let identifier = "studentPin"
+        let identifier = "locPin_0"
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
 
         if pinView == nil {
