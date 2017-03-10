@@ -29,12 +29,14 @@ struct PRSStudentData {
         // nil or unwrappable properties and add an evalation date
         //
         
-        firstName = (dictionary["firstName"] as? String!) ?? "-"
-        lastName  = (dictionary["lastName"] as? String!)  ?? "-"
-        mediaURL  = (dictionary["mediaURL"] as? String!)  ?? "-"
-        mapString = (dictionary["mapString"] as? String!) ?? "-"
-        objectId  = (dictionary["objectId"] as? String!)  ?? "-"
-        uniqueKey = (dictionary["uniqueKey"] as? String!) ?? "-"
+        let metaDefault: String! = "-"
+        
+        firstName = (dictionary["firstName"] as? String!) ?? metaDefault
+        lastName  = (dictionary["lastName"] as? String!)  ?? metaDefault
+        mediaURL  = (dictionary["mediaURL"] as? String!)  ?? metaDefault
+        mapString = (dictionary["mapString"] as? String!) ?? metaDefault
+        objectId  = (dictionary["objectId"] as? String!)  ?? metaDefault
+        uniqueKey = (dictionary["uniqueKey"] as? String!) ?? metaDefault
 
         latitude  = (dictionary["latitude"] as? Double!)  ?? nil
         longitude = (dictionary["longitude"] as? Double!) ?? nil
