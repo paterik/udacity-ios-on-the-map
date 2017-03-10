@@ -26,11 +26,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>294</string>
+	<string>357</string>
 	<key>FacebookAppID</key>
 	<string>365362206864879</string>
 	<key>FacebookDisplayName</key>
 	<string>onthemap</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -42,6 +44,8 @@
 	<true/>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>the app requires access to your media library</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>this app requires permanent access to your current location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>this app requires access to your location service</string>
 	<key>NSPhotoLibraryUsageDescription</key>
