@@ -20,7 +20,7 @@ class PRSClient: NSObject {
     //
     // MARK: Constants (Normal)
     //
-    let debugMode: Bool = true
+    let debugMode: Bool = false
     let session = URLSession.shared
     let client = RequestClient.sharedInstance
     let students = PRSStudentLocations.sharedInstance
@@ -59,17 +59,14 @@ class PRSClient: NSObject {
             } else {
                 
                 guard let results = data!["results"] as? [[String: AnyObject]] else {
-                    completionHandlerForGetAllLocations(nil, "No results key in the return data")
+                    completionHandlerForGetAllLocations(nil, "Up's, missing result key in response data")
                     return
                 }
                 
                 self.students.locations.removeAll()
                 
-                // for this time, I'll add almost everything fetched from API - later a plausible check will
-                // (re)evaluate the incoming meta-lines for "reasons" ...
                 for dictionary in results as [NSDictionary] {
                     let meta = PRSStudentData(dictionary)
-                    
                     if self.validateStudentMeta(meta) == true {
                         
                         self.students.locations.append(meta)
@@ -79,8 +76,33 @@ class PRSClient: NSObject {
                     }
                 }
                 
+                // append a single fixture student meta block during development
+                self.addSampleStudentLocation()
+                
                 completionHandlerForGetAllLocations(true, nil)
             }
         }
+    }
+    
+    /*
+     * add a sample (fixture) student location, used during development (Loc: Dresden, Zwinger)
+     */
+    private func addSampleStudentLocation ()
+        
+        -> Void {
+    
+        let sampleStudentDict : NSDictionary =
+        [
+            "firstName": "Patrick",
+            "lastName": "Paechnatz",
+            "mediaURL": "https://dunkelfrosch.com",
+            "mapString": "Dresden, Germany",
+            "objectId": "xx9xxYY9ZZ",
+            "uniqueKey": "9999999999",
+            "latitude": 51.053059,
+            "longitude": 13.733758,
+        ]
+
+        self.students.locations.append(PRSStudentData(sampleStudentDict))
     }
 }

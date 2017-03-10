@@ -12,7 +12,7 @@ extension PRSClient {
 
     /*
      * validate incoming student meta lines check for valid geo localization properties, return false if
-     * coordinates seems invalid (using regex call)
+     * coordinates seems invalid (using regex validation process)
      */
     func validateStudentMeta(_ meta:PRSStudentData) -> Bool {
         
