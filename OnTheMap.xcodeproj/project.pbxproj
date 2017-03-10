@@ -34,6 +34,10 @@
 		B1DB862D1E126397006D827A /* PRSStudentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB862C1E126397006D827A /* PRSStudentData.swift */; };
 		B1DB862F1E17A89B006D827A /* PRSClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB862E1E17A89B006D827A /* PRSClientExtension.swift */; };
 		B1DB86311E17B38B006D827A /* RequestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB86301E17B38B006D827A /* RequestClient.swift */; };
+		B1FCE41B1E72AD050056FC00 /* PRSStudentMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FCE41A1E72AD050056FC00 /* PRSStudentMapAnnotation.swift */; };
+		B1FCE41D1E72CE180056FC00 /* MapViewLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FCE41C1E72CE180056FC00 /* MapViewLocationManager.swift */; };
+		B1FCE41F1E72F3840056FC00 /* MapViewLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FCE41E1E72F3840056FC00 /* MapViewLocation.swift */; };
+		B1FCE4211E72F48A0056FC00 /* MapViewLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FCE4201E72F48A0056FC00 /* MapViewLocations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +94,10 @@
 		B1DB862C1E126397006D827A /* PRSStudentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSStudentData.swift; sourceTree = "<group>"; };
 		B1DB862E1E17A89B006D827A /* PRSClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSClientExtension.swift; sourceTree = "<group>"; };
 		B1DB86301E17B38B006D827A /* RequestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestClient.swift; sourceTree = "<group>"; };
+		B1FCE41A1E72AD050056FC00 /* PRSStudentMapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSStudentMapAnnotation.swift; sourceTree = "<group>"; };
+		B1FCE41C1E72CE180056FC00 /* MapViewLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewLocationManager.swift; sourceTree = "<group>"; };
+		B1FCE41E1E72F3840056FC00 /* MapViewLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewLocation.swift; sourceTree = "<group>"; };
+		B1FCE4201E72F48A0056FC00 /* MapViewLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewLocations.swift; sourceTree = "<group>"; };
 		E474849C56D370264FFAD133 /* Pods-OnTheMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheMap/Pods-OnTheMap.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +131,9 @@
 			isa = PBXGroup;
 			children = (
 				B11812831DE4386700C1C91C /* extensions */,
+				B1FCE41C1E72CE180056FC00 /* MapViewLocationManager.swift */,
+				B1FCE41E1E72F3840056FC00 /* MapViewLocation.swift */,
+				B1FCE4201E72F48A0056FC00 /* MapViewLocations.swift */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -357,6 +368,7 @@
 				B1DB862A1E1262BB006D827A /* PRSClient.swift */,
 				B1DB862C1E126397006D827A /* PRSStudentData.swift */,
 				B1682AB81E70422F004CB17C /* PRSStudentLocations.swift */,
+				B1FCE41A1E72AD050056FC00 /* PRSStudentMapAnnotation.swift */,
 			);
 			name = parse.com;
 			sourceTree = "<group>";
@@ -602,12 +614,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1682AB91E70422F004CB17C /* PRSStudentLocations.swift in Sources */,
+				B1FCE41D1E72CE180056FC00 /* MapViewLocationManager.swift in Sources */,
 				B12DBEC41DECD0B100C5988A /* FBSession.swift in Sources */,
 				B1DB862F1E17A89B006D827A /* PRSClientExtension.swift in Sources */,
 				B1DB86271E1260E2006D827A /* TableViewController.swift in Sources */,
 				B11812911DE4682900C1C91C /* UDCClient.swift in Sources */,
 				B119B58A1DE5A5F7002AF6AF /* UDCSession.swift in Sources */,
 				B13384321E113DB300A23201 /* LocationViewController.swift in Sources */,
+				B1FCE4211E72F48A0056FC00 /* MapViewLocations.swift in Sources */,
+				B1FCE41B1E72AD050056FC00 /* PRSStudentMapAnnotation.swift in Sources */,
 				B16F05F11E71EA6B00CED99B /* MapViewControllerExtension.swift in Sources */,
 				B1DB862B1E1262BB006D827A /* PRSClient.swift in Sources */,
 				B1DB86311E17B38B006D827A /* RequestClient.swift in Sources */,
@@ -617,6 +632,7 @@
 				B1DB86251E126029006D827A /* MapViewController.swift in Sources */,
 				B12EB42B1E290F7D0048526A /* RequestClientExtension.swift in Sources */,
 				B11812851DE4388200C1C91C /* UIColor.swift in Sources */,
+				B1FCE41F1E72F3840056FC00 /* MapViewLocation.swift in Sources */,
 				B11812941DE4699B00C1C91C /* UDCClientExtension.swift in Sources */,
 				B118128C1DE4664600C1C91C /* LoginViewControllerExtension.swift in Sources */,
 				B1A15B461DE040FD002A4307 /* AppDelegate.swift in Sources */,
