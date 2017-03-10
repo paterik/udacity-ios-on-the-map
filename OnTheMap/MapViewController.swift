@@ -30,6 +30,7 @@ class MapViewController: UIViewController {
     let locationMapZoom : CLLocationDegrees = 10   // zoom factor (0.03 seems best for max zoom)
     let locationDistanceDivider : Double = 1000.0  // rate for metric conversion (m -> km)
     let locationFetchMode : Int8 = 1               // 1: saveMode, 2: quickMode
+    
     var locationFetchTrying : Bool = false
     var locationFetchSuccess : Bool = false
     var locationFetchStartTime : Date!
