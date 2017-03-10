@@ -131,9 +131,6 @@
 			isa = PBXGroup;
 			children = (
 				B11812831DE4386700C1C91C /* extensions */,
-				B1FCE41C1E72CE180056FC00 /* MapViewLocationManager.swift */,
-				B1FCE41E1E72F3840056FC00 /* MapViewLocation.swift */,
-				B1FCE4201E72F48A0056FC00 /* MapViewLocations.swift */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -295,6 +292,7 @@
 			children = (
 				B118128D1DE4679C00C1C91C /* gdc */,
 				B11812861DE465E900C1C91C /* clients */,
+				B1D68FB11E731ED3008F73FA /* location */,
 				B11812821DE4385600C1C91C /* common */,
 			);
 			name = model;
@@ -359,6 +357,16 @@
 				B1A15B671DE040FD002A4307 /* Info.plist */,
 			);
 			path = OnTheMapUITests;
+			sourceTree = "<group>";
+		};
+		B1D68FB11E731ED3008F73FA /* location */ = {
+			isa = PBXGroup;
+			children = (
+				B1FCE41C1E72CE180056FC00 /* MapViewLocationManager.swift */,
+				B1FCE41E1E72F3840056FC00 /* MapViewLocation.swift */,
+				B1FCE4201E72F48A0056FC00 /* MapViewLocations.swift */,
+			);
+			name = location;
 			sourceTree = "<group>";
 		};
 		B1DB86281E126295006D827A /* parse.com */ = {
