@@ -10,12 +10,4 @@ import UIKit
 
 class LocationViewController: UITabBarController {
     
-    var client = PRSClient.sharedInstance
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        /*client.getAllStudentLocations() { (success, error) in
-        }*/
-    }
 }
