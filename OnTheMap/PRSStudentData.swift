@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct PRSStudentData {
     
@@ -18,6 +19,7 @@ struct PRSStudentData {
     let mapString: String!
     let objectId: String!
     let uniqueKey: String!
+    var studentImage: UIImage?
     let evaluated: Date!
     
     init (_ dictionary: NSDictionary) {
@@ -37,6 +39,7 @@ struct PRSStudentData {
         latitude  = (dictionary["latitude"] as? Double!)  ?? nil
         longitude = (dictionary["longitude"] as? Double!) ?? nil
 
+        studentImage = UIImage(named: "icnUserDefault_v1")
         evaluated = Date()
     }
 }
