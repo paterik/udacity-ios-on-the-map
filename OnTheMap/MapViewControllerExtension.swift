@@ -176,7 +176,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         _ manager: CLLocationManager,
           didFailWithError error: Error) {
         
-        if debugMode { print("locationManager: localization request finaly failed -> \(error)") }
+        if debugMode { print("locationManager: localization request finally failed -> \(error)") }
         
         locationFetchSuccess = false
         locationFetchStop()
@@ -201,6 +201,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
                 /* ignore first attempt */
                 if locationFetchStartTime == nil {
+                    
                     locationFetchStartTime = Date()
                     
                     return
@@ -208,6 +209,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
                 /* ignore overtime requests */
                 if _determinationTime.timeIntervalSince(self.locationFetchStartTime) > locationCheckTimeout {
+                    
                     locationFetchStop()
                 
                     return
@@ -231,7 +233,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     /*
      * update location meta information and (re)positioning current mapView
      */
-    func updateCurrentLocationMeta(
+    func updateCurrentLocationMeta( 
         _ coordinate: CLLocationCoordinate2D) {
     
         let center = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -257,19 +259,83 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         updateCurrentLocationMeta(mapView.userLocation.coordinate)
     }
     
-    /*
-     * render and setup a styled annotation pin within the current map
-     */
     func mapView(
         _ mapView: MKMapView,
           viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         /* ignore all given location annotation except the student ones */
-        if !(annotation is PRSStudentMapAnnotation){
-            return nil
-        }
+        if !(annotation is PRSStudentMapAnnotation) { return nil }
         
         let identifier = "locPin_0"
+        var annotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        
+        if annotationView == nil {
+            
+            annotationView = StudentMapAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView?.canShowCallout = false
+            
+        } else {
+            
+            annotationView?.annotation = annotation
+            
+        }
+        
+        annotationView?.image = UIImage(named: "icnUserDefault_v1")
+        
+        return annotationView
+    }
+    
+    func mapView(
+        _ mapView: MKMapView,
+          didSelect view: MKAnnotationView) {
+        
+        if view.annotation is MKUserLocation { return }
+        
+        // let studentsAnnotation = view.annotation as! PRSStudentMapAnnotation
+        let views = Bundle.main.loadNibNamed("StudentMapAnnotation", owner: nil, options: nil)
+        let calloutView = views?[0] as! StudentMapAnnotation
+        
+        calloutView.center = CGPoint(x: view.bounds.size.width / 2, y: -calloutView.bounds.size.height * 0.65)
+        
+        view.addSubview(calloutView)
+        
+        mapView.setCenter((view.annotation?.coordinate)!, animated: true)
+    }
+    
+    func mapView(
+        _ mapView: MKMapView,
+          didDeselect view: MKAnnotationView) {
+        
+        if view.isKind(of: StudentMapAnnotationView.self) {
+            for subview in view.subviews {
+                subview.removeFromSuperview()
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
+     * render and setup a styled annotation pin within the current map
+     */
+    func _mapView_old (
+        _ mapView: MKMapView,
+          viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        
+        
+        let identifier = "locPin_0"
+        let studentAnnotation = annotation as! PRSStudentMapAnnotation
+
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
 
         if pinView == nil {
@@ -277,19 +343,24 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             let linkButton = UIButton(type: .detailDisclosure)
                 linkButton.tintColor = UIColor.black
             
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            let linkLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
+                linkLabel.text = studentAnnotation.url
+                linkLabel.font = UIFont(name: "Verdana", size: 10)
+            
+            pinView = MKPinAnnotationView(annotation: studentAnnotation, reuseIdentifier: identifier)
             pinView!.canShowCallout = true
             pinView!.pinTintColor = UIColor.red
             pinView!.rightCalloutAccessoryView = linkButton
             
+            pinView!.detailCalloutAccessoryView = linkLabel
+            
         } else {
   
-            pinView!.annotation = annotation
+            pinView!.annotation = studentAnnotation
         }
         
-        let studentAnnotation = annotation as! PRSStudentMapAnnotation
         pinView!.leftCalloutAccessoryView = UIImageView(image: studentAnnotation.image)
-            
+        
         return pinView
     }
     
