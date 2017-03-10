@@ -33,6 +33,7 @@ class MapViewController: UIViewController {
     
     let locationFetchMode = 1 // 1: saveMode, 2: quickMode
     var locationFetchTrying = false
+    var locationFetchSuccess = false
     var locationFetchStartTime : Date!
     var locationManager : CLLocationManager { return self.mapViewLocationManager.locationManager }
     var currentLocations = MapViewLocations.sharedInstance.currentLocations

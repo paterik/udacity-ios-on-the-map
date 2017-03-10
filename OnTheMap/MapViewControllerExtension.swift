@@ -61,8 +61,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         var sourceLocation: CLLocation?
         var targetLocation: CLLocation?
         
-        if self.currentLocations.count > 0 {
-            currentLocation = self.currentLocations.first
+        /* render distance to other students only if device location meta data available */
+        if currentLocations.count > 0 {
+            currentLocation = currentLocations.first
             sourceLocation = CLLocation(latitude: (currentLocation?.latitude)!, longitude: (currentLocation?.longitude)!)
             
             renderDistance = true
@@ -141,9 +142,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      */
     func locationFetchStop () {
         
-        self.locationManager.stopUpdatingLocation()
-        self.locationFetchStartTime = nil
-        self.locationFetchTrying = false
+        locationManager.stopUpdatingLocation()
+        locationFetchStartTime = nil
+        locationFetchTrying = false
     }
     
     //
@@ -161,8 +162,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         switch status {
             case .authorizedAlways, .authorizedWhenInUse:
-                self.mapViewLocationManager.doThisWhenAuthorized?()
-                self.mapViewLocationManager.doThisWhenAuthorized = nil
+                mapViewLocationManager.doThisWhenAuthorized?()
+                mapViewLocationManager.doThisWhenAuthorized = nil
             
             default: break
         }
@@ -177,7 +178,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         if debugMode { print("locationManager: localization request finaly failed -> \(error)") }
         
-        self.locationFetchStop()
+        locationFetchSuccess = false
+        locationFetchStop()
     }
     
     /*
@@ -198,15 +200,15 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 let _determinationTime = _location.timestamp
             
                 /* ignore first attempt */
-                if self.locationFetchStartTime == nil {
-                    self.locationFetchStartTime = Date()
+                if locationFetchStartTime == nil {
+                    locationFetchStartTime = Date()
                     
                     return
                 }
             
                 /* ignore overtime requests */
                 if _determinationTime.timeIntervalSince(self.locationFetchStartTime) > locationCheckTimeout {
-                    self.locationFetchStop()
+                    locationFetchStop()
                 
                     return
                 }
@@ -214,7 +216,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 /* wait for the next one */
                 if _accuracy < 0 || _accuracy > locationAccuracy { return }
             
-                self.locationFetchStop()
+                locationFetchStop()
             
                 updateCurrentLocationMeta(_coordinate)
             
@@ -234,12 +236,13 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
         let center = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: locationMapZoom, longitudeDelta: locationMapZoom))
+        let currentLocation : NSDictionary = [ "latitude": coordinate.latitude, "longitude": coordinate.longitude ]
+        
+        currentLocations.removeAll() // currently we won't persist all evaluated device locations
+        currentLocations.append(MapViewLocation(currentLocation)) // persist evaluated device location
+        locationFetchSuccess = true
         
         mapView.setRegion(region, animated: true)
-        
-        let currentLocation : NSDictionary = [ "latitude": coordinate.latitude, "longitude": coordinate.longitude ]
-        self.currentLocations.removeAll() // currently we won't persist all evaluated device locations
-        self.currentLocations.append(MapViewLocation(currentLocation))
         
         if debugMode { print("You are at [\(coordinate.latitude)] [\(coordinate.longitude)]") }
     }
@@ -251,7 +254,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         _ mapView: MKMapView,
           didUpdate userLocation: MKUserLocation) {
         
-        updateCurrentLocationMeta(self.mapView.userLocation.coordinate)
+        updateCurrentLocationMeta(mapView.userLocation.coordinate)
     }
     
     /*
