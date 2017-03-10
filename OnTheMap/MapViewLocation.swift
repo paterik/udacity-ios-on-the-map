@@ -10,8 +10,8 @@ import UIKit
 
 struct MapViewLocation {
     
-    let latitude: Double!
-    let longitude: Double!
+    let latitude: Double?
+    let longitude: Double?
     let evaluated: Date!
     
     init (_ dictionary: NSDictionary) {

@@ -13,12 +13,12 @@ struct PRSStudentData {
     
     let firstName: String!
     let lastName: String!
-    let latitude: Double!
-    let longitude: Double!
     let mediaURL: String!
     let mapString: String!
     let objectId: String!
     let uniqueKey: String!
+    let latitude: Double?
+    let longitude: Double?
     var studentImage: UIImage?
     let evaluated: Date!
     
