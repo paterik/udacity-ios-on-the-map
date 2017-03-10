@@ -15,6 +15,8 @@
 		B11812941DE4699B00C1C91C /* UDCClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11812931DE4699B00C1C91C /* UDCClientExtension.swift */; };
 		B119B5861DE591F5002AF6AF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B119B5851DE591F5002AF6AF /* String.swift */; };
 		B119B58A1DE5A5F7002AF6AF /* UDCSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B119B5891DE5A5F7002AF6AF /* UDCSession.swift */; };
+		B12009381E734D08006E2499 /* StudentMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12009371E734D08006E2499 /* StudentMapAnnotationView.swift */; };
+		B120093A1E7355BC006E2499 /* StudentMapAnnotation.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1D68FB31E73340D008F73FA /* StudentMapAnnotation.xib */; };
 		B12DBEC41DECD0B100C5988A /* FBSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DBEC31DECD0B100C5988A /* FBSession.swift */; };
 		B12EB42B1E290F7D0048526A /* RequestClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */; };
 		B13384321E113DB300A23201 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13384311E113DB300A23201 /* LocationViewController.swift */; };
@@ -28,6 +30,7 @@
 		B1A15B501DE040FD002A4307 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1A15B4E1DE040FD002A4307 /* LaunchScreen.storyboard */; };
 		B1A15B5B1DE040FD002A4307 /* OnTheMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B5A1DE040FD002A4307 /* OnTheMapTests.swift */; };
 		B1A15B661DE040FD002A4307 /* OnTheMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B651DE040FD002A4307 /* OnTheMapUITests.swift */; };
+		B1D68FB61E73340D008F73FA /* StudentMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D68FB41E73340D008F73FA /* StudentMapAnnotation.swift */; };
 		B1DB86251E126029006D827A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB86241E126029006D827A /* MapViewController.swift */; };
 		B1DB86271E1260E2006D827A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB86261E1260E2006D827A /* TableViewController.swift */; };
 		B1DB862B1E1262BB006D827A /* PRSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB862A1E1262BB006D827A /* PRSClient.swift */; };
@@ -67,6 +70,7 @@
 		B11812931DE4699B00C1C91C /* UDCClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDCClientExtension.swift; sourceTree = "<group>"; };
 		B119B5851DE591F5002AF6AF /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B119B5891DE5A5F7002AF6AF /* UDCSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDCSession.swift; sourceTree = "<group>"; };
+		B12009371E734D08006E2499 /* StudentMapAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentMapAnnotationView.swift; sourceTree = "<group>"; };
 		B12DBEC31DECD0B100C5988A /* FBSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBSession.swift; sourceTree = "<group>"; };
 		B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestClientExtension.swift; sourceTree = "<group>"; };
 		B13384311E113DB300A23201 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 		B1A15B651DE040FD002A4307 /* OnTheMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapUITests.swift; sourceTree = "<group>"; };
 		B1A15B671DE040FD002A4307 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1AEC7F01E125D5800EDAD47 /* LGSideMenuController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LGSideMenuController.framework; path = "Pods/../build/Debug-iphoneos/LGSideMenuController/LGSideMenuController.framework"; sourceTree = "<group>"; };
+		B1D68FB31E73340D008F73FA /* StudentMapAnnotation.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StudentMapAnnotation.xib; sourceTree = "<group>"; };
+		B1D68FB41E73340D008F73FA /* StudentMapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentMapAnnotation.swift; sourceTree = "<group>"; };
 		B1DB86241E126029006D827A /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B1DB86261E1260E2006D827A /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		B1DB862A1E1262BB006D827A /* PRSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSClient.swift; sourceTree = "<group>"; };
@@ -252,6 +258,7 @@
 		B154718A1DE0437D000226D7 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				B1D68FB21E7333A9008F73FA /* partials */,
 				B154718B1DE04384000226D7 /* storyboards */,
 			);
 			name = view;
@@ -367,6 +374,16 @@
 				B1FCE4201E72F48A0056FC00 /* MapViewLocations.swift */,
 			);
 			name = location;
+			sourceTree = "<group>";
+		};
+		B1D68FB21E7333A9008F73FA /* partials */ = {
+			isa = PBXGroup;
+			children = (
+				B1D68FB31E73340D008F73FA /* StudentMapAnnotation.xib */,
+				B1D68FB41E73340D008F73FA /* StudentMapAnnotation.swift */,
+				B12009371E734D08006E2499 /* StudentMapAnnotationView.swift */,
+			);
+			name = partials;
 			sourceTree = "<group>";
 		};
 		B1DB86281E126295006D827A /* parse.com */ = {
@@ -534,6 +551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1A15B501DE040FD002A4307 /* LaunchScreen.storyboard in Resources */,
+				B120093A1E7355BC006E2499 /* StudentMapAnnotation.xib in Resources */,
 				B1A15B4D1DE040FD002A4307 /* Assets.xcassets in Resources */,
 				B1A15B4B1DE040FD002A4307 /* Main.storyboard in Resources */,
 			);
@@ -634,6 +652,7 @@
 				B16F05F11E71EA6B00CED99B /* MapViewControllerExtension.swift in Sources */,
 				B1DB862B1E1262BB006D827A /* PRSClient.swift in Sources */,
 				B1DB86311E17B38B006D827A /* RequestClient.swift in Sources */,
+				B12009381E734D08006E2499 /* StudentMapAnnotationView.swift in Sources */,
 				B1886DEB1DEE1DC5004026BE /* FBClient.swift in Sources */,
 				B1DB862D1E126397006D827A /* PRSStudentData.swift in Sources */,
 				B1A15B481DE040FD002A4307 /* LoginViewController.swift in Sources */,
@@ -641,6 +660,7 @@
 				B12EB42B1E290F7D0048526A /* RequestClientExtension.swift in Sources */,
 				B11812851DE4388200C1C91C /* UIColor.swift in Sources */,
 				B1FCE41F1E72F3840056FC00 /* MapViewLocation.swift in Sources */,
+				B1D68FB61E73340D008F73FA /* StudentMapAnnotation.swift in Sources */,
 				B11812941DE4699B00C1C91C /* UDCClientExtension.swift in Sources */,
 				B118128C1DE4664600C1C91C /* LoginViewControllerExtension.swift in Sources */,
 				B1A15B461DE040FD002A4307 /* AppDelegate.swift in Sources */,
