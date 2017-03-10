@@ -21,8 +21,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var btnForgotUdacityPassword: UIButton!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    let UDCClientInstance = UDCClient.sharedInstance
-    let FBClientInstance = FBClient.sharedInstance
+    let clientUdacity = UDCClient.sharedInstance
+    let clientFacebook = FBClient.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +54,7 @@ class LoginViewController: UIViewController {
         loadLocationViewController()
         
         // ----------------------------------------------------------------------------- override for fast development
-        /* UDCClientInstance.getUserSessionToken(
+        /* clientUdacity.getUserSessionToken(
             
             inpUdacityUser.text!,
             inpUdacityPassword.text!) { (udcSession, error) in
@@ -86,7 +86,7 @@ class LoginViewController: UIViewController {
         /* deactivate ui during http rest call */
         activateUI(false)
 
-        FBClientInstance.getUserSessionToken (viewController: self) { (success: Bool?, fbSession: FBSession?, message: String?) in
+        clientFacebook.getUserSessionToken (viewController: self) { (success: Bool?, fbSession: FBSession?, message: String?) in
 
             if success! == true {
                 
