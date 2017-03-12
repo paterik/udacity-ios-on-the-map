@@ -12,5 +12,5 @@ class MapViewLocations {
     
     static let sharedInstance = MapViewLocations()
     
-    var currentLocations = [MapViewLocation]()
+    var currentDeviceLocations = [MapViewLocation]()
 }
