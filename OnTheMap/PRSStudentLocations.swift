@@ -13,4 +13,6 @@ class PRSStudentLocations {
     static let sharedInstance = PRSStudentLocations()
     
     var locations = [PRSStudentData]()
+    var myLocations = [PRSStudentData]()
+    
 }
