@@ -17,10 +17,10 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="110"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icnUserSampleBig_v1" translatesAutoresizingMaskIntoConstraints="NO" id="08t-aW-Ig0" userLabel="StudentImage">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgUserSample_01_v1" translatesAutoresizingMaskIntoConstraints="NO" id="08t-aW-Ig0" userLabel="StudentImage">
                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Patrick Paechnatz" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HF6-1M-H5a" userLabel="StudentName">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maria Yates" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HF6-1M-H5a" userLabel="StudentName">
                     <rect key="frame" x="108" y="0.0" width="184" height="32"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -111,6 +111,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="studentDistance" destination="HfP-VC-EUR" id="HaY-JB-hoe"/>
+                <outlet property="studentGraphDistanceBackground" destination="UkQ-8Q-KOy" id="w1Y-JU-EAu"/>
+                <outlet property="studentGraphDistanceValue" destination="VfI-A5-kVK" id="znf-2q-AAf"/>
                 <outlet property="studentImage" destination="08t-aW-Ig0" id="I3a-lG-5re"/>
                 <outlet property="studentLinkGithub" destination="P7F-2g-LP6" id="o2l-cv-NEa"/>
                 <outlet property="studentLinkLinkedIn" destination="cZV-hT-ECm" id="QME-jH-F3t"/>
@@ -125,7 +127,7 @@
         <image name="icnGithub_v1" width="25" height="25"/>
         <image name="icnLinkedIn_v1" width="25" height="25"/>
         <image name="icnTwitter_v1" width="25" height="25"/>
-        <image name="icnUserSampleBig_v1" width="128" height="128"/>
         <image name="icnXing_v1" width="25" height="25"/>
+        <image name="imgUserSample_01_v1" width="128" height="128"/>
     </resources>
 </document>
