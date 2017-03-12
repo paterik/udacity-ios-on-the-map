@@ -28,6 +28,25 @@ class UDCClient: NSObject {
     //
     let apiURL: String = "https://www.udacity.com/api/session"
     
+    //
+    // MARK: Variables
+    //
+    var clientSession: UDCSession? = nil
+    
+    func getUserSessionDeveloperToken (
+        completionHandlerForAuth: @escaping (_ udcSession: UDCSession?, _ error: String?) -> Void) {
+    
+        let _udcSession = UDCSession(
+            accountKey: "9237689572",
+            accountRegistered: true,
+            sessionId: "1520764715S97349d2a59440130528480c39dfdd1ee",
+            sessionExpirationDate: Date() + 2.months - 1.days - 1.minutes,
+            created: Date()
+        )
+        
+        completionHandlerForAuth(_udcSession, nil)
+    }
+    
     func getUserSessionToken (
         _ username: String,
         _ password: String,
