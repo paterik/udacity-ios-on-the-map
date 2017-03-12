@@ -28,6 +28,11 @@ class FBClient: NSObject {
     let fbReqPermissions = ["public_profile", "email"]
     let fbGraphProperties = ["picture.type(large)", "email"]
     
+    //
+    // MARK: Variables
+    //
+    var clientSession: FBSession? = nil
+    
     //* handle facebook graph request result and persist facebook session object inside app delegate */
     func getFacebookUserData(
          completionHandlerForGraph: @escaping (_ success: Bool, _ fbSession: FBSession?, _ message: String?) -> Void) {
