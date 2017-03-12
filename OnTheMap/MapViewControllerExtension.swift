@@ -31,7 +31,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         clientParse.getAllStudentLocations () { (success, error) in
             
-            if error == nil {
+            if success == true {
                 
                 self.generateMapAnnotationsArray()
                 
@@ -57,14 +57,14 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         let students = PRSStudentLocations.sharedInstance
         
         var renderDistance: Bool = false
-        var currentLocation: MapViewLocation?
+        var currentDeviceLocation: MapViewLocation?
         var sourceLocation: CLLocation?
         var targetLocation: CLLocation?
         
         /* render distance to other students only if device location meta data available */
-        if currentLocations.count > 0 {
-            currentLocation = currentLocations.first
-            sourceLocation = CLLocation(latitude: (currentLocation?.latitude)!, longitude: (currentLocation?.longitude)!)
+        if currentDeviceLocations.count > 0 {
+            currentDeviceLocation = currentDeviceLocations.first
+            sourceLocation = CLLocation(latitude: (currentDeviceLocation?.latitude)!, longitude: (currentDeviceLocation?.longitude)!)
             
             renderDistance = true
         }
@@ -76,7 +76,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
             annotation.title = NSString(format: "%@ %@", dictionary.firstName, dictionary.lastName) as String
             annotation.url = dictionary.mediaURL
-            annotation.image = dictionary.studentImage
             annotation.subtitle = annotation.url
             
             if renderDistance {
@@ -238,10 +237,10 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
         let center = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: locationMapZoom, longitudeDelta: locationMapZoom))
-        let currentLocation : NSDictionary = [ "latitude": coordinate.latitude, "longitude": coordinate.longitude ]
+        let currentDeviceLocation : NSDictionary = [ "latitude": coordinate.latitude, "longitude": coordinate.longitude ]
         
-        currentLocations.removeAll() // currently we won't persist all evaluated device locations
-        currentLocations.append(MapViewLocation(currentLocation)) // persist evaluated device location
+        currentDeviceLocations.removeAll() // currently we won't persist all evaluated device locations
+        currentDeviceLocations.append(MapViewLocation(currentDeviceLocation)) // persist evaluated device location
         locationFetchSuccess = true
         
         mapView.setRegion(region, animated: true)
