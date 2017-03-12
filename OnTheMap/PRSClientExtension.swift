@@ -11,6 +11,28 @@ import Foundation
 extension PRSClient {
 
     /*
+     * return json strong from array
+     */
+    func getJSONFromStringArray(
+        _ arrayData: [String:String]) -> String {
+        
+        var JSONString: String = "{}"
+        
+        do {
+            
+            let jsonData = try JSONSerialization.data(withJSONObject: arrayData, options: JSONSerialization.WritingOptions.prettyPrinted)
+            if let _jsonString = String(data: jsonData, encoding: String.Encoding.utf8) {
+                JSONString = _jsonString
+            }
+            
+        } catch {
+            if debugMode { print ("An Error occured in ParseClient::getJSONFromStringArray -> \(error)") }
+        }
+        
+        return JSONString
+    }
+    
+    /*
      * validate incoming student meta lines check for valid geo localization properties, return false if
      * coordinates seems invalid (using regex validation process)
      */
