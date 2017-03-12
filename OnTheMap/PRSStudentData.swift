@@ -11,16 +11,19 @@ import UIKit
 
 struct PRSStudentData {
     
-    let firstName: String!
-    let lastName: String!
-    let mediaURL: String!
-    let mapString: String!
     let objectId: String!
     let uniqueKey: String!
+    
+    let firstName: String!
+    let lastName: String!
+    let mapString: String!
+    let mediaURL: String!
+    
     let latitude: Double?
     let longitude: Double?
-    var studentImage: UIImage?
-    let evaluated: Date!
+    
+    let createdAt: Date!
+    let updatedAt: Date!
     
     init (_ dictionary: NSDictionary) {
         
@@ -41,7 +44,7 @@ struct PRSStudentData {
         latitude  = (dictionary["latitude"] as? Double!)  ?? nil
         longitude = (dictionary["longitude"] as? Double!) ?? nil
 
-        studentImage = UIImage(named: "icnUserDefault_v1")
-        evaluated = Date()
+        createdAt = Date()
+        updatedAt = Date()
     }
 }
