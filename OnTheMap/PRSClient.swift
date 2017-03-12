@@ -9,6 +9,7 @@
 //
 
 import Foundation
+import UIKit
 
 class PRSClient: NSObject {
     
@@ -20,15 +21,18 @@ class PRSClient: NSObject {
     //
     // MARK: Constants (Normal)
     //
-    let debugMode: Bool = false
+    let debugMode: Bool = true
     let session = URLSession.shared
     let client = RequestClient.sharedInstance
+    let clientUdacity = UDCClient.sharedInstance
+    let clientFacebook = FBClient.sharedInstance
     let students = PRSStudentLocations.sharedInstance
     
     //
     // MARK: Constants (API)
     //
     let apiURL: String = "https://parse.udacity.com/parse/classes/StudentLocation"
+    let apiWhereParam: String = "where"
     let apiOrderParam: String = "order"
     let apiOrderValue: String = "-updatedAt"
     let apiLimitParam: String = "limit"
@@ -39,14 +43,66 @@ class PRSClient: NSObject {
         "X-Parse-REST-API-Key": "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
     ]
     
+    //
+    // MARK: Variables
+    //
+    var sessionUdacity: UDCSession?
+    var sessionFacebook: FBSession?
+    var sessionParamString: String?
+    var metaMyLocationsCount: Int?
+    var metaStudentLocationsCount: Int?
+    var metaStudentLocationsCountValid: Int?
+    
+    /*
+     * get the current user location object and check corresponding student location
+     */
+    func getStudentLocations (
+        _ completionHandlerForCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
+        
+        /*guard let sessionUdacity = clientUdacity.clientSession else {
+            completionHandlerForCurrentLocation(nil, "Up's, no active udacity user session were found! Are you still logged in?")
+            return
+        }*/
+        
+        let sessionParamString = getJSONFromStringArray([ "uniqueKey" : "6063512956" ]) // sessionUdacity.accountKey!
+        let sessionParamStringEscaped = sessionParamString.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
+        let apiRequestURL = NSString(format: "%@?%@=%@", apiURL, apiWhereParam, sessionParamStringEscaped!)
+        
+        client.get(apiRequestURL as String, headers: apiHeaderAuth) { (data, error) in
+            
+            if (error != nil) {
+                
+                completionHandlerForCurrentLocation(nil, "Up's, your request couln't be handled ... \(error)")
+                
+            } else {
+                
+                guard let results = data!["results"] as? [[String: AnyObject]] else {
+                    completionHandlerForCurrentLocation(nil, "Up's, missing result key in response data")
+                    return
+                }
+           
+                self.students.myLocations.removeAll()
+                
+                for dictionary in results as [NSDictionary] {
+                    let meta = PRSStudentData(dictionary)
+                    self.students.myLocations.append(meta)
+                    if self.debugMode == true {
+                        print ("\(meta)\n--")
+                    }
+                }
+                
+                self.metaMyLocationsCount = self.students.myLocations.count
+                completionHandlerForCurrentLocation(true, nil)
+            }
+        }
+    }
+    
     /**
      * get all available students ordered by last update and limit by the first 100 entities and persisting results into
      * struct base collection if data seems plausible (firstname / lastname / location not empty)
      */
     func getAllStudentLocations (
-        _ completionHandlerForGetAllLocations: @escaping (_ success: Bool?, _ error: String?)
-        
-        -> Void) {
+        _ completionHandlerForGetAllLocations: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
         let apiRequestURL = NSString(format: "%@?%@=%@&%@=%@", apiURL, apiOrderParam, apiOrderValue, apiLimitParam, apiLimitValue)
         
@@ -54,12 +110,12 @@ class PRSClient: NSObject {
             
             if (error != nil) {
                 
-                completionHandlerForGetAllLocations(nil, error)
+                completionHandlerForGetAllLocations(false, "Up's, your request couln't be handled ... \(error)")
                 
             } else {
                 
                 guard let results = data!["results"] as? [[String: AnyObject]] else {
-                    completionHandlerForGetAllLocations(nil, "Up's, missing result key in response data")
+                    completionHandlerForGetAllLocations(false, "Up's, missing result key in response data")
                     return
                 }
                 
@@ -75,6 +131,9 @@ class PRSClient: NSObject {
                         }
                     }
                 }
+                
+                self.metaStudentLocationsCountValid = self.students.locations.count
+                self.metaMyLocationsCount = results.count
                 
                 // append a single fixture student meta block during development
                 self.addSampleStudentLocation()
