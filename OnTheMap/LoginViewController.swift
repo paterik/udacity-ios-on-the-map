@@ -13,6 +13,9 @@ import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
 
+    //
+    // MARKS: Outlets
+    //
     @IBOutlet weak var inpUdacityUser: UITextField!
     @IBOutlet weak var inpUdacityPassword: UITextField!
     @IBOutlet weak var btnLoginUdactiy: UIButton!
@@ -20,12 +23,21 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var btnCreateUdacityAccount: UIButton!
     @IBOutlet weak var btnForgotUdacityPassword: UIButton!
     
+    //
+    // MARKS: Constants
+    //
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let clientUdacity = UDCClient.sharedInstance
     let clientFacebook = FBClient.sharedInstance
     
+    //
+    // MARKS: Variables
+    //
+    var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        activitySpinner.center = self.view.center
     }
     
     @IBAction func createUdacityAccountAction(_ sender: AnyObject) {
@@ -48,21 +60,25 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginUdacityAction(_ sender: AnyObject) {
         
+        /* show activity spinner */
+        activitySpinner.startAnimating()
+        view.addSubview(activitySpinner)
+        
         /* deactivate ui during http rest call */
-        // activateUI(false)
+        activateUI(false)
         
-        loadLocationViewController()
-        
-        // ----------------------------------------------------------------------------- override for fast development
-        /* clientUdacity.getUserSessionToken(
-            
-            inpUdacityUser.text!,
-            inpUdacityPassword.text!) { (udcSession, error) in
+        clientUdacity.getUserSessionDeveloperToken() { (udcSession, error) in
                 
             if error == nil {
                     
                 self.appDelegate.isAuthByUdacity = true
                 self.appDelegate.setUdacitySession(udcSession!)
+                self.clientUdacity.clientSession = self.appDelegate.getUdacitySession()
+                
+                print ("-------------------------------")
+                print (self.clientUdacity.clientSession!)
+                print ("-------------------------------")
+                
                 self.loadLocationViewController()
                     
                 // cleanOut username and password after login done successfully
@@ -74,14 +90,19 @@ class LoginViewController: UIViewController {
             } else {
 
                 self.showErrorMessage(error!)
+                self.activateUI(true)
             }
                 
             // (re)activate ui after http rest call result handling
             self.activateUI(true)
-        } */
+        }
     }
     
     @IBAction func loginFacebookAction(_ sender: AnyObject) {
+        
+        /* show activity spinner */
+        activitySpinner.startAnimating()
+        view.addSubview(activitySpinner)
         
         /* deactivate ui during http rest call */
         activateUI(false)
@@ -93,12 +114,15 @@ class LoginViewController: UIViewController {
                 /* persist udacity session model and provide it inside appDelegate globaly */
                 self.appDelegate.isAuthByFacebook = true
                 self.appDelegate.setFacebookSession(fbSession!)
+                self.clientFacebook.clientSession = self.appDelegate.getFacebookSession()
+                
+                print (self.clientFacebook.clientSession!)
+                
                 self.loadLocationViewController()
 
             } else {
                 
-                self.showErrorMessage(message!)
-                
+                self.showErrorMessage(message!)                
             }
 
             /* (re)activate ui after http rest call result handling */
@@ -112,6 +136,12 @@ class LoginViewController: UIViewController {
             withIdentifier: "LocationViewController") as! LocationViewController
         
         locationViewController.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+    
+        /* deactivate and remove activity spinner */
+        activitySpinner.stopAnimating()
+        view.willRemoveSubview(self.activitySpinner)
+        
+        self.activateUI(true)
         
         self.present(locationViewController, animated: true, completion: nil)
     }
