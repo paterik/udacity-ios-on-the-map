@@ -19,6 +19,9 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgUserSample_01_v1" translatesAutoresizingMaskIntoConstraints="NO" id="08t-aW-Ig0" userLabel="StudentImage">
                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="uQL-Yw-079"/>
+                    </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maria Yates" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HF6-1M-H5a" userLabel="StudentName">
                     <rect key="frame" x="108" y="0.0" width="184" height="32"/>
@@ -26,39 +29,15 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6789 km" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HfP-VC-EUR" userLabel="StudentDistance">
-                    <rect key="frame" x="245" y="82" width="47" height="14"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZV-hT-ECm" userLabel="StudentProfileLinkedIn">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZV-hT-ECm" userLabel="StudentMediaURL">
                     <rect key="frame" x="267" y="40" width="25" height="25"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="25" id="3DB-Zs-f4d"/>
+                        <constraint firstAttribute="height" constant="25" id="a1e-ha-Huh"/>
                     </constraints>
-                    <state key="normal" image="icnLinkedIn_v1"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1cr-sY-eha" userLabel="StudentProfileXing">
-                    <rect key="frame" x="234" y="40" width="25" height="25"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="25" id="V2N-by-n1T"/>
-                    </constraints>
-                    <state key="normal" image="icnXing_v1"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QV7-IR-1gU" userLabel="StudentProfileTwitter">
-                    <rect key="frame" x="201" y="40" width="25" height="25"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="25" id="wtN-4E-L4j"/>
-                    </constraints>
-                    <state key="normal" image="icnTwitter_v1"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7F-2g-LP6" userLabel="StudentProfileGithub">
-                    <rect key="frame" x="168" y="37" width="25" height="31"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="25" id="RDx-Cm-86k"/>
-                    </constraints>
-                    <state key="normal" image="icnGithub_v1"/>
+                    <state key="normal" image="icnMediaLink_v1"/>
+                    <connections>
+                        <action selector="btnOpenStudentMediaURL:" destination="iN0-l3-epB" eventType="touchUpInside" id="Uhg-d0-hTN"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UkQ-8Q-KOy" userLabel="StudentDistanceGraphBackground">
                     <rect key="frame" x="0.0" y="99" width="300" height="11"/>
@@ -71,41 +50,43 @@
                     <rect key="frame" x="0.0" y="99" width="119" height="11"/>
                     <color key="backgroundColor" red="0.99215686270000003" green="0.3921568627" blue="0.035294117649999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="119" id="Nuz-x7-ll2"/>
-                        <constraint firstAttribute="height" constant="11" id="cnj-05-UpN"/>
+                        <constraint firstAttribute="height" constant="11" id="19x-Kr-1lI"/>
+                        <constraint firstAttribute="width" constant="119" id="t7y-ec-j2h"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="5"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6789 km" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HfP-VC-EUR" userLabel="StudentDistance">
+                    <rect key="frame" x="108" y="77" width="184" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="Wo0-Wg-iqR"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="08t-aW-Ig0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1gM-1I-k08"/>
-                <constraint firstItem="UkQ-8Q-KOy" firstAttribute="firstBaseline" secondItem="VfI-A5-kVK" secondAttribute="firstBaseline" id="94e-gM-K3D"/>
-                <constraint firstItem="VfI-A5-kVK" firstAttribute="leading" secondItem="UkQ-8Q-KOy" secondAttribute="leading" id="CIv-Hk-dZi"/>
-                <constraint firstItem="1cr-sY-eha" firstAttribute="top" secondItem="cZV-hT-ECm" secondAttribute="top" id="CvO-G9-NGY"/>
-                <constraint firstItem="HF6-1M-H5a" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="E0j-vL-r6D"/>
-                <constraint firstItem="QV7-IR-1gU" firstAttribute="leading" secondItem="P7F-2g-LP6" secondAttribute="trailing" constant="8" symbolic="YES" id="F9P-ex-Cez"/>
-                <constraint firstItem="HF6-1M-H5a" firstAttribute="leading" secondItem="08t-aW-Ig0" secondAttribute="trailing" constant="8" symbolic="YES" id="Kjj-Ru-13A"/>
-                <constraint firstItem="1cr-sY-eha" firstAttribute="leading" secondItem="QV7-IR-1gU" secondAttribute="trailing" constant="8" symbolic="YES" id="MeE-CZ-EbI"/>
-                <constraint firstItem="P7F-2g-LP6" firstAttribute="top" secondItem="HF6-1M-H5a" secondAttribute="bottom" constant="5" id="QuF-Vd-fGT"/>
-                <constraint firstItem="UkQ-8Q-KOy" firstAttribute="baseline" secondItem="VfI-A5-kVK" secondAttribute="baseline" id="THm-1W-buK"/>
-                <constraint firstItem="QV7-IR-1gU" firstAttribute="top" secondItem="1cr-sY-eha" secondAttribute="top" id="ZlX-lD-fLS"/>
-                <constraint firstAttribute="bottom" secondItem="08t-aW-Ig0" secondAttribute="bottom" constant="10" id="ceA-ua-xYT"/>
-                <constraint firstItem="cZV-hT-ECm" firstAttribute="trailing" secondItem="HfP-VC-EUR" secondAttribute="trailing" id="dtJ-b7-nfq"/>
-                <constraint firstItem="P7F-2g-LP6" firstAttribute="centerY" secondItem="QV7-IR-1gU" secondAttribute="centerY" id="eTY-zD-o3q"/>
-                <constraint firstItem="08t-aW-Ig0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="f1q-Yn-pqN"/>
-                <constraint firstItem="HF6-1M-H5a" firstAttribute="trailing" secondItem="cZV-hT-ECm" secondAttribute="trailing" id="ghe-zx-1hy"/>
-                <constraint firstItem="UkQ-8Q-KOy" firstAttribute="top" secondItem="HfP-VC-EUR" secondAttribute="bottom" constant="3" id="hyh-87-UEg"/>
-                <constraint firstItem="QV7-IR-1gU" firstAttribute="top" secondItem="HF6-1M-H5a" secondAttribute="bottom" constant="8" symbolic="YES" id="jPk-2w-OJT"/>
-                <constraint firstAttribute="bottom" secondItem="VfI-A5-kVK" secondAttribute="bottom" id="l15-z1-maK"/>
-                <constraint firstItem="VfI-A5-kVK" firstAttribute="top" secondItem="HF6-1M-H5a" secondAttribute="bottom" constant="67" id="mSl-YY-cd6"/>
-                <constraint firstItem="08t-aW-Ig0" firstAttribute="leading" secondItem="VfI-A5-kVK" secondAttribute="leading" id="oxR-Mc-cu8"/>
-                <constraint firstItem="08t-aW-Ig0" firstAttribute="top" secondItem="HF6-1M-H5a" secondAttribute="top" id="pz3-lw-pOy"/>
-                <constraint firstAttribute="trailing" secondItem="UkQ-8Q-KOy" secondAttribute="trailing" id="r9J-l1-35w"/>
-                <constraint firstItem="P7F-2g-LP6" firstAttribute="leading" secondItem="08t-aW-Ig0" secondAttribute="trailing" constant="68" id="u9K-h7-5cl"/>
-                <constraint firstItem="cZV-hT-ECm" firstAttribute="leading" secondItem="1cr-sY-eha" secondAttribute="trailing" constant="8" symbolic="YES" id="wKH-0k-sBR"/>
+                <constraint firstItem="VfI-A5-kVK" firstAttribute="firstBaseline" secondItem="UkQ-8Q-KOy" secondAttribute="firstBaseline" id="0JC-KZ-Hbg"/>
+                <constraint firstAttribute="trailing" secondItem="UkQ-8Q-KOy" secondAttribute="trailing" id="2j6-Kq-Wfo"/>
+                <constraint firstAttribute="bottom" secondItem="VfI-A5-kVK" secondAttribute="bottom" id="51X-VJ-gT1"/>
+                <constraint firstItem="08t-aW-Ig0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="7GU-8Y-GKE"/>
+                <constraint firstItem="UkQ-8Q-KOy" firstAttribute="baseline" secondItem="VfI-A5-kVK" secondAttribute="baseline" id="A9a-1i-iQ3"/>
+                <constraint firstItem="VfI-A5-kVK" firstAttribute="top" secondItem="HfP-VC-EUR" secondAttribute="bottom" constant="8" symbolic="YES" id="ADi-4N-heC"/>
+                <constraint firstItem="08t-aW-Ig0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="AVG-ai-L2t"/>
+                <constraint firstItem="HF6-1M-H5a" firstAttribute="leading" secondItem="08t-aW-Ig0" secondAttribute="trailing" constant="8" symbolic="YES" id="C7D-Dd-60g"/>
+                <constraint firstItem="08t-aW-Ig0" firstAttribute="top" secondItem="HF6-1M-H5a" secondAttribute="top" id="CZu-kF-To4"/>
+                <constraint firstItem="HfP-VC-EUR" firstAttribute="top" secondItem="cZV-hT-ECm" secondAttribute="bottom" constant="12" id="JLj-hl-oXR"/>
+                <constraint firstItem="cZV-hT-ECm" firstAttribute="trailing" secondItem="HfP-VC-EUR" secondAttribute="trailing" id="LwG-U6-Mp1"/>
+                <constraint firstItem="HF6-1M-H5a" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="UZM-IG-quv"/>
+                <constraint firstItem="08t-aW-Ig0" firstAttribute="leading" secondItem="VfI-A5-kVK" secondAttribute="leading" id="Z8t-f5-2vG"/>
+                <constraint firstAttribute="bottom" secondItem="08t-aW-Ig0" secondAttribute="bottom" constant="10" id="iNJ-Jj-eIk"/>
+                <constraint firstItem="cZV-hT-ECm" firstAttribute="top" secondItem="HF6-1M-H5a" secondAttribute="bottom" constant="8" symbolic="YES" id="qnE-um-wLR"/>
+                <constraint firstItem="HF6-1M-H5a" firstAttribute="leading" secondItem="HfP-VC-EUR" secondAttribute="leading" id="qsL-ce-lDy"/>
+                <constraint firstItem="HF6-1M-H5a" firstAttribute="trailing" secondItem="cZV-hT-ECm" secondAttribute="trailing" id="w44-hH-Twd"/>
+                <constraint firstItem="UkQ-8Q-KOy" firstAttribute="leading" secondItem="VfI-A5-kVK" secondAttribute="leading" id="yow-yU-TGI"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -114,20 +95,14 @@
                 <outlet property="studentGraphDistanceBackground" destination="UkQ-8Q-KOy" id="w1Y-JU-EAu"/>
                 <outlet property="studentGraphDistanceValue" destination="VfI-A5-kVK" id="znf-2q-AAf"/>
                 <outlet property="studentImage" destination="08t-aW-Ig0" id="I3a-lG-5re"/>
-                <outlet property="studentLinkGithub" destination="P7F-2g-LP6" id="o2l-cv-NEa"/>
-                <outlet property="studentLinkLinkedIn" destination="cZV-hT-ECm" id="QME-jH-F3t"/>
-                <outlet property="studentLinkTwitter" destination="QV7-IR-1gU" id="Elz-4t-5nU"/>
-                <outlet property="studentLinkXing" destination="1cr-sY-eha" id="sxJ-QB-0gi"/>
+                <outlet property="studentMediaURL" destination="cZV-hT-ECm" id="XGo-me-7L2"/>
                 <outlet property="studentName" destination="HF6-1M-H5a" id="V3c-8r-N1e"/>
             </connections>
             <point key="canvasLocation" x="573" y="240"/>
         </view>
     </objects>
     <resources>
-        <image name="icnGithub_v1" width="25" height="25"/>
-        <image name="icnLinkedIn_v1" width="25" height="25"/>
-        <image name="icnTwitter_v1" width="25" height="25"/>
-        <image name="icnXing_v1" width="25" height="25"/>
+        <image name="icnMediaLink_v1" width="25" height="25"/>
         <image name="imgUserSample_01_v1" width="128" height="128"/>
     </resources>
 </document>
