@@ -28,7 +28,7 @@ class MapViewController: UIViewController {
     
     let locationAccuracy : CLLocationAccuracy = 10 // accuracy factor for device location
     let locationCheckTimeout : TimeInterval = 10   // timeout for device location fetch
-    let locationMapZoom : CLLocationDegrees = 10   // zoom factor (0.03 seems best for max zoom)
+    let locationMapZoom : CLLocationDegrees = 0.03 // zoom factor (0.03 seems best for max zoom)
     let locationDistanceDivider : Double = 1000.0  // rate for metric conversion (m -> km)
     let locationFetchMode : Int8 = 1               // 1: saveMode, 2: quickMode
     
@@ -65,8 +65,63 @@ class MapViewController: UIViewController {
             
             if success == true {
                 
-                print(self.students.myLocations.count)
-                print(self.students.locations.count)
+                let alertController = UIAlertController(
+                    title: "Info",
+                    message: "I've found valid student location(s) for your account",
+                    preferredStyle: UIAlertControllerStyle.alert
+                )
+                
+                let dlgBtnDeleteAction = UIAlertAction(title: "delete", style: .default) { (action:UIAlertAction!) in
+                    print ("delete pressed")
+                }
+                
+                let dlgBtnCancelAction = UIAlertAction(title: "cancel", style: .default) { (action:UIAlertAction!) in
+                    print ("cancel pressed")
+                }
+                
+                alertController.addAction(dlgBtnDeleteAction)
+                alertController.addAction(dlgBtnCancelAction)
+                
+                switch true
+                {
+                    // no locations found, load addLocation formular
+                    case self.clientParse.metaMyLocationsCount! == 0:
+                    
+                        break
+                    
+                    // exactly one location found, let user choose between delete or update this location
+                    case self.clientParse.metaMyLocationsCount! == 1:
+                        
+                        alertController.title = "Warning"
+                        alertController.message = "You've already set your student location, do you want to delete or update the last one?"
+                        let dlgBtnUpdateAction = UIAlertAction(title: "UPDATE", style: .default) { (action:UIAlertAction!) in
+                            print ("update pressed")
+                        }
+                        
+                        alertController.addAction(dlgBtnUpdateAction)
+                        
+                        OperationQueue.main.addOperation {
+                            self.present(alertController, animated: true, completion:nil)
+                        }
+                        
+                        break
+                    
+                    // more than one location found, let user choos betwwen delete all old ones
+                    case self.clientParse.metaMyLocationsCount! > 1:
+                    
+                        alertController.title = "Warning"
+                        alertController.message = NSString(
+                            format: "You've already set your student location, do you want to delete the %d old ones?",
+                            self.clientParse.metaMyLocationsCount!) as String!
+                        
+                        OperationQueue.main.addOperation {
+                            self.present(alertController, animated: true, completion:nil)
+                        }
+                        
+                        break
+                    
+                    default: break
+                }
             
             } else {
                 
