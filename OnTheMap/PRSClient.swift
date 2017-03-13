@@ -59,12 +59,12 @@ class PRSClient: NSObject {
     func getStudentLocations (
         _ completionHandlerForCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
-        /*guard let sessionUdacity = clientUdacity.clientSession else {
+        guard let sessionUdacity = clientUdacity.clientSession else {
             completionHandlerForCurrentLocation(nil, "Up's, no active udacity user session were found! Are you still logged in?")
             return
-        }*/
+        }
         
-        let sessionParamString = getJSONFromStringArray([ "uniqueKey" : "6063512956" ]) // sessionUdacity.accountKey!
+        let sessionParamString = getJSONFromStringArray([ "uniqueKey" : sessionUdacity.accountKey! ]) // "6063512956"
         let sessionParamStringEscaped = sessionParamString.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
         let apiRequestURL = NSString(format: "%@?%@=%@", apiURL, apiWhereParam, sessionParamStringEscaped!)
         
