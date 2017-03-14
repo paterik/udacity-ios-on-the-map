@@ -1,5 +1,5 @@
 //
-//  LocationViewController.swift
+//  LocationTabViewController.swift
 //  OnTheMap
 //
 //  Created by Patrick Paechnatz on 26.12.16.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class LocationViewController: UITabBarController {
+class LocationTabViewController: UITabBarController {
     
 }
