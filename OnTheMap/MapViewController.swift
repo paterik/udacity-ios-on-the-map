@@ -59,7 +59,58 @@ class MapViewController: UIViewController {
         locationManager.delegate = self
     }
     
-    @IBAction func btnAddUser(_ sender: Any) {
+    func prepareVC(_ identifier: String) -> UIViewController {
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        var vc: UIViewController!
+        
+        switch true {
+            case identifier == "profileEditView":
+                vc = storyBoard.instantiateViewController(withIdentifier: identifier) as! ProfileEditViewController
+                
+            break
+            
+            case identifier == "locationEditView":
+                vc = storyBoard.instantiateViewController(withIdentifier: identifier) as! LocationEditViewController
+            
+            break
+            
+            default: break
+        }
+        
+        vc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+        vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        
+        return vc
+    }
+    
+    @IBAction func btnAddUserLocationAction(_ sender: Any) {
+        
+        let locationRequestController = UIAlertController(
+            title: "Let's start ...",
+            message: "Do you want to use your current device location as default for your next steps?",
+            preferredStyle: UIAlertControllerStyle.alert
+        )
+        
+        let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
+        
+            let vc = self.prepareVC("profileEditView") as! ProfileEditViewController
+            self.present(vc, animated: true, completion: nil)
+        }
+        
+        let dlgBtnNoAction = UIAlertAction(title: "No", style: .default) { (action: UIAlertAction!) in
+            
+            let vc = self.prepareVC("locationEditView") as! LocationEditViewController
+            self.present(vc, animated: true, completion: nil)
+        }
+        
+        locationRequestController.addAction(dlgBtnYesAction)
+        locationRequestController.addAction(dlgBtnNoAction)
+        
+        present(locationRequestController, animated: true, completion:nil)
+    }
+    
+    func handleUserLocation() {
         
         clientParse.getStudentLocations() { (success, error) in
             
@@ -84,45 +135,46 @@ class MapViewController: UIViewController {
                 
                 switch true
                 {
-                    // no locations found, load addLocation formular
-                    case self.clientParse.metaMyLocationsCount! == 0:
+                // no locations found, load addLocation formular
+                case self.clientParse.metaMyLocationsCount! == 0:
                     
-                        break
+                    print("success!!!")
+                    break
                     
-                    // exactly one location found, let user choose between delete or update this location
-                    case self.clientParse.metaMyLocationsCount! == 1:
-                        
-                        alertController.title = "Warning"
-                        alertController.message = "You've already set your student location, do you want to delete or update the last one?"
-                        let dlgBtnUpdateAction = UIAlertAction(title: "UPDATE", style: .default) { (action:UIAlertAction!) in
-                            print ("update pressed")
-                        }
-                        
-                        alertController.addAction(dlgBtnUpdateAction)
-                        
-                        OperationQueue.main.addOperation {
-                            self.present(alertController, animated: true, completion:nil)
-                        }
-                        
-                        break
+                // exactly one location found, let user choose between delete or update this location
+                case self.clientParse.metaMyLocationsCount! == 1:
                     
-                    // more than one location found, let user choos betwwen delete all old ones
-                    case self.clientParse.metaMyLocationsCount! > 1:
+                    alertController.title = "Warning"
+                    alertController.message = "You've already set your student location, do you want to delete or update the last one?"
+                    let dlgBtnUpdateAction = UIAlertAction(title: "UPDATE", style: .default) { (action:UIAlertAction!) in
+                        print ("update pressed")
+                    }
                     
-                        alertController.title = "Warning"
-                        alertController.message = NSString(
-                            format: "You've already set your student location, do you want to delete the %d old ones?",
-                            self.clientParse.metaMyLocationsCount!) as String!
-                        
-                        OperationQueue.main.addOperation {
-                            self.present(alertController, animated: true, completion:nil)
-                        }
-                        
-                        break
+                    alertController.addAction(dlgBtnUpdateAction)
                     
-                    default: break
+                    OperationQueue.main.addOperation {
+                        self.present(alertController, animated: true, completion:nil)
+                    }
+                    
+                    break
+                    
+                // more than one location found, let user choos betwwen delete all old ones
+                case self.clientParse.metaMyLocationsCount! > 1:
+                    
+                    alertController.title = "Warning"
+                    alertController.message = NSString(
+                        format: "You've already set your student location, do you want to delete the %d old ones?",
+                        self.clientParse.metaMyLocationsCount!) as String!
+                    
+                    OperationQueue.main.addOperation {
+                        self.present(alertController, animated: true, completion:nil)
+                    }
+                    
+                    break
+                    
+                default: break
                 }
-            
+                
             } else {
                 
                 let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.alert)
@@ -132,6 +184,15 @@ class MapViewController: UIViewController {
                     self.present(alertController, animated: true, completion:nil)
                 }
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
+        if segue.identifier == "editLocation"{
+            _ = segue.destination as! LocationEditViewController
+            
+            
         }
     }
 }
