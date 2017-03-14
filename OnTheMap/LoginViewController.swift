@@ -133,7 +133,7 @@ class LoginViewController: UIViewController {
     private func loadLocationViewController() {
     
         let locationViewController = self.storyboard!.instantiateViewController(
-            withIdentifier: "LocationViewController") as! LocationViewController
+            withIdentifier: "LocationTabViewController") as! LocationTabViewController
         
         locationViewController.modalTransitionStyle = UIModalTransitionStyle.coverVertical
     
