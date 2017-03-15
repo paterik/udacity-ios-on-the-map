@@ -10,4 +10,5 @@ import Foundation
 
 protocol EditViewProtocol {
 
+    var useCurrentDeviceLocation: Bool { get set }
 }
