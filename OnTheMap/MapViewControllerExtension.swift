@@ -17,6 +17,134 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     //
     
     /*
+     * the method will handle our ident based viewController switch for editView UserProfile and UserLocation
+     */
+    func prepareVC(_ identifier: String) -> UIViewController {
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        var vc: UIViewController!
+        
+        switch true {
+        
+            case identifier == "profileEditView":
+                vc = storyBoard.instantiateViewController(withIdentifier: identifier) as! ProfileEditViewController
+                break
+            
+            case identifier == "locationEditView":
+                vc = storyBoard.instantiateViewController(withIdentifier: identifier) as! LocationEditViewController
+                break
+            
+            default:
+                break
+        }
+        
+        vc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+        vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        
+        return vc
+    }
+    
+    /*
+     * this method will add a new userLocation to our parse api persistence layer
+     */
+    func userLocationAdd() {
+        
+        let locationRequestController = UIAlertController(
+            title: "Let's start ...",
+            message: "Do you want to use your current device location as default for your next steps?",
+            preferredStyle: UIAlertControllerStyle.alert
+        )
+        
+        let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
+            
+            let vc = self.prepareVC("profileEditView") as! ProfileEditViewController
+                vc.useCurrentDeviceLocation = true
+            
+            self.present(vc, animated: true, completion: nil)
+        }
+        
+        let dlgBtnNoAction = UIAlertAction(title: "No", style: .default) { (action: UIAlertAction!) in
+            
+            let vc = self.prepareVC("locationEditView") as! LocationEditViewController
+                vc.useCurrentDeviceLocation = false
+            
+            self.present(vc, animated: true, completion: nil)
+        }
+        
+        locationRequestController.addAction(dlgBtnYesAction)
+        locationRequestController.addAction(dlgBtnNoAction)
+        
+        present(locationRequestController, animated: true, completion: nil)
+    }
+    
+    func userLocationUpdate() {}
+    func userLocationDelete() {}
+    
+    /*
+     * this method will handle the 3 cases of user location persitence/validations
+     */
+    func handleUserLocation() {
+        
+        let alertController = UIAlertController(
+            title: "Info",
+            message: "I've found valid student location(s) for your account",
+            preferredStyle: UIAlertControllerStyle.alert
+        )
+        
+        let dlgBtnCancelAction = UIAlertAction(title: "cancel", style: .default) { (action:UIAlertAction!) in }
+        let dlgBtnDeleteAction = UIAlertAction(title: "delete", style: .default) { (action:UIAlertAction!) in
+            self.userLocationDelete()
+        }
+        
+        alertController.addAction(dlgBtnDeleteAction)
+        alertController.addAction(dlgBtnCancelAction)
+        
+        switch true {
+            
+            // no locations found, load addLocation formular
+            case self.clientParse.metaMyLocationsCount! == 0:
+            
+                self.userLocationAdd()
+
+                break
+            
+            // exactly one location found, let user choose between delete or update this location
+            case self.clientParse.metaMyLocationsCount! == 1:
+            
+                alertController.title = "Warning"
+                alertController.message = "You've already set your student location, do you want to delete or update the last one?"
+                let dlgBtnUpdateAction = UIAlertAction(title: "update", style: .default) { (action:UIAlertAction!) in
+                
+                    self.userLocationUpdate()
+                }
+            
+                alertController.addAction(dlgBtnUpdateAction)
+            
+                OperationQueue.main.addOperation {
+                    self.present(alertController, animated: true, completion:nil)
+                }
+            
+                break
+            
+            // more than one location found, let user choos betwwen delete all old ones
+            case self.clientParse.metaMyLocationsCount! > 1:
+            
+                alertController.title = "Warning"
+                alertController.message = NSString(
+                    format: "You've already set your student location, do you want to delete the %d old ones?",
+                    self.clientParse.metaMyLocationsCount!) as String!
+            
+                OperationQueue.main.addOperation {
+                    self.present(alertController, animated: true, completion:nil)
+                }
+            
+                break
+            
+            default: break
+        }
+    }
+    
+    /*
      * simple wrapper for fetchAll student locations call, used during map initialization and by updateButton process call
      */
     func updateStudentLocations () {
@@ -29,7 +157,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      */
     func fetchAllStudentLocations () {
         
-        clientParse.getAllStudentLocations () { (success, error) in
+       clientParse.getAllStudentLocations () { (success, error) in
             
             if success == true {
                 
@@ -104,6 +232,25 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         }
         
         return distanceOut
+    }
+    
+    /*
+     * update location meta information and (re)positioning current mapView
+     */
+    func updateCurrentLocationMeta(
+        _ coordinate: CLLocationCoordinate2D) {
+        
+        let center = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: locationMapZoom, longitudeDelta: locationMapZoom))
+        let currentDeviceLocation : NSDictionary = [ "latitude": coordinate.latitude, "longitude": coordinate.longitude ]
+        
+        currentDeviceLocations.removeAll() // currently we won't persist all evaluated device locations
+        currentDeviceLocations.append(MapViewLocation(currentDeviceLocation)) // persist evaluated device location
+        locationFetchSuccess = true
+        
+        mapView.setRegion(region, animated: true)
+        
+        if debugMode { print("You are at [\(coordinate.latitude)] [\(coordinate.longitude)]") }
     }
     
     /*
@@ -230,25 +377,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     /*
-     * update location meta information and (re)positioning current mapView
-     */
-    func updateCurrentLocationMeta( 
-        _ coordinate: CLLocationCoordinate2D) {
-    
-        let center = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: locationMapZoom, longitudeDelta: locationMapZoom))
-        let currentDeviceLocation : NSDictionary = [ "latitude": coordinate.latitude, "longitude": coordinate.longitude ]
-        
-        currentDeviceLocations.removeAll() // currently we won't persist all evaluated device locations
-        currentDeviceLocations.append(MapViewLocation(currentDeviceLocation)) // persist evaluated device location
-        locationFetchSuccess = true
-        
-        mapView.setRegion(region, animated: true)
-        
-        if debugMode { print("You are at [\(coordinate.latitude)] [\(coordinate.longitude)]") }
-    }
-    
-    /*
      * update map position to current location
      */
     func mapView(
@@ -310,57 +438,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 subview.removeFromSuperview()
             }
         }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-     * render and setup a styled annotation pin within the current map
-     */
-    func _mapView_old (
-        _ mapView: MKMapView,
-          viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        
-        
-        let identifier = "locPin_0"
-        let studentAnnotation = annotation as! PRSStudentMapAnnotation
-
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
-
-        if pinView == nil {
-            
-            let linkButton = UIButton(type: .detailDisclosure)
-                linkButton.tintColor = UIColor.black
-            
-            let linkLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
-                linkLabel.text = studentAnnotation.url
-                linkLabel.font = UIFont(name: "Verdana", size: 10)
-            
-            pinView = MKPinAnnotationView(annotation: studentAnnotation, reuseIdentifier: identifier)
-            pinView!.canShowCallout = true
-            pinView!.pinTintColor = UIColor.red
-            pinView!.rightCalloutAccessoryView = linkButton
-            
-            pinView!.detailCalloutAccessoryView = linkLabel
-            
-        } else {
-  
-            pinView!.annotation = studentAnnotation
-        }
-        
-        pinView!.leftCalloutAccessoryView = UIImageView(image: studentAnnotation.image)
-        
-        return pinView
     }
     
     /*
