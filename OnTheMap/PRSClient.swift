@@ -54,13 +54,27 @@ class PRSClient: NSObject {
     var metaStudentLocationsCountValid: Int?
     
     /*
+     * @NotFullyImplemented
+     * validate and set the current user location object
+     */
+    func setStudentLocation (
+        _ studentData: PRSStudentData?,
+        _ completionHandlerForSetCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
+        
+        guard let sessionUdacity = clientUdacity.clientSession else {
+            completionHandlerForSetCurrentLocation(false, "Up's, no active udacity user session were found! Are you still logged in?")
+            return
+        }
+    }
+    
+    /*
      * get the current user location object and check corresponding student location
      */
     func getStudentLocations (
         _ completionHandlerForCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
         guard let sessionUdacity = clientUdacity.clientSession else {
-            completionHandlerForCurrentLocation(nil, "Up's, no active udacity user session were found! Are you still logged in?")
+            completionHandlerForCurrentLocation(false, "Up's, no active udacity user session were found! Are you still logged in?")
             return
         }
         
@@ -72,12 +86,12 @@ class PRSClient: NSObject {
             
             if (error != nil) {
                 
-                completionHandlerForCurrentLocation(nil, "Up's, your request couln't be handled ... \(error)")
+                completionHandlerForCurrentLocation(false, "Up's, your request couln't be handled ... \(error)")
                 
             } else {
                 
                 guard let results = data!["results"] as? [[String: AnyObject]] else {
-                    completionHandlerForCurrentLocation(nil, "Up's, missing result key in response data")
+                    completionHandlerForCurrentLocation(false, "Up's, missing result key in response data")
                     return
                 }
            
@@ -102,7 +116,7 @@ class PRSClient: NSObject {
      * struct base collection if data seems plausible (firstname / lastname / location not empty)
      */
     func getAllStudentLocations (
-        _ completionHandlerForGetAllLocations: @escaping (_ success: Bool?, _ error: String?) -> Void) {
+       _ completionHandlerForGetAllLocations: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
         let apiRequestURL = NSString(format: "%@?%@=%@&%@=%@", apiURL, apiOrderParam, apiOrderValue, apiLimitParam, apiLimitValue)
         
