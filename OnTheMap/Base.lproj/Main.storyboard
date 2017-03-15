@@ -404,7 +404,7 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Patrick" placeholder="Where are you studying today?" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rP2-OO-Ziv">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Patrick" placeholder="Whats your firstname" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rP2-OO-Ziv">
                                 <rect key="frame" x="32" y="102" width="310" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="6Vp-zu-9wf"/>
@@ -422,7 +422,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Paechnatz" placeholder="Where are you studying today?" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qxy-If-ueP">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Paechnatz" placeholder="Whats your lastname?" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qxy-If-ueP">
                                 <rect key="frame" x="32" y="188" width="310" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="h5f-px-1F7"/>
@@ -440,7 +440,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="www.dunkelfrosch.com" placeholder="Where are you studying today?" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="keB-3V-5IK">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="www.dunkelfrosch.com" placeholder="What URL do you want to provide?" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="keB-3V-5IK">
                                 <rect key="frame" x="32" y="273" width="310" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="Iuz-Hz-aNd"/>
@@ -488,6 +488,9 @@
                     <connections>
                         <outlet property="btnCloseView" destination="mlt-VK-KvZ" id="yGB-cj-Ta5"/>
                         <outlet property="btnSaveProfile" destination="eSf-vE-vMs" id="d86-9T-VwO"/>
+                        <outlet property="inpFirstname" destination="rP2-OO-Ziv" id="kvr-4b-45u"/>
+                        <outlet property="inpLastname" destination="Qxy-If-ueP" id="lCM-AL-R5E"/>
+                        <outlet property="inpMediaURL" destination="keB-3V-5IK" id="LPs-MU-4IA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0D7-Vj-0Zw" userLabel="First Responder" sceneMemberID="firstResponder"/>
