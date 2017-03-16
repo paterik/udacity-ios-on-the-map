@@ -65,6 +65,20 @@ class PRSClient: NSObject {
             completionHandlerForSetCurrentLocation(false, "Up's, no active udacity user session were found! Are you still logged in?")
             return
         }
+        
+        let data = studentData!.asArray as [String : AnyObject]?
+        print(data)
+        
+        /*client.post(apiURL, headers: apiHeaderAuth, jsonBody: studentData!.asArray as [String : AnyObject]?) { (data, error) in
+            
+            if (error != nil) {
+                
+                completionHandlerForSetCurrentLocation(false, "Up's, your request couln't be handled ... \(error)")
+                
+            } else {
+                
+            }*/
+    
     }
     
     /*
