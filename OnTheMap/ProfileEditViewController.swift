@@ -53,30 +53,32 @@ class ProfileEditViewController: UIViewController, EditViewProtocol {
             
             if success == true {
                 
-                print ("------------ data seems valid --------------")
-                print (studentData ?? "no-data")
+                self.clientParse.setStudentLocation (studentData) { (success, error) in
+                    
+                    if success == true {
+                        
+                        print ("yeah!")
+                        
+                    } else {
+                        
+                        // error? do something ... but for now just clean up the alert dialog
+                        let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.alert)
+                        let Action = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in }
+                        
+                        alertController.addAction(Action)
+                        OperationQueue.main.addOperation {
+                            self.present(alertController, animated: true, completion:nil)
+                        }
+                    }
+                }
+
                 
             } else {
                 alertController.message = error
                 self.present(alertController, animated: true, completion:nil)
             }
-        }
-        
-    
-        /*clientParse.getAllStudentLocations () { (success, error) in
             
-
-                
-            } else {
-                
-                // error? do something ... but for now just clean up the alert dialog
-                alertController.message = error
-                
-                OperationQueue.main.addOperation {
-                    self.present(alertController, animated: true, completion:nil)
-                }
-            }
-        }*/
+        }
     }
     
     func validateStudentMetaData(
