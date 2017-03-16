@@ -25,6 +25,22 @@ struct PRSStudentData {
     let createdAt: Date!
     let updatedAt: Date!
     
+    var asArray: [String : Any] {
+        get {
+            return [
+                "firstName": firstName ?? " ",
+                "lastName": lastName ?? " ",
+                "mediaURL": mediaURL ?? " ",
+                "mapString": mapString ?? " ",
+                "objectId": objectId ?? " ",
+                "uniqueKey": uniqueKey ?? " ",
+                "latitude": latitude ?? 0.0,
+                "longitude": longitude ?? 0.0
+                
+            ] as [String : Any]
+        }
+    }
+    
     init (_ dictionary: NSDictionary) {
         
         //
