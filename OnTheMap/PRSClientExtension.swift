@@ -11,7 +11,7 @@ import Foundation
 extension PRSClient {
 
     /*
-     * return json strong from array
+     * return json string from array
      */
     func getJSONFromStringArray(
         _ arrayData: [String:String]) -> String {
@@ -21,6 +21,28 @@ extension PRSClient {
         do {
             
             let jsonData = try JSONSerialization.data(withJSONObject: arrayData, options: JSONSerialization.WritingOptions.prettyPrinted)
+            if let _jsonString = String(data: jsonData, encoding: String.Encoding.utf8) {
+                JSONString = _jsonString
+            }
+            
+        } catch {
+            if debugMode { print ("An Error occured in ParseClient::getJSONFromStringArray -> \(error)") }
+        }
+        
+        return JSONString
+    }
+    
+    /**
+     * return json string from student meta dictionary
+     */
+    func getJSONFromStudentMetaDictionary(
+        _ studentData: PRSStudentData!) -> String {
+        
+        var JSONString: String = "{}"
+        
+        do {
+            
+            let jsonData = try JSONSerialization.data(withJSONObject: studentData, options: JSONSerialization.WritingOptions.prettyPrinted)
             if let _jsonString = String(data: jsonData, encoding: String.Encoding.utf8) {
                 JSONString = _jsonString
             }
