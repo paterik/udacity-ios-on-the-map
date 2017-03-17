@@ -33,7 +33,7 @@ extension ProfileEditViewController {
                 "mapString": "test123",
                 "latitude": 51.05089,
                 "longitude": 13.73832,
-                ]
+            ]
         
         completionHandlerForValidateData(true, nil, PRSStudentData(currentStudentDict))
     }
