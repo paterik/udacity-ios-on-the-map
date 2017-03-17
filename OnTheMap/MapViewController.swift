@@ -39,7 +39,6 @@ class MapViewController: UIViewController {
     var locationFetchSuccess : Bool = false
     var locationFetchStartTime : Date!
     var locationManager : CLLocationManager { return self.mapViewLocationManager.locationManager }
-    var currentDeviceLocations = MapViewLocations.sharedInstance.currentDeviceLocations
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var annotations = [PRSStudentMapAnnotation]()
     
