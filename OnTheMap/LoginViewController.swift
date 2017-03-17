@@ -75,10 +75,6 @@ class LoginViewController: UIViewController {
                 self.appDelegate.setUdacitySession(udcSession!)
                 self.clientUdacity.clientSession = self.appDelegate.getUdacitySession()
                 
-                print ("-------------------------------")
-                print (self.clientUdacity.clientSession!)
-                print ("-------------------------------")
-                
                 self.loadLocationViewController()
                     
                 // cleanOut username and password after login done successfully
