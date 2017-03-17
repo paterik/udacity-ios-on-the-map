@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //
     // MARK: Functions for API SessionHandling
     //
+    var currentDeviceLocations = [MapViewLocation]()
     var studentLocations: [PRSStudentData] = []
     var studentLocation: PRSStudentData? = nil
     var facebookSession: FBSession? = nil
