@@ -133,7 +133,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 alertController.message = NSString(
                     format: "You've already set your student location, do you want to delete the %d old ones?",
                     self.clientParse.metaMyLocationsCount!) as String!
-            
+
                 OperationQueue.main.addOperation {
                     self.present(alertController, animated: true, completion:nil)
                 }
@@ -190,8 +190,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         var targetLocation: CLLocation?
         
         /* render distance to other students only if device location meta data available */
-        if currentDeviceLocations.count > 0 {
-            currentDeviceLocation = currentDeviceLocations.first
+        if MapViewController.appDelegate.currentDeviceLocations.count > 0 {
+            currentDeviceLocation = MapViewController.appDelegate.currentDeviceLocations.first
             sourceLocation = CLLocation(latitude: (currentDeviceLocation?.latitude)!, longitude: (currentDeviceLocation?.longitude)!)
             
             renderDistance = true
@@ -244,13 +244,16 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: locationMapZoom, longitudeDelta: locationMapZoom))
         let currentDeviceLocation : NSDictionary = [ "latitude": coordinate.latitude, "longitude": coordinate.longitude ]
         
-        currentDeviceLocations.removeAll() // currently we won't persist all evaluated device locations
-        currentDeviceLocations.append(MapViewLocation(currentDeviceLocation)) // persist evaluated device location
+        MapViewController.appDelegate.currentDeviceLocations.removeAll() // currently we won't persist all evaluated device locations
+        MapViewController.appDelegate.currentDeviceLocations.append(MapViewLocation(currentDeviceLocation)) // persist evaluated device location
         locationFetchSuccess = true
         
         mapView.setRegion(region, animated: true)
         
-        if debugMode { print("You are at [\(coordinate.latitude)] [\(coordinate.longitude)]") }
+        print("-------------------------------------------------------------")
+        print("You are at [\(coordinate.latitude)] [\(coordinate.longitude)]")
+        print(MapViewController.appDelegate.currentDeviceLocations)
+        print("-------------------------------------------------------------")
     }
     
     /*
