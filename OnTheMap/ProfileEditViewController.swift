@@ -10,6 +10,8 @@ import UIKit
 
 class ProfileEditViewController: UIViewController, EditViewProtocol {
     
+    static let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     //
     // MARK: Convarnts
     //
@@ -57,7 +59,7 @@ class ProfileEditViewController: UIViewController, EditViewProtocol {
                     
                     if success == true {
                         
-                        print ("yeah!")
+                        self.btnCloseViewAction(sender)
                         
                     } else {
                         
@@ -77,33 +79,6 @@ class ProfileEditViewController: UIViewController, EditViewProtocol {
                 alertController.message = error
                 self.present(alertController, animated: true, completion:nil)
             }
-            
         }
-    }
-    
-    func validateStudentMetaData(
-        _ completionHandlerForValidateData: @escaping (
-            _ success: Bool?,
-            _ error: String?,
-            _ studentData: PRSStudentData?) -> Void) {
-    
-        if inpFirstname.text?.isEmpty ?? true && inpLastname.text?.isEmpty ?? true {
-            
-            completionHandlerForValidateData(false, "Up's, validation for your user profile failed! Check your firstname/lastname!", nil)
-        }
-        
-        let currentStudentDict : NSDictionary =
-            [
-                "firstName": inpFirstname.text!,
-                "lastName": inpLastname.text!,
-                "mediaURL": "",
-                "mapString": "test",
-                "uniqueKey": "9999999999",
-                "latitude": 51.053059,
-                "longitude": 13.733758,
-            ]
-        
-        completionHandlerForValidateData(true, nil, PRSStudentData(currentStudentDict))
-   
     }
 }
