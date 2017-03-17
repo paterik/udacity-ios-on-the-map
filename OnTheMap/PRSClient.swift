@@ -67,6 +67,7 @@ class PRSClient: NSObject {
         }
         
         let data = studentData!.asArray as [String : AnyObject]?
+        print(sessionUdacity)
         print(data)
         
         /*client.post(apiURL, headers: apiHeaderAuth, jsonBody: studentData!.asArray as [String : AnyObject]?) { (data, error) in
