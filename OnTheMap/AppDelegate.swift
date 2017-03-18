@@ -17,16 +17,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     //
-    // MARK: Functions for API SessionHandling
+    // MARK: Variables for API SessionHandling
     //
-    var currentDeviceLocations = [MapViewLocation]()
-    var studentLocations: [PRSStudentData] = []
-    var studentLocation: PRSStudentData? = nil
     var facebookSession: FBSession? = nil
     var udacitySession: UDCSession? = nil
     var isAuthByUdacity: Bool = false
     var isAuthByFacebook: Bool = false
 
+    //
+    // MARK: Variables for minor data "persitence" during app runtime
+    //
+    var currentDeviceLocations = [DeviceLocation]()
+    
     //
     // FIXME: refactoring of getter/setter functionally necessary !!!
     //
@@ -48,16 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func getFacebookSession() -> FBSession {
 
         return facebookSession!
-    }
-    
-    func setStudentLocation(_ _studentLocation: PRSStudentData) {
-        
-        studentLocation = _studentLocation
-    }
-    
-    func getStudentLocation() -> PRSStudentData {
-        
-        return studentLocation!
     }
 
     //
