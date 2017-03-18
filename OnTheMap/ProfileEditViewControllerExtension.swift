@@ -17,11 +17,23 @@ extension ProfileEditViewController {
         _ error: String?,
         _ studentData: PRSStudentData?) -> Void) {
         
-        // check for vaild input fields (firstName and lastNAme)
+        // check for vaild input fields (firstName and lastName), return on any error here
         if inpFirstname.text?.isEmpty ?? true && inpLastname.text?.isEmpty ?? true {
             completionHandlerForValidateData(
                 false, "Up's, validation for your user profile failed! Check your firstname/lastname!", nil
             )
+            
+            return
+        }
+        
+        // check current session state, also return on any problem here
+        guard let sessionUdacity = clientUdacity.clientSession else {
+            
+            completionHandlerForValidateData(
+                false, "Up's, no active udacity user session were found! Are you still logged in?", nil
+            )
+            
+            return
         }
         
         let _currentDeviceLocations: [DeviceLocation] = appDelegate.currentDeviceLocations
@@ -37,12 +49,13 @@ extension ProfileEditViewController {
         
         let currentStudentDict : NSDictionary =
             [
-                "firstName" : inpFirstname.text!,
-                "lastName"  : inpLastname.text!,
-                "mediaURL"  : inpMediaURL.text!,
-                "mapString" : "test123",
-                "latitude"  : _latitude!,
-                "longitude" : _longitude!,
+                "firstName" : inpFirstname.text! as String,
+                "lastName"  : inpLastname.text! as String,
+                "mediaURL"  : inpMediaURL.text! as String,
+                "mapString" : "Dresden, Germany" as String,
+                "uniqueKey" : sessionUdacity.accountKey!,
+                "latitude"  : _latitude! as Double,
+                "longitude" : _longitude! as Double,
             ]
         
         completionHandlerForValidateData(true, nil, PRSStudentData(currentStudentDict))
