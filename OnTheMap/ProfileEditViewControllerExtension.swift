@@ -17,22 +17,32 @@ extension ProfileEditViewController {
         _ error: String?,
         _ studentData: PRSStudentData?) -> Void) {
         
+        // check for vaild input fields (firstName and lastNAme)
         if inpFirstname.text?.isEmpty ?? true && inpLastname.text?.isEmpty ?? true {
-            
-            completionHandlerForValidateData(false, "Up's, validation for your user profile failed! Check your firstname/lastname!", nil)
+            completionHandlerForValidateData(
+                false, "Up's, validation for your user profile failed! Check your firstname/lastname!", nil
+            )
         }
         
-        // let currentDeviceLocation: MapViewLocation = currentDeviceLocations.first!
-        print (ProfileEditViewController.appDelegate.currentDeviceLocations)
+        let _currentDeviceLocations: [DeviceLocation] = appDelegate.currentDeviceLocations
+        var _currentDeviceLocation: DeviceLocation?
+        var _longitude: Double?
+        var _latitude: Double?
+        
+        if useCurrentDeviceLocation == true && _currentDeviceLocations.count > 0 {
+            _currentDeviceLocation = _currentDeviceLocations.first
+            _longitude = _currentDeviceLocation!.longitude
+            _latitude = _currentDeviceLocation!.latitude
+        }
         
         let currentStudentDict : NSDictionary =
             [
-                "firstName": inpFirstname.text!,
-                "lastName": inpLastname.text!,
-                "mediaURL": inpMediaURL.text!,
-                "mapString": "test123",
-                "latitude": 51.05089,
-                "longitude": 13.73832,
+                "firstName" : inpFirstname.text!,
+                "lastName"  : inpLastname.text!,
+                "mediaURL"  : inpMediaURL.text!,
+                "mapString" : "test123",
+                "latitude"  : _latitude!,
+                "longitude" : _longitude!,
             ]
         
         completionHandlerForValidateData(true, nil, PRSStudentData(currentStudentDict))
