@@ -10,14 +10,13 @@ import UIKit
 
 class ProfileEditViewController: UIViewController, EditViewProtocol {
     
-    static let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
     //
-    // MARK: Convarnts
+    // MARK: Constants
     //
     let debugMode: Bool = false
     let clientParse = PRSClient.sharedInstance
     let clientUdacity = UDCClient.sharedInstance
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     //
     // MARK: Variables
@@ -73,7 +72,6 @@ class ProfileEditViewController: UIViewController, EditViewProtocol {
                         }
                     }
                 }
-
                 
             } else {
                 alertController.message = error
