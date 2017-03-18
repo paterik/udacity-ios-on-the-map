@@ -61,14 +61,13 @@ class PRSClient: NSObject {
         _ studentData: PRSStudentData?,
         _ completionHandlerForSetCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
-        guard let sessionUdacity = clientUdacity.clientSession else {
+        /*guard let sessionUdacity = clientUdacity.clientSession else {
             completionHandlerForSetCurrentLocation(false, "Up's, no active udacity user session were found! Are you still logged in?")
             return
-        }
+        }*/
         
-        let data = studentData!.asArray as [String : AnyObject]?
-        print(sessionUdacity)
-        print(data)
+        print("------------------------------")
+        print(studentData)
         
         /*client.post(apiURL, headers: apiHeaderAuth, jsonBody: studentData!.asArray as [String : AnyObject]?) { (data, error) in
             
@@ -78,8 +77,8 @@ class PRSClient: NSObject {
                 
             } else {
                 
-            }*/
-    
+            }
+        }*/
     }
     
     /*
