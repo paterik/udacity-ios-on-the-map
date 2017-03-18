@@ -148,6 +148,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      * simple wrapper for fetchAll student locations call, used during map initialization and by updateButton process call
      */
     func updateStudentLocations () {
+        
         mapView.removeAnnotations(annotations)
         fetchAllStudentLocations()
     }
@@ -185,13 +186,13 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         let students = PRSStudentLocations.sharedInstance
         
         var renderDistance: Bool = false
-        var currentDeviceLocation: MapViewLocation?
+        var currentDeviceLocation: DeviceLocation?
         var sourceLocation: CLLocation?
         var targetLocation: CLLocation?
         
         /* render distance to other students only if device location meta data available */
-        if MapViewController.appDelegate.currentDeviceLocations.count > 0 {
-            currentDeviceLocation = MapViewController.appDelegate.currentDeviceLocations.first
+        if appDelegate.currentDeviceLocations.count > 0 {
+            currentDeviceLocation = appDelegate.currentDeviceLocations.first
             sourceLocation = CLLocation(latitude: (currentDeviceLocation?.latitude)!, longitude: (currentDeviceLocation?.longitude)!)
             
             renderDistance = true
@@ -244,16 +245,18 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: locationMapZoom, longitudeDelta: locationMapZoom))
         let currentDeviceLocation : NSDictionary = [ "latitude": coordinate.latitude, "longitude": coordinate.longitude ]
         
-        MapViewController.appDelegate.currentDeviceLocations.removeAll() // currently we won't persist all evaluated device locations
-        MapViewController.appDelegate.currentDeviceLocations.append(MapViewLocation(currentDeviceLocation)) // persist evaluated device location
+        appDelegate.currentDeviceLocations.removeAll() // currently we won't persist all evaluated device locations
+        appDelegate.currentDeviceLocations.append(DeviceLocation(currentDeviceLocation)) // persist evaluated device location
         locationFetchSuccess = true
         
         mapView.setRegion(region, animated: true)
         
-        print("-------------------------------------------------------------")
-        print("You are at [\(coordinate.latitude)] [\(coordinate.longitude)]")
-        print(MapViewController.appDelegate.currentDeviceLocations)
-        print("-------------------------------------------------------------")
+        if debugMode == true {
+            print("-------------------------------------------------------------")
+            print("You are at [\(coordinate.latitude)] [\(coordinate.longitude)]")
+            print(appDelegate.currentDeviceLocations)
+            print("-------------------------------------------------------------")
+        }
     }
     
     /*
@@ -261,7 +264,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      */
     func locationFetchStart() {
         
-        mapViewLocationManager.checkForLocationAccess {
+        deviceLocationManager.checkForLocationAccess {
             
             switch self.locationFetchMode
             {
@@ -311,8 +314,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         switch status {
             case .authorizedAlways, .authorizedWhenInUse:
-                mapViewLocationManager.doThisWhenAuthorized?()
-                mapViewLocationManager.doThisWhenAuthorized = nil
+                deviceLocationManager.doThisWhenAuthorized?()
+                deviceLocationManager.doThisWhenAuthorized = nil
             
             default: break
         }
