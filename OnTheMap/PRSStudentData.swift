@@ -34,8 +34,8 @@ struct PRSStudentData {
                 "mapString": mapString ?? " ",
                 "objectId": objectId ?? " ",
                 "uniqueKey": uniqueKey ?? " ",
-                "latitude": latitude!,
-                "longitude": longitude!
+                "latitude": latitude! as Double,
+                "longitude": longitude! as Double
                 
             ] as [String : Any]
         }
