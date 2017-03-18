@@ -15,7 +15,7 @@ class MapViewController: UIViewController {
     //
     // MARK: Constants (Statics)
     //
-    static let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     //
     // MARK: Constants (Normal)
@@ -23,7 +23,7 @@ class MapViewController: UIViewController {
     let debugMode: Bool = false
     let clientParse = PRSClient.sharedInstance
     let clientUdacity = UDCClient.sharedInstance
-    let mapViewLocationManager = MapViewLocationManager.sharedInstance
+    let deviceLocationManager = DeviceLocationManager.sharedInstance
     let students = PRSStudentLocations.sharedInstance
     
     let locationAccuracy : CLLocationAccuracy = 10 // accuracy factor for device location
@@ -38,7 +38,7 @@ class MapViewController: UIViewController {
     var locationFetchTrying : Bool = false
     var locationFetchSuccess : Bool = false
     var locationFetchStartTime : Date!
-    var locationManager : CLLocationManager { return self.mapViewLocationManager.locationManager }
+    var locationManager : CLLocationManager { return self.deviceLocationManager.locationManager }
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var annotations = [PRSStudentMapAnnotation]()
     
@@ -75,6 +75,7 @@ class MapViewController: UIViewController {
                 
                 let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.alert)
                 let Action = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in }
+                
                 alertController.addAction(Action)
                 OperationQueue.main.addOperation {
                     self.present(alertController, animated: true, completion:nil)
