@@ -34,8 +34,8 @@ struct PRSStudentData {
                 "mapString": mapString ?? " ",
                 "objectId": objectId ?? " ",
                 "uniqueKey": uniqueKey ?? " ",
-                "latitude": latitude ?? 0.0,
-                "longitude": longitude ?? 0.0
+                "latitude": latitude!,
+                "longitude": longitude!
                 
             ] as [String : Any]
         }
@@ -57,8 +57,8 @@ struct PRSStudentData {
         objectId  = (dictionary["objectId"] as? String!)  ?? metaDefault
         uniqueKey = (dictionary["uniqueKey"] as? String!) ?? metaDefault
 
-        latitude  = (dictionary["latitude"] as? Double!)  ?? nil
-        longitude = (dictionary["longitude"] as? Double!) ?? nil
+        latitude  = (dictionary["latitude"] as? Double!)  ?? 0.0
+        longitude = (dictionary["longitude"] as? Double!) ?? 0.0
 
         createdAt = Date()
         updatedAt = Date()
