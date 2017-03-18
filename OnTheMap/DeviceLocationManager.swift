@@ -1,5 +1,5 @@
 //
-//  MapViewLocationManager.swift
+//  DeviceLocationManager.swift
 //  OnTheMap
 //
 //  Created by Patrick Paechnatz on 10.03.17.
@@ -9,12 +9,12 @@
 import UIKit
 import CoreLocation
 
-class MapViewLocationManager {
+class DeviceLocationManager {
     
     //
     // MARK: Constants (Statics)
     //
-    static let sharedInstance = MapViewLocationManager()
+    static let sharedInstance = DeviceLocationManager()
     
     //
     // MARK: Constants (Normal)
@@ -27,7 +27,10 @@ class MapViewLocationManager {
     //
     var doThisWhenAuthorized : (() -> ())?
     
-    func checkForLocationAccess(always:Bool = false, andThen f: (()->())? = nil) {
+    //
+    // check authorization state for device location
+    //
+    func checkForLocationAccess(always: Bool = false, andThen f: (()->())? = nil) {
         
         guard CLLocationManager.locationServicesEnabled() else {
             
