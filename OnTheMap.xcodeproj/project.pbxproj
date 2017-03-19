@@ -23,6 +23,7 @@
 		B150D1A71E740E9F001FF941 /* DateOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B150D1A61E740E9F001FF941 /* DateOperations.swift */; };
 		B1682AB91E70422F004CB17C /* PRSStudentLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1682AB81E70422F004CB17C /* PRSStudentLocations.swift */; };
 		B16F05F11E71EA6B00CED99B /* MapViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16F05F01E71EA6B00CED99B /* MapViewControllerExtension.swift */; };
+		B1748B4D1E7EABC3003D9A31 /* CLPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1748B4C1E7EABC3003D9A31 /* CLPlacemark.swift */; };
 		B18340D11E77105A0042A813 /* LocationEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18340D01E77105A0042A813 /* LocationEditViewController.swift */; };
 		B18340D31E77108F0042A813 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18340D21E77108F0042A813 /* ProfileEditViewController.swift */; };
 		B1886DEB1DEE1DC5004026BE /* FBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1886DEA1DEE1DC5004026BE /* FBClient.swift */; };
@@ -82,6 +83,7 @@
 		B150D1A61E740E9F001FF941 /* DateOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOperations.swift; sourceTree = "<group>"; };
 		B1682AB81E70422F004CB17C /* PRSStudentLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSStudentLocations.swift; sourceTree = "<group>"; };
 		B16F05F01E71EA6B00CED99B /* MapViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerExtension.swift; sourceTree = "<group>"; };
+		B1748B4C1E7EABC3003D9A31 /* CLPlacemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPlacemark.swift; sourceTree = "<group>"; };
 		B18340D01E77105A0042A813 /* LocationEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditViewController.swift; sourceTree = "<group>"; };
 		B18340D21E77108F0042A813 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		B1886DEA1DEE1DC5004026BE /* FBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBClient.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				B11812841DE4388200C1C91C /* UIColor.swift */,
 				B119B5851DE591F5002AF6AF /* String.swift */,
 				B150D1A61E740E9F001FF941 /* DateOperations.swift */,
+				B1748B4C1E7EABC3003D9A31 /* CLPlacemark.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -670,6 +673,7 @@
 				B119B58A1DE5A5F7002AF6AF /* UDCSession.swift in Sources */,
 				B13384321E113DB300A23201 /* LocationTabViewController.swift in Sources */,
 				B1FCE41B1E72AD050056FC00 /* PRSStudentMapAnnotation.swift in Sources */,
+				B1748B4D1E7EABC3003D9A31 /* CLPlacemark.swift in Sources */,
 				B16F05F11E71EA6B00CED99B /* MapViewControllerExtension.swift in Sources */,
 				B1DB862B1E1262BB006D827A /* PRSClient.swift in Sources */,
 				B1DB86311E17B38B006D827A /* RequestClient.swift in Sources */,
