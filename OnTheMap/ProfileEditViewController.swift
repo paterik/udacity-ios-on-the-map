@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class ProfileEditViewController: UIViewController, EditViewProtocol {
     
@@ -17,11 +18,13 @@ class ProfileEditViewController: UIViewController, EditViewProtocol {
     let clientParse = PRSClient.sharedInstance
     let clientUdacity = UDCClient.sharedInstance
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let metaNoData: String = "no data"
     
     //
     // MARK: Variables
     //
     var useCurrentDeviceLocation: Bool = false
+    var mapView: MKMapView!
     
     //
     // MARK: IBOutlet Variables
@@ -62,7 +65,7 @@ class ProfileEditViewController: UIViewController, EditViewProtocol {
                         
                     } else {
                         
-                        // error? do something ... but for now just clean up the alert dialog
+                        // client error saving profile? do something ... but for now just clean up the alert dialog
                         let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.alert)
                         let Action = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in }
                         
@@ -74,6 +77,7 @@ class ProfileEditViewController: UIViewController, EditViewProtocol {
                 }
                 
             } else {
+                // validation error before saving profile? show corresponding message as dialog
                 alertController.message = error
                 self.present(alertController, animated: true, completion:nil)
             }
