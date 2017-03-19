@@ -59,6 +59,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
             let vc = self.prepareVC("profileEditView") as! ProfileEditViewController
                 vc.useCurrentDeviceLocation = true
+                vc.mapView = self.mapView
             
             self.present(vc, animated: true, completion: nil)
         }
@@ -190,7 +191,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         var sourceLocation: CLLocation?
         var targetLocation: CLLocation?
         
-        /* render distance to other students only if device location meta data available */
+        // render distance to other students only if device location meta data available
         if appDelegate.currentDeviceLocations.count > 0 {
             currentDeviceLocation = appDelegate.currentDeviceLocations.first
             sourceLocation = CLLocation(latitude: (currentDeviceLocation?.latitude)!, longitude: (currentDeviceLocation?.longitude)!)
@@ -203,9 +204,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             let coordinate = CLLocationCoordinate2D(latitude: dictionary.latitude!, longitude: dictionary.longitude!)
             let annotation = PRSStudentMapAnnotation(coordinate)
             
-            annotation.title = NSString(format: "%@ %@", dictionary.firstName, dictionary.lastName) as String
-            annotation.url = dictionary.mediaURL
-            annotation.subtitle = annotation.url
+            annotation.title = NSString(format: "%@ %@", dictionary.firstName ?? locationNoData, dictionary.lastName ?? locationNoData) as String
+            annotation.url = dictionary.mediaURL ?? locationNoData
+            annotation.subtitle = annotation.url ?? locationNoData
             
             if renderDistance {
                 targetLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -351,7 +352,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 let _accuracy = _location.horizontalAccuracy
                 let _determinationTime = _location.timestamp
             
-                /* ignore first attempt */
+                // ignore first attempt
                 if locationFetchStartTime == nil {
                     
                     locationFetchStartTime = Date()
@@ -359,7 +360,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                     return
                 }
             
-                /* ignore overtime requests */
+                // ignore overtime requests
                 if _determinationTime.timeIntervalSince(self.locationFetchStartTime) > locationCheckTimeout {
                     
                     locationFetchStop()
@@ -367,7 +368,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                     return
                 }
                 
-                /* wait for the next one */
+                // wait for the next one
                 if _accuracy < 0 || _accuracy > locationAccuracy { return }
             
                 locationFetchStop()
@@ -396,7 +397,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         _ mapView: MKMapView,
           viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        /* ignore all given location annotation except the student ones */
+        // ignore all given location annotation except the student ones
         if !(annotation is PRSStudentMapAnnotation) { return nil }
         
         let identifier = "locPin_0"
