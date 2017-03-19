@@ -13,11 +13,6 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     //
-    // MARK: Constants (Statics)
-    //
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
-    //
     // MARK: Constants (Normal)
     //
     let debugMode: Bool = false
@@ -25,12 +20,14 @@ class MapViewController: UIViewController {
     let clientUdacity = UDCClient.sharedInstance
     let deviceLocationManager = DeviceLocationManager.sharedInstance
     let students = PRSStudentLocations.sharedInstance
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     let locationAccuracy : CLLocationAccuracy = 10 // accuracy factor for device location
     let locationCheckTimeout : TimeInterval = 10   // timeout for device location fetch
     let locationMapZoom : CLLocationDegrees = 0.03 // zoom factor (0.03 seems best for max zoom)
     let locationDistanceDivider : Double = 1000.0  // rate for metric conversion (m -> km)
     let locationFetchMode : Int8 = 1               // 1: saveMode, 2: quickMode
+    let locationNoData : String = "no data"        // default for missing student metadata
     
     //
     // MARKS: Variables
