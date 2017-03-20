@@ -51,7 +51,8 @@ class ProfileEditViewController: UIViewController, EditViewProtocol {
         )
         
         let Action = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction!) in }
-            alertController.addAction(Action)
+        
+        alertController.addAction(Action)
         
         validateStudentMetaData() { (success, error, studentData) in
             
