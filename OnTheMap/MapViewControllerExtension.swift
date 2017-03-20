@@ -8,7 +8,6 @@
 
 import UIKit
 import MapKit
-import Foundation
 
 extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
@@ -17,7 +16,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     //
     
     /*
-     * the method will handle our ident based viewController switch for editView UserProfile and UserLocation
+     * the method will handle our ident based viewController switch for separate callOut of editView 
+     * UserProfile and UserLocation
      */
     func prepareVC(_ identifier: String) -> UIViewController {
         
@@ -43,6 +43,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         return vc
     }
+    
+    func userLocationUpdate() {}
+    func userLocationDelete() {}
     
     /*
      * this method will add a new userLocation to our parse api persistence layer
@@ -77,10 +80,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         present(locationRequestController, animated: true, completion: nil)
     }
-    
-    func userLocationUpdate() {}
-    func userLocationDelete() {}
-    
+
     /*
      * this method will handle the 3 cases of user location persitence/validations
      */
@@ -92,8 +92,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             preferredStyle: UIAlertControllerStyle.alert
         )
         
-        let dlgBtnCancelAction = UIAlertAction(title: "cancel", style: .default) { (action:UIAlertAction!) in }
-        let dlgBtnDeleteAction = UIAlertAction(title: "delete", style: .default) { (action:UIAlertAction!) in
+        let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action:UIAlertAction!) in }
+        let dlgBtnDeleteAction = UIAlertAction(title: "Delete", style: .default) { (action:UIAlertAction!) in
             self.userLocationDelete()
         }
         
@@ -114,16 +114,14 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
                 alertController.title = "Warning"
                 alertController.message = "You've already set your student location, do you want to delete or update the last one?"
-                let dlgBtnUpdateAction = UIAlertAction(title: "update", style: .default) { (action:UIAlertAction!) in
+                let dlgBtnUpdateAction = UIAlertAction(title: "Update", style: .default) { (action:UIAlertAction!) in
                 
                     self.userLocationUpdate()
                 }
             
                 alertController.addAction(dlgBtnUpdateAction)
             
-                OperationQueue.main.addOperation {
-                    self.present(alertController, animated: true, completion:nil)
-                }
+                OperationQueue.main.addOperation { self.present(alertController, animated: true, completion:nil) }
             
                 break
             
@@ -135,9 +133,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                     format: "You've already set your student location, do you want to delete the %d old ones?",
                     self.clientParse.metaMyLocationsCount!) as String!
 
-                OperationQueue.main.addOperation {
-                    self.present(alertController, animated: true, completion:nil)
-                }
+                OperationQueue.main.addOperation { self.present(alertController, animated: true, completion:nil) }
             
                 break
             
@@ -172,9 +168,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 let Action = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in }
                 
                 alertController.addAction(Action)
-                OperationQueue.main.addOperation {
-                    self.present(alertController, animated: true, completion:nil)
-                }
+                OperationQueue.main.addOperation { self.present(alertController, animated: true, completion:nil) }
             }
         }
     }
@@ -204,9 +198,12 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             let coordinate = CLLocationCoordinate2D(latitude: dictionary.latitude!, longitude: dictionary.longitude!)
             let annotation = PRSStudentMapAnnotation(coordinate)
             
-            annotation.title = NSString(format: "%@ %@", dictionary.firstName ?? locationNoData, dictionary.lastName ?? locationNoData) as String
             annotation.url = dictionary.mediaURL ?? locationNoData
             annotation.subtitle = annotation.url ?? locationNoData
+            annotation.title = NSString(
+                format: "%@ %@",
+                dictionary.firstName ?? locationNoData,
+                dictionary.lastName ?? locationNoData) as String
             
             if renderDistance {
                 targetLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -216,13 +213,11 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             annotations.append(annotation)
         }
         
-        DispatchQueue.main.async {
-            self.mapView.addAnnotations(self.annotations)
-        }
+        DispatchQueue.main.async { self.mapView.addAnnotations(self.annotations) }
     }
     
     /*
-     * get the printable (human readable) distance between two locations (using metric system)
+     * get the printable (human readable) distance between two locations (using fix metric system)
      */
     func getPrintableDistanceBetween(_ sourceLocation: CLLocation!, _ targetLocation: CLLocation!) -> String {
         
@@ -255,7 +250,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         if debugMode == true {
             print("-------------------------------------------------------------")
             print("You are at [\(coordinate.latitude)] [\(coordinate.longitude)]")
-            print(appDelegate.currentDeviceLocations)
             print("-------------------------------------------------------------")
         }
     }
