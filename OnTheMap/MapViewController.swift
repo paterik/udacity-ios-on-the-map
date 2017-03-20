@@ -10,6 +10,9 @@ import MapKit
 
 class MapViewController: UIViewController {
 
+    //
+    // MARK: IBOutlet variables
+    //
     @IBOutlet weak var mapView: MKMapView!
     
     //
@@ -27,10 +30,10 @@ class MapViewController: UIViewController {
     let locationMapZoom : CLLocationDegrees = 0.03 // zoom factor (0.03 seems best for max zoom)
     let locationDistanceDivider : Double = 1000.0  // rate for metric conversion (m -> km)
     let locationFetchMode : Int8 = 1               // 1: saveMode, 2: quickMode
-    let locationNoData : String = "no data"        // default for missing student metadata
+    let locationNoData : String = "no data"        // default for missing student meta data
     
     //
-    // MARKS: Variables
+    // MARK: Variables
     //
     var locationFetchTrying : Bool = false
     var locationFetchSuccess : Bool = false
@@ -39,6 +42,9 @@ class MapViewController: UIViewController {
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var annotations = [PRSStudentMapAnnotation]()
     
+    //
+    // MARK: UIView Methods (overrides)
+    //
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
@@ -55,12 +61,10 @@ class MapViewController: UIViewController {
         locationManager.delegate = self
     }
     
+    //
+    // MARK: IBAction Methods
+    //
     @IBAction func btnAddUserLocationAction(_ sender: Any) {
-        
-        validateCurrentUserLocations()
-    }
-    
-    func validateCurrentUserLocations() {
         
         clientParse.getStudentLocations() { (success, error) in
             
