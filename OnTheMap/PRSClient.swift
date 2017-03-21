@@ -55,26 +55,25 @@ class PRSClient: NSObject {
     
     /*
      * @NotFullyImplemented
-     * validate and set the current user location object
+     * set current user location object (new student location)
      */
     func setStudentLocation (
         _ studentData: PRSStudentData?,
         _ completionHandlerForSetCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
-        print("----------------------------------------------------------------------------------------")
-        print(studentData!)
-        print("----------------------------------------------------------------------------------------")
+        let studentDataArray = prepareStudentMetaForPostRequest(studentData)!
         
-        completionHandlerForSetCurrentLocation(true, nil)
-        
-        /*client.post(apiURL, headers: apiHeaderAuth, jsonBody: studentData!.asArray as [String : AnyObject]?) { (data, error) in
+        client.post(apiURL, headers: apiHeaderAuth, jsonBody: studentDataArray as [String : AnyObject]?) { (data, error) in
+            
             if (error != nil) {
+                
                 completionHandlerForSetCurrentLocation(false, "Up's, your request couln't be handled ... \(error)")
                 
             } else {
                 
+                completionHandlerForSetCurrentLocation(true, nil)
             }
-        }*/
+        }
     }
     
     /*
