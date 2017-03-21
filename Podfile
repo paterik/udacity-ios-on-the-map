@@ -13,12 +13,7 @@ def facebookSDKCore
     pod 'FBSDKShareKit'
 end
 
-def onTheMapProdPods
-    pod 'BGTableViewRowActionWithImage'
-end
-
 target 'OnTheMap' do
-    onTheMapProdPods
     facebookSDKCore
     amazonSDKCore
 end
