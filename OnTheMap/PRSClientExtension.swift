@@ -11,6 +11,20 @@ import Foundation
 extension PRSClient {
 
     /*
+     * prepare student data object for upcoming post request remove post-obsolete key 'objectId'
+     */
+    func prepareStudentMetaForPostRequest(
+        _ studentData: PRSStudentData?) -> [String : AnyObject]? {
+        
+        var studentDataArray = studentData!.asArray
+        if let index = studentDataArray.index(forKey: "objectId") {
+            studentDataArray.remove(at: index)
+        }
+        
+        return studentDataArray as [String : AnyObject]?
+    }
+    
+    /*
      * return json string from array
      */
     func getJSONFromStringArray(
