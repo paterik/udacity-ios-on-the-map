@@ -244,25 +244,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9kf-pw-GQ5">
-                                <rect key="frame" x="0.0" y="193" width="375" height="454"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9kf-pw-GQ5" userLabel="mapView">
+                                <rect key="frame" x="0.0" y="240" width="375" height="407"/>
                             </mapView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Dresden, Germany" placeholder="Where are you studying today?" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Isg-cn-bbv">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Dresden, Germany" placeholder="Where are you studying today?" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Isg-cn-bbv" userLabel="inpLocationMapString">
                                 <rect key="frame" x="49" y="102" width="310" height="31"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your Location, your device location will be default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5U-PX-qog">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your Location, your device location will be default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5U-PX-qog" userLabel="lblLocationMapStringDescription">
                                 <rect key="frame" x="49" y="134" width="310" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UoD-gs-8kt">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UoD-gs-8kt" userLabel="btnSetLocationToCurrentDeviceLocation">
                                 <rect key="frame" x="16" y="105" width="25" height="25"/>
                                 <color key="tintColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="icnLocation_v1"/>
+                                <connections>
+                                    <action selector="btnSetLocationToCurrentDeviceLocationAction:" destination="pxh-hh-Zix" eventType="touchUpInside" id="72N-oo-Org"/>
+                                </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PjO-dX-nHi">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -274,46 +277,68 @@
                                                 <action selector="btnCloseViewAction:" destination="pxh-hh-Zix" id="0th-Vc-fdj"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="icnSave_v1" id="v2a-dk-nwX" userLabel="btnSave">
+                                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icnSave_v1" id="v2a-dk-nwX" userLabel="btnSave">
                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="btnAcceptLocationAction:" destination="pxh-hh-Zix" id="4Xu-tr-TFB"/>
+                                                <segue destination="BXj-DK-Js1" kind="showDetail" id="nDo-0v-PXU"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="EKZ-3Y-N4X" userLabel="btnSubmit">
+                                <rect key="frame" x="16" y="181" width="343" height="40"/>
+                                <color key="backgroundColor" red="0.08235294118" green="0.64313725489999995" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="F8D-Ei-vuf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Plot Location">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnHandleLocationSubmitAction:" destination="pxh-hh-Zix" eventType="touchUpInside" id="D2N-Q1-er2"/>
+                                    <action selector="loginUdacityAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ACF-p1-SFI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Isg-cn-bbv" firstAttribute="trailing" secondItem="cy1-NS-jIg" secondAttribute="trailingMargin" id="2m4-8Z-zxV"/>
-                            <constraint firstItem="PjO-dX-nHi" firstAttribute="top" secondItem="ay8-Rw-uZT" secondAttribute="bottom" id="3zp-0W-Ee6"/>
-                            <constraint firstItem="e5U-PX-qog" firstAttribute="top" secondItem="Isg-cn-bbv" secondAttribute="bottom" constant="1" id="5JW-RI-aMv"/>
-                            <constraint firstAttribute="bottom" secondItem="9kf-pw-GQ5" secondAttribute="bottom" constant="20" symbolic="YES" id="7RR-Eu-4MX"/>
-                            <constraint firstItem="Isg-cn-bbv" firstAttribute="trailing" secondItem="e5U-PX-qog" secondAttribute="trailing" id="9ol-bm-24o"/>
-                            <constraint firstItem="e5U-PX-qog" firstAttribute="leading" secondItem="cy1-NS-jIg" secondAttribute="leadingMargin" constant="33" id="A99-46-uEB"/>
-                            <constraint firstItem="PjO-dX-nHi" firstAttribute="leading" secondItem="cy1-NS-jIg" secondAttribute="leading" id="Eea-Pg-skW"/>
-                            <constraint firstItem="UoD-gs-8kt" firstAttribute="centerY" secondItem="Isg-cn-bbv" secondAttribute="centerY" id="EsS-fa-cpj"/>
-                            <constraint firstItem="UoD-gs-8kt" firstAttribute="top" secondItem="PjO-dX-nHi" secondAttribute="bottom" constant="41" id="FIg-27-E78"/>
-                            <constraint firstItem="9kf-pw-GQ5" firstAttribute="top" secondItem="UoD-gs-8kt" secondAttribute="bottom" constant="63" id="OHk-Cw-ypl"/>
-                            <constraint firstItem="Isg-cn-bbv" firstAttribute="top" secondItem="PjO-dX-nHi" secondAttribute="bottom" constant="38" id="UBv-wM-oax"/>
-                            <constraint firstAttribute="trailing" secondItem="PjO-dX-nHi" secondAttribute="trailing" id="XLA-Ut-gRu"/>
-                            <constraint firstItem="Isg-cn-bbv" firstAttribute="leading" secondItem="e5U-PX-qog" secondAttribute="leading" id="ZwF-Qr-Ivv"/>
-                            <constraint firstItem="PjO-dX-nHi" firstAttribute="trailing" secondItem="9kf-pw-GQ5" secondAttribute="trailing" id="eEC-gi-Jck"/>
-                            <constraint firstItem="PjO-dX-nHi" firstAttribute="leading" secondItem="9kf-pw-GQ5" secondAttribute="leading" id="evs-Ct-V60"/>
-                            <constraint firstItem="Isg-cn-bbv" firstAttribute="leading" secondItem="UoD-gs-8kt" secondAttribute="trailing" constant="8" symbolic="YES" id="gGm-Fa-HTh"/>
-                            <constraint firstItem="9kf-pw-GQ5" firstAttribute="top" secondItem="e5U-PX-qog" secondAttribute="bottom" constant="38" id="zGo-4q-jTs"/>
+                            <constraint firstItem="PjO-dX-nHi" firstAttribute="top" secondItem="ay8-Rw-uZT" secondAttribute="bottom" id="0dG-wg-1Ms"/>
+                            <constraint firstItem="Isg-cn-bbv" firstAttribute="top" secondItem="PjO-dX-nHi" secondAttribute="bottom" constant="38" id="3ho-g1-pHJ"/>
+                            <constraint firstItem="UoD-gs-8kt" firstAttribute="centerY" secondItem="Isg-cn-bbv" secondAttribute="centerY" id="5Yi-EB-Y7L"/>
+                            <constraint firstAttribute="trailing" secondItem="PjO-dX-nHi" secondAttribute="trailing" id="6Uv-PJ-0n0"/>
+                            <constraint firstItem="EKZ-3Y-N4X" firstAttribute="top" secondItem="UoD-gs-8kt" secondAttribute="bottom" constant="51" id="9iY-mb-Xsy"/>
+                            <constraint firstItem="PjO-dX-nHi" firstAttribute="leading" secondItem="9kf-pw-GQ5" secondAttribute="leading" id="BcU-xI-jQo"/>
+                            <constraint firstItem="UoD-gs-8kt" firstAttribute="leading" secondItem="EKZ-3Y-N4X" secondAttribute="leading" id="Bsf-Bd-Gjg"/>
+                            <constraint firstAttribute="bottom" secondItem="9kf-pw-GQ5" secondAttribute="bottom" constant="20" symbolic="YES" id="EOh-ye-yoy"/>
+                            <constraint firstItem="EKZ-3Y-N4X" firstAttribute="top" secondItem="e5U-PX-qog" secondAttribute="bottom" constant="26" id="F8r-4G-U5p"/>
+                            <constraint firstItem="PjO-dX-nHi" firstAttribute="leading" secondItem="cy1-NS-jIg" secondAttribute="leading" id="FD4-Ri-6wE"/>
+                            <constraint firstItem="e5U-PX-qog" firstAttribute="leading" secondItem="cy1-NS-jIg" secondAttribute="leadingMargin" constant="33" id="HDM-lT-z7Z"/>
+                            <constraint firstItem="Isg-cn-bbv" firstAttribute="trailing" secondItem="e5U-PX-qog" secondAttribute="trailing" id="JhS-Vt-bh2"/>
+                            <constraint firstItem="e5U-PX-qog" firstAttribute="top" secondItem="Isg-cn-bbv" secondAttribute="bottom" constant="1" id="Slj-ri-DEs"/>
+                            <constraint firstItem="PjO-dX-nHi" firstAttribute="centerX" secondItem="EKZ-3Y-N4X" secondAttribute="centerX" id="VnE-Au-dC3"/>
+                            <constraint firstItem="PjO-dX-nHi" firstAttribute="trailing" secondItem="9kf-pw-GQ5" secondAttribute="trailing" id="bzV-3O-C8a"/>
+                            <constraint firstItem="e5U-PX-qog" firstAttribute="trailing" secondItem="EKZ-3Y-N4X" secondAttribute="trailing" id="cnI-hp-Mam"/>
+                            <constraint firstItem="9kf-pw-GQ5" firstAttribute="top" secondItem="EKZ-3Y-N4X" secondAttribute="bottom" constant="19" id="esp-Hb-h6s"/>
+                            <constraint firstItem="Isg-cn-bbv" firstAttribute="leading" secondItem="e5U-PX-qog" secondAttribute="leading" id="hxQ-A8-NtM"/>
+                            <constraint firstItem="UoD-gs-8kt" firstAttribute="top" secondItem="PjO-dX-nHi" secondAttribute="bottom" constant="41" id="lKd-w1-4MS"/>
+                            <constraint firstItem="Isg-cn-bbv" firstAttribute="leading" secondItem="UoD-gs-8kt" secondAttribute="trailing" constant="8" symbolic="YES" id="za0-8g-sdX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="a9i-Yp-N2E"/>
                     <connections>
                         <outlet property="btnAcceptLocation" destination="v2a-dk-nwX" id="9Vk-Pe-A6C"/>
                         <outlet property="btnCloseView" destination="7SM-Xp-wKy" id="JRS-xH-zc3"/>
+                        <outlet property="btnSubmit" destination="EKZ-3Y-N4X" id="vUr-EO-5aj"/>
+                        <outlet property="inpLocationMapString" destination="Isg-cn-bbv" id="ZKv-Cz-vgu"/>
+                        <outlet property="mapView" destination="9kf-pw-GQ5" id="QBo-I4-vMD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gue-QX-tQo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3316" y="-360"/>
+            <point key="canvasLocation" x="3316" y="-360.2698650674663"/>
         </scene>
         <!--LocationViewController-->
         <scene sceneID="3Yh-4P-UBk">
