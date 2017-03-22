@@ -17,26 +17,65 @@ class LocationEditViewController: UIViewController, EditViewProtocol {
     let debugMode: Bool = false
     let clientParse = PRSClient.sharedInstance
     let clientUdacity = UDCClient.sharedInstance
+    let locationMapZoom : CLLocationDegrees = 0.03 // zoom factor (0.03 seems best for max zoom)
     
     //
     // MARK: Variables
     //
     var useCurrentDeviceLocation: Bool = false
+    var btnState: Int = 1 // 1: Plot Location, 2: Submit Location
+    var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     //
     // MARK: IBOutlet Variables
     //
     @IBOutlet weak var btnCloseView: UIBarButtonItem!
     @IBOutlet weak var btnAcceptLocation: UIBarButtonItem!
+    @IBOutlet weak var inpLocationMapString: UITextField!
+    @IBOutlet weak var btnSubmit: UIButton!
+    @IBOutlet weak var mapView: MKMapView!
+    
+    override func viewDidLoad() {
+        activitySpinner.center = self.view.center
+    }
     
     //
     // MARK: IBOutlet Actions
     //
+    @IBAction func btnHandleLocationSubmitAction(_ sender: Any) {
+        
+        btnSubmit.isEnabled = true
+        inpLocationMapString.isEnabled = false
+        
+        // evaluate state and define title and action
+        switch btnState {
+        
+            case 1:
+                btnSubmit.setTitle("Plot Location", for: .normal)
+                inpLocationMapString.resignFirstResponder()
+                getMapPositionByAddressString(inpLocationMapString.text!)
+                break;
+            
+            case 2:
+                inpLocationMapString.isEnabled = false
+                btnSubmit.setTitle("Confirm Location", for: .normal)
+                
+                break;
+            
+            default:
+                btnSubmit.isEnabled = false
+                btnCloseViewAction(sender)
+                break;
+        }
+        
+        // switch button state 1->2, 2->1
+        btnState = (btnState == 1) ? 2 : 1
+    }
+    
     @IBAction func btnCloseViewAction(_ sender: Any) {
         self.dismiss(animated: true)
     }
     
-    @IBAction func btnAcceptLocationAction(_ sender: Any) {
-    
-    }
+    @IBAction func btnAcceptLocationAction(_ sender: Any) {}
+    @IBAction func btnSetLocationToCurrentDeviceLocationAction(_ sender: Any) {}
 }
