@@ -20,6 +20,7 @@
 		B12DBEC41DECD0B100C5988A /* FBSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DBEC31DECD0B100C5988A /* FBSession.swift */; };
 		B12EB42B1E290F7D0048526A /* RequestClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */; };
 		B13384321E113DB300A23201 /* LocationTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13384311E113DB300A23201 /* LocationTabViewController.swift */; };
+		B14739551E82E93000041AFB /* LocationEditViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14739541E82E93000041AFB /* LocationEditViewControllerExtension.swift */; };
 		B150D1A71E740E9F001FF941 /* DateOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B150D1A61E740E9F001FF941 /* DateOperations.swift */; };
 		B1682AB91E70422F004CB17C /* PRSStudentLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1682AB81E70422F004CB17C /* PRSStudentLocations.swift */; };
 		B16F05F11E71EA6B00CED99B /* MapViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16F05F01E71EA6B00CED99B /* MapViewControllerExtension.swift */; };
@@ -42,6 +43,7 @@
 		B1DB862D1E126397006D827A /* PRSStudentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB862C1E126397006D827A /* PRSStudentData.swift */; };
 		B1DB862F1E17A89B006D827A /* PRSClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB862E1E17A89B006D827A /* PRSClientExtension.swift */; };
 		B1DB86311E17B38B006D827A /* RequestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB86301E17B38B006D827A /* RequestClient.swift */; };
+		B1E27CF41E82881900972B44 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E27CF31E82881900972B44 /* Double.swift */; };
 		B1F92E031E7C373A00D7BE14 /* ProfileEditViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F92E021E7C373A00D7BE14 /* ProfileEditViewControllerExtension.swift */; };
 		B1FCE41B1E72AD050056FC00 /* PRSStudentMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FCE41A1E72AD050056FC00 /* PRSStudentMapAnnotation.swift */; };
 		B1FCE41D1E72CE180056FC00 /* DeviceLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FCE41C1E72CE180056FC00 /* DeviceLocationManager.swift */; };
@@ -80,6 +82,7 @@
 		B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestClientExtension.swift; sourceTree = "<group>"; };
 		B13384311E113DB300A23201 /* LocationTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTabViewController.swift; sourceTree = "<group>"; };
 		B13CFC5A1DEB0C6300C08272 /* OnTheMap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnTheMap.entitlements; sourceTree = "<group>"; };
+		B14739541E82E93000041AFB /* LocationEditViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditViewControllerExtension.swift; sourceTree = "<group>"; };
 		B150D1A61E740E9F001FF941 /* DateOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOperations.swift; sourceTree = "<group>"; };
 		B1682AB81E70422F004CB17C /* PRSStudentLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSStudentLocations.swift; sourceTree = "<group>"; };
 		B16F05F01E71EA6B00CED99B /* MapViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -110,6 +113,7 @@
 		B1DB862C1E126397006D827A /* PRSStudentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSStudentData.swift; sourceTree = "<group>"; };
 		B1DB862E1E17A89B006D827A /* PRSClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSClientExtension.swift; sourceTree = "<group>"; };
 		B1DB86301E17B38B006D827A /* RequestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestClient.swift; sourceTree = "<group>"; };
+		B1E27CF31E82881900972B44 /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		B1F92E021E7C373A00D7BE14 /* ProfileEditViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditViewControllerExtension.swift; sourceTree = "<group>"; };
 		B1FCE41A1E72AD050056FC00 /* PRSStudentMapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSStudentMapAnnotation.swift; sourceTree = "<group>"; };
 		B1FCE41C1E72CE180056FC00 /* DeviceLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceLocationManager.swift; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 				B119B5851DE591F5002AF6AF /* String.swift */,
 				B150D1A61E740E9F001FF941 /* DateOperations.swift */,
 				B1748B4C1E7EABC3003D9A31 /* CLPlacemark.swift */,
+				B1E27CF31E82881900972B44 /* Double.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -432,6 +437,7 @@
 			isa = PBXGroup;
 			children = (
 				B1F92E021E7C373A00D7BE14 /* ProfileEditViewControllerExtension.swift */,
+				B14739541E82E93000041AFB /* LocationEditViewControllerExtension.swift */,
 			);
 			name = extension;
 			sourceTree = "<group>";
@@ -681,6 +687,7 @@
 				B18340D31E77108F0042A813 /* ProfileEditViewController.swift in Sources */,
 				B1886DEB1DEE1DC5004026BE /* FBClient.swift in Sources */,
 				B1DA3A6B1E787D8000E66EE5 /* EditViewProtocol.swift in Sources */,
+				B14739551E82E93000041AFB /* LocationEditViewControllerExtension.swift in Sources */,
 				B1DB862D1E126397006D827A /* PRSStudentData.swift in Sources */,
 				B1A15B481DE040FD002A4307 /* LoginViewController.swift in Sources */,
 				B1DB86251E126029006D827A /* MapViewController.swift in Sources */,
@@ -693,6 +700,7 @@
 				B118128C1DE4664600C1C91C /* LoginViewControllerExtension.swift in Sources */,
 				B1A15B461DE040FD002A4307 /* AppDelegate.swift in Sources */,
 				B119B5861DE591F5002AF6AF /* String.swift in Sources */,
+				B1E27CF41E82881900972B44 /* Double.swift in Sources */,
 				B118128F1DE467B100C1C91C /* GDCBlackbox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
