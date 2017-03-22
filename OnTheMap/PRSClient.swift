@@ -54,7 +54,6 @@ class PRSClient: NSObject {
     var metaStudentLocationsCountValid: Int?
     
     /*
-     * @NotFullyImplemented
      * set current user location object (new student location)
      */
     func setStudentLocation (
@@ -72,6 +71,29 @@ class PRSClient: NSObject {
             } else {
                 
                 completionHandlerForSetCurrentLocation(true, nil)
+            }
+        }
+    }
+    
+    /*
+     * delete a specific user location object
+     */
+    func deleteStudentLocation (
+        _ studentData: PRSStudentData?,
+        _ completionHandlerForDeleteCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
+        
+        let objectId = studentData!.objectId
+        let apiRequestURL = NSString(format: "%@/%@", apiURL, objectId!)
+        
+        client.delete(apiRequestURL as String, headers: apiHeaderAuth) { (data, error) in
+            
+            if (error != nil) {
+                
+                completionHandlerForDeleteCurrentLocation(false, "Up's, your request couln't be handled ... \(error)")
+                
+            } else {
+                
+                completionHandlerForDeleteCurrentLocation(true, nil)
             }
         }
     }
