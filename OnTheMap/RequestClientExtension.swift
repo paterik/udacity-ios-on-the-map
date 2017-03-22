@@ -26,6 +26,23 @@ extension RequestClient {
         )
     }
     
+    
+    /*
+     * base "DELETE" method for our request base client
+     */
+    func delete (
+        _ url: String,
+        headers: [String:String],
+        completionHandlerForDelete: @escaping (_ data: AnyObject?, _ errorString: String?)
+        
+        -> Void) {
+        
+        requestExecute(
+            requestPrepare(url, "DELETE", headers: headers, jsonDataBody:[:]),
+            completionHandlerForRequest: completionHandlerForDelete
+        )
+    }
+    
     /*
      * base "POST" method for our request base client
      */
