@@ -23,7 +23,7 @@ class LocationEditViewController: UIViewController, EditViewProtocol {
     // MARK: Variables
     //
     var useCurrentDeviceLocation: Bool = false
-    var btnState: Int = 1 // 1: Plot Location, 2: Submit Location
+    var btnState: Int = 1 // initial state of confirm button 1: Plot Location, 2: Submit Location
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     //
@@ -36,7 +36,13 @@ class LocationEditViewController: UIViewController, EditViewProtocol {
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
         activitySpinner.center = self.view.center
+        
+        mapView.delegate = self
+        mapView.showsUserLocation = false
     }
     
     //
@@ -46,6 +52,7 @@ class LocationEditViewController: UIViewController, EditViewProtocol {
         
         btnSubmit.isEnabled = true
         inpLocationMapString.isEnabled = false
+        btnAcceptLocation.isEnabled = false
         
         // evaluate state and define title and action
         switch btnState {
@@ -57,8 +64,10 @@ class LocationEditViewController: UIViewController, EditViewProtocol {
                 break;
             
             case 2:
+                btnAcceptLocation.isEnabled = true
                 inpLocationMapString.isEnabled = false
                 btnSubmit.setTitle("Confirm Location", for: .normal)
+                updateMapLocationAnnotationAsConfirmed()
                 
                 break;
             
