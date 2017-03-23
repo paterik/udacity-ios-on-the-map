@@ -58,33 +58,68 @@ class LocationEditViewController: UIViewController, EditViewProtocol {
         switch btnState {
         
             case 1:
+                
                 btnSubmit.setTitle("Plot Location", for: .normal)
                 inpLocationMapString.resignFirstResponder()
+                // perform step 1 action
                 getMapPositionByAddressString(inpLocationMapString.text!)
+
+                btnState += 1
+                
                 break;
             
             case 2:
+                
                 btnAcceptLocation.isEnabled = true
                 inpLocationMapString.isEnabled = false
                 btnSubmit.setTitle("Confirm Location", for: .normal)
+                // perform step 2 action
                 updateMapLocationAnnotationAsConfirmed()
+
+                btnState += 1
+                
+                break;
+            
+            case 3:
+                
+                btnAcceptLocation.isEnabled = true
+                inpLocationMapString.isEnabled = false
+                btnSubmit.setTitle("Set Your Profile", for: .normal)
+                // perform stel 3 action
+                btnAcceptLocationAction(sender)
+                
+                btnState += 1
                 
                 break;
             
             default:
+                
+                // leave view an any state below 1 or above 3
                 btnSubmit.isEnabled = false
                 btnCloseViewAction(sender)
+                
                 break;
         }
-        
-        // switch button state 1->2, 2->1
-        btnState = (btnState == 1) ? 2 : 1
     }
     
     @IBAction func btnCloseViewAction(_ sender: Any) {
         self.dismiss(animated: true)
     }
     
-    @IBAction func btnAcceptLocationAction(_ sender: Any) {}
+    @IBAction func btnAcceptLocationAction(_ sender: Any) {
+    
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        var vc: ProfileEditViewController!
+        
+        vc = storyBoard.instantiateViewController(withIdentifier: "profileEditView") as! ProfileEditViewController
+        vc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+        vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        
+        vc.useCurrentDeviceLocation = false
+        vc.mapView = self.mapView
+        
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     @IBAction func btnSetLocationToCurrentDeviceLocationAction(_ sender: Any) {}
 }
