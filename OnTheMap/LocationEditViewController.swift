@@ -59,46 +59,31 @@ class LocationEditViewController: UIViewController, EditViewProtocol {
         
             case 1:
                 
-                btnSubmit.setTitle("Plot Location", for: .normal)
-                inpLocationMapString.resignFirstResponder()
                 // perform step 1 action
                 getMapPositionByAddressString(inpLocationMapString.text!)
 
-                btnState += 1
-                
-                break;
+                break
             
             case 2:
                 
-                btnAcceptLocation.isEnabled = true
-                inpLocationMapString.isEnabled = false
-                btnSubmit.setTitle("Confirm Location", for: .normal)
                 // perform step 2 action
                 updateMapLocationAnnotationAsConfirmed()
 
-                btnState += 1
-                
-                break;
+                break
             
             case 3:
                 
-                btnAcceptLocation.isEnabled = true
-                inpLocationMapString.isEnabled = false
-                btnSubmit.setTitle("Set Your Profile", for: .normal)
-                // perform stel 3 action
+                // perform step 3 action
                 btnAcceptLocationAction(sender)
                 
-                btnState += 1
-                
-                break;
+                break
             
             default:
                 
-                // leave view an any state below 1 or above 3
-                btnSubmit.isEnabled = false
+                // leave view on any state below 1 or above 3
                 btnCloseViewAction(sender)
                 
-                break;
+                break
         }
     }
     

@@ -71,14 +71,13 @@ extension LocationEditViewController: MKMapViewDelegate {
         )
         
         mapView.setRegion(region, animated: true)
-        btnSubmit.setTitle("Confirm Location", for: .normal)
-        btnState = 2
-        
-        // add map annotation pin
         DispatchQueue.main.async { self.mapView.addAnnotation(PRSStudentMapAnnotation(coordinate)) }
         
         activitySpinner.stopAnimating()
         view.willRemoveSubview(activitySpinner)
+        
+        // prepare ui for step 2
+        self.prepareStep(2)
     }
     
     /*
@@ -92,6 +91,47 @@ extension LocationEditViewController: MKMapViewDelegate {
             if annotationView?.annotation is PRSStudentMapAnnotation {
                 annotationView?.image = UIImage(named: "icnUserDefault_v1")
             }
+        }
+        
+        // prepare ui for step 2
+        prepareStep(3)
+    }
+    
+    /*
+     * simple ui element modifier for our corresponding steps (1-3)
+     */
+    func prepareStep(_ step: Int8) {
+        
+        switch step {
+            
+            case 1:
+            
+                inpLocationMapString.resignFirstResponder()
+                btnSubmit.setTitle("Plot Location", for: .normal)
+                btnState = 1
+            
+                break
+            
+            case 2:
+            
+            
+                btnAcceptLocation.isEnabled = true
+                inpLocationMapString.isEnabled = false
+                btnSubmit.setTitle("Confirm Location", for: .normal)
+                btnState = 2
+            
+                break
+            
+            case 3:
+            
+                btnAcceptLocation.isEnabled = true
+                inpLocationMapString.isEnabled = false
+                btnSubmit.setTitle("Set Your Profile", for: .normal)
+                btnState = 3
+            
+                break
+            
+            default: break
         }
     }
     
