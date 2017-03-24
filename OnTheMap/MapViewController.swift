@@ -13,11 +13,13 @@ class MapViewController: UIViewController {
     //
     // MARK: IBOutlet variables
     //
+    
     @IBOutlet weak var mapView: MKMapView!
     
     //
     // MARK: Constants (Normal)
     //
+    
     let debugMode: Bool = false
     let clientParse = PRSClient.sharedInstance
     let clientUdacity = UDCClient.sharedInstance
@@ -36,6 +38,7 @@ class MapViewController: UIViewController {
     //
     // MARK: Variables
     //
+    
     var locationFetchTrying : Bool = false
     var locationFetchSuccess : Bool = false
     var locationFetchStartTime : Date!
@@ -46,6 +49,7 @@ class MapViewController: UIViewController {
     //
     // MARK: UIView Methods (overrides)
     //
+    
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
@@ -65,6 +69,7 @@ class MapViewController: UIViewController {
     //
     // MARK: IBAction Methods
     //
+    
     @IBAction func btnAddUserLocationAction(_ sender: Any) {
         
         clientParse.getStudentLocations() { (success, error) in

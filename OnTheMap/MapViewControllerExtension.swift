@@ -15,35 +15,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     // MARK: Class internal methods
     //
     
-    /*
-     * the method will handle our ident based viewController switch for separate callOut of editView 
-     * UserProfile and UserLocation
-     */
-    func prepareVC(_ identifier: String) -> UIViewController {
-        
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        var vc: UIViewController!
-        
-        switch true {
-        
-            case identifier == "profileEditView":
-                vc = storyBoard.instantiateViewController(withIdentifier: identifier) as! ProfileEditViewController
-                break
-            
-            case identifier == "locationEditView":
-                vc = storyBoard.instantiateViewController(withIdentifier: identifier) as! LocationEditViewController
-                break
-            
-            default:
-                break
-        }
-        
-        vc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
-        vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        
-        return vc
-    }
-    
     func userLocationUpdate() {}
     
     /*
@@ -93,19 +64,20 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
             
-            // (re)check current device location
-            self.locationFetchStart()
-            let vc = self.prepareVC("profileEditView") as! ProfileEditViewController
-                vc.useCurrentDeviceLocation = true
-                vc.mapView = self.mapView
+            self.appDelegate.useCurrentDeviceLocation = false
             
-            self.present(vc, animated: true, completion: nil)
         }
         
         let dlgBtnNoAction = UIAlertAction(title: "No", style: .default) { (action: UIAlertAction!) in
             
-            let vc = self.prepareVC("locationEditView") as! LocationEditViewController
-                vc.useCurrentDeviceLocation = false
+            self.appDelegate.useCurrentDeviceLocation = false
+            
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            var vc: UIViewController!
+            vc = storyBoard.instantiateViewController(withIdentifier: "PageSetRoot") as! LocationEditViewController
+            vc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+            vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
             
             self.present(vc, animated: true, completion: nil)
         }
