@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationPageViewController: UIPageViewController {
+class LocationPageViewController: UIPageViewController, PageSetViewControllerProtocol {
     
     //
     // MARK: Constants
@@ -70,13 +70,24 @@ class LocationPageViewController: UIPageViewController {
     //
     
     /*
+     * handle string based commands from embedded controllers, here we can force a scroll
+     * inside our pageViewController given by our PageSetLocationViewController for example
+     */
+    func handleDelegateCommand(_ command: String) {
+        
+        if command == "scrollToNextViewController" {
+            if debugMode == true { print ("_received: \(command), execute: scroll") }
+            scrollToNextViewController()
+        }
+    }
+    
+    /*
      * scrolls/jump to the next view controller.
      */
     func scrollToNextViewController() {
         
         if let visibleViewController = viewControllers?.first,
            let nextViewController = pageViewController(self, viewControllerAfter: visibleViewController) {
-            
             scrollToViewController(nextViewController)
         }
     }
@@ -100,10 +111,11 @@ class LocationPageViewController: UIPageViewController {
      */
     fileprivate func newLocationViewController(_ indent: String) -> UIViewController {
         
-        return
-            
-            UIStoryboard(name: "Main", bundle: nil) .
-            instantiateViewController(withIdentifier: "\(indent)Controller")
+        let vc = UIStoryboard(name: "Main", bundle: nil) .
+        instantiateViewController(withIdentifier: "\(indent)Controller") as! PageSetViewController
+        vc.delegate = self
+        
+        return vc
     }
     
     /*
