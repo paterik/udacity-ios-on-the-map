@@ -284,6 +284,10 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         appDelegate.currentDeviceLocations.removeAll() // currently we won't persist all evaluated device locations
         appDelegate.currentDeviceLocations.append(DeviceLocation(currentDeviceLocation)) // persist evaluated device location
+        appDelegate.useCurrentDeviceLocation = true
+        appDelegate.useLongitude = coordinate.longitude
+        appDelegate.useLatitude = coordinate.latitude
+        
         locationFetchSuccess = true
         
         mapView.setRegion(region, animated: true)

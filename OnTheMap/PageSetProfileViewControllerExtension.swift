@@ -34,24 +34,23 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
             
             return
         }
-        
-        let _currentDeviceLocations: [DeviceLocation] = appDelegate.currentDeviceLocations
-        var _currentDeviceLocation: DeviceLocation?
-        var _longitude: Double?
-        var _latitude: Double?
-        
-        // device based location denied or no device location persisted yet?
-        if appDelegate.useCurrentDeviceLocation == false || _currentDeviceLocations.count == 0 {
-            let newCoords = mapView.centerCoordinate
-            _latitude = newCoords.latitude
-            _longitude = newCoords.longitude
+
+        // check longitude availability
+        guard let _longitude: Double = appDelegate.useLongitude else {
+            completionHandlerForValidateData(
+                false, "Up's, unable to fetch longitude from map or device location!", nil
+            )
+            
+            return
         }
         
-        // device based location fetch wanted and device location persisted?
-        if appDelegate.useCurrentDeviceLocation == true && _currentDeviceLocations.count > 0 {
-            _currentDeviceLocation = _currentDeviceLocations.first
-            _longitude = _currentDeviceLocation!.longitude
-            _latitude = _currentDeviceLocation!.latitude
+        // check latitude availability
+        guard let _latitude: Double = appDelegate.useLatitude else {
+            completionHandlerForValidateData(
+                false, "Up's, unable to fetch latitude from map or device location!", nil
+            )
+            
+            return
         }
         
         getStudentMetaProfile(sessionUdacity.accountKey, _latitude, _longitude) { (success, error, studentData) in

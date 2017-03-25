@@ -73,7 +73,9 @@ extension PageSetLocationViewController: MKMapViewDelegate, UIPageViewController
         mapView.setRegion(region, animated: true)
         DispatchQueue.main.async { self.mapView.addAnnotation(PRSStudentMapAnnotation(coordinate)) }
         
-        
+        appDelegate.useCurrentDeviceLocation = false
+        appDelegate.useLongitude = coordinate.longitude
+        appDelegate.useLatitude = coordinate.latitude
         
         activitySpinner.stopAnimating()
         view.willRemoveSubview(activitySpinner)
@@ -104,11 +106,15 @@ extension PageSetLocationViewController: MKMapViewDelegate, UIPageViewController
      */
     func prepareStep(_ step: Int8) {
         
+        btnSubmit.isEnabled = true
+        inpLocationMapString.isEnabled = false
+        btnAcceptLocation.isEnabled = false
+        
         switch step {
             
             case 1:
-            
-                btnAcceptLocation.isEnabled = false
+                
+                inpLocationMapString.isEnabled = true
                 inpLocationMapString.resignFirstResponder()
                 btnSubmit.setTitle("Plot Location", for: .normal)
                 btnState = 1
@@ -117,7 +123,6 @@ extension PageSetLocationViewController: MKMapViewDelegate, UIPageViewController
             
             case 2:
             
-                btnAcceptLocation.isEnabled = true
                 inpLocationMapString.isEnabled = false
                 btnSubmit.setTitle("Confirm Location", for: .normal)
                 btnState = 2
