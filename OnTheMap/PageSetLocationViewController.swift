@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PageSetLocationViewController: UIViewController {
+class PageSetLocationViewController: PageSetViewController {
 
     //
     // MARK: Constants
@@ -55,11 +55,18 @@ class PageSetLocationViewController: UIViewController {
     // MARK: IBAction Methods
     //
     
+    @IBAction func btnAcceptLocationAction(_ sender: Any) {
+        
+        if let del = delegate {
+            del.handleDelegateCommand("scrollToNextViewController")
+        }
+    }
+    
     @IBAction func btnHandleLocationSubmitAction(_ sender: Any) {
         
         btnSubmit.isEnabled = true
         inpLocationMapString.isEnabled = false
-        btnAcceptLocation.isEnabled = false
+        btnAcceptLocation.isEnabled = true
         
         // evaluate state and define title and action
         switch btnState {
@@ -98,9 +105,6 @@ class PageSetLocationViewController: UIViewController {
         
         self.dismiss(animated: true)
     }
-    
-   
-    @IBAction func btnAcceptLocationAction(_ sender: Any) { }
     
     @IBAction func btnSetLocationToCurrentDeviceLocationAction(_ sender: Any) { }
     
