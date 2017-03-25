@@ -106,6 +106,7 @@ extension PageSetLocationViewController: MKMapViewDelegate, UIPageViewController
             
             case 1:
             
+                btnAcceptLocation.isEnabled = false
                 inpLocationMapString.resignFirstResponder()
                 btnSubmit.setTitle("Plot Location", for: .normal)
                 btnState = 1
@@ -113,7 +114,6 @@ extension PageSetLocationViewController: MKMapViewDelegate, UIPageViewController
                 break
             
             case 2:
-            
             
                 btnAcceptLocation.isEnabled = true
                 inpLocationMapString.isEnabled = false
