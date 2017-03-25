@@ -22,5 +22,15 @@ extension LocationEditViewController: LocationPageViewControllerDelegate {
          didUpdatePageIndex index: Int) {
         
         pageControl.currentPage = index
+        
+        // deactivate nextPageButton on 3 page scenario (page 1, choose destination)
+        btnNextStep.isEnabled = true
+        btnNextStep.isHidden = false
+        if index == 0 &&  pageControl.numberOfPages == 3 {
+            btnNextStep.isEnabled = false
+            btnNextStep.isHidden = true
+            
+            
+        }
     }
 }
