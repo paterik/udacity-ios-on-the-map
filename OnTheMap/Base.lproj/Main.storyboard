@@ -344,6 +344,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnNextStep" destination="bQO-pW-9ir" id="LEr-nm-RMU"/>
                         <outlet property="containerView" destination="7nH-ju-qJ4" id="9DF-cr-biT"/>
                         <outlet property="pageControl" destination="Ssd-LJ-T2h" id="xPV-Cm-p97"/>
                     </connections>
