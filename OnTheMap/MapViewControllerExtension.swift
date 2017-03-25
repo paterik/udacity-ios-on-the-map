@@ -56,29 +56,29 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      */
     func userLocationAdd() {
         
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let locationRequestController = UIAlertController(
             title: "Let's start ...",
             message: "Do you want to use your current device location as default for your next steps?",
             preferredStyle: UIAlertControllerStyle.alert
         )
         
+        var vc: UIViewController!
+        vc = storyBoard.instantiateViewController(withIdentifier: "PageSetRoot") as! LocationEditViewController
+        vc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+        vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        
         let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
             
-            self.appDelegate.useCurrentDeviceLocation = false
-            
+            // useCurrentDeviceLocation: true means our pageViewController will use a smaller stack of pageSetControllers
+            self.appDelegate.useCurrentDeviceLocation = true
+            self.present(vc, animated: true, completion: nil)
         }
         
         let dlgBtnNoAction = UIAlertAction(title: "No", style: .default) { (action: UIAlertAction!) in
             
+            // useCurrentDeviceLocation: false means our pageViewController will use the full stack of pageSetControllers
             self.appDelegate.useCurrentDeviceLocation = false
-            
-            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            var vc: UIViewController!
-            vc = storyBoard.instantiateViewController(withIdentifier: "PageSetRoot") as! LocationEditViewController
-            vc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
-            vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-            
             self.present(vc, animated: true, completion: nil)
         }
         
@@ -99,9 +99,14 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             preferredStyle: UIAlertControllerStyle.alert
         )
         
-        let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in return }
-        let dlgBtnDeleteAction = UIAlertAction(title: "Delete", style: .default) { (action: UIAlertAction!) in self.userLocationDelete() }
-        let dlgBtnAddLocationAction = UIAlertAction(title: "Add", style: .default) { (action: UIAlertAction!) in self.userLocationAdd() }
+        let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
+            return }
+        
+        let dlgBtnDeleteAction = UIAlertAction(title: "Delete", style: .default) { (action: UIAlertAction!) in
+            self.userLocationDelete() }
+        
+        let dlgBtnAddLocationAction = UIAlertAction(title: "Add", style: .default) { (action: UIAlertAction!) in
+            self.userLocationAdd() }
         
         alertController.addAction(dlgBtnDeleteAction)
         alertController.addAction(dlgBtnCancelAction)
@@ -237,8 +242,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func getPrintableDistanceBetween(_ sourceLocation: CLLocation!, _ targetLocation: CLLocation!) -> String {
         
         let distanceValue = sourceLocation.distance(from: targetLocation)
-        var distanceOut: String! = NSString(format: "%.0f %@", distanceValue, "m") as String
         
+        var distanceOut: String! = NSString(format: "%.0f %@", distanceValue, "m") as String
         if distanceValue >= locationDistanceDivider {
             distanceOut = NSString(format: "%.0f %@", (distanceValue / locationDistanceDivider), "km") as String
         }
