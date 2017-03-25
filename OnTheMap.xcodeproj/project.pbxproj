@@ -19,6 +19,8 @@
 		B120093A1E7355BC006E2499 /* StudentMapAnnotation.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1D68FB31E73340D008F73FA /* StudentMapAnnotation.xib */; };
 		B12DBEC41DECD0B100C5988A /* FBSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DBEC31DECD0B100C5988A /* FBSession.swift */; };
 		B12EB42B1E290F7D0048526A /* RequestClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */; };
+		B13280F81E867BB000C03A8A /* PageSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13280F71E867BB000C03A8A /* PageSetViewController.swift */; };
+		B13280FB1E867F1A00C03A8A /* PageSetViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13280FA1E867F1A00C03A8A /* PageSetViewControllerProtocol.swift */; };
 		B13384321E113DB300A23201 /* LocationTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13384311E113DB300A23201 /* LocationTabViewController.swift */; };
 		B14739551E82E93000041AFB /* PageSetLocationViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14739541E82E93000041AFB /* PageSetLocationViewControllerExtension.swift */; };
 		B150D1A71E740E9F001FF941 /* DateOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B150D1A61E740E9F001FF941 /* DateOperations.swift */; };
@@ -87,6 +89,8 @@
 		B12009371E734D08006E2499 /* StudentMapAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentMapAnnotationView.swift; sourceTree = "<group>"; };
 		B12DBEC31DECD0B100C5988A /* FBSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBSession.swift; sourceTree = "<group>"; };
 		B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestClientExtension.swift; sourceTree = "<group>"; };
+		B13280F71E867BB000C03A8A /* PageSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSetViewController.swift; sourceTree = "<group>"; };
+		B13280FA1E867F1A00C03A8A /* PageSetViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSetViewControllerProtocol.swift; sourceTree = "<group>"; };
 		B13384311E113DB300A23201 /* LocationTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTabViewController.swift; sourceTree = "<group>"; };
 		B13CFC5A1DEB0C6300C08272 /* OnTheMap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnTheMap.entitlements; sourceTree = "<group>"; };
 		B14739541E82E93000041AFB /* PageSetLocationViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSetLocationViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -254,6 +258,14 @@
 			name = extension;
 			sourceTree = "<group>";
 		};
+		B13280F91E867EF900C03A8A /* protocol */ = {
+			isa = PBXGroup;
+			children = (
+				B13280FA1E867F1A00C03A8A /* PageSetViewControllerProtocol.swift */,
+			);
+			name = protocol;
+			sourceTree = "<group>";
+		};
 		B13384301E113D5300A23201 /* locationTabView */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,10 +352,12 @@
 		B17F1F061E855080003B4F79 /* pages */ = {
 			isa = PBXGroup;
 			children = (
+				B13280F91E867EF900C03A8A /* protocol */,
 				B1F92E011E7C371800D7BE14 /* extension */,
 				B18340D21E77108F0042A813 /* PageSetProfileViewController.swift */,
 				B18340D01E77105A0042A813 /* PageSetLocationViewController.swift */,
 				B1D40DE11E8505690063636E /* PageSetDetailViewController.swift */,
+				B13280F71E867BB000C03A8A /* PageSetViewController.swift */,
 			);
 			name = pages;
 			sourceTree = "<group>";
@@ -729,6 +743,7 @@
 				B1748B4D1E7EABC3003D9A31 /* CLPlacemark.swift in Sources */,
 				B16F05F11E71EA6B00CED99B /* MapViewControllerExtension.swift in Sources */,
 				B1DB862B1E1262BB006D827A /* PRSClient.swift in Sources */,
+				B13280FB1E867F1A00C03A8A /* PageSetViewControllerProtocol.swift in Sources */,
 				B1DB86311E17B38B006D827A /* RequestClient.swift in Sources */,
 				B12009381E734D08006E2499 /* StudentMapAnnotationView.swift in Sources */,
 				B18340D31E77108F0042A813 /* PageSetProfileViewController.swift in Sources */,
@@ -753,6 +768,7 @@
 				B119B5861DE591F5002AF6AF /* String.swift in Sources */,
 				B1CA1AFC1E85696200981A5A /* LocationPageViewControllerDelegate.swift in Sources */,
 				B1E27CF41E82881900972B44 /* Double.swift in Sources */,
+				B13280F81E867BB000C03A8A /* PageSetViewController.swift in Sources */,
 				B118128F1DE467B100C1C91C /* GDCBlackbox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
