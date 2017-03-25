@@ -34,6 +34,7 @@ class LocationEditViewController: UIViewController {
         
         super.viewDidLoad()
         
+        prepareUI()
         pageControl.addTarget(
             self,
             action: #selector(LocationEditViewController.btnPageControlAction),
@@ -62,6 +63,14 @@ class LocationEditViewController: UIViewController {
     
     func btnPageControlAction() {
         locationPageViewController?.scrollToViewController(index: pageControl.currentPage)
+    }
+    
+    /*
+     * this method will disable feature implementation of more than 2 pages during profile/location setup
+     */
+    func prepareUI() {
+        btnNextStep.isEnabled = false
+        btnNextStep.isHidden = true
     }
 }
 

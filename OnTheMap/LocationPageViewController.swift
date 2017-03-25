@@ -27,16 +27,16 @@ class LocationPageViewController: UIPageViewController, PageSetViewControllerPro
     fileprivate(set) lazy var completeViewControllers: [UIViewController] = {
         return [
             self.newLocationViewController("pageSetLocation"),
-            self.newLocationViewController("pageSetProfile"),
-            self.newLocationViewController("pageSetDetail")
+            self.newLocationViewController("pageSetProfile")
+            // self.newLocationViewController("pageSetDetail") // disabled yet!
         ]
     }()
     
     // small (quick) controller stack to handle profile and details only
     fileprivate(set) lazy var quickViewControllers: [UIViewController] = {
         return [
-            self.newLocationViewController("pageSetProfile"),
-            self.newLocationViewController("pageSetDetail")
+            self.newLocationViewController("pageSetProfile")
+            // self.newLocationViewController("pageSetDetail") // disabled yet!
         ]
     }()
     
