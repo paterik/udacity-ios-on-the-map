@@ -24,8 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var isAuthByUdacity: Bool = false
     var isAuthByFacebook: Bool = false
     var useCurrentDeviceLocation: Bool = false
-    var useLongitude: Double = 0.0
-    var useLatitude: Double = 0.0
+    var useLongitude: Double?
+    var useLatitude: Double?
 
     //
     // MARK: Variables for minor data "persitence" during app runtime
