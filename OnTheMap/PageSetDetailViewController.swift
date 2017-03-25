@@ -10,8 +10,14 @@ import UIKit
 
 class PageSetDetailViewController: PageSetViewController {
 
+    //
+    // MARK: IBOutlet Variables
+    //
     @IBOutlet weak var btnCloseView: UIBarButtonItem!
     
+    //
+    // MARK: IBAction Methods
+    //
     @IBAction func btnCloseViewAction(_ sender: Any) {
         self.dismiss(animated: true)
     }

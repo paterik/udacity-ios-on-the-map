@@ -16,8 +16,6 @@ class PageSetLocationViewController: PageSetViewController {
     //
     
     let debugMode: Bool = false
-    let clientParse = PRSClient.sharedInstance
-    let clientUdacity = UDCClient.sharedInstance
     let locationMapZoom : CLLocationDegrees = 0.03 // zoom factor (0.03 seems best for max zoom)
     
     //

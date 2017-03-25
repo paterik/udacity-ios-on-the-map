@@ -73,6 +73,8 @@ extension PageSetLocationViewController: MKMapViewDelegate, UIPageViewController
         mapView.setRegion(region, animated: true)
         DispatchQueue.main.async { self.mapView.addAnnotation(PRSStudentMapAnnotation(coordinate)) }
         
+        
+        
         activitySpinner.stopAnimating()
         view.willRemoveSubview(activitySpinner)
         

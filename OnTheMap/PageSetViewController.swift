@@ -8,9 +8,18 @@
 
 import UIKit
 
-
 class PageSetViewController: UIViewController {
     
-    var delegate: PageSetViewControllerProtocol?
+    //
+    // MARK: Constants
+    //
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let clientParse = PRSClient.sharedInstance
+    let clientUdacity = UDCClient.sharedInstance
+    let metaNoData: String = "no data"
     
+    //
+    // MARK: Variables
+    //
+    var delegate: PageSetViewControllerProtocol?
 }

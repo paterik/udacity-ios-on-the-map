@@ -16,10 +16,6 @@ class PageSetProfileViewController: PageSetViewController {
     //
     
     let debugMode: Bool = false
-    let clientParse = PRSClient.sharedInstance
-    let clientUdacity = UDCClient.sharedInstance
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    let metaNoData: String = "no data"
     
     //
     // MARK: Variables
@@ -47,6 +43,7 @@ class PageSetProfileViewController: PageSetViewController {
     }
     
     @IBAction func btnSaveProfileAction(_ sender: Any) {
+        
         let alertController = UIAlertController(
             title: "Alert",
             message: "Validation-Error in your user profile",
