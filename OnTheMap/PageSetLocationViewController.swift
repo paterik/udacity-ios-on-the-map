@@ -47,6 +47,7 @@ class PageSetLocationViewController: PageSetViewController {
         
         mapView.delegate = self
         mapView.showsUserLocation = false
+        prepareStep(1)
     }
     
     //
@@ -61,10 +62,6 @@ class PageSetLocationViewController: PageSetViewController {
     }
     
     @IBAction func btnHandleLocationSubmitAction(_ sender: Any) {
-        
-        btnSubmit.isEnabled = true
-        inpLocationMapString.isEnabled = false
-        btnAcceptLocation.isEnabled = true
         
         // evaluate state and define title and action
         switch btnState {
