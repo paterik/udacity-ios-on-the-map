@@ -24,6 +24,7 @@ class LocationEditViewController: UIViewController {
     
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var btnNextStep: UIButton!
     
     //
     // MARK: Overrides
@@ -42,8 +43,8 @@ class LocationEditViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if let tutorialPageViewController = segue.destination as? LocationPageViewController {
-            self.locationPageViewController = tutorialPageViewController
+        if let locationPageViewController = segue.destination as? LocationPageViewController {
+            self.locationPageViewController = locationPageViewController
         }
     }
     
