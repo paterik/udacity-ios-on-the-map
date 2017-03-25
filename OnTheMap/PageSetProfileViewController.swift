@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PageSetProfileViewController: UIViewController {
+class PageSetProfileViewController: PageSetViewController {
     
     //
     // MARK: Constants
