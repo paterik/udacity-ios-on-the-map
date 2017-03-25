@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PageSetDetailViewController: UIViewController {
+class PageSetDetailViewController: PageSetViewController {
 
     @IBOutlet weak var btnCloseView: UIBarButtonItem!
     
