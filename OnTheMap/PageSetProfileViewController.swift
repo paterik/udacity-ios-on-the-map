@@ -73,11 +73,15 @@ class PageSetProfileViewController: PageSetViewController {
                 
                 if self.editMode == false {
                 
-                    if self.createStudentMetaData(studentData) == true { self.btnCloseViewAction(sender) }
+                    if self.createStudentMetaData(studentData) == true {
+                        self.btnCloseViewAction(sender)
+                    }
                     
                 } else {
                 
-                    if self.updateStudentMetaData(studentData) == true { self.btnCloseViewAction(sender) }
+                    if self.updateStudentMetaData(studentData) == true {
+                        self.btnCloseViewAction(sender)
+                    }
                 }
                 
             } else {
