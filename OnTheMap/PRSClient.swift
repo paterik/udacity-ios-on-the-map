@@ -54,7 +54,7 @@ class PRSClient: NSObject {
     var metaStudentLocationsCountValid: Int?
     
     /*
-     * set current user location object (new student location)
+     * set current user location object (as new student location)
      */
     func setStudentLocation (
         _ studentData: PRSStudentData?,
@@ -62,7 +62,9 @@ class PRSClient: NSObject {
         
         let studentDataArray = prepareStudentMetaForPostRequest(studentData)!
         
-        client.post(apiURL, headers: apiHeaderAuth, jsonBody: studentDataArray as [String : AnyObject]?) { (data, error) in
+        client.post(apiURL, headers: apiHeaderAuth, jsonBody: studentDataArray as [String : AnyObject]?)
+        {
+            (data, error) in
             
             if (error != nil) {
                 
@@ -84,9 +86,11 @@ class PRSClient: NSObject {
         
         let objectId = studentData!.objectId
         let apiRequestURL = NSString(format: "%@/%@", apiURL, objectId!)
-        let studentDataArray = studentData!.asArray
+        let studentDataArray = prepareStudentMetaForPutRequest(studentData!)
         
-        client.put(apiRequestURL as String, headers: apiHeaderAuth, jsonBody: studentDataArray as [String : AnyObject]?) { (data, error) in
+        client.put(apiRequestURL as String, headers: apiHeaderAuth, jsonBody: studentDataArray as [String : AnyObject]?)
+        {
+            (data, error) in
             
             if (error != nil) {
                 
@@ -109,7 +113,9 @@ class PRSClient: NSObject {
         let objectId = studentData!.objectId
         let apiRequestURL = NSString(format: "%@/%@", apiURL, objectId!)
         
-        client.delete(apiRequestURL as String, headers: apiHeaderAuth) { (data, error) in
+        client.delete(apiRequestURL as String, headers: apiHeaderAuth)
+        {
+            (data, error) in
             
             if (error != nil) {
                 
@@ -137,7 +143,9 @@ class PRSClient: NSObject {
         let sessionParamStringEscaped = sessionParamString.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
         let apiRequestURL = NSString(format: "%@?%@=%@", apiURL, apiWhereParam, sessionParamStringEscaped!)
         
-        client.get(apiRequestURL as String, headers: apiHeaderAuth) { (data, error) in
+        client.get(apiRequestURL as String, headers: apiHeaderAuth)
+        {
+            (data, error) in
             
             if (error != nil) {
                 
@@ -176,7 +184,9 @@ class PRSClient: NSObject {
         
         let apiRequestURL = NSString(format: "%@?%@=%@&%@=%@", apiURL, apiOrderParam, apiOrderValue, apiLimitParam, apiLimitValue)
         
-        client.get(apiRequestURL as String, headers: apiHeaderAuth) { (data, error) in
+        client.get(apiRequestURL as String, headers: apiHeaderAuth)
+        {
+            (data, error) in
             
             if (error != nil) {
                 
@@ -207,7 +217,7 @@ class PRSClient: NSObject {
                 self.metaStudentLocationsCountValid = self.students.locations.count
                 self.metaMyLocationsCount = results.count
                 
-                // append a single fixture student meta block during development
+                // [ DEV/DBG ] : append a single fixture student meta block during development
                 self.addSampleStudentLocation()
                 
                 completionHandlerForGetAllLocations(true, nil)
