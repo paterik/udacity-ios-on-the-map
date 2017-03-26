@@ -15,7 +15,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     // MARK: Class internal methods
     //
     
-    func userLocationUpdate(_ userLocation: PRSStudentData!) {
+    func userLocationUpdate(
+       _ userLocation: PRSStudentData!) {
     
         self.clientParse.updateStudentLocation(userLocation) { (success, error) in
             
@@ -26,7 +27,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             } else {
                 
                 // client error updating location? show corresponding message and return ...
-                let Action = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in return }
+                let Action = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction!) in return }
                 let alertController = UIAlertController(
                     title: "Alert",
                     message: error,
@@ -35,7 +36,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 
                 alertController.addAction(Action)
                 OperationQueue.main.addOperation {
-                    self.present(alertController, animated: true, completion:nil)
+                    self.present(alertController, animated: true, completion: nil)
                 }
             }
         }
@@ -44,7 +45,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     /*
      * delete a specific userLocation from parse api persitence layer
      */
-    func userLocationDelete(_ userLocation: PRSStudentData!) {
+    func userLocationDelete(
+       _ userLocation: PRSStudentData!) {
     
         self.clientParse.deleteStudentLocation (userLocation) { (success, error) in
             
@@ -55,7 +57,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             } else {
                 
                 // client error deleting location? show corresponding message and return ...
-                let Action = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in return }
+                let Action = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction!) in return }
                 let alertController = UIAlertController(
                     title: "Alert",
                     message: error,
@@ -64,7 +66,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 
                 alertController.addAction(Action)
                 OperationQueue.main.addOperation {
-                    self.present(alertController, animated: true, completion:nil)
+                    self.present(alertController, animated: true, completion: nil)
                 }
             }
         }
@@ -83,7 +85,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     /*
      * this method will add a new userLocation to our parse api persistence layer
      */
-    func userLocationAdd() {
+    func userLocationAdd(_ editMode: Bool) {
         
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "PageSetRoot") as! LocationEditViewController
@@ -95,7 +97,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         vc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        vc.currentUserStudentData = currentUserStudentData
+        vc.editMode = editMode
         
         let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
             // check device location again ...
@@ -149,7 +151,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      */
     func handleUserLocation() {
         
-        currentUserStudentData = self.clientParse.students.myLocations.last
+        appDelegate.currentUserStudentLocation = self.clientParse.students.myLocations.last
         
         let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
             return }
@@ -158,10 +160,10 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             self.userLocationDeleteAll() }
         
         let dlgBtnAddLocationAction = UIAlertAction(title: "Add", style: .default) { (action: UIAlertAction!) in
-            self.userLocationAdd() }
+            self.userLocationAdd( false ) }
         
         let dlgBtnUpdateAction = UIAlertAction(title: "Update", style: .default) { (action: UIAlertAction!) in
-            self.userLocationUpdate( self.currentUserStudentData ) }
+            self.userLocationAdd( true ) }
         
         let alertController = UIAlertController(title: "Warning", message: "", preferredStyle: UIAlertControllerStyle.alert)
         
@@ -176,7 +178,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         switch true {
             
             // no locations found, load addLocation formular
-            case self.clientParse.metaMyLocationsCount! == 0: self.userLocationAdd(); break
+            case self.clientParse.metaMyLocationsCount! == 0: self.userLocationAdd(false); break
             // moultiple locations found, let user choose between delete all or update the last persited location
             case self.clientParse.metaMyLocationsCount! > 0:
             
