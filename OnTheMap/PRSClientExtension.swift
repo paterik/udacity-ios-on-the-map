@@ -17,6 +17,8 @@ extension PRSClient {
        _ studentData: PRSStudentData?) -> [String : AnyObject]? {
         
         var studentDataArray = studentData!.asArray
+            studentDataArray["objectId"] = appDelegate.currentUserStudentLocation?.objectId!
+        
         if let index = studentDataArray.index(forKey: "createdAt") {
             studentDataArray.remove(at: index)
         }
