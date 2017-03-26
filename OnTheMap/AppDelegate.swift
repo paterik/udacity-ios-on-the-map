@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var udacitySession: UDCSession? = nil
     var isAuthByUdacity: Bool = false
     var isAuthByFacebook: Bool = false
+    var inEditMode: Bool = false
     var useCurrentDeviceLocation: Bool = false
     var useLongitude: Double?
     var useLatitude: Double?
