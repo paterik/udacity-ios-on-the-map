@@ -17,6 +17,28 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
     func userLocationUpdate(_ userLocation: PRSStudentData!) {
     
+        self.clientParse.updateStudentLocation(userLocation) { (success, error) in
+            
+            if success == true {
+                
+                OperationQueue.main.addOperation { self.updateStudentLocations() }
+                
+            } else {
+                
+                // client error updating location? show corresponding message and return ...
+                let Action = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in return }
+                let alertController = UIAlertController(
+                    title: "Alert",
+                    message: error,
+                    preferredStyle: UIAlertControllerStyle.alert
+                )
+                
+                alertController.addAction(Action)
+                OperationQueue.main.addOperation {
+                    self.present(alertController, animated: true, completion:nil)
+                }
+            }
+        }
     }
     
     /*
@@ -32,7 +54,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 
             } else {
                 
-                // client error deleting location? leave iterator by return
+                // client error deleting location? show corresponding message and return ...
                 let Action = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in return }
                 let alertController = UIAlertController(
                     title: "Alert",
