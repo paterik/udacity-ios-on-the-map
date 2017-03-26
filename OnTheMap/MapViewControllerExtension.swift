@@ -75,7 +75,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         vc.currentUserStudentData = currentUserStudentData
         
-        
         let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
             // check device location again ...
             self.locationFetchStart()
@@ -225,7 +224,10 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         // render distance to other students only if device location meta data available
         if appDelegate.currentDeviceLocations.count > 0 {
             currentDeviceLocation = appDelegate.currentDeviceLocations.first
-            sourceLocation = CLLocation(latitude: (currentDeviceLocation?.latitude)!, longitude: (currentDeviceLocation?.longitude)!)
+            sourceLocation = CLLocation(
+                latitude: (currentDeviceLocation?.latitude)!,
+                longitude: (currentDeviceLocation?.longitude)!
+            )
             
             renderDistance = true
         }
@@ -256,7 +258,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     /*
      * get the printable (human readable) distance between two locations (using fix metric system)
      */
-    func getPrintableDistanceBetween(_ sourceLocation: CLLocation!, _ targetLocation: CLLocation!) -> String {
+    func getPrintableDistanceBetween(
+       _ sourceLocation: CLLocation!,
+       _ targetLocation: CLLocation!) -> String {
         
         let distanceValue = sourceLocation.distance(from: targetLocation)
         
@@ -302,7 +306,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      * update location meta information and (re)positioning current mapView
      */
     func updateCurrentLocationMeta(
-        _ coordinate: CLLocationCoordinate2D) {
+       _ coordinate: CLLocationCoordinate2D) {
         
         let center = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         let currentDeviceLocation : NSDictionary = [ "latitude": coordinate.latitude, "longitude": coordinate.longitude ]
@@ -376,8 +380,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      * handle authorization change for location fetch permission using corresponding delegate call of locationManager
      */
     func locationManager(
-        _ manager: CLLocationManager,
-          didChangeAuthorization status: CLAuthorizationStatus) {
+       _ manager: CLLocationManager,
+         didChangeAuthorization status: CLAuthorizationStatus) {
         
         if debugMode { print("locationManager: permission/authorization mode changed -> \(status.rawValue)") }
         
@@ -394,8 +398,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      * error handling of location fetch using corresponding delegate call of locationManager
      */
     func locationManager(
-        _ manager: CLLocationManager,
-          didFailWithError error: Error) {
+       _ manager: CLLocationManager,
+         didFailWithError error: Error) {
         
         if debugMode { print("locationManager: localization request finally failed -> \(error)") }
         
@@ -407,8 +411,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      * fetch current device location using corresponding delegate call of locationManager
      */
     func locationManager(
-        _ manager: CLLocationManager,
-          didUpdateLocations locations: [CLLocation]) {
+       _ manager: CLLocationManager,
+         didUpdateLocations locations: [CLLocation]) {
         
         let _location = locations.last!
         let _coordinate = _location.coordinate
@@ -452,15 +456,15 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     func mapView(
-        _ mapView: MKMapView,
-          didUpdate userLocation: MKUserLocation) {
+       _ mapView: MKMapView,
+         didUpdate userLocation: MKUserLocation) {
         
         updateCurrentLocationMeta(mapView.userLocation.coordinate)
     }
     
     func mapView(
-        _ mapView: MKMapView,
-          viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+       _ mapView: MKMapView,
+         viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         if !(annotation is PRSStudentMapAnnotation) { return nil }
         
@@ -484,8 +488,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     func mapView(
-        _ mapView: MKMapView,
-          didSelect view: MKAnnotationView) {
+       _ mapView: MKMapView,
+         didSelect view: MKAnnotationView) {
         
         if view.annotation is MKUserLocation { return }
     
@@ -500,8 +504,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     func mapView(
-        _ mapView: MKMapView,
-          didDeselect view: MKAnnotationView) {
+       _ mapView: MKMapView,
+         didDeselect view: MKAnnotationView) {
         
         if view.isKind(of: StudentMapAnnotationView.self) {
             for subview in view.subviews {
@@ -511,9 +515,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     func mapView(
-        _ mapView: MKMapView,
-          annotationView view: MKAnnotationView,
-          calloutAccessoryControlTapped control: UIControl) {
+       _ mapView: MKMapView,
+         annotationView view: MKAnnotationView,
+         calloutAccessoryControlTapped control: UIControl) {
         
         if control == view.rightCalloutAccessoryView {
             
