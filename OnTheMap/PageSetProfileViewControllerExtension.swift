@@ -74,11 +74,8 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
     
     func loadStudentMetaData() {
         
-        editMode = false
-        
-        if appDelegate.currentUserStudentLocation != nil {
+        if appDelegate.currentUserStudentLocation != nil && appDelegate.inEditMode == true {
             
-            editMode = true
             inpFirstname.text = appDelegate.currentUserStudentLocation!.firstName
             inpLastname.text = appDelegate.currentUserStudentLocation!.lastName
             inpMediaURL.text = appDelegate.currentUserStudentLocation!.mediaURL
