@@ -57,8 +57,8 @@ class PRSClient: NSObject {
      * set current user location object (as new student location)
      */
     func setStudentLocation (
-        _ studentData: PRSStudentData?,
-        _ completionHandlerForSetCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
+       _ studentData: PRSStudentData?,
+       _ completionHandlerForSetCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
         let studentDataArray = prepareStudentMetaForPostRequest(studentData)!
         
@@ -81,8 +81,8 @@ class PRSClient: NSObject {
      * update a specific user location object
      */
     func updateStudentLocation (
-        _ studentData: PRSStudentData?,
-        _ completionHandlerForUpdateCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
+       _ studentData: PRSStudentData?,
+       _ completionHandlerForUpdateCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
         let objectId = studentData!.objectId
         let apiRequestURL = NSString(format: "%@/%@", apiURL, objectId!)
@@ -107,8 +107,8 @@ class PRSClient: NSObject {
      * delete a specific user location object
      */
     func deleteStudentLocation (
-        _ studentData: PRSStudentData?,
-        _ completionHandlerForDeleteCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
+       _ studentData: PRSStudentData?,
+       _ completionHandlerForDeleteCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
         let objectId = studentData!.objectId
         let apiRequestURL = NSString(format: "%@/%@", apiURL, objectId!)
@@ -132,7 +132,7 @@ class PRSClient: NSObject {
      * get the current user location object and check corresponding student location
      */
     func getMyStudentLocations (
-        _ completionHandlerForCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
+       _ completionHandlerForCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
         guard let sessionUdacity = clientUdacity.clientSession else {
             completionHandlerForCurrentLocation(false, "Up's, no active udacity user session were found! Are you still logged in?")
