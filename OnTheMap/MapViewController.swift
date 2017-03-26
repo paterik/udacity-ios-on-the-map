@@ -33,7 +33,7 @@ class MapViewController: UIViewController {
     let locationDistanceDivider : Double = 1000.0  // rate for metric conversion (m -> km)
     let locationFetchMode : Int8 = 1               // 1: saveMode, 2: quickMode
     let locationCoordRound : Int = 6               // round factor for coordinate comparison
-    let locationNoData : String = "no data"        // default for missing student meta data
+    let locationNoData : String = "no meta data"   // default for missing student meta data
     
     //
     // MARK: Variables
@@ -45,6 +45,7 @@ class MapViewController: UIViewController {
     var locationManager : CLLocationManager { return self.deviceLocationManager.locationManager }
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var annotations = [PRSStudentMapAnnotation]()
+    var currentUserStudentData: PRSStudentData?
     
     //
     // MARK: UIView Methods (overrides)
@@ -72,7 +73,7 @@ class MapViewController: UIViewController {
     
     @IBAction func btnAddUserLocationAction(_ sender: Any) {
         
-        clientParse.getStudentLocations() { (success, error) in
+        clientParse.getMyStudentLocations() { (success, error) in
             
             if success == true {
                 

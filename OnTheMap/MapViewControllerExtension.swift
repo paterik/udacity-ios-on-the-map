@@ -15,39 +15,46 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     // MARK: Class internal methods
     //
     
-    func userLocationUpdate() {}
+    func userLocationUpdate(_ userLocation: PRSStudentData!) {
+    
+    }
+    
+    /*
+     * delete a specific userLocation from parse api persitence layer
+     */
+    func userLocationDelete(_ userLocation: PRSStudentData!) {
+    
+        self.clientParse.deleteStudentLocation (userLocation) { (success, error) in
+            
+            if success == true {
+                
+                OperationQueue.main.addOperation { self.updateStudentLocations() }
+                
+            } else {
+                
+                // client error deleting location? leave iterator by return
+                let Action = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in return }
+                let alertController = UIAlertController(
+                    title: "Alert",
+                    message: error,
+                    preferredStyle: UIAlertControllerStyle.alert
+                )
+                
+                alertController.addAction(Action)
+                OperationQueue.main.addOperation {
+                    self.present(alertController, animated: true, completion:nil)
+                }
+            }
+        }
+    }
     
     /*
      * this method will delete all userLocations (studenLocations) from parse api persitence layer
      */
-    func userLocationDelete() {
+    func userLocationDeleteAll() {
         
         for location in clientParse.students.myLocations {
-        
-            self.clientParse.deleteStudentLocation (location as PRSStudentData) { (success, error) in
-                
-                if success == true {
-                    
-                    OperationQueue.main.addOperation {
-                        self.updateStudentLocations()
-                    }
-                    
-                } else {
-                    
-                    // client error deleting location? leave iterator by return
-                    let Action = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in return }
-                    let alertController = UIAlertController(
-                        title: "Alert",
-                        message: error,
-                        preferredStyle: UIAlertControllerStyle.alert
-                    )
-                    
-                    alertController.addAction(Action)
-                    OperationQueue.main.addOperation {
-                        self.present(alertController, animated: true, completion:nil)
-                    }
-                }
-            }
+            self.userLocationDelete(location)
         }
     }
     
@@ -57,22 +64,50 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func userLocationAdd() {
         
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "PageSetRoot") as! LocationEditViewController
         let locationRequestController = UIAlertController(
             title: "Let's start ...",
             message: "Do you want to use your current device location as default for your next steps?",
             preferredStyle: UIAlertControllerStyle.alert
         )
         
-        var vc: UIViewController!
-        vc = storyBoard.instantiateViewController(withIdentifier: "PageSetRoot") as! LocationEditViewController
         vc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        vc.currentUserStudentData = currentUserStudentData
+        
         
         let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
-            
+            // check device location again ...
+            self.locationFetchStart()
             // useCurrentDeviceLocation: true means our pageViewController will use a smaller stack of pageSetControllers
             self.appDelegate.useCurrentDeviceLocation = true
-            self.present(vc, animated: true, completion: nil)
+            // check if last location doesn't match the current one ...
+            if self.validateCurrentLocationAgainstLastPersistedOne() == false {
+                
+                let locationDuplicateWarningController = UIAlertController(
+                    title: "Duplication Warning ...",
+                    message: "Your current device location is already in use by one of your previous locations!\n" +
+                    "You can ignore this but you'll add a location duplicate doing this!",
+                    preferredStyle: UIAlertControllerStyle.alert
+                )
+                
+                let dlgBtnIgnoreWarningAction = UIAlertAction(title: "Ignore", style: .default) { (action: UIAlertAction!) in
+                    self.present(vc, animated: true, completion: nil)
+                }
+                
+                let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
+                    return
+                }
+                
+                locationDuplicateWarningController.addAction(dlgBtnIgnoreWarningAction)
+                locationDuplicateWarningController.addAction(dlgBtnCancelAction)
+                
+                self.present(locationDuplicateWarningController, animated: true, completion: nil)
+            
+            } else {
+                
+                self.present(vc, animated: true, completion: nil)
+            }
         }
         
         let dlgBtnNoAction = UIAlertAction(title: "No", style: .default) { (action: UIAlertAction!) in
@@ -93,59 +128,42 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      */
     func handleUserLocation() {
         
-        let alertController = UIAlertController(
-            title: "Info",
-            message: "I've found valid student location(s) for your account",
-            preferredStyle: UIAlertControllerStyle.alert
-        )
+        currentUserStudentData = self.clientParse.students.myLocations.last
         
         let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
             return }
         
         let dlgBtnDeleteAction = UIAlertAction(title: "Delete", style: .default) { (action: UIAlertAction!) in
-            self.userLocationDelete() }
+            self.userLocationDeleteAll() }
         
         let dlgBtnAddLocationAction = UIAlertAction(title: "Add", style: .default) { (action: UIAlertAction!) in
             self.userLocationAdd() }
         
+        let dlgBtnUpdateAction = UIAlertAction(title: "Update", style: .default) { (action: UIAlertAction!) in
+            self.userLocationUpdate( self.currentUserStudentData ) }
+        
+        let alertController = UIAlertController(title: "Warning", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        
         alertController.addAction(dlgBtnDeleteAction)
-        alertController.addAction(dlgBtnCancelAction)
+        alertController.message = "You've already set your student location, do you want to delete or update the last one?"
+        if self.clientParse.metaMyLocationsCount! > 1 {
+            alertController.message = NSString(
+                format: "You've already set your student location, do you want to delete the %d old locations?",
+                self.clientParse.metaMyLocationsCount!) as String!
+        }
         
         switch true {
             
             // no locations found, load addLocation formular
-            case self.clientParse.metaMyLocationsCount! == 0:
+            case self.clientParse.metaMyLocationsCount! == 0: self.userLocationAdd(); break
+            // moultiple locations found, let user choose between delete all or update the last persited location
+            case self.clientParse.metaMyLocationsCount! > 0:
             
-                self.userLocationAdd()
-
-                break
+                alertController.addAction(dlgBtnAddLocationAction)
+                alertController.addAction(dlgBtnUpdateAction)
+                alertController.addAction(dlgBtnCancelAction)
             
-            // exactly one location found, let user choose between delete or update this location
-            case self.clientParse.metaMyLocationsCount! == 1:
-            
-                alertController.title = "Warning"
-                alertController.message = "You've already set your student location, do you want to delete or update the last one?"
-                let dlgBtnUpdateAction = UIAlertAction(title: "Update", style: .default) { (action: UIAlertAction!) in self.userLocationUpdate() }
-                    alertController.addAction(dlgBtnUpdateAction)
-                
-                // check if last location doesnt match the current one, if not ... allow user to add this location
-                if validateCurrentLocationAgainstLastPersistedOne() == true {
-                    alertController.addAction(dlgBtnAddLocationAction)
-                }
-            
-                OperationQueue.main.addOperation { self.present(alertController, animated: true, completion:nil) }
-            
-                break
-            
-            // more than one location found, let user choos betwwen delete all old ones
-            case self.clientParse.metaMyLocationsCount! > 1:
-            
-                alertController.title = "Warning"
-                alertController.message = NSString(
-                    format: "You've already set your student location, do you want to delete the %d old ones?",
-                    self.clientParse.metaMyLocationsCount!) as String!
-
-                OperationQueue.main.addOperation { self.present(alertController, animated: true, completion:nil) }
+                OperationQueue.main.addOperation { self.present(alertController, animated: true, completion: nil) }
             
                 break
             
@@ -159,7 +177,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func updateStudentLocations () {
         
         mapView.removeAnnotations(annotations)
-        
         fetchAllStudentLocations()
     }
     
@@ -198,9 +215,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         let students = PRSStudentLocations.sharedInstance
         
         var renderDistance: Bool = false
-        var currentDeviceLocation: DeviceLocation?
         var sourceLocation: CLLocation?
         var targetLocation: CLLocation?
+        var currentDeviceLocation: DeviceLocation?
         
         // remove all old annotations
         annotations.removeAll()
@@ -243,6 +260,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         let distanceValue = sourceLocation.distance(from: targetLocation)
         
+        // todo(!) should be handle by localization manager instead using static metric definition
         var distanceOut: String! = NSString(format: "%.0f %@", distanceValue, "m") as String
         if distanceValue >= locationDistanceDivider {
             distanceOut = NSString(format: "%.0f %@", (distanceValue / locationDistanceDivider), "km") as String
@@ -253,15 +271,26 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
     /*
      * check current device location against the last persisted studentLocation meta information.
-     * If bothe locations seems to be plausible equal this method will be returned false
+     * If both locations seems to be plausible equal this validation method will be returned false.
+     * For accuracy reasons I'll round the coordinates down to 6 decimal places (:locationCoordRound)
      */
     func validateCurrentLocationAgainstLastPersistedOne() -> Bool {
-    
-        let lastDeviceLocation = appDelegate.currentDeviceLocations.first
-        let lastStudentLocation = clientParse.students.myLocations.first
         
-        if lastDeviceLocation!.longitude!.roundTo(locationCoordRound) == lastStudentLocation!.longitude!.roundTo(locationCoordRound) &&
-            lastDeviceLocation!.latitude!.roundTo(locationCoordRound) == lastStudentLocation!.latitude!.roundTo(locationCoordRound) {
+        let lastDeviceLocation = appDelegate.currentDeviceLocations.last
+        let lastStudentLocation = clientParse.students.myLocations.last
+        
+        // no local studen location for my account found? fine ...
+        if lastStudentLocation == nil {
+            return true
+        }
+        
+        let _lastDeviceLongitude: Double = lastDeviceLocation!.longitude!.roundTo(locationCoordRound)
+        let _lastDeviceLatitude: Double = lastDeviceLocation!.latitude!.roundTo(locationCoordRound)
+        let _lastUserStudentLongitude: Double = lastStudentLocation!.longitude!.roundTo(locationCoordRound)
+        let _lastUserStudentLatitude: Double = lastStudentLocation!.latitude!.roundTo(locationCoordRound)
+        
+        if _lastDeviceLongitude == _lastUserStudentLongitude &&
+            _lastDeviceLatitude == _lastUserStudentLatitude {
             
             return false
         }
@@ -422,9 +451,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         }
     }
     
-    /*
-     * update map position to current location
-     */
     func mapView(
         _ mapView: MKMapView,
           didUpdate userLocation: MKUserLocation) {
@@ -436,7 +462,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         _ mapView: MKMapView,
           viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        // ignore all given location annotation except the student ones
         if !(annotation is PRSStudentMapAnnotation) { return nil }
         
         let identifier = "locPin_0"
@@ -485,9 +510,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         }
     }
     
-    /*
-     * handle pin-click to open corresponding url inside the subtitle
-     */
     func mapView(
         _ mapView: MKMapView,
           annotationView view: MKAnnotationView,
