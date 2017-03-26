@@ -14,6 +14,8 @@ class LocationEditViewController: UIViewController {
     // MARK: Variables
     //
     
+    var updateMode: Bool = false
+    var currentUserStudentData: PRSStudentData?
     var locationPageViewController: LocationPageViewController? {
         didSet { locationPageViewController?.locationDelegate = self }
     }
