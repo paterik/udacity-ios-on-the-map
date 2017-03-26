@@ -22,5 +22,5 @@ class PageSetViewController: UIViewController {
     // MARK: Variables
     //
     var delegate: PageSetViewControllerProtocol?
-    var currentUserStudentData: PRSStudentData?
+    var editMode: Bool = false
 }
