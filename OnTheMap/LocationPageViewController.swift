@@ -22,13 +22,14 @@ class LocationPageViewController: UIPageViewController, PageSetViewControllerPro
     //
     
     weak var locationDelegate: LocationPageViewControllerDelegate?
+    var currentUserLocation: PRSStudentData? = nil
     
     // complete controller stack to handle location manually (followed by profile and details)
     fileprivate(set) lazy var completeViewControllers: [UIViewController] = {
         return [
             self.newLocationViewController("pageSetLocation"),
             self.newLocationViewController("pageSetProfile")
-            // self.newLocationViewController("pageSetDetail") // disabled yet!
+            // *** self.newLocationViewController("pageSetDetail") // disabled yet!
         ]
     }()
     
@@ -36,7 +37,7 @@ class LocationPageViewController: UIPageViewController, PageSetViewControllerPro
     fileprivate(set) lazy var quickViewControllers: [UIViewController] = {
         return [
             self.newLocationViewController("pageSetProfile")
-            // self.newLocationViewController("pageSetDetail") // disabled yet!
+            // *** self.newLocationViewController("pageSetDetail") // disabled yet!
         ]
     }()
     
@@ -73,7 +74,8 @@ class LocationPageViewController: UIPageViewController, PageSetViewControllerPro
      * handle string based commands from embedded controllers, here we can force a scroll
      * inside our pageViewController given by our PageSetLocationViewController for example
      */
-    func handleDelegateCommand(_ command: String) {
+    func handleDelegateCommand(
+       _ command: String) {
         
         if command == "scrollToNextViewController" {
             if debugMode == true { print ("_received: \(command), execute: scroll") }
@@ -95,7 +97,9 @@ class LocationPageViewController: UIPageViewController, PageSetViewControllerPro
     /*
      * scrolls/jump to the view controller on corresponding index (including autocalc of direction)
      */
-    func scrollToViewController(index newIndex: Int) {
+    func scrollToViewController(
+         index newIndex: Int) {
+        
         if let firstViewController = viewControllers?.first,
            let currentIndex = orderedViewControllers.index(of: firstViewController) {
             
@@ -107,9 +111,22 @@ class LocationPageViewController: UIPageViewController, PageSetViewControllerPro
     }
     
     /*
+     * notifies 'locationDelegate' about current page index is updated
+     */
+    func notifyLocationDelegateOfNewIndex() {
+        
+        if let firstViewController = viewControllers?.first,
+            let index = orderedViewControllers.index(of: firstViewController) {
+            
+            locationDelegate?.locationPageViewController(self, didUpdatePageIndex: index)
+        }
+    }
+    
+    /*
      * fetch a new viewController by corresponding identifier
      */
-    fileprivate func newLocationViewController(_ indent: String) -> UIViewController {
+    fileprivate func newLocationViewController(
+       _ indent: String) -> UIViewController {
         
         let vc = UIStoryboard(name: "Main", bundle: nil) .
         instantiateViewController(withIdentifier: "\(indent)Controller") as! PageSetViewController
@@ -134,17 +151,5 @@ class LocationPageViewController: UIPageViewController, PageSetViewControllerPro
                 self.notifyLocationDelegateOfNewIndex()
             }
         )
-    }
-    
-    /*
-     * notifies 'locationDelegate' about current page index is updated
-     */
-     func notifyLocationDelegateOfNewIndex() {
-        
-        if let firstViewController = viewControllers?.first,
-           let index = orderedViewControllers.index(of: firstViewController) {
-            
-            locationDelegate?.locationPageViewController(self, didUpdatePageIndex: index)
-        }
     }
 }
