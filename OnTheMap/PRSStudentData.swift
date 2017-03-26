@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 struct PRSStudentData {
     
@@ -25,17 +24,25 @@ struct PRSStudentData {
     let createdAt: Date!
     let updatedAt: Date!
     
+    let metaDateTimeFormat: String! = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    
+    var _createdAtRaw: NSString!
+    var _updatedAtRaw: NSString!
+    
     var asArray: [String : Any] {
+        
         get {
             return [
-                "firstName": firstName ?? " ",
-                "lastName": lastName ?? " ",
-                "mediaURL": mediaURL ?? " ",
-                "mapString": mapString ?? " ",
-                "objectId": objectId ?? " ",
-                "uniqueKey": uniqueKey ?? " ",
-                "latitude": latitude! as Double,
-                "longitude": longitude! as Double
+                "firstName" : firstName  ?? "",
+                "lastName"  : lastName   ?? "",
+                "mediaURL"  : mediaURL   ?? "",
+                "mapString" : mapString  ?? "",
+                "objectId"  : objectId   ?? "",
+                "uniqueKey" : uniqueKey  ?? "",
+                "latitude"  : latitude!  as Double,
+                "longitude" : longitude! as Double,
+                "createdAt" : ["__type" : "Date", "iso" : _createdAtRaw ],
+                "updatedAt" : ["__type" : "Date", "iso" : _updatedAtRaw ]
                 
             ] as [String : Any]
         }
@@ -48,19 +55,28 @@ struct PRSStudentData {
         // nil or unwrappable properties and add an evalation date
         //
         
-        let metaDefault: String! = "-"
+        _createdAtRaw = NSDate().dateToString(Date(), metaDateTimeFormat)
+        _updatedAtRaw = NSDate().dateToString(Date(), metaDateTimeFormat)
         
-        firstName = (dictionary["firstName"] as? String!) ?? metaDefault
-        lastName  = (dictionary["lastName"] as? String!)  ?? metaDefault
-        mediaURL  = (dictionary["mediaURL"] as? String!)  ?? metaDefault
-        mapString = (dictionary["mapString"] as? String!) ?? metaDefault
-        objectId  = (dictionary["objectId"] as? String!)  ?? metaDefault
-        uniqueKey = (dictionary["uniqueKey"] as? String!) ?? metaDefault
+        if dictionary["createdAt"] != nil {
+             _createdAtRaw = (dictionary["createdAt"] as? NSString)!
+        }
+        
+        if dictionary["updateAt"] != nil {
+             _updatedAtRaw = (dictionary["updatedAt"] as? NSString)!
+        }
+        
+        firstName = (dictionary["firstName"] as? String!) ?? ""
+        lastName  = (dictionary["lastName"] as? String!)  ?? ""
+        mediaURL  = (dictionary["mediaURL"] as? String!)  ?? ""
+        mapString = (dictionary["mapString"] as? String!) ?? ""
+        objectId  = (dictionary["objectId"] as? String!)  ?? ""
+        uniqueKey = (dictionary["uniqueKey"] as? String!) ?? ""
 
         latitude  = (dictionary["latitude"] as? Double!)  ?? 0.0
         longitude = (dictionary["longitude"] as? Double!) ?? 0.0
 
-        createdAt = Date()
-        updatedAt = Date()
+        createdAt = NSDate().dateFromString(_createdAtRaw, metaDateTimeFormat) as Date!
+        updatedAt = NSDate().dateFromString(_updatedAtRaw, metaDateTimeFormat) as Date!
     }
 }
