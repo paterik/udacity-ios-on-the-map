@@ -15,6 +15,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     // MARK: Class internal methods
     //
     
+    /*
+     * update a specific user location from map annotation panel directly (not used yet)
+     */
     func userLocationUpdate(
        _ userLocation: PRSStudentData!) {
     
@@ -87,6 +90,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      */
     func userLocationAdd(_ editMode: Bool) {
         
+        appDelegate.inEditMode = editMode
+        
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "PageSetRoot") as! LocationEditViewController
         let locationRequestController = UIAlertController(
@@ -98,6 +103,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         vc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         vc.editMode = editMode
+        
         
         let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
             // check device location again ...
@@ -151,7 +157,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      */
     func handleUserLocation() {
         
-        appDelegate.currentUserStudentLocation = self.clientParse.students.myLocations.last
+        
         
         let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
             return }
@@ -178,7 +184,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         switch true {
             
             // no locations found, load addLocation formular
-            case self.clientParse.metaMyLocationsCount! == 0: self.userLocationAdd(false); break
+            case self.clientParse.metaMyLocationsCount! == 0: self.userLocationAdd( false ); break
             // moultiple locations found, let user choose between delete all or update the last persited location
             case self.clientParse.metaMyLocationsCount! > 0:
             
@@ -186,6 +192,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 alertController.addAction(dlgBtnUpdateAction)
                 alertController.addAction(dlgBtnCancelAction)
             
+                self.appDelegate.currentUserStudentLocation = self.clientParse.students.myLocations.last
+                
                 OperationQueue.main.addOperation { self.present(alertController, animated: true, completion: nil) }
             
                 break
