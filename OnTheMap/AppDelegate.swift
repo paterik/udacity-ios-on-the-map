@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Variables for minor data "persitence" during app runtime
     //
     var currentDeviceLocations = [DeviceLocation]()
+    var currentUserStudentLocation : PRSStudentData? = nil
     
     //
     // FIXME: refactoring of getter/setter functionally necessary !!!
