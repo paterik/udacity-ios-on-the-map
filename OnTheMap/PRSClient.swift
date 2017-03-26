@@ -76,6 +76,30 @@ class PRSClient: NSObject {
     }
     
     /*
+     * update a specific user location object
+     */
+    func updateStudentLocation (
+        _ studentData: PRSStudentData?,
+        _ completionHandlerForUpdateCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
+        
+        let objectId = studentData!.objectId
+        let apiRequestURL = NSString(format: "%@/%@", apiURL, objectId!)
+        let studentDataArray = studentData!.asArray
+        
+        client.put(apiRequestURL as String, headers: apiHeaderAuth, jsonBody: studentDataArray as [String : AnyObject]?) { (data, error) in
+            
+            if (error != nil) {
+                
+                completionHandlerForUpdateCurrentLocation(false, "Up's, your request couln't be handled ... \(error)")
+                
+            } else {
+                
+                completionHandlerForUpdateCurrentLocation(true, nil)
+            }
+        }
+    }
+    
+    /*
      * delete a specific user location object
      */
     func deleteStudentLocation (
@@ -101,7 +125,7 @@ class PRSClient: NSObject {
     /*
      * get the current user location object and check corresponding student location
      */
-    func getStudentLocations (
+    func getMyStudentLocations (
         _ completionHandlerForCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
         guard let sessionUdacity = clientUdacity.clientSession else {
@@ -123,9 +147,10 @@ class PRSClient: NSObject {
                 
                 guard let results = data!["results"] as? [[String: AnyObject]] else {
                     completionHandlerForCurrentLocation(false, "Up's, missing result key in response data")
+                    
                     return
                 }
-           
+                
                 self.students.myLocations.removeAll()
                 
                 for dictionary in results as [NSDictionary] {
@@ -161,12 +186,14 @@ class PRSClient: NSObject {
                 
                 guard let results = data!["results"] as? [[String: AnyObject]] else {
                     completionHandlerForGetAllLocations(false, "Up's, missing result key in response data")
+                    
                     return
                 }
                 
                 self.students.locations.removeAll()
                 
                 for dictionary in results as [NSDictionary] {
+                    
                     let meta = PRSStudentData(dictionary)
                     if self.validateStudentMeta(meta) == true {
                         
