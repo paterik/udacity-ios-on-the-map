@@ -16,21 +16,25 @@ class PRSClient: NSObject {
     //
     // MARK: Constants (Statics)
     //
+    
     static let sharedInstance = PRSClient()
 
     //
     // MARK: Constants (Normal)
     //
-    let debugMode: Bool = true
+    
+    let debugMode: Bool = false
     let session = URLSession.shared
     let client = RequestClient.sharedInstance
     let clientUdacity = UDCClient.sharedInstance
     let clientFacebook = FBClient.sharedInstance
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let students = PRSStudentLocations.sharedInstance
     
     //
     // MARK: Constants (API)
     //
+    
     let apiURL: String = "https://parse.udacity.com/parse/classes/StudentLocation"
     let apiWhereParam: String = "where"
     let apiOrderParam: String = "order"
@@ -46,6 +50,7 @@ class PRSClient: NSObject {
     //
     // MARK: Variables
     //
+    
     var sessionUdacity: UDCSession?
     var sessionFacebook: FBSession?
     var sessionParamString: String?
@@ -84,7 +89,7 @@ class PRSClient: NSObject {
        _ studentData: PRSStudentData?,
        _ completionHandlerForUpdateCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
-        let objectId = studentData!.objectId
+        let objectId = appDelegate.currentUserStudentLocation?.objectId!
         let apiRequestURL = NSString(format: "%@/%@", apiURL, objectId!)
         let studentDataArray = prepareStudentMetaForPutRequest(studentData!)
         
@@ -162,6 +167,7 @@ class PRSClient: NSObject {
                 self.students.myLocations.removeAll()
                 
                 for dictionary in results as [NSDictionary] {
+                    
                     let meta = PRSStudentData(dictionary)
                     self.students.myLocations.append(meta)
                     if self.debugMode == true {
@@ -216,7 +222,6 @@ class PRSClient: NSObject {
                 
                 self.metaStudentLocationsCountValid = self.students.locations.count
                 self.metaMyLocationsCount = results.count
-                
                 // [ DEV/DBG ] : append a single fixture student meta block during development
                 self.addSampleStudentLocation()
                 
