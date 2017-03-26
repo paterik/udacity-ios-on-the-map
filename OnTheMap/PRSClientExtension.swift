@@ -11,7 +11,21 @@ import Foundation
 extension PRSClient {
 
     /*
-     * prepare student data object for upcoming post request remove redundant key 'objectId'
+     * prepare student data object for upcoming patch/put request remove 'createdAt' key
+     */
+    func prepareStudentMetaForPutRequest(
+       _ studentData: PRSStudentData?) -> [String : AnyObject]? {
+        
+        var studentDataArray = studentData!.asArray
+        if let index = studentDataArray.index(forKey: "createdAt") {
+            studentDataArray.remove(at: index)
+        }
+        
+        return studentDataArray as [String : AnyObject]?
+    }
+    
+    /*
+     * prepare student data object for upcoming post request remove redundant 'objectId' key
      */
     func prepareStudentMetaForPostRequest(
        _ studentData: PRSStudentData?) -> [String : AnyObject]? {
