@@ -58,6 +58,9 @@ class PageSetProfileViewController: PageSetViewController {
             
             if success == true {
                 
+                //
+                // weazL 1001: hier muss nach update oder createMode unterschieden werden !!!
+                //
                 self.clientParse.setStudentLocation (studentData) { (success, error) in
                     
                     if success == true {

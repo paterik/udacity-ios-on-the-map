@@ -11,5 +11,4 @@ import Foundation
 protocol PageSetViewControllerProtocol {
     
     func handleDelegateCommand(_ command: String)
-    
 }
