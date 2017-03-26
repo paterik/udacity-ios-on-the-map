@@ -21,6 +21,7 @@
 		B12EB42B1E290F7D0048526A /* RequestClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */; };
 		B13280F81E867BB000C03A8A /* PageSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13280F71E867BB000C03A8A /* PageSetViewController.swift */; };
 		B13280FB1E867F1A00C03A8A /* PageSetViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13280FA1E867F1A00C03A8A /* PageSetViewControllerProtocol.swift */; };
+		B13280FD1E86C56C00C03A8A /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13280FC1E86C56C00C03A8A /* NSDate.swift */; };
 		B13384321E113DB300A23201 /* LocationTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13384311E113DB300A23201 /* LocationTabViewController.swift */; };
 		B14739551E82E93000041AFB /* PageSetLocationViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14739541E82E93000041AFB /* PageSetLocationViewControllerExtension.swift */; };
 		B150D1A71E740E9F001FF941 /* DateOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B150D1A61E740E9F001FF941 /* DateOperations.swift */; };
@@ -91,6 +92,7 @@
 		B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestClientExtension.swift; sourceTree = "<group>"; };
 		B13280F71E867BB000C03A8A /* PageSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSetViewController.swift; sourceTree = "<group>"; };
 		B13280FA1E867F1A00C03A8A /* PageSetViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSetViewControllerProtocol.swift; sourceTree = "<group>"; };
+		B13280FC1E86C56C00C03A8A /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
 		B13384311E113DB300A23201 /* LocationTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTabViewController.swift; sourceTree = "<group>"; };
 		B13CFC5A1DEB0C6300C08272 /* OnTheMap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnTheMap.entitlements; sourceTree = "<group>"; };
 		B14739541E82E93000041AFB /* PageSetLocationViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSetLocationViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				B150D1A61E740E9F001FF941 /* DateOperations.swift */,
 				B1748B4C1E7EABC3003D9A31 /* CLPlacemark.swift */,
 				B1E27CF31E82881900972B44 /* Double.swift */,
+				B13280FC1E86C56C00C03A8A /* NSDate.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -244,8 +247,8 @@
 		B12EB4281E290F4D0048526A /* base */ = {
 			isa = PBXGroup;
 			children = (
-				B1DB86301E17B38B006D827A /* RequestClient.swift */,
 				B12EB4291E290F5D0048526A /* extension */,
+				B1DB86301E17B38B006D827A /* RequestClient.swift */,
 			);
 			name = base;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 				B18340D31E77108F0042A813 /* PageSetProfileViewController.swift in Sources */,
 				B1886DEB1DEE1DC5004026BE /* FBClient.swift in Sources */,
 				B1DA3A6B1E787D8000E66EE5 /* EditViewProtocol.swift in Sources */,
+				B13280FD1E86C56C00C03A8A /* NSDate.swift in Sources */,
 				B14739551E82E93000041AFB /* PageSetLocationViewControllerExtension.swift in Sources */,
 				B1DB862D1E126397006D827A /* PRSStudentData.swift in Sources */,
 				B1D40DE21E8505690063636E /* PageSetDetailViewController.swift in Sources */,
