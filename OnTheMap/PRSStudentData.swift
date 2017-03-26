@@ -10,7 +10,6 @@ import Foundation
 
 struct PRSStudentData {
     
-    let objectId: String!
     let uniqueKey: String!
     
     let firstName: String!
@@ -26,6 +25,7 @@ struct PRSStudentData {
     
     let metaDateTimeFormat: String! = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     
+    var objectId: String!
     var _createdAtRaw: NSString!
     var _updatedAtRaw: NSString!
     
