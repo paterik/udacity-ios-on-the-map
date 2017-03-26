@@ -14,5 +14,4 @@ class PRSStudentLocations {
     
     var locations = [PRSStudentData]()
     var myLocations = [PRSStudentData]()
-    
 }
