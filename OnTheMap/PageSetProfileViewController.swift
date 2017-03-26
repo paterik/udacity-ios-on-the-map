@@ -2,6 +2,8 @@
 //  PageSetProfileViewController.swift
 //  OnTheMap
 //
+//  this class will handle the final student meta update/create profile process
+//
 //  Created by Patrick Paechnatz on 13.03.17.
 //  Copyright © 2017 Patrick Paechnatz. All rights reserved.
 //
@@ -22,6 +24,8 @@ class PageSetProfileViewController: PageSetViewController {
     //
     
     var mapView: MKMapView!
+    var metaUpdateSuccess: Bool = false
+    var metaCreateSuccess: Bool = false
     
     //
     // MARK: IBOutlet Variables
@@ -34,6 +38,16 @@ class PageSetProfileViewController: PageSetViewController {
     @IBOutlet weak var btnSaveProfile: UIBarButtonItem!
     
     //
+    // MARK: Overrides
+    //
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        loadStudentMetaData()
+    }
+    
+    //
     // MARK: IBAction Methods
     //
     
@@ -44,46 +58,32 @@ class PageSetProfileViewController: PageSetViewController {
     
     @IBAction func btnSaveProfileAction(_ sender: Any) {
         
+        let btnOkAction = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction!) in return }
         let alertController = UIAlertController(
             title: "Alert",
             message: "Validation-Error in your user profile",
             preferredStyle: UIAlertControllerStyle.alert
         )
         
-        let Action = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction!) in }
-        
-        alertController.addAction(Action)
+        alertController.addAction(btnOkAction)
         
         validateStudentMetaData() { (success, error, studentData) in
             
             if success == true {
                 
-                //
-                // weazL 1001: hier muss nach update oder createMode unterschieden werden !!!
-                //
-                self.clientParse.setStudentLocation (studentData) { (success, error) in
+                if self.editMode == false {
+                
+                    if self.createStudentMetaData(studentData) == true { self.btnCloseViewAction(sender) }
                     
-                    if success == true {
-                        
-                        self.btnCloseViewAction(sender)
-                        
-                    } else {
-                        
-                        // client error saving profile? do something ... but for now just clean up the alert dialog
-                        let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.alert)
-                        let Action = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in }
-                        
-                        alertController.addAction(Action)
-                        OperationQueue.main.addOperation {
-                            self.present(alertController, animated: true, completion:nil)
-                        }
-                    }
+                } else {
+                
+                    if self.updateStudentMetaData(studentData) == true { self.btnCloseViewAction(sender) }
                 }
                 
             } else {
                 // validation error before saving profile? show corresponding message as dialog
                 alertController.message = error
-                self.present(alertController, animated: true, completion:nil)
+                self.present(alertController, animated: true, completion: nil)
             }
         }
     }

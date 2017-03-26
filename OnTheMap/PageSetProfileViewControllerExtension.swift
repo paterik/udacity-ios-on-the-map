@@ -11,11 +11,85 @@ import MapKit
 
 extension PageSetProfileViewController: UIPageViewControllerDelegate {
 
+    /*
+     * update student profile meta data using (parse) api call and parametric metaObject
+     */
+    func updateStudentMetaData(
+       _ studentMetaData: PRSStudentData!) -> Bool! {
+        
+        metaUpdateSuccess = true
+        
+        self.clientParse.updateStudentLocation(studentMetaData) { (success, error) in
+            
+            if success == false {
+                
+                self.metaUpdateSuccess = false
+                
+                // client error updating location? show corresponding message and return ...
+                let btnOkAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in }
+                let alertController = UIAlertController(
+                    title: "Alert",
+                    message: error,
+                    preferredStyle: UIAlertControllerStyle.alert
+                )
+                
+                alertController.addAction(btnOkAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+        
+        return metaUpdateSuccess
+    }
+    
+    /*
+     * create student profile meta data using (parse) api call and parametric metaObject
+     */
+    func createStudentMetaData(
+       _ studentMetaData: PRSStudentData!) -> Bool! {
+        
+        metaCreateSuccess = true
+        
+        self.clientParse.setStudentLocation (studentMetaData) { (success, error) in
+            
+            if success == false {
+                
+                self.metaCreateSuccess = false
+                
+                // client error updating location? show corresponding message and return ...
+                let btnOkAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in }
+                let alertController = UIAlertController(
+                    title: "Alert",
+                    message: error,
+                    preferredStyle: UIAlertControllerStyle.alert
+                )
+                
+                alertController.addAction(btnOkAction)
+                self.present(alertController, animated: true, completion: nil)
+                
+            }
+        }
+        
+        return metaCreateSuccess
+    }
+    
+    func loadStudentMetaData() {
+        
+        editMode = false
+        
+        if appDelegate.currentUserStudentLocation != nil {
+            
+            editMode = true
+            inpFirstname.text = appDelegate.currentUserStudentLocation!.firstName
+            inpLastname.text = appDelegate.currentUserStudentLocation!.lastName
+            inpMediaURL.text = appDelegate.currentUserStudentLocation!.mediaURL
+        }
+    }
+    
     func validateStudentMetaData(
-        _ completionHandlerForValidateData: @escaping (
-        _ success: Bool?,
-        _ error: String?,
-        _ studentData: PRSStudentData?) -> Void) {
+       _ completionHandlerForValidateData: @escaping (
+       _ success: Bool?,
+       _ error: String?,
+       _ studentData: PRSStudentData?) -> Void) {
         
         // check for vaild input fields (firstName and lastName), return on any error here
         if inpFirstname.text?.isEmpty ?? true && inpLastname.text?.isEmpty ?? true {
@@ -53,7 +127,9 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
             return
         }
         
-        getStudentMetaProfile(sessionUdacity.accountKey, _latitude, _longitude) { (success, error, studentData) in
+        getStudentMetaProfile(sessionUdacity.accountKey, _latitude, _longitude)
+        {
+            (success, error, studentData) in
         
             if success == true {
                 completionHandlerForValidateData(true, nil, studentData)
@@ -81,8 +157,13 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
         let _location = CLLocation(latitude: _latitude!, longitude: _longitude!)
         var _mapString: String?
         
-        _geocoder.reverseGeocodeLocation(_location) { (placemarks, error) in
-            _mapString = self.getMapPlacemarkAsString(withPlacemarks: placemarks, error: error) ?? self.metaNoData
+        _geocoder.reverseGeocodeLocation(_location)
+        {
+            (placemarks, error) in
+            _mapString = self.getMapPlacemarkAsString(
+                withPlacemarks: placemarks,
+                error: error) ?? self.metaNoData
+            
             let currentStudentDict : NSDictionary =
                 [
                     "uniqueKey" : _accountKey!,
