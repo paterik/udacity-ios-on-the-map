@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 
 class MapViewController: UIViewController {
-
+    
     //
     // MARK: IBOutlet variables
     //
@@ -45,7 +45,6 @@ class MapViewController: UIViewController {
     var locationManager : CLLocationManager { return self.deviceLocationManager.locationManager }
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var annotations = [PRSStudentMapAnnotation]()
-    var currentUserStudentData: PRSStudentData?
     
     //
     // MARK: UIView Methods (overrides)
