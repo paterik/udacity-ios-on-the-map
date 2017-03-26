@@ -14,6 +14,7 @@ extension LocationEditViewController: LocationPageViewControllerDelegate {
        _ locationPageViewController: LocationPageViewController,
          didUpdatePageCount count: Int) {
         
+        pageControl.isHidden = count == 1 ? true : false
         pageControl.numberOfPages = count
     }
     
