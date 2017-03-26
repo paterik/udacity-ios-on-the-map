@@ -29,7 +29,7 @@ class LocationPageViewController: UIPageViewController, PageSetViewControllerPro
         return [
             self.newLocationViewController("pageSetLocation"),
             self.newLocationViewController("pageSetProfile")
-            // *** self.newLocationViewController("pageSetDetail") // disabled yet!
+            // <---> self.newLocationViewController("pageSetDetail") // [ DEV/DBG ] : disabled yet!
         ]
     }()
     
@@ -37,7 +37,7 @@ class LocationPageViewController: UIPageViewController, PageSetViewControllerPro
     fileprivate(set) lazy var quickViewControllers: [UIViewController] = {
         return [
             self.newLocationViewController("pageSetProfile")
-            // *** self.newLocationViewController("pageSetDetail") // disabled yet!
+            // <---> self.newLocationViewController("pageSetDetail") // [ DEV/DBG ] : disabled yet!
         ]
     }()
     
