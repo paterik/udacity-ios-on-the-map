@@ -26,6 +26,7 @@ class PageSetProfileViewController: PageSetViewController {
     var mapView: MKMapView!
     var metaUpdateSuccess: Bool = false
     var metaCreateSuccess: Bool = false
+    var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     //
     // MARK: IBOutlet Variables
@@ -47,6 +48,12 @@ class PageSetProfileViewController: PageSetViewController {
         loadStudentMetaData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        activitySpinner.center = self.view.center
+    }
+    
     //
     // MARK: IBAction Methods
     //
@@ -57,6 +64,10 @@ class PageSetProfileViewController: PageSetViewController {
     }
     
     @IBAction func btnSaveProfileAction(_ sender: Any) {
+        
+        // show activity spinner
+        activitySpinner.startAnimating()
+        view.addSubview(activitySpinner)
         
         let btnOkAction = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction!) in return }
         let alertController = UIAlertController(
@@ -88,7 +99,12 @@ class PageSetProfileViewController: PageSetViewController {
                 // validation error before saving profile? show corresponding message as dialog
                 alertController.message = error
                 self.present(alertController, animated: true, completion: nil)
+                
             }
+            
+            // deactivate and remove activity spinner
+            self.activitySpinner.stopAnimating()
+            self.view.willRemoveSubview(self.activitySpinner)
         }
     }
 }
