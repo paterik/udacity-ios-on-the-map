@@ -17,7 +17,8 @@ class PRSStudentMapAnnotation: NSObject, MKAnnotation {
     var url: String?
     var distance: String?
     var image: UIImage?
-    var evaluated: Date?
+    var determined: Date?
+    var ownLocation: Bool! = false
     
     init(_ coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
