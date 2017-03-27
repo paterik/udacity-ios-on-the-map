@@ -42,7 +42,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func createUdacityAccountAction(_ sender: AnyObject) {
         
-        /* show redirect message dialog for creating new udacity account */
+        // show redirect message dialog for creating new udacity account
         showRedirectMessage(
             "You have no udacity account yet? No Problem, create a new account right now ...",
             "https://auth.udacity.com/sign-up?next=https%3A%2F%2Fclassroom.udacity.com%2Fauthenticated"
@@ -51,7 +51,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func forgotUdacityPasswordAction(_ sender: AnyObject) {
         
-        /* show redirect message dialog for credential lost of your udactiy account */
+        // show redirect message dialog for credential lost of your udactiy account
         showRedirectMessage(
             "You've lost your password? No problem, accept this redirect to your udacity login page and click the forgot password link",
             "https://auth.udacity.com/sign-in?next=https%3A%2F%2Fclassroom.udacity.com%2Fauthenticated"
@@ -60,11 +60,11 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginUdacityAction(_ sender: AnyObject) {
         
-        /* show activity spinner */
+        // show activity spinner
         activitySpinner.startAnimating()
         view.addSubview(activitySpinner)
         
-        /* deactivate ui during http rest call */
+        // deactivate ui during http rest call
         activateUI(false)
         
         clientUdacity.getUserSessionDeveloperToken() { (udcSession, error) in
@@ -96,18 +96,18 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginFacebookAction(_ sender: AnyObject) {
         
-        /* show activity spinner */
+        // show activity spinner
         activitySpinner.startAnimating()
         view.addSubview(activitySpinner)
         
-        /* deactivate ui during http rest call */
+        // deactivate ui during http rest call
         activateUI(false)
 
         clientFacebook.getUserSessionToken (viewController: self) { (success: Bool?, fbSession: FBSession?, message: String?) in
 
             if success! == true {
                 
-                /* persist udacity session model and provide it inside appDelegate globaly */
+                // persist udacity session model and provide it inside appDelegate globaly
                 self.appDelegate.isAuthByFacebook = true
                 self.appDelegate.setFacebookSession(fbSession!)
                 self.clientFacebook.clientSession = self.appDelegate.getFacebookSession()
@@ -121,7 +121,7 @@ class LoginViewController: UIViewController {
                 self.showErrorMessage(message!)                
             }
 
-            /* (re)activate ui after http rest call result handling */
+            // (re)activate ui after http rest call result handling
             self.activateUI(true)
         }
     }
@@ -133,7 +133,7 @@ class LoginViewController: UIViewController {
         
         locationViewController.modalTransitionStyle = UIModalTransitionStyle.coverVertical
     
-        /* deactivate and remove activity spinner */
+        // deactivate and remove activity spinner
         activitySpinner.stopAnimating()
         view.willRemoveSubview(self.activitySpinner)
         
