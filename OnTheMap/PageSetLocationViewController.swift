@@ -43,11 +43,15 @@ class PageSetLocationViewController: PageSetViewController {
         
         super.viewDidLoad()
         
-        activitySpinner.center = self.view.center
-        
         mapView.delegate = self
         mapView.showsUserLocation = false
         prepareStep(1)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        activitySpinner.center = self.view.center
     }
     
     //
@@ -56,9 +60,7 @@ class PageSetLocationViewController: PageSetViewController {
     
     @IBAction func btnAcceptLocationAction(_ sender: Any) {
         
-        if let del = delegate {
-            del.handleDelegateCommand("scrollToNextViewController")
-        }
+        if let del = delegate { del.handleDelegateCommand("scrollToNextViewController") }
     }
     
     @IBAction func btnHandleLocationSubmitAction(_ sender: Any) {
