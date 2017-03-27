@@ -239,8 +239,8 @@ class PRSClient: NSObject {
     
         let sampleStudentDict : NSDictionary =
         [
-            "firstName": "Patrick",
-            "lastName": "Paechnatz",
+            "firstName": "Robert",
+            "lastName": "Heidmann",
             "mediaURL": "https://dunkelfrosch.com",
             "mapString": "Dresden, Germany",
             "objectId": "xx9xxYY9ZZ",
