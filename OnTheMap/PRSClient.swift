@@ -112,11 +112,10 @@ class PRSClient: NSObject {
      * delete a specific user location object
      */
     func deleteStudentLocation (
-       _ studentData: PRSStudentData?,
+       _ studentDataObjectId: String!,
        _ completionHandlerForDeleteCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
-        let objectId = studentData!.objectId
-        let apiRequestURL = NSString(format: "%@/%@", apiURL, objectId!)
+        let apiRequestURL = NSString(format: "%@/%@", apiURL, studentDataObjectId)
         
         client.delete(apiRequestURL as String, headers: apiHeaderAuth)
         {
