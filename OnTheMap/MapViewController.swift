@@ -43,8 +43,8 @@ class MapViewController: UIViewController {
     var locationFetchSuccess : Bool = false
     var locationFetchStartTime : Date!
     var locationManager : CLLocationManager { return self.deviceLocationManager.locationManager }
-    var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var annotations = [PRSStudentMapAnnotation]()
+    var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     //
     // MARK: UIView Methods (overrides)
