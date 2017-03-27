@@ -545,6 +545,11 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             calloutView.studentDistance.text = studentAnnotation.distance
         }
         
+        calloutView.studentImage.image = UIImage(named: "imgUserDefault_v2")
+        if studentAnnotation.ownLocation == true {
+            calloutView.studentImage.image = UIImage(named: "icnUserSampleBig_v1")
+        }
+        
         view.addSubview(calloutView)
         
         mapView.setCenter((view.annotation?.coordinate)!, animated: true)
