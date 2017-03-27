@@ -50,7 +50,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      */
     func userLocationDelete(
        _ userLocation: PRSStudentData!) {
-    
+        
         self.clientParse.deleteStudentLocation (userLocation) { (success, error) in
             
             if success == true {
@@ -104,7 +104,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         vc.editMode = editMode
         
-        
         let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
             // check device location again ...
             self.locationFetchStart()
@@ -156,8 +155,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      * this method will handle the 3 cases of user location persitence/validations
      */
     func handleUserLocation() {
-        
-        
         
         let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
             return }
@@ -216,7 +213,11 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      */
     func fetchAllStudentLocations () {
         
-       clientParse.getAllStudentLocations () { (success, error) in
+        // deactivate and remove activity spinner
+        self.activitySpinner.stopAnimating()
+        self.view.willRemoveSubview(self.activitySpinner)
+        
+        clientParse.getAllStudentLocations () { (success, error) in
             
             if success == true {
                 
@@ -235,6 +236,10 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 alertController.addAction(Action)
                 OperationQueue.main.addOperation { self.present(alertController, animated: true, completion:nil) }
             }
+            
+            // deactivate and remove activity spinner
+            self.activitySpinner.stopAnimating()
+            self.view.willRemoveSubview(self.activitySpinner)
         }
     }
     
@@ -278,7 +283,11 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
             if renderDistance {
                 targetLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-                annotation.subtitle = getPrintableDistanceBetween(sourceLocation, targetLocation)
+                annotation.distance = getPrintableDistanceBetween(sourceLocation, targetLocation)
+            }
+            
+            if dictionary.uniqueKey == clientParse.clientUdacity.clientSession?.accountKey! {
+                annotation.ownLocation = true
             }
             
             annotations.append(annotation)
@@ -326,7 +335,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         let _lastUserStudentLatitude: Double = lastStudentLocation!.latitude!.roundTo(locationCoordRound)
         
         if _lastDeviceLongitude == _lastUserStudentLongitude &&
-            _lastDeviceLatitude == _lastUserStudentLatitude {
+           _lastDeviceLatitude  == _lastUserStudentLatitude {
             
             return false
         }
@@ -348,7 +357,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         )
         
         appDelegate.currentDeviceLocations.removeAll() // currently we won't persist all evaluated device locations
-        appDelegate.currentDeviceLocations.append(DeviceLocation(currentDeviceLocation)) // persist evaluated device location
+        appDelegate.currentDeviceLocations.append(DeviceLocation(currentDeviceLocation)) // persist device location
         appDelegate.useCurrentDeviceLocation = true
         appDelegate.useLongitude = coordinate.longitude
         appDelegate.useLatitude = coordinate.latitude
@@ -524,11 +533,17 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
          didSelect view: MKAnnotationView) {
         
         if view.annotation is MKUserLocation { return }
-    
+        
+        let studentAnnotation = view.annotation as! PRSStudentMapAnnotation
         let views = Bundle.main.loadNibNamed("StudentMapAnnotation", owner: nil, options: nil)
         let calloutView = views?[0] as! StudentMapAnnotation
         
         calloutView.center = CGPoint(x: view.bounds.size.width / 2, y: -calloutView.bounds.size.height * 0.65)
+        calloutView.studentName.text = studentAnnotation.title
+        calloutView.studentMediaURL.setTitle(studentAnnotation.url, for: .normal)
+        if studentAnnotation.distance != nil {
+            calloutView.studentDistance.text = studentAnnotation.distance
+        }
         
         view.addSubview(calloutView)
         
