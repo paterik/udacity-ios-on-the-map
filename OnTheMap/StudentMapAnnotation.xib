@@ -17,13 +17,13 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="110"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgUserSample_01_v1" translatesAutoresizingMaskIntoConstraints="NO" id="08t-aW-Ig0" userLabel="StudentImage">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgUserDefault_v2" translatesAutoresizingMaskIntoConstraints="NO" id="08t-aW-Ig0" userLabel="StudentImage">
                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="uQL-Yw-079"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maria Yates" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HF6-1M-H5a" userLabel="StudentName">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="???" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HF6-1M-H5a" userLabel="StudentName">
                     <rect key="frame" x="108" y="0.0" width="184" height="32"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -80,6 +80,7 @@
                 <constraint firstItem="08t-aW-Ig0" firstAttribute="top" secondItem="HF6-1M-H5a" secondAttribute="top" id="CZu-kF-To4"/>
                 <constraint firstItem="HfP-VC-EUR" firstAttribute="top" secondItem="cZV-hT-ECm" secondAttribute="bottom" constant="12" id="JLj-hl-oXR"/>
                 <constraint firstItem="cZV-hT-ECm" firstAttribute="trailing" secondItem="HfP-VC-EUR" secondAttribute="trailing" id="LwG-U6-Mp1"/>
+                <constraint firstItem="cZV-hT-ECm" firstAttribute="leading" secondItem="08t-aW-Ig0" secondAttribute="trailing" constant="167" id="PKe-7T-1MP"/>
                 <constraint firstItem="HF6-1M-H5a" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="UZM-IG-quv"/>
                 <constraint firstItem="08t-aW-Ig0" firstAttribute="leading" secondItem="VfI-A5-kVK" secondAttribute="leading" id="Z8t-f5-2vG"/>
                 <constraint firstAttribute="bottom" secondItem="08t-aW-Ig0" secondAttribute="bottom" constant="10" id="iNJ-Jj-eIk"/>
@@ -103,6 +104,6 @@
     </objects>
     <resources>
         <image name="icnMediaLink_v1" width="25" height="25"/>
-        <image name="imgUserSample_01_v1" width="128" height="128"/>
+        <image name="imgUserDefault_v2" width="256" height="256"/>
     </resources>
 </document>
