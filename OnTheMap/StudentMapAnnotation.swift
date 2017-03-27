@@ -17,8 +17,8 @@ class StudentMapAnnotation: UIView {
     @IBOutlet weak var studentGraphDistanceBackground: UILabel!
     @IBOutlet weak var studentGraphDistanceValue: UILabel!
     
-    
     @IBAction func btnOpenStudentMediaURL(_ sender: Any) {
         
+        print ("execute studentData (media) URL \(studentMediaURL.title(for: .normal)!)")
     }
 }
