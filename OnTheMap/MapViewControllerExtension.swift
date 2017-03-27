@@ -46,12 +46,43 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     /*
+     * action wrapper for delete userLocation using button click call from annotation directly
+     */
+    func userLocationDeleteAction(_ sender: UIButton) {
+        
+        // using accessibilityHint "hack" to fetch a specific id (here objectId of parse.com)
+        let objectId = sender.accessibilityHint
+        
+        if objectId != nil && objectId?.isEmpty == false {
+        
+            let locationDestructionWarning = UIAlertController(
+                title: "Removal Warning ...",
+                message: "Do you really want to delete this location?",
+                preferredStyle: UIAlertControllerStyle.alert
+            )
+            
+            let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
+                self.userLocationDelete(objectId!)
+            }
+            
+            let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
+                return
+            }
+            
+            locationDestructionWarning.addAction(dlgBtnYesAction)
+            locationDestructionWarning.addAction(dlgBtnCancelAction)
+            
+            self.present(locationDestructionWarning, animated: true, completion: nil)
+        }
+    }
+    
+    /*
      * delete a specific userLocation from parse api persitence layer
      */
     func userLocationDelete(
-       _ userLocation: PRSStudentData!) {
+       _ userLocationObjectId: String!) {
         
-        self.clientParse.deleteStudentLocation (userLocation) { (success, error) in
+        self.clientParse.deleteStudentLocation (userLocationObjectId) { (success, error) in
             
             if success == true {
                 
@@ -81,7 +112,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func userLocationDeleteAll() {
         
         for location in clientParse.students.myLocations {
-            self.userLocationDelete(location)
+            self.userLocationDelete(location.objectId)
         }
     }
     
@@ -226,14 +257,14 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             } else {
                 
                 // error? do something ... but for now just clean up the alert dialog
-                let Action = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in }
+                let btnOkAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in }
                 let alertController = UIAlertController(
                     title: "Alert",
                     message: error,
                     preferredStyle: UIAlertControllerStyle.alert
                 )
                 
-                alertController.addAction(Action)
+                alertController.addAction(btnOkAction)
                 OperationQueue.main.addOperation { self.present(alertController, animated: true, completion:nil) }
             }
             
@@ -274,6 +305,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             let coordinate = CLLocationCoordinate2D(latitude: dictionary.latitude!, longitude: dictionary.longitude!)
             let annotation = PRSStudentMapAnnotation(coordinate)
             
+            annotation.objectId = dictionary.objectId
             annotation.url = dictionary.mediaURL ?? locationNoData
             annotation.subtitle = annotation.url ?? locationNoData
             annotation.title = NSString(
@@ -548,6 +580,15 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         calloutView.studentImage.image = UIImage(named: "imgUserDefault_v2")
         if studentAnnotation.ownLocation == true {
             calloutView.studentImage.image = UIImage(named: "icnUserSampleBig_v1")
+            
+            let btnImage = UIImage(named: "icnDelete_v1") as UIImage?
+            let btnDelete = UIButton(type: UIButtonType.custom) as UIButton
+            btnDelete.frame = CGRect(x: 108, y: 65, width: 25, height: 25)
+            btnDelete.setImage(btnImage, for: .normal)
+            btnDelete.accessibilityHint = studentAnnotation.objectId
+            btnDelete.addTarget(self, action: #selector(MapViewController.userLocationDeleteAction(_:)), for: .touchUpInside)
+            
+            calloutView.addSubview(btnDelete)
         }
         
         view.addSubview(calloutView)
