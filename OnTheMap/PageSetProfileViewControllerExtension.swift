@@ -137,8 +137,26 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
     }
     
     /*
-     * get students profile as NSDictionary block, used later as json body content
-     * for our upsert parse client method.
+     * validate string as accessable url using the "expensive" canOpenURL method
+     * return false on any kind of missmatch
+     */
+    private func validateMediaURLDirectly (
+        _ urlString: String?) -> Bool {
+        
+        if let _urlString = urlString {
+            
+            if let url = NSURL(string: _urlString) {
+                
+                return UIApplication.shared.canOpenURL(url as URL)
+            }
+        }
+        
+        return false
+    }
+    
+    /*
+     * get students profile as NSDictionary block from view input directly and generate (pre)json NSDictionary
+     * format as return object block. The meta data will also be prepared (e.g. mediaUrl)
      */
     private func getStudentMetaProfile(
         _ _accountKey: String!,
@@ -157,9 +175,8 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
         _geocoder.reverseGeocodeLocation(_location)
         {
             (placemarks, error) in
-            _mapString = self.getMapPlacemarkAsString(
-                withPlacemarks: placemarks,
-                error: error) ?? self.metaNoData
+            
+            _mapString = self.getMapPlacemarkAsString(withPlacemarks: placemarks, error: error) ?? self.metaNoData
             
             let currentStudentDict : NSDictionary =
                 [
@@ -199,8 +216,4 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
         
         return nil
     }
-    
-    //
-    // MARK: Delegates
-    //
 }
