@@ -30,14 +30,14 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             } else {
                 
                 // client error updating location? show corresponding message and return ...
-                let Action = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction!) in return }
+                let btnOkAction = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction!) in return }
                 let alertController = UIAlertController(
                     title: "Alert",
                     message: error,
                     preferredStyle: UIAlertControllerStyle.alert
                 )
                 
-                alertController.addAction(Action)
+                alertController.addAction(btnOkAction)
                 OperationQueue.main.addOperation {
                     self.present(alertController, animated: true, completion: nil)
                 }
@@ -91,14 +91,14 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             } else {
                 
                 // client error deleting location? show corresponding message and return ...
-                let Action = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction!) in return }
+                let btnOkAction = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction!) in return }
                 let alertController = UIAlertController(
                     title: "Alert",
                     message: error,
                     preferredStyle: UIAlertControllerStyle.alert
                 )
                 
-                alertController.addAction(Action)
+                alertController.addAction(btnOkAction)
                 OperationQueue.main.addOperation {
                     self.present(alertController, animated: true, completion: nil)
                 }
@@ -603,29 +603,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         if view.isKind(of: StudentMapAnnotationView.self) {
             for subview in view.subviews {
                 subview.removeFromSuperview()
-            }
-        }
-    }
-    
-    func mapView(
-       _ mapView: MKMapView,
-         annotationView view: MKAnnotationView,
-         calloutAccessoryControlTapped control: UIControl) {
-        
-        if control == view.rightCalloutAccessoryView {
-            
-            let app = UIApplication.shared
-            
-            if var mediaURL = (view.annotation?.subtitle!)! as String? {
-                
-                if (mediaURL.hasPrefix("www")) {
-                    mediaURL = NSString(format: "https://%@", mediaURL) as String
-                }
-                
-                let nsURL = URL(string: mediaURL)!
-                if app.canOpenURL(nsURL) {
-                    app.open(nsURL, options: [:], completionHandler: nil)
-                }
             }
         }
     }
