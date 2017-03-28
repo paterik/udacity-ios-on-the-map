@@ -14,6 +14,7 @@ class LocationEditViewController: UIViewController {
     // MARK: Variables
     //
     
+    var currentUserLocation: PRSStudentData? = nil
     var editMode: Bool = false
     var locationPageViewController: LocationPageViewController? {
         didSet { locationPageViewController?.locationDelegate = self }
@@ -46,6 +47,9 @@ class LocationEditViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let locationPageViewController = segue.destination as? LocationPageViewController {
+            locationPageViewController.editMode = editMode
+            locationPageViewController.currentUserLocation = nil
+            
             self.locationPageViewController = locationPageViewController
         }
     }
