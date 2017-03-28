@@ -46,6 +46,18 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     /*
+     * action wrapper for update userLocation using button click call from annotation directly
+     */
+    func userLocationEditProfileAction(_ sender: UIButton) {
+    
+        let objectId = sender.accessibilityHint
+        
+        if objectId != nil && objectId?.isEmpty == false {
+            print ("editProfile: \(objectId!)")
+        }
+    }
+    
+    /*
      * action wrapper for delete userLocation using button click call from annotation directly
      */
     func userLocationDeleteAction(_ sender: UIButton) {
@@ -117,7 +129,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     /*
-     * this method will add a new userLocation to our parse api persistence layer
+     * this method will add a new or update an existing userLocation from parse api persistence layer
      */
     func userLocationAdd(_ editMode: Bool) {
         
@@ -133,6 +145,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         vc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        vc.currentUserLocation = appDelegate.currentUserStudentLocation
         vc.editMode = editMode
         
         let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
@@ -581,14 +594,24 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         if studentAnnotation.ownLocation == true {
             calloutView.studentImage.image = UIImage(named: "icnUserSampleBig_v1")
             
-            let btnImage = UIImage(named: "icnDelete_v1") as UIImage?
+            let btnDeleteImage = UIImage(named: "icnDelete_v1") as UIImage?
             let btnDelete = UIButton(type: UIButtonType.custom) as UIButton
+            
+            let btnEditImage = UIImage(named: "icnEditProfile_v1") as UIImage?
+            let btnEdit = UIButton(type: UIButtonType.custom) as UIButton
+            
             btnDelete.frame = CGRect(x: 108, y: 65, width: 25, height: 25)
-            btnDelete.setImage(btnImage, for: .normal)
+            btnDelete.setImage(btnDeleteImage, for: .normal)
             btnDelete.accessibilityHint = studentAnnotation.objectId
             btnDelete.addTarget(self, action: #selector(MapViewController.userLocationDeleteAction(_:)), for: .touchUpInside)
             
+            btnEdit.frame = CGRect(x: 143, y: 65, width: 25, height: 25)
+            btnEdit.setImage(btnEditImage, for: .normal)
+            btnEdit.accessibilityHint = studentAnnotation.objectId
+            btnEdit.addTarget(self, action: #selector(MapViewController.userLocationEditProfileAction(_:)), for: .touchUpInside)
+            
             calloutView.addSubview(btnDelete)
+            calloutView.addSubview(btnEdit)
         }
         
         view.addSubview(calloutView)
