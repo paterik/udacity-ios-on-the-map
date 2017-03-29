@@ -47,20 +47,45 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
     /*
      * action wrapper for update userLocation using button click call from annotation directly
+     * try to fetch object by given object id and set it as appDelegate.currentUserStudentLocation
+     * after that call method userLocationAdd(_ editMode = true)
      */
-    func userLocationEditProfileAction(_ sender: UIButton) {
+    func userLocationEditProfileAction(
+       _ sender: UIButton) {
     
         let objectId = sender.accessibilityHint
         
         if objectId != nil && objectId?.isEmpty == false {
-            print ("editProfile: \(objectId!)")
+            
+            if let userLocation: PRSStudentData = getOwndedStudentLocationByObjectId(objectId!) {
+                
+                appDelegate.currentUserStudentLocation = userLocation
+                userLocationAdd( true )
+                
+            } else {
+                
+                let locationNotFoundWarning = UIAlertController(
+                    title: "Location Warning ...",
+                    message: "Location with objectId \(objectId) not found!",
+                    preferredStyle: UIAlertControllerStyle.alert
+                )
+                
+                let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
+                    return
+                }
+                
+                locationNotFoundWarning.addAction(dlgBtnCancelAction)
+                
+                self.present(locationNotFoundWarning, animated: true, completion: nil)
+            }
         }
     }
     
     /*
      * action wrapper for delete userLocation using button click call from annotation directly
      */
-    func userLocationDeleteAction(_ sender: UIButton) {
+    func userLocationDeleteAction(
+       _ sender: UIButton) {
         
         // using accessibilityHint "hack" to fetch a specific id (here objectId of parse.com)
         let objectId = sender.accessibilityHint
@@ -357,6 +382,21 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         }
         
         return distanceOut
+    }
+    
+    /*
+     * get a owned student location by their corresponding objectId
+     */
+    func getOwndedStudentLocationByObjectId(
+       _ objectId: String) -> PRSStudentData? {
+        
+        for location in clientParse.students.myLocations {
+            if location.objectId == objectId {
+                return location
+            }
+        }
+        
+        return nil
     }
     
     /*
