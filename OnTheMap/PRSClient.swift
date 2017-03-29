@@ -187,6 +187,11 @@ class PRSClient: NSObject {
     func getAllStudentLocations (
        _ completionHandlerForGetAllLocations: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
+        guard let sessionUdacity = clientUdacity.clientSession else {
+            completionHandlerForGetAllLocations(false, "Up's, no active udacity user session were found! Are you still logged in?")
+            return
+        }
+        
         let apiRequestURL = NSString(format: "%@?%@=%@&%@=%@", apiURL, apiOrderParam, apiOrderValue, apiLimitParam, apiLimitValue)
         
         client.get(apiRequestURL as String, headers: apiHeaderAuth)
@@ -194,7 +199,6 @@ class PRSClient: NSObject {
             (data, error) in
             
             if (error != nil) {
-                
                 completionHandlerForGetAllLocations(false, "Up's, your request couln't be handled ... \(error)")
                 
             } else {
@@ -206,13 +210,20 @@ class PRSClient: NSObject {
                 }
                 
                 self.students.locations.removeAll()
+                self.students.myLocations.removeAll()
                 
                 for dictionary in results as [NSDictionary] {
                     
                     let meta = PRSStudentData(dictionary)
                     if self.validateStudentMeta(meta) == true {
                         
+                        // add all relevant locations in collection
                         self.students.locations.append(meta)
+                        // add owned locations in separate collection
+                        if meta.uniqueKey != nil && meta.uniqueKey == sessionUdacity.accountKey! {
+                            self.students.myLocations.append(meta)
+                        }
+                        
                         if self.debugMode == true {
                             print ("\(meta)\n--")
                         }
@@ -220,7 +231,7 @@ class PRSClient: NSObject {
                 }
                 
                 self.metaStudentLocationsCountValid = self.students.locations.count
-                self.metaMyLocationsCount = results.count
+                self.metaStudentLocationsCount = results.count
                 // [ DEV/DBG ] : append a single fixture student meta block during development
                 self.addSampleStudentLocation()
                 
