@@ -3,6 +3,10 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 use_frameworks!
 
+def baseCore
+    pod 'BGTableViewRowActionWithImage'
+end
+
 def amazonSDKCore
     pod 'AWSS3'
 end
@@ -16,4 +20,5 @@ end
 target 'OnTheMap' do
     facebookSDKCore
     amazonSDKCore
+    baseCore
 end
