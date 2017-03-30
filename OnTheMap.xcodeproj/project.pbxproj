@@ -17,6 +17,8 @@
 		B119B58A1DE5A5F7002AF6AF /* UDCSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B119B5891DE5A5F7002AF6AF /* UDCSession.swift */; };
 		B12009381E734D08006E2499 /* StudentMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12009371E734D08006E2499 /* StudentMapAnnotationView.swift */; };
 		B120093A1E7355BC006E2499 /* StudentMapAnnotation.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1D68FB31E73340D008F73FA /* StudentMapAnnotation.xib */; };
+		B12AD3451E8C24A400BB9821 /* StudentTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B12AD3441E8C24A400BB9821 /* StudentTableCell.xib */; };
+		B12AD3471E8C271F00BB9821 /* StudentTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12AD3461E8C271F00BB9821 /* StudentTableCell.swift */; };
 		B12DBEC41DECD0B100C5988A /* FBSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DBEC31DECD0B100C5988A /* FBSession.swift */; };
 		B12EB42B1E290F7D0048526A /* RequestClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */; };
 		B13280F81E867BB000C03A8A /* PageSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13280F71E867BB000C03A8A /* PageSetViewController.swift */; };
@@ -88,6 +90,8 @@
 		B119B5851DE591F5002AF6AF /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B119B5891DE5A5F7002AF6AF /* UDCSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDCSession.swift; sourceTree = "<group>"; };
 		B12009371E734D08006E2499 /* StudentMapAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentMapAnnotationView.swift; sourceTree = "<group>"; };
+		B12AD3441E8C24A400BB9821 /* StudentTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StudentTableCell.xib; sourceTree = "<group>"; };
+		B12AD3461E8C271F00BB9821 /* StudentTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTableCell.swift; sourceTree = "<group>"; };
 		B12DBEC31DECD0B100C5988A /* FBSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBSession.swift; sourceTree = "<group>"; };
 		B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestClientExtension.swift; sourceTree = "<group>"; };
 		B13280F71E867BB000C03A8A /* PageSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSetViewController.swift; sourceTree = "<group>"; };
@@ -463,6 +467,8 @@
 				B1D68FB31E73340D008F73FA /* StudentMapAnnotation.xib */,
 				B1D68FB41E73340D008F73FA /* StudentMapAnnotation.swift */,
 				B12009371E734D08006E2499 /* StudentMapAnnotationView.swift */,
+				B12AD3441E8C24A400BB9821 /* StudentTableCell.xib */,
+				B12AD3461E8C271F00BB9821 /* StudentTableCell.swift */,
 			);
 			name = partials;
 			sourceTree = "<group>";
@@ -644,6 +650,7 @@
 				B1A15B501DE040FD002A4307 /* LaunchScreen.storyboard in Resources */,
 				B120093A1E7355BC006E2499 /* StudentMapAnnotation.xib in Resources */,
 				B1A15B4D1DE040FD002A4307 /* Assets.xcassets in Resources */,
+				B12AD3451E8C24A400BB9821 /* StudentTableCell.xib in Resources */,
 				B1A15B4B1DE040FD002A4307 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -767,6 +774,7 @@
 				B1CA1AFE1E856A6300981A5A /* LocationEditViewControllerExtension.swift in Sources */,
 				B11812941DE4699B00C1C91C /* UDCClientExtension.swift in Sources */,
 				B118128C1DE4664600C1C91C /* LoginViewControllerExtension.swift in Sources */,
+				B12AD3471E8C271F00BB9821 /* StudentTableCell.swift in Sources */,
 				B1A15B461DE040FD002A4307 /* AppDelegate.swift in Sources */,
 				B1D40DDE1E84E2570063636E /* LocationPageViewController.swift in Sources */,
 				B119B5861DE591F5002AF6AF /* String.swift in Sources */,
