@@ -171,15 +171,25 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
         let _geocoder = CLGeocoder()
         let _location = CLLocation(latitude: _latitude!, longitude: _longitude!)
         var _mapString: String?
+        var _objectId: String! = ""
         
         _geocoder.reverseGeocodeLocation(_location)
         {
             (placemarks, error) in
             
+            if error != nil {
+                completionHandlerForStudentMetaProfile(false, error!.localizedDescription, nil)
+            }
+            
             _mapString = self.getMapPlacemarkAsString(withPlacemarks: placemarks, error: error) ?? self.metaNoData
+            
+            if self.appDelegate.inEditMode {
+                _objectId = (self.appDelegate.currentUserStudentLocation?.objectId!)! as String
+            }
             
             let currentStudentDict : NSDictionary =
                 [
+                    "objectId"  : _objectId!,
                     "uniqueKey" : _accountKey!,
                     "firstName" : self.inpFirstname.text! as String,
                     "lastName"  : self.inpLastname.text! as String,
