@@ -23,7 +23,7 @@ class PRSClient: NSObject {
     // MARK: Constants (Normal)
     //
     
-    let debugMode: Bool = false
+    let debugMode: Bool = true
     let session = URLSession.shared
     let client = RequestClient.sharedInstance
     let clientUdacity = UDCClient.sharedInstance
@@ -40,7 +40,7 @@ class PRSClient: NSObject {
     let apiOrderParam: String = "order"
     let apiOrderValue: String = "-updatedAt"
     let apiLimitParam: String = "limit"
-    let apiLimitValue: String = "100"
+    let apiLimitValue: String = "200"
     
     let apiHeaderAuth = [
         "X-Parse-Application-Id": "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr",
@@ -89,10 +89,10 @@ class PRSClient: NSObject {
        _ studentData: PRSStudentData?,
        _ completionHandlerForUpdateCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
-        let objectId = appDelegate.currentUserStudentLocation?.objectId!
-        let apiRequestURL = NSString(format: "%@/%@", apiURL, objectId!)
+        let apiRequestURL = NSString(format: "%@/%@", apiURL, studentData!.objectId!)
         let studentDataArray = prepareStudentMetaForPutRequest(studentData!)
         
+        completionHandlerForUpdateCurrentLocation(true, nil)
         client.put(apiRequestURL as String, headers: apiHeaderAuth, jsonBody: studentDataArray as [String : AnyObject]?)
         {
             (data, error) in
@@ -209,14 +209,12 @@ class PRSClient: NSObject {
                     return
                 }
                 
-                self.students.locations.removeAll()
-                self.students.myLocations.removeAll()
+                self.students.clearCollections()
                 
                 for dictionary in results as [NSDictionary] {
-                    
+                
                     let meta = PRSStudentData(dictionary)
                     if self.validateStudentMeta(meta) == true {
-                        
                         // add all relevant locations in collection
                         self.students.locations.append(meta)
                         // add owned locations in separate collection
