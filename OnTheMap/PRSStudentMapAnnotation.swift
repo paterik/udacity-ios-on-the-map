@@ -20,6 +20,7 @@ class PRSStudentMapAnnotation: NSObject, MKAnnotation {
     var determined: Date?
     var ownLocation: Bool! = false
     var objectId: String?
+    var flag: String?
     
     init(_ coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
