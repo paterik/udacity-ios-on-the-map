@@ -11,29 +11,61 @@ import MapKit
 
 extension CLPlacemark {
     
-    var compactAddress: String? {
+    var compactAdress: String? {
+    
+        if let _ = locality {
         
-        if let name = name {
-            
-            var result = name
+            var addressString:String = ""
             
             if let _street = thoroughfare {
-                result += ", \(_street)"
+                addressString += "\(_street), "
             }
             
             if let _zipCode = postalCode {
-                result += ", \(_zipCode)"
+                addressString += "\(_zipCode)"
             }
             
             if let _city = locality {
-                result += " \(_city)"
+                addressString += " \(_city)"
             }
             
             if let _country = country {
-                result += " (\(_country))"
+                addressString += ", \(_country)"
             }
             
-            return result
+            return addressString
+        }
+        
+        return nil
+    }
+    
+    var fullAddress: String? {
+        
+        if let _ = locality {
+            
+            var addressString:String = ""
+            
+            if let _name = name {
+                addressString += "\(_name), "
+            }
+            
+            if let _street = thoroughfare {
+                addressString += "\(_street), "
+            }
+            
+            if let _zipCode = postalCode {
+                addressString += "\(_zipCode)"
+            }
+            
+            if let _city = locality {
+                addressString += " \(_city)"
+            }
+            
+            if let _country = country {
+                addressString += ", \(_country)"
+            }
+            
+            return addressString
         }
         
         return nil
