@@ -144,7 +144,7 @@
         <!--LocationTableViewController-->
         <scene sceneID="BOo-8A-Q0z">
             <objects>
-                <viewController storyboardIdentifier="LocationTableViewController" title="LocationTableViewController" id="9CU-nN-4mc" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationTableViewController" title="LocationTableViewController" id="9CU-nN-4mc" customClass="TableViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wMa-49-uly"/>
                         <viewControllerLayoutGuide type="bottom" id="dc8-d7-KWA"/>
@@ -166,19 +166,40 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p9o-fR-MV7" userLabel="ui_view_table">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="studentLocationCell" rowHeight="75" id="yUW-is-oJG" userLabel="ui_view_table_cell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yUW-is-oJG" id="W5K-4k-JVs">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="xhJ-2d-OjN" secondAttribute="trailing" id="MfG-pL-Nqh"/>
-                            <constraint firstItem="xhJ-2d-OjN" firstAttribute="top" secondItem="wMa-49-uly" secondAttribute="bottom" id="Pd4-p8-eAh"/>
-                            <constraint firstItem="xhJ-2d-OjN" firstAttribute="leading" secondItem="9uU-k6-b9j" secondAttribute="leading" id="oa8-xY-64v"/>
+                            <constraint firstItem="xhJ-2d-OjN" firstAttribute="top" secondItem="wMa-49-uly" secondAttribute="bottom" id="0KV-kw-DP0"/>
+                            <constraint firstItem="xhJ-2d-OjN" firstAttribute="trailing" secondItem="p9o-fR-MV7" secondAttribute="trailing" id="561-xW-g5v"/>
+                            <constraint firstAttribute="trailing" secondItem="xhJ-2d-OjN" secondAttribute="trailing" id="5HR-D7-kDF"/>
+                            <constraint firstItem="p9o-fR-MV7" firstAttribute="bottom" secondItem="dc8-d7-KWA" secondAttribute="top" id="9nw-0v-crw"/>
+                            <constraint firstItem="xhJ-2d-OjN" firstAttribute="leading" secondItem="p9o-fR-MV7" secondAttribute="leading" id="EZ5-W4-IFe"/>
+                            <constraint firstItem="p9o-fR-MV7" firstAttribute="top" secondItem="xhJ-2d-OjN" secondAttribute="bottom" id="Tm6-nF-Bma"/>
+                            <constraint firstItem="xhJ-2d-OjN" firstAttribute="leading" secondItem="9uU-k6-b9j" secondAttribute="leading" id="vgX-KA-qdq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ii6-sd-plE"/>
+                    <connections>
+                        <outlet property="tableView" destination="p9o-fR-MV7" id="UJz-YZ-f51"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jor-8y-smy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2534" y="413"/>
+            <point key="canvasLocation" x="2533.5999999999999" y="412.44377811094455"/>
         </scene>
         <!--LocationMapViewController-->
         <scene sceneID="haW-oT-1GN">
