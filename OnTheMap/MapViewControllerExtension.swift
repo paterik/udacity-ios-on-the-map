@@ -343,8 +343,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
             renderDistance = true
         }
-        
-        for var dictionary in students.locations {
+
+        for (index, dictionary) in students.locations.enumerated() {
             
             let coordinate = CLLocationCoordinate2D(latitude: dictionary.latitude!, longitude: dictionary.longitude!)
             let annotation = PRSStudentMapAnnotation(coordinate)
@@ -360,7 +360,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             if renderDistance {
                 targetLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
                 annotation.distance = getPrintableDistanceBetween(sourceLocation, targetLocation)
-                dictionary.distance = annotation.distance ?? "0 km"
+                
+                students.locations[index].distance = annotation.distance!
             }
             
             if dictionary.uniqueKey == clientParse.clientUdacity.clientSession?.accountKey! {
