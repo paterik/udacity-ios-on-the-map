@@ -1,16 +1,64 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="StudentTableCell" customModule="OnTheMap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="75"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Patrick Paechnatz " textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUq-fs-Xxw" userLabel="ui_lbl_studentName">
+                    <rect key="frame" x="10" y="0.0" width="280" height="32"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 km" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEG-jw-a56" userLabel="ui_lbl_studentDistance">
+                    <rect key="frame" x="147" y="53" width="143" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="143" id="a9v-uH-azd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Juan, PR, United States" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zcB-83-QVb" userLabel="ui_lbl_studentMapString">
+                    <rect key="frame" x="10" y="31" width="280" height="14"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="zUq-fs-Xxw" firstAttribute="trailing" secondItem="zcB-83-QVb" secondAttribute="trailing" id="DLO-0X-BFx"/>
+                <constraint firstItem="zUq-fs-Xxw" firstAttribute="leading" secondItem="zcB-83-QVb" secondAttribute="leading" id="Hl7-vh-bno"/>
+                <constraint firstItem="PEG-jw-a56" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottomMargin" id="Nfr-Fu-1L7"/>
+                <constraint firstItem="zUq-fs-Xxw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="OAT-yX-Hy8"/>
+                <constraint firstItem="PEG-jw-a56" firstAttribute="top" secondItem="zcB-83-QVb" secondAttribute="bottom" constant="8" symbolic="YES" id="ORi-rt-w2n"/>
+                <constraint firstItem="zcB-83-QVb" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="RVf-0c-yIY"/>
+                <constraint firstItem="PEG-jw-a56" firstAttribute="top" secondItem="zUq-fs-Xxw" secondAttribute="bottom" constant="21" id="ap2-lK-xE6"/>
+                <constraint firstItem="zUq-fs-Xxw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="c7C-wG-UtH"/>
+                <constraint firstItem="zcB-83-QVb" firstAttribute="trailing" secondItem="PEG-jw-a56" secondAttribute="trailing" id="caj-PG-BEI"/>
+                <constraint firstItem="zUq-fs-Xxw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="ywQ-Bx-kHj"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="lblStudentDistance" destination="PEG-jw-a56" id="8iz-Md-ymE"/>
+                <outlet property="lblStudentMapString" destination="zcB-83-QVb" id="FYr-wy-b45"/>
+                <outlet property="lblStudentName" destination="zUq-fs-Xxw" id="IXe-TB-7kt"/>
+            </connections>
+            <point key="canvasLocation" x="72" y="53.5"/>
         </view>
     </objects>
 </document>

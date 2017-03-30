@@ -6,4 +6,15 @@
 //  Copyright © 2017 Patrick Paechnatz. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class StudentTableCell: UITableViewCell {
+    
+    @IBOutlet weak var lblStudentDistance: UILabel!
+    @IBOutlet weak var lblStudentName: UILabel!
+    @IBOutlet weak var lblStudentMapString: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+}
