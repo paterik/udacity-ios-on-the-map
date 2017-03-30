@@ -150,7 +150,6 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func userLocationDeleteFromRow(
        _ objectId: String!) {
-    
         
         let locationDestructionWarning = UIAlertController(
             title: "Removal Warning ...",

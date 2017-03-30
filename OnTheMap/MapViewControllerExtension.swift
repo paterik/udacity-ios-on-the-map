@@ -319,7 +319,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     /*
-     * generate the student meta based map annoation array and render results by async queue transfer to mapView directly
+     * generate the student meta based map annoation array, render results by async queue transfer to mapView directly
+     * and manipulate/enrich the origin location by further (calculated) meta-data (currently the device distance to
+     * other students)
      */
     func generateMapAnnotationsArray () {
         
@@ -360,7 +362,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             if renderDistance {
                 targetLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
                 annotation.distance = getPrintableDistanceBetween(sourceLocation, targetLocation)
-                
                 students.locations[index].distance = annotation.distance!
             }
             
