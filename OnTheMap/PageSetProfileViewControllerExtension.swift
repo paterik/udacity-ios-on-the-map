@@ -205,7 +205,7 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
     
     /*
      * tranlate current map coordinate based placemark to a human readable location string
-     * try to render a compactAddress using my own CLPlacemark extension fallback (a) to city
+     * try to render a compactAdress using my own CLPlacemark extension fallback (a) to city
      * name on any nil-return, fallback (b) return nil
      */
     private func getMapPlacemarkAsString(
@@ -220,7 +220,7 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
             
             if let placemarks = placemarks, let placemark = placemarks.first {
                 
-                return placemark.compactAddress ?? placemark.locality
+                return placemark.compactAdress ?? placemark.locality
             }
         }
         
