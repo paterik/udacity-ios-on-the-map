@@ -22,8 +22,6 @@ class LocationPageViewController: UIPageViewController, PageSetViewControllerPro
     //
     
     weak var locationDelegate: LocationPageViewControllerDelegate?
-    var currentUserLocation: PRSStudentData? = nil
-    var editMode: Bool = false
     
     // complete controller stack to handle location manually (followed by profile and details)
     fileprivate(set) lazy var completeViewControllers: [UIViewController] = {
