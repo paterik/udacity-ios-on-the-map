@@ -29,6 +29,25 @@ struct PRSStudentData {
     var _createdAtRaw: NSString!
     var _updatedAtRaw: NSString!
     
+    private var _distance: String = ""
+    private var _country: String = ""
+    private var _flag: String = ""
+    
+    public var distance: String {
+        get { return self._distance }
+        set { self._distance = newValue }
+    }
+    
+    public var country: String {
+        get { return self._country }
+        set { self._country = newValue }
+    }
+    
+    public var flag: String {
+        get { return self._flag }
+        set { self._flag = newValue }
+    }
+    
     var asArray: [String : Any] {
         
         get {
