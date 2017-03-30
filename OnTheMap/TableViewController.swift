@@ -66,7 +66,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
          cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! StudentTableCell!
-        let studentLocationMeta = clientParse.students.locations[indexPath.row]
+        let studentLocationMeta = locations[indexPath.row]
         
         cell?.lblStudentName.text = NSString(
             format: "%@ %@ %@",
