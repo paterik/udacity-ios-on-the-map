@@ -82,7 +82,7 @@ class PageSetProfileViewController: PageSetViewController {
             
             if success == true {
                 
-                if self.editMode == false {
+                if self.appDelegate.inEditMode == false {
                 
                     if self.createStudentMetaData(studentData) == true {
                         self.btnCloseViewAction(sender)
@@ -90,6 +90,7 @@ class PageSetProfileViewController: PageSetViewController {
                     
                 } else {
                 
+                    // bug: objectId seems to be nil!
                     if self.updateStudentMetaData(studentData) == true {
                         self.btnCloseViewAction(sender)
                     }
