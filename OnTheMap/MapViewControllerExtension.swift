@@ -392,15 +392,15 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     /*
-     * get a nice flag by incomming location coordinate set
+     * get a nice flag by incomming location coordinate set (will be used future version)
      */
     func getPrintableFlagByLocation(
-        _ location: CLLocation!,
-        _ completionHandlerGetFlag: @escaping (
-        _ success: Bool?,
-        _ error: String?,
-        _ country: String?,
-        _ flag: String?) -> Void) {
+       _ location: CLLocation!,
+       _ completionHandlerGetFlag: @escaping (
+       _ success: Bool?,
+       _ error: String?,
+       _ country: String?,
+       _ flag: String?) -> Void) {
     
         let geoCoder = CLGeocoder()
         
@@ -423,9 +423,10 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     /*
-     * get a flag by given country iso-code
+     * get a flag by given country iso-code (will be used in future version)
      */
-    func flag(_ country: String) -> String {
+    func flag(
+       _ country: String) -> String {
 
         return country.unicodeScalars.flatMap { String.init(UnicodeScalar(127397 + $0.value)!) }.joined()
     }
