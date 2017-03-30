@@ -25,9 +25,10 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     let debugMode: Bool = false
     let clientParse = PRSClient.sharedInstance
     let clientUdacity = UDCClient.sharedInstance
-    let cellIdentifier = "studentLocationCell"
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let locationNoData = ""
     let locationCellHeight: CGFloat = 75.0
+    let cellIdentifier = "studentLocationCell"
     
     //
     // MARK: Variables
@@ -45,8 +46,6 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-        // let views = Bundle.main.loadNibNamed("StudentMapAnnotation", owner: nil, options: nil)
         tableView.register(UINib(nibName: "StudentTableCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
     }
     
@@ -104,7 +103,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             with: UITableViewRowActionStyle.default,
             title: "Profile",
             
-            backgroundColor: UIColor(netHex: 0x16A184),
+            backgroundColor: UIColor(netHex: 0x33383C),
             image: UIImage(named: "icnTableCellProfile_v2"),
             forCellHeight: UInt(self.locationCellHeight)) { action, index in
                 
@@ -142,5 +141,35 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         return [link!]
+    }
+    
+    func userLocationEditFromRow(
+       _ objectId: String!) {
+    
+    }
+    
+    func userLocationDeleteFromRow(
+       _ objectId: String!) {
+    
+        
+        let locationDestructionWarning = UIAlertController(
+            title: "Removal Warning ...",
+            message: "Do you really want to delete this location?",
+            preferredStyle: UIAlertControllerStyle.alert
+        )
+            
+        let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
+        //        self.Map.sharedInstance.userLocationDelete(objectId!)
+        }
+            
+        let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
+            return
+        }
+            
+        locationDestructionWarning.addAction(dlgBtnYesAction)
+        locationDestructionWarning.addAction(dlgBtnCancelAction)
+            
+        self.present(locationDestructionWarning, animated: true, completion: nil)
+        
     }
 }
