@@ -17,7 +17,7 @@ extension PRSClient {
        _ studentData: PRSStudentData?) -> [String : AnyObject]? {
         
         var studentDataArray = studentData!.asArray
-            studentDataArray["objectId"] = appDelegate.currentUserStudentLocation?.objectId!
+            // studentDataArray["objectId"] = appDelegate.currentUserStudentLocation?.objectId!
         
         if let index = studentDataArray.index(forKey: "createdAt") {
             studentDataArray.remove(at: index)
@@ -84,7 +84,8 @@ extension PRSClient {
     
     /*
      * validate incoming student meta lines check for valid geo localization properties, return false if
-     * coordinates seems invalid (using regex validation process)
+     * coordinates seems invalid (using regex validation process), uniqueKey and objectId are missing or
+     * objectId/uniqueId already stored in collection
      */
     func validateStudentMeta(
        _ meta:PRSStudentData) -> Bool {
@@ -92,7 +93,9 @@ extension PRSClient {
         var isValid: Bool = false
         
         guard let _latitudeRaw = meta.latitude,
-              let _longitudeRaw = meta.longitude else {
+              let _longitudeRaw = meta.longitude,
+              let _objectId = meta.objectId,
+              let _uniqueKey = meta.uniqueKey else {
             
             return isValid
         }
@@ -103,10 +106,16 @@ extension PRSClient {
         let _longitudeRegex = "^(\\+|-)?(?:180(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,6})?))$"
         
         if (_longitude.range(of: _longitudeRegex, options: .regularExpression) != nil &&
-            _latitude.range(of: _latitudeRegex, options: .regularExpression) != nil) {
+            _latitude.range(of: _latitudeRegex, options: .regularExpression) != nil &&
+            _uniqueKey != "" && _objectId != "" &&
+             students.locationObjectIds.contains(_objectId) == false &&
+             students.locationUniqueKeys.contains(_uniqueKey) == false) {
             
             isValid = true
         }
+        
+        students.locationObjectIds.append(meta.objectId)
+        students.locationUniqueKeys.append(meta.uniqueKey)
         
         return isValid
     }
