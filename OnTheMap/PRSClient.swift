@@ -73,7 +73,7 @@ class PRSClient: NSObject {
             
             if (error != nil) {
                 
-                completionHandlerForSetCurrentLocation(false, "Up's, your request couln't be handled ... \(error)")
+                completionHandlerForSetCurrentLocation(false, "Up's, your request couln't be handled ... \(String(describing: error))")
                 
             } else {
                 
@@ -99,7 +99,7 @@ class PRSClient: NSObject {
             
             if (error != nil) {
                 
-                completionHandlerForUpdateCurrentLocation(false, "Up's, your request couln't be handled ... \(error)")
+                completionHandlerForUpdateCurrentLocation(false, "Up's, your request couln't be handled ... \(String(describing: error))")
                 
             } else {
                 
@@ -123,7 +123,7 @@ class PRSClient: NSObject {
             
             if (error != nil) {
                 
-                completionHandlerForDeleteCurrentLocation(false, "Up's, your request couln't be handled ... \(error)")
+                completionHandlerForDeleteCurrentLocation(false, "Up's, your request couln't be handled ... \(String(describing: error))")
                 
             } else {
                 
@@ -153,7 +153,7 @@ class PRSClient: NSObject {
             
             if (error != nil) {
                 
-                completionHandlerForCurrentLocation(false, "Up's, your request couln't be handled ... \(error)")
+                completionHandlerForCurrentLocation(false, "Up's, your request couln't be handled ... \(String(describing: error))")
                 
             } else {
                 
@@ -199,7 +199,7 @@ class PRSClient: NSObject {
             (data, error) in
             
             if (error != nil) {
-                completionHandlerForGetAllLocations(false, "Up's, your request couln't be handled ... \(error)")
+                completionHandlerForGetAllLocations(false, "Up's, your request couln't be handled ... \(String(describing: error))")
                 
             } else {
                 

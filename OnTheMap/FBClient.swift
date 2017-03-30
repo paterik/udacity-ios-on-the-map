@@ -109,7 +109,7 @@ class FBClient: NSObject {
                 
             if error != nil {
                 /* error 01: general exception/error during facebook login detected */
-                completionHandlerForToken(false, nil, "\(error?.localizedDescription)")
+                completionHandlerForToken(false, nil, "\(String(describing: error?.localizedDescription))")
                 return
                     
             } else if (FBSDKLoginManagerLoginResult?.isCancelled)! {

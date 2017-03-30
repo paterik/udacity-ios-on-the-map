@@ -166,7 +166,7 @@ class RequestClient {
                 
                 /* GUARD: Was there an error? */
                 guard error == nil else {
-                    sendError(error: "Up's, there was a general error with your request: \(error)")
+                    sendError(error: "Up's, there was a general error with your request: \(String(describing: error))")
                     return
                 }
                 

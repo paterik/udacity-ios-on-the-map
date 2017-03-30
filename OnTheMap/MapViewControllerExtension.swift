@@ -70,7 +70,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 
                 let locationNotFoundWarning = UIAlertController(
                     title: "Location Warning ...",
-                    message: "Location with objectId \(objectId) not found!",
+                    message: "Location with objectId \(String(describing: objectId)) not found!",
                     preferredStyle: UIAlertControllerStyle.alert
                 )
                 
