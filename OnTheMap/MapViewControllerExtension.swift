@@ -21,7 +21,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func userLocationUpdate(
        _ userLocation: PRSStudentData!) {
     
-        self.clientParse.updateStudentLocation(userLocation) { (success, error) in
+        self.clientParse.updateStudentLocation(userLocation) {
+            
+            (success, error) in
             
             if success == true {
                 
@@ -49,6 +51,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      * action wrapper for update userLocation using button click call from annotation directly
      * try to fetch object by given object id and set it as appDelegate.currentUserStudentLocation
      * after that call method userLocationAdd(_ editMode = true)
+     *
+     * bug: it seems to be that an update will create a second location :(
      */
     func userLocationEditProfileAction(
        _ sender: UIButton) {
@@ -119,7 +123,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func userLocationDelete(
        _ userLocationObjectId: String!) {
         
-        self.clientParse.deleteStudentLocation (userLocationObjectId) { (success, error) in
+        self.clientParse.deleteStudentLocation (userLocationObjectId) {
+            
+            (success, error) in
             
             if success == true {
                 
@@ -170,16 +176,14 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         vc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        vc.currentUserLocation = appDelegate.currentUserStudentLocation
-        vc.editMode = editMode
         
         let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
             // check device location again ...
             self.locationFetchStart()
             // useCurrentDeviceLocation: true means our pageViewController will use a smaller stack of pageSetControllers
             self.appDelegate.useCurrentDeviceLocation = true
-            // check if last location doesn't match the current one ...
-            if self.validateCurrentLocationAgainstLastPersistedOne() == false {
+            // check if last location doesn't match the current one ... if app in create mode only
+            if editMode == false && self.validateCurrentLocationAgainstLastPersistedOne() == false {
                 
                 let locationDuplicateWarningController = UIAlertController(
                     title: "Duplication Warning ...",
@@ -200,7 +204,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 locationDuplicateWarningController.addAction(dlgBtnCancelAction)
                 
                 self.present(locationDuplicateWarningController, animated: true, completion: nil)
-            
+                
             } else {
                 
                 self.present(vc, animated: true, completion: nil)
@@ -286,7 +290,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         self.activitySpinner.stopAnimating()
         self.view.willRemoveSubview(self.activitySpinner)
         
-        clientParse.getAllStudentLocations () { (success, error) in
+        clientParse.getAllStudentLocations () {
+            
+            (success, error) in
             
             if success == true {
                 
@@ -338,7 +344,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             renderDistance = true
         }
         
-        for dictionary in students.locations {
+        for var dictionary in students.locations {
             
             let coordinate = CLLocationCoordinate2D(latitude: dictionary.latitude!, longitude: dictionary.longitude!)
             let annotation = PRSStudentMapAnnotation(coordinate)
@@ -354,6 +360,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             if renderDistance {
                 targetLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
                 annotation.distance = getPrintableDistanceBetween(sourceLocation, targetLocation)
+                dictionary.distance = annotation.distance ?? "0 km"
             }
             
             if dictionary.uniqueKey == clientParse.clientUdacity.clientSession?.accountKey! {
@@ -382,6 +389,45 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         }
         
         return distanceOut
+    }
+    
+    /*
+     * get a nice flag by incomming location coordinate set
+     */
+    func getPrintableFlagByLocation(
+        _ location: CLLocation!,
+        _ completionHandlerGetFlag: @escaping (
+        _ success: Bool?,
+        _ error: String?,
+        _ country: String?,
+        _ flag: String?) -> Void) {
+    
+        let geoCoder = CLGeocoder()
+        
+        geoCoder.reverseGeocodeLocation(location) {
+            
+            (placemarks, error) -> Void in
+            
+            if error != nil {
+                completionHandlerGetFlag(false, error!.localizedDescription, nil, nil)
+            }
+            
+            if let placemarks = placemarks,
+               let placemark = placemarks.first,
+               let isoCountryCode = placemark.isoCountryCode,
+               let country = placemark.country {
+            
+                completionHandlerGetFlag(true, nil, country, self.flag(isoCountryCode))
+            }
+        }
+    }
+    
+    /*
+     * get a flag by given country iso-code
+     */
+    func flag(_ country: String) -> String {
+
+        return country.unicodeScalars.flatMap { String.init(UnicodeScalar(127397 + $0.value)!) }.joined()
     }
     
     /*
@@ -552,7 +598,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
                 // ignore first attempt
                 if locationFetchStartTime == nil {
-                    
                     locationFetchStartTime = Date()
                     
                     return
@@ -560,7 +605,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
                 // ignore overtime requests
                 if _determinationTime.timeIntervalSince(self.locationFetchStartTime) > locationCheckTimeout {
-                    
                     locationFetchStop()
                 
                     return
@@ -570,7 +614,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                 if _accuracy < 0 || _accuracy > locationAccuracy { return }
             
                 locationFetchStop()
-            
                 updateCurrentLocationMeta(_coordinate)
             
             case 2:
