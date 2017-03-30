@@ -12,6 +12,20 @@ class PRSStudentLocations {
     
     static let sharedInstance = PRSStudentLocations()
     
+    // collection for all student locations
     var locations = [PRSStudentData]()
+    // collection for my owned locations
     var myLocations = [PRSStudentData]()
+    // collection helper for location object id's (used to unique/cleanUp collection)
+    var locationObjectIds = [String]()
+    // collection helper for location unique keys (used to unique/cleanUp collection)
+    var locationUniqueKeys = [String]()
+    
+    func clearCollections() {
+    
+        locations.removeAll()
+        myLocations.removeAll()
+        locationObjectIds.removeAll()
+        locationUniqueKeys.removeAll()
+    }
 }
