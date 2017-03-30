@@ -17,6 +17,12 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     //
+    // MARK: Constants (Statics)
+    //
+    
+    static let sharedInstance = MapViewController()
+    
+    //
     // MARK: Constants (Normal)
     //
     
