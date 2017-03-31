@@ -143,7 +143,29 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 image: UIImage(named: "icnTableCellDelete_v2"),
                 forCellHeight: UInt(self.locationCellHeight)) { action, index in
                 
-                    print (currentCellLocation)
+                    let locationDestructionWarning = UIAlertController(
+                        title: "Removal Warning ...",
+                        message: "Do you really want to delete this location?",
+                        preferredStyle: UIAlertControllerStyle.alert
+                    )
+                    
+                    let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
+                        // execute api call to delete user location object
+                        print ("_ delete: ")
+                        print (currentCellLocation)
+                        self.userLocationDeleteFromRow(currentCellLocation.objectId!, [indexPath])
+                    }
+                    
+                    let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
+                        return
+                    }
+                    
+                    locationDestructionWarning.addAction(dlgBtnYesAction)
+                    locationDestructionWarning.addAction(dlgBtnCancelAction)
+                    
+                    
+                    self.present(locationDestructionWarning, animated: true, completion: nil)
+                    
             }
             
             return [link!, edit!, delete!]
@@ -157,27 +179,42 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     }
     
+    /*
+     * delete a specific userLocation from parse api persitence layer
+     */
     func userLocationDeleteFromRow(
-       _ objectId: String!) {
+        _ userLocationObjectId: String!,
+        _ indexPath: [IndexPath]) {
         
-        let locationDestructionWarning = UIAlertController(
-            title: "Removal Warning ...",
-            message: "Do you really want to delete this location?",
-            preferredStyle: UIAlertControllerStyle.alert
-        )
+        self.clientParse.deleteStudentLocation (userLocationObjectId) {
             
-        let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
-        //        self.Map.sharedInstance.userLocationDelete(objectId!)
+            (success, error) in
+            
+            if success == true {
+                
+                // remove object id from all corresponding collections
+                self.clientParse.students.removeByObjectId(userLocationObjectId)
+                self.appDelegate.forceMapReload = true
+                
+                OperationQueue.main.addOperation {
+                    self.tableView.reloadData()
+                }
+                
+            } else {
+                
+                // client error deleting location? show corresponding message and return ...
+                let btnOkAction = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction!) in return }
+                let alertController = UIAlertController(
+                    title: "Alert",
+                    message: error,
+                    preferredStyle: UIAlertControllerStyle.alert
+                )
+                
+                alertController.addAction(btnOkAction)
+                OperationQueue.main.addOperation {
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
         }
-            
-        let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
-            return
-        }
-            
-        locationDestructionWarning.addAction(dlgBtnYesAction)
-        locationDestructionWarning.addAction(dlgBtnCancelAction)
-            
-        self.present(locationDestructionWarning, animated: true, completion: nil)
-        
     }
 }
