@@ -25,6 +25,12 @@ class PRSStudentLocations {
     
         locations.removeAll()
         myLocations.removeAll()
+        
+        clearValidatorCache()
+    }
+    
+    func clearValidatorCache() {
+        
         locationObjectIds.removeAll()
         locationUniqueKeys.removeAll()
     }
