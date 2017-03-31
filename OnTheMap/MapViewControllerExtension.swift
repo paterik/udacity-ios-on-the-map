@@ -345,7 +345,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
             renderDistance = true
         }
-
+        
         for (index, dictionary) in students.locations.enumerated() {
             
             let coordinate = CLLocationCoordinate2D(latitude: dictionary.latitude!, longitude: dictionary.longitude!)
@@ -384,53 +384,13 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         let distanceValue = sourceLocation.distance(from: targetLocation)
         
-        // todo(!) should be handle by localization manager instead using static metric definition
+        // todo(!) should be handle by localization manager instead using static metric definition here
         var distanceOut: String! = NSString(format: "%.0f %@", distanceValue, "m") as String
         if distanceValue >= locationDistanceDivider {
             distanceOut = NSString(format: "%.0f %@", (distanceValue / locationDistanceDivider), "km") as String
         }
         
         return distanceOut
-    }
-    
-    /*
-     * get a nice flag by incomming location coordinate set (will be used future version)
-     */
-    func getPrintableFlagByLocation(
-       _ location: CLLocation!,
-       _ completionHandlerGetFlag: @escaping (
-       _ success: Bool?,
-       _ error: String?,
-       _ country: String?,
-       _ flag: String?) -> Void) {
-    
-        let geoCoder = CLGeocoder()
-        
-        geoCoder.reverseGeocodeLocation(location) {
-            
-            (placemarks, error) -> Void in
-            
-            if error != nil {
-                completionHandlerGetFlag(false, error!.localizedDescription, nil, nil)
-            }
-            
-            if let placemarks = placemarks,
-               let placemark = placemarks.first,
-               let isoCountryCode = placemark.isoCountryCode,
-               let country = placemark.country {
-            
-                completionHandlerGetFlag(true, nil, country, self.flag(isoCountryCode))
-            }
-        }
-    }
-    
-    /*
-     * get a flag by given country iso-code (will be used in future version)
-     */
-    func flag(
-       _ country: String) -> String {
-
-        return country.unicodeScalars.flatMap { String.init(UnicodeScalar(127397 + $0.value)!) }.joined()
     }
     
     /*
@@ -450,7 +410,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
     /*
      * check current device location against the last persisted studentLocation meta information.
-     * If both locations seems to be plausible equal this validation method will be returned false.
+     * If both locations seems to be "plausible equal" this validation method will be returned false.
      * For accuracy reasons I'll round the coordinates down to 6 decimal places (:locationCoordRound)
      */
     func validateCurrentLocationAgainstLastPersistedOne() -> Bool {
