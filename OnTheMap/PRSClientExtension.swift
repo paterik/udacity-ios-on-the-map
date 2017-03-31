@@ -19,7 +19,6 @@ extension PRSClient {
        _ studentData: PRSStudentData?) -> [String : AnyObject]? {
         
         var studentDataArray = studentData!.asArray
-            // studentDataArray["objectId"] = appDelegate.currentUserStudentLocation?.objectId!
         
         if let index = studentDataArray.index(forKey: "createdAt") {
             studentDataArray.remove(at: index)
@@ -95,37 +94,31 @@ extension PRSClient {
         
             if self.validateStudentMeta(meta) == true {
             
-                // try to evaluate cached api call respones first
+                // try to evaluate cached response/result instead of using an "expensive" google api call first
                 self.clientGoogle.getMapMetaByCache(meta.longitude!, meta.latitude!) {
                     
                     (success, message, gClientSession) in
                     
                     if success == true {
                         
-                        let flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
-                        
-                        print ("_evaluated by cache #\(index) \(meta.longitude!),\(meta.latitude!) found flag \(flag)")
                         self.students.locations[index].flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
+                        self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
+                        if self.debugMode { print ("_ fetch cached flag \(self.students.locations[index].flag)") }
                         
                     } else {
                         
+                        // call googles map api using dispatch queue command pipe including a 250ms delay to prevent "OVER_QUERY_LIMIT"
                         DispatchQueue.main.asyncAfter(deadline: .now() + (Double(index) / 4 )) {
                             
-                            // call googles map api using dispatch queue command pipe with 250ms delay
                             self.clientGoogle.getMapMetaByCoordinates(meta.longitude!, meta.latitude!) {
                                 
                                 (success, message, gClientSession) in
                                 
                                 if success == true {
                                     
-                                    let flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
-                                    
-                                    print ("_evaluated by api   #\(index) \(meta.longitude!),\(meta.latitude!) found flag \(flag)")
                                     self.students.locations[index].flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
-                                    
-                                } else {
-                                    print ("_error     #\(index) \(meta.longitude!),\(meta.latitude!)")
-                                    print (message!)
+                                    self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
+                                    if self.debugMode { print ("_ fetch frech flag  \(self.students.locations[index].flag)") }
                                 }
                             }
                         }
@@ -174,11 +167,18 @@ extension PRSClient {
     }
     
     /*
-     * get a flag by given country iso-code (will be used in future version)
+     * get a emoji flag by given country iso-code, return "🏴" on invalid/unknown code
      */
     func getFlagByCountryISOCode(
-        _ country: String) -> String {
+        _ code: String) -> String {
         
-        return country.unicodeScalars.flatMap { String.init(UnicodeScalar(127397 + $0.value)!) }.joined()
+        for localeISOCode in NSLocale.isoCountryCodes {
+            
+            if code == localeISOCode {
+                return code.unicodeScalars.flatMap { String.init(UnicodeScalar(127397 + $0.value)!) }.joined()
+            }
+        }
+        
+        return metaCountryUnknownFlag
     }
 }
