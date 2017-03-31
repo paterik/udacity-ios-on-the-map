@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var useCurrentDeviceLocation: Bool = false
     var useLongitude: Double?
     var useLatitude: Double?
+    var forceMapReload: Bool = false
 
     //
     // MARK: Variables for minor data "persitence" during app runtime
