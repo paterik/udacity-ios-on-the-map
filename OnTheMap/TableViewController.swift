@@ -29,6 +29,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     let locationNoData = ""
     let locationCellHeight: CGFloat = 90.0
     let cellIdentifier = "studentLocationCell"
+    let metaDateTimeFormat = "dd.MM.Y hh:mm"
     
     //
     // MARK: Variables
@@ -74,6 +75,15 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             studentLocationMeta.lastName ?? locationNoData
         ) as String
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = PRSClient.sharedInstance.metaDateTimeFormat
+        dateFormatter.locale = Locale.init(identifier: NSLocale.current.languageCode!)
+        
+        let dateObj = dateFormatter.date(from: studentLocationMeta._createdAtRaw as String)
+        dateFormatter.dateFormat = metaDateTimeFormat
+        
+        // set student meta createdAt timestamp as formatted date
+        cell?.lblStudentDataTimeStamp.text = "\(dateFormatter.string(from: dateObj!))"
         // set provided mapString, if nothing found take enriched meta for country
         cell?.lblStudentMapString.text = studentLocationMeta.mapString ?? studentLocationMeta.country
         // set distance to student

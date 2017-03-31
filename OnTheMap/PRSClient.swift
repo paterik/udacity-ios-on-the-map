@@ -37,10 +37,11 @@ class PRSClient: NSObject {
     
     let metaCountryUnknownFlag = "🏴"
     let metaCountryUnknown = "unknown country"
+    let metaDateTimeFormat: String! = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let students = PRSStudentLocations.sharedInstance
     let clientGoogleThreshold = 4 // request throttle, 4 means 1000/4 = 250ms
-    
+
     //
     // MARK: Constants (API)
     //

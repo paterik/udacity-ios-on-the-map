@@ -23,8 +23,6 @@ struct PRSStudentData {
     let createdAt: Date!
     let updatedAt: Date!
     
-    let metaDateTimeFormat: String! = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-    
     var objectId: String!
     var _createdAtRaw: NSString!
     var _updatedAtRaw: NSString!
@@ -74,8 +72,8 @@ struct PRSStudentData {
         // nil or unwrappable properties and add an evalation date
         //
         
-        _createdAtRaw = NSDate().dateToString(Date(), metaDateTimeFormat)
-        _updatedAtRaw = NSDate().dateToString(Date(), metaDateTimeFormat)
+        _createdAtRaw = NSDate().dateToString(Date(), PRSClient.sharedInstance.metaDateTimeFormat)
+        _updatedAtRaw = NSDate().dateToString(Date(), PRSClient.sharedInstance.metaDateTimeFormat)
         
         if dictionary["createdAt"] != nil {
              _createdAtRaw = (dictionary["createdAt"] as? NSString)!
@@ -95,7 +93,7 @@ struct PRSStudentData {
         latitude  = (dictionary["latitude"] as? Double!)  ?? 0.0
         longitude = (dictionary["longitude"] as? Double!) ?? 0.0
 
-        createdAt = NSDate().dateFromString(_createdAtRaw, metaDateTimeFormat) as Date!
-        updatedAt = NSDate().dateFromString(_updatedAtRaw, metaDateTimeFormat) as Date!
+        createdAt = NSDate().dateFromString(_createdAtRaw, PRSClient.sharedInstance.metaDateTimeFormat) as Date!
+        updatedAt = NSDate().dateFromString(_updatedAtRaw, PRSClient.sharedInstance.metaDateTimeFormat) as Date!
     }
 }
