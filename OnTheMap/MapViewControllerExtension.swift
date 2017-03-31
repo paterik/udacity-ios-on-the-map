@@ -179,7 +179,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
             // check device location again ...
-            self.locationFetchStart()
+            self.updateDeviceLocation()
             // useCurrentDeviceLocation: true means our pageViewController will use a smaller stack of pageSetControllers
             self.appDelegate.useCurrentDeviceLocation = true
             // check if last location doesn't match the current one ... if app in create mode only
@@ -470,7 +470,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     /*
      * start location scan
      */
-    func locationFetchStart() {
+    func updateDeviceLocation() {
         
         deviceLocationManager.checkForLocationAccess {
             
@@ -483,6 +483,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
                     self.locationFetchTrying = true
                     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
                     self.locationManager.activityType = .fitness
+                    self.locationManager.distanceFilter = self.locationDistanceHook
                     self.locationFetchStartTime = nil
                 
                     self.locationManager.startUpdatingLocation()
