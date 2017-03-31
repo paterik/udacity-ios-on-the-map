@@ -32,6 +32,14 @@ class PRSClient: NSObject {
     let clientFacebook = FBClient.sharedInstance
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let students = PRSStudentLocations.sharedInstance
+    let clientGoogleThreshold = 4 // request throttle, 4 means 1000/4 = 250ms
+    let metaCountryUnknown = "unknown country"
+    
+    //
+    // MARK: Constants (Specials)
+    //
+    
+    let metaCountryUnknownFlag = "🏴"
     
     //
     // MARK: Constants (API)
