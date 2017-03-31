@@ -10,6 +10,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 class PRSClient: NSObject {
     
@@ -27,6 +28,7 @@ class PRSClient: NSObject {
     let session = URLSession.shared
     let client = RequestClient.sharedInstance
     let clientUdacity = UDCClient.sharedInstance
+    let clientGoogle = GClient.sharedInstance
     let clientFacebook = FBClient.sharedInstance
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let students = PRSStudentLocations.sharedInstance
@@ -228,10 +230,12 @@ class PRSClient: NSObject {
                     }
                 }
                 
+                // enrich students meta information a bit
+                self.enrichStudentMeta()
+                
+                // add some meta statistics
                 self.metaStudentLocationsCountValid = self.students.locations.count
                 self.metaStudentLocationsCount = results.count
-                // [ DEV/DBG ] : append a single fixture student meta block during development
-                self.addSampleStudentLocation()
                 
                 completionHandlerForGetAllLocations(true, nil)
             }
@@ -239,7 +243,7 @@ class PRSClient: NSObject {
     }
     
     /*
-     * add a sample (fixture) student location, used during development (Loc: Dresden, Zwinger)
+     * [ DBG/DEV ] add a sample (fixture) student location, used during development (Loc: Dresden, Zwinger)
      */
     private func addSampleStudentLocation ()
         
