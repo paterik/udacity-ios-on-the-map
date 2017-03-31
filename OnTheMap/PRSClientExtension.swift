@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import MapKit
+import UIKit
 
 extension PRSClient {
 
@@ -83,6 +85,57 @@ extension PRSClient {
     }
     
     /*
+     * add further meta information to our customer mota object using google maps api by delayed requests of 250ms
+     */
+    func enrichStudentMeta() {
+        
+        students.clearValidatorCache()
+        
+        for (index, meta) in students.locations.enumerated() {
+        
+            if self.validateStudentMeta(meta) == true {
+            
+                // try to evaluate cached api call respones first
+                self.clientGoogle.getMapMetaByCache(meta.longitude!, meta.latitude!) {
+                    
+                    (success, message, gClientSession) in
+                    
+                    if success == true {
+                        
+                        let flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
+                        
+                        print ("_evaluated by cache #\(index) \(meta.longitude!),\(meta.latitude!) found flag \(flag)")
+                        self.students.locations[index].flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
+                        
+                    } else {
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + (Double(index) / 4 )) {
+                            
+                            // call googles map api using dispatch queue command pipe with 250ms delay
+                            self.clientGoogle.getMapMetaByCoordinates(meta.longitude!, meta.latitude!) {
+                                
+                                (success, message, gClientSession) in
+                                
+                                if success == true {
+                                    
+                                    let flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
+                                    
+                                    print ("_evaluated by api   #\(index) \(meta.longitude!),\(meta.latitude!) found flag \(flag)")
+                                    self.students.locations[index].flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
+                                    
+                                } else {
+                                    print ("_error     #\(index) \(meta.longitude!),\(meta.latitude!)")
+                                    print (message!)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    /*
      * validate incoming student meta lines check for valid geo localization properties, return false if
      * coordinates seems invalid (using regex validation process), uniqueKey and objectId are missing or
      * objectId/uniqueId already stored in collection
@@ -118,5 +171,14 @@ extension PRSClient {
         students.locationUniqueKeys.append(meta.uniqueKey)
         
         return isValid
+    }
+    
+    /*
+     * get a flag by given country iso-code (will be used in future version)
+     */
+    func getFlagByCountryISOCode(
+        _ country: String) -> String {
+        
+        return country.unicodeScalars.flatMap { String.init(UnicodeScalar(127397 + $0.value)!) }.joined()
     }
 }
