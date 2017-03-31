@@ -196,7 +196,7 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
                     "mediaURL"  : self.inpMediaURL.text! as String,
                     "latitude"  : _latitude! as Double,
                     "longitude" : _longitude! as Double,
-                    "mapString" : _mapString! as String,
+                    "mapString" : _mapString! as String
                 ]
             
             completionHandlerForStudentMetaProfile(true, nil, PRSStudentData(currentStudentDict))
