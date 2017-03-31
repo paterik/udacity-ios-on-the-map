@@ -22,7 +22,7 @@
 		B12DBEC41DECD0B100C5988A /* FBSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DBEC31DECD0B100C5988A /* FBSession.swift */; };
 		B12EB42B1E290F7D0048526A /* RequestClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */; };
 		B13280F81E867BB000C03A8A /* PageSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13280F71E867BB000C03A8A /* PageSetViewController.swift */; };
-		B13280FB1E867F1A00C03A8A /* PageSetViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13280FA1E867F1A00C03A8A /* PageSetViewControllerProtocol.swift */; };
+		B13280FB1E867F1A00C03A8A /* ControllerCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13280FA1E867F1A00C03A8A /* ControllerCommandProtocol.swift */; };
 		B13280FD1E86C56C00C03A8A /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13280FC1E86C56C00C03A8A /* NSDate.swift */; };
 		B13384321E113DB300A23201 /* LocationTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13384311E113DB300A23201 /* LocationTabViewController.swift */; };
 		B14739551E82E93000041AFB /* PageSetLocationViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14739541E82E93000041AFB /* PageSetLocationViewControllerExtension.swift */; };
@@ -41,6 +41,9 @@
 		B1A15B501DE040FD002A4307 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1A15B4E1DE040FD002A4307 /* LaunchScreen.storyboard */; };
 		B1A15B5B1DE040FD002A4307 /* OnTheMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B5A1DE040FD002A4307 /* OnTheMapTests.swift */; };
 		B1A15B661DE040FD002A4307 /* OnTheMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A15B651DE040FD002A4307 /* OnTheMapUITests.swift */; };
+		B1C5C46A1E8E4C6D0053C40C /* GClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C5C4691E8E4C6D0053C40C /* GClient.swift */; };
+		B1C5C46C1E8E573E0053C40C /* GClientSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C5C46B1E8E573E0053C40C /* GClientSession.swift */; };
+		B1C5C46E1E8E7E980053C40C /* GClientCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C5C46D1E8E7E980053C40C /* GClientCache.swift */; };
 		B1CA1AFC1E85696200981A5A /* LocationPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CA1AFB1E85696200981A5A /* LocationPageViewControllerDelegate.swift */; };
 		B1CA1AFE1E856A6300981A5A /* LocationEditViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CA1AFD1E856A6300981A5A /* LocationEditViewControllerExtension.swift */; };
 		B1CA1B001E856AA400981A5A /* LocationPageViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CA1AFF1E856AA400981A5A /* LocationPageViewControllerExtension.swift */; };
@@ -95,7 +98,7 @@
 		B12DBEC31DECD0B100C5988A /* FBSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBSession.swift; sourceTree = "<group>"; };
 		B12EB42A1E290F7D0048526A /* RequestClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestClientExtension.swift; sourceTree = "<group>"; };
 		B13280F71E867BB000C03A8A /* PageSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSetViewController.swift; sourceTree = "<group>"; };
-		B13280FA1E867F1A00C03A8A /* PageSetViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSetViewControllerProtocol.swift; sourceTree = "<group>"; };
+		B13280FA1E867F1A00C03A8A /* ControllerCommandProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerCommandProtocol.swift; sourceTree = "<group>"; };
 		B13280FC1E86C56C00C03A8A /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
 		B13384311E113DB300A23201 /* LocationTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTabViewController.swift; sourceTree = "<group>"; };
 		B13CFC5A1DEB0C6300C08272 /* OnTheMap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnTheMap.entitlements; sourceTree = "<group>"; };
@@ -122,6 +125,9 @@
 		B1A15B651DE040FD002A4307 /* OnTheMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapUITests.swift; sourceTree = "<group>"; };
 		B1A15B671DE040FD002A4307 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1AEC7F01E125D5800EDAD47 /* LGSideMenuController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LGSideMenuController.framework; path = "Pods/../build/Debug-iphoneos/LGSideMenuController/LGSideMenuController.framework"; sourceTree = "<group>"; };
+		B1C5C4691E8E4C6D0053C40C /* GClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GClient.swift; sourceTree = "<group>"; };
+		B1C5C46B1E8E573E0053C40C /* GClientSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GClientSession.swift; sourceTree = "<group>"; };
+		B1C5C46D1E8E7E980053C40C /* GClientCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GClientCache.swift; sourceTree = "<group>"; };
 		B1CA1AFB1E85696200981A5A /* LocationPageViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPageViewControllerDelegate.swift; sourceTree = "<group>"; };
 		B1CA1AFD1E856A6300981A5A /* LocationEditViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditViewControllerExtension.swift; sourceTree = "<group>"; };
 		B1CA1AFF1E856AA400981A5A /* LocationPageViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPageViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -199,6 +205,7 @@
 				B12EB4281E290F4D0048526A /* base */,
 				B1DB86281E126295006D827A /* parse.com */,
 				B11812871DE465F000C1C91C /* udacity.com */,
+				B1C5C4681E8E4C420053C40C /* google.com */,
 				B11812881DE465F800C1C91C /* facebook.com */,
 			);
 			name = clients;
@@ -265,14 +272,6 @@
 			name = extension;
 			sourceTree = "<group>";
 		};
-		B13280F91E867EF900C03A8A /* protocol */ = {
-			isa = PBXGroup;
-			children = (
-				B13280FA1E867F1A00C03A8A /* PageSetViewControllerProtocol.swift */,
-			);
-			name = protocol;
-			sourceTree = "<group>";
-		};
 		B13384301E113D5300A23201 /* locationTabView */ = {
 			isa = PBXGroup;
 			children = (
@@ -328,6 +327,7 @@
 		B154718D1DE043D2000226D7 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				B1C5C4671E8DA5FE0053C40C /* protocol */,
 				B18340CF1E770F870042A813 /* locationEditView */,
 				B1DF14EB1E1258E20001D54C /* LeftSidebarView */,
 				B13384341E113DF700A23201 /* locationTableView */,
@@ -359,7 +359,6 @@
 		B17F1F061E855080003B4F79 /* pages */ = {
 			isa = PBXGroup;
 			children = (
-				B13280F91E867EF900C03A8A /* protocol */,
 				B1F92E011E7C371800D7BE14 /* extension */,
 				B18340D21E77108F0042A813 /* PageSetProfileViewController.swift */,
 				B18340D01E77105A0042A813 /* PageSetLocationViewController.swift */,
@@ -432,6 +431,24 @@
 				B1A15B671DE040FD002A4307 /* Info.plist */,
 			);
 			path = OnTheMapUITests;
+			sourceTree = "<group>";
+		};
+		B1C5C4671E8DA5FE0053C40C /* protocol */ = {
+			isa = PBXGroup;
+			children = (
+				B13280FA1E867F1A00C03A8A /* ControllerCommandProtocol.swift */,
+			);
+			name = protocol;
+			sourceTree = "<group>";
+		};
+		B1C5C4681E8E4C420053C40C /* google.com */ = {
+			isa = PBXGroup;
+			children = (
+				B1C5C4691E8E4C6D0053C40C /* GClient.swift */,
+				B1C5C46B1E8E573E0053C40C /* GClientSession.swift */,
+				B1C5C46D1E8E7E980053C40C /* GClientCache.swift */,
+			);
+			name = google.com;
 			sourceTree = "<group>";
 		};
 		B1CA1AF91E85693000981A5A /* protocol */ = {
@@ -744,7 +761,9 @@
 				B18340D11E77105A0042A813 /* PageSetLocationViewController.swift in Sources */,
 				B1DB862F1E17A89B006D827A /* PRSClientExtension.swift in Sources */,
 				B1D40DE41E8505C60063636E /* PageSetDetailViewControllerExtension.swift in Sources */,
+				B1C5C46E1E8E7E980053C40C /* GClientCache.swift in Sources */,
 				B1DB86271E1260E2006D827A /* TableViewController.swift in Sources */,
+				B1C5C46A1E8E4C6D0053C40C /* GClient.swift in Sources */,
 				B11812911DE4682900C1C91C /* UDCClient.swift in Sources */,
 				B119B58A1DE5A5F7002AF6AF /* UDCSession.swift in Sources */,
 				B13384321E113DB300A23201 /* LocationTabViewController.swift in Sources */,
@@ -753,7 +772,8 @@
 				B1748B4D1E7EABC3003D9A31 /* CLPlacemark.swift in Sources */,
 				B16F05F11E71EA6B00CED99B /* MapViewControllerExtension.swift in Sources */,
 				B1DB862B1E1262BB006D827A /* PRSClient.swift in Sources */,
-				B13280FB1E867F1A00C03A8A /* PageSetViewControllerProtocol.swift in Sources */,
+				B1C5C46C1E8E573E0053C40C /* GClientSession.swift in Sources */,
+				B13280FB1E867F1A00C03A8A /* ControllerCommandProtocol.swift in Sources */,
 				B1DB86311E17B38B006D827A /* RequestClient.swift in Sources */,
 				B12009381E734D08006E2499 /* StudentMapAnnotationView.swift in Sources */,
 				B18340D31E77108F0042A813 /* PageSetProfileViewController.swift in Sources */,
