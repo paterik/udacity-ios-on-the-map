@@ -34,4 +34,24 @@ class PRSStudentLocations {
         locationObjectIds.removeAll()
         locationUniqueKeys.removeAll()
     }
+    
+    func removeByObjectId(_ objectId: String) {
+    
+        // remove object by given id from all locations stack
+        for (index, location) in locations.enumerated() {
+            if location.objectId == objectId {
+                locations.remove(at: index)
+            }
+        }
+        
+        // remove object by given id from my location stack
+        for (index, location) in myLocations.enumerated() {
+            if location.objectId == objectId {
+                locations.remove(at: index)
+            }
+        }
+        
+        // clear validator cache
+        clearValidatorCache()
+    }
 }

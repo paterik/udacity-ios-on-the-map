@@ -103,6 +103,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             )
             
             let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
+                // execute api call to delete user location object
                 self.userLocationDelete(objectId!)
             }
             
@@ -129,6 +130,10 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
             if success == true {
                 
+                // remove object id from all corresponding collections
+                self.clientParse.students.removeByObjectId(userLocationObjectId)
+                
+                // update locations stack *** not required if lists are cleared natively
                 OperationQueue.main.addOperation { self.updateStudentLocations() }
                 
             } else {
