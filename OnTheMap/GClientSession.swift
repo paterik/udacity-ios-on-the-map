@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+struct GClientSession {
+    
+    let cacheApiRequestURL: String!
+    let cacheApiRequestParam: String!
+    let cacheApiRequestDate: Date!
+    
+    let countryName: String!
+    let countryCode: String!
+}

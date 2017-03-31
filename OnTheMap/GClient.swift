@@ -7,3 +7,130 @@
 //
 
 import Foundation
+
+class GClient: NSObject {
+
+    //
+    // MARK: Constants (Statics)
+    //
+    
+    static let sharedInstance = GClient()
+    
+    //
+    // MARK: Constants (Normal)
+    //
+    
+    let debugMode: Bool = true
+    let session = URLSession.shared
+    let client = RequestClient.sharedInstance
+    let dateFormatter = DateFormatter()
+    
+    //
+    // MARK: Constants (API)
+    //
+    
+    let apiURL: String = "https://maps.googleapis.com/maps/api/geocode/json"
+    
+    //
+    // MARK: Variables
+    //
+    
+    func getMapMetaByCache (
+       _ longitude: Double,
+       _ latitude: Double,
+       
+         completionHandlerGetMapMetaFromCache: @escaping (
+       _ success: Bool?,
+       _ message: String?,
+       _ gClientSession: GClientSession?)
+        
+        -> Void) {
+        
+        // try to use cache first!
+        for cache in GClientCache.sharedInstance.metaData {
+            
+            if "\(latitude),\(longitude)" == cache.cacheApiRequestParam {
+                completionHandlerGetMapMetaFromCache(true, nil, cache)
+                
+                return
+            }
+        }
+        
+        completionHandlerGetMapMetaFromCache(false, "no entry for \(latitude),\(longitude) in cached requests found ...", nil)
+    }
+    
+    /*
+     * get additional meta information using googles map api, evaluating country name and country iso code for flag
+     * emoji extension of student data. I've including caching "logic" to prevent double calls for location coords
+     * who where fetched earlier
+     */
+    func getMapMetaByCoordinates (
+        _ longitude: Double,
+        _ latitude: Double,
+        
+          completionHandlerGetMapMeta: @escaping (
+        _ success: Bool?,
+        _ message: String?,
+        _ gClientSession: GClientSession?)
+        
+        -> Void) {
+
+        let apiRequestURL = NSString(format: "%@?latlng=%@&sensor=true_or_false", apiURL, "\(latitude),\(longitude)")
+
+        //
+        // todo: add protective cache-call logic to prevent api-requests by calling this method natively
+        //
+        
+        client.get(apiRequestURL as String, headers: [:])
+        {
+            (data, error) in
+         
+            if (error != nil) {
+                completionHandlerGetMapMeta(false, "Up's, your request couldn't be handled ... \(String(describing: error))", nil)
+                
+            } else {
+                
+                guard let results = data!["results"] as? [[String: AnyObject]] else {
+                    completionHandlerGetMapMeta(false, "Up's, missing result key in response data", nil)
+                    return
+                }
+                
+                guard let status = data!["status"] as? String else {
+                    completionHandlerGetMapMeta(false, "Up's, missing status key in response data", nil)
+                    return
+                }
+                
+                if status == "OK" && results.count > 0 {
+                    
+                    let countryComponents = results[ results.count-1 ]
+                    if let countryAddressComponents = countryComponents[ "address_components" ] as? NSArray {
+                        
+                        var addressComponent = countryAddressComponents[ 0 ] as! NSDictionary
+                        if countryAddressComponents.count > 1 {
+                            addressComponent = countryAddressComponents[ countryAddressComponents.count-1 ] as! NSDictionary
+                        }
+                        
+                        let _gClientSession = GClientSession(
+                            
+                            cacheApiRequestURL: apiRequestURL as String,
+                            cacheApiRequestParam: "\(latitude),\(longitude)",
+                            cacheApiRequestDate: Date(),
+                            
+                            countryName: addressComponent["long_name"] as! String,
+                            countryCode: addressComponent["short_name"] as! String
+                        )
+                        
+                        GClientCache.sharedInstance.metaData.append(_gClientSession)
+                        
+                        completionHandlerGetMapMeta(true, nil , _gClientSession)
+                    }
+                    
+                } else {
+                    
+                    completionHandlerGetMapMeta(false, "Up's, couldn't foind any plausible data for \(latitude),\(longitude) -> status=\(status)", nil)
+                    
+                }
+            }
+        }
+    }
+}

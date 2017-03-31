@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+class GClientCache {
+
+    static let sharedInstance = GClientCache()
+    
+    var metaData = [GClientSession]()
+    
+    func clearCache() {
+    
+        metaData.removeAll()
+    }
+}
