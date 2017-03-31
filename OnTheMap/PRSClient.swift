@@ -30,9 +30,6 @@ class PRSClient: NSObject {
     let clientUdacity = UDCClient.sharedInstance
     let clientGoogle = GClient.sharedInstance
     let clientFacebook = FBClient.sharedInstance
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    let students = PRSStudentLocations.sharedInstance
-    let clientGoogleThreshold = 4 // request throttle, 4 means 1000/4 = 250ms
     
     //
     // MARK: Constants (Specials)
@@ -40,6 +37,9 @@ class PRSClient: NSObject {
     
     let metaCountryUnknownFlag = "🏴"
     let metaCountryUnknown = "unknown country"
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let students = PRSStudentLocations.sharedInstance
+    let clientGoogleThreshold = 4 // request throttle, 4 means 1000/4 = 250ms
     
     //
     // MARK: Constants (API)
@@ -234,7 +234,7 @@ class PRSClient: NSObject {
                     }
                 }
                 
-                // enrich students meta information a bit
+                // enrich students meta information using google's map api
                 self.enrichStudentMeta()
                 
                 // add some meta statistics
@@ -247,7 +247,7 @@ class PRSClient: NSObject {
     }
     
     /*
-     * [ DBG/DEV ] add a sample (fixture) student location, used during development (Loc: Dresden, Zwinger)
+     * [ DBG/DEV ] add a sample (fixture) student location, only used during development (Loc: Dresden, Zwinger)
      */
     private func addSampleStudentLocation ()
         

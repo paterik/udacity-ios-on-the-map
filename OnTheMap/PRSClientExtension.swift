@@ -103,11 +103,11 @@ extension PRSClient {
                         
                         self.students.locations[index].flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
                         self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
-                        if self.debugMode { print ("_ fetch cached flag \(self.students.locations[index].flag)") }
+                        if self.debugMode { print ("_ fetch cached flag: \(self.students.locations[index].flag)") }
                         
                     } else {
                         
-                        // call googles map api using dispatch queue command pipe including a 250ms delay to prevent "OVER_QUERY_LIMIT"
+                        // call googles map api using dispatch queue command-pipe with a 250ms execution delay to prevent "OVER_QUERY_LIMIT"
                         DispatchQueue.main.asyncAfter(deadline: .now() + (Double(index) / 4 )) {
                             
                             self.clientGoogle.getMapMetaByCoordinates(meta.longitude!, meta.latitude!) {
@@ -118,7 +118,7 @@ extension PRSClient {
                                     
                                     self.students.locations[index].flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
                                     self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
-                                    if self.debugMode { print ("_ fetch frech flag  \(self.students.locations[index].flag)") }
+                                    if self.debugMode { print ("_ fetch new flag:    \(self.students.locations[index].flag)") }
                                 }
                             }
                         }
@@ -131,7 +131,8 @@ extension PRSClient {
     /*
      * validate incoming student meta lines check for valid geo localization properties, return false if
      * coordinates seems invalid (using regex validation process), uniqueKey and objectId are missing or
-     * objectId/uniqueId already stored in collection
+     * objectId/uniqueId already stored in collection (this validator seems a little bit to strong, I'll
+     * rebuild/refine this one in future release(s))
      */
     func validateStudentMeta(
        _ meta:PRSStudentData) -> Bool {
