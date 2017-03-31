@@ -60,6 +60,8 @@ class PageSetProfileViewController: PageSetViewController {
     
     @IBAction func btnCloseViewAction(_ sender: Any) {
         
+        if let del = self.delegate { del.handleDelegateCommand("updateStudentLocationAfterMetaChange") }
+        
         self.dismiss(animated: true)
     }
     
