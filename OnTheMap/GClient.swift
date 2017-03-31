@@ -61,8 +61,8 @@ class GClient: NSObject {
     
     /*
      * get additional meta information using googles map api, evaluating country name and country iso code for flag
-     * emoji extension of student data. I've including caching "logic" to prevent double calls for location coords
-     * who where fetched earlier
+     * emoji extension of student data. I've including caching "logic" to prevent double calls for location coord's
+     * who where fetched earlier.
      */
     func getMapMetaByCoordinates (
         _ longitude: Double,
@@ -75,11 +75,19 @@ class GClient: NSObject {
         
         -> Void) {
 
+        // add protective cache-call logic to prevent api-requests by calling this method natively
+        getMapMetaByCache(longitude, latitude) {
+            
+            (success, message, gClientSession) in
+            
+            if success == true {
+                
+                completionHandlerGetMapMeta(true, nil , gClientSession)
+                return
+            }
+        }
+        
         let apiRequestURL = NSString(format: "%@?latlng=%@&sensor=true_or_false", apiURL, "\(latitude),\(longitude)")
-
-        //
-        // todo: add protective cache-call logic to prevent api-requests by calling this method natively
-        //
         
         client.get(apiRequestURL as String, headers: [:])
         {
