@@ -27,7 +27,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     let clientUdacity = UDCClient.sharedInstance
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let locationNoData = ""
-    let locationCellHeight: CGFloat = 75.0
+    let locationCellHeight: CGFloat = 90.0
     let cellIdentifier = "studentLocationCell"
     
     //
@@ -69,10 +69,9 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         let studentLocationMeta = locations[indexPath.row]
         
         cell?.lblStudentName.text = NSString(
-            format: "%@ %@ %@",
+            format: "%@ %@",
             studentLocationMeta.firstName ?? locationNoData,
-            studentLocationMeta.lastName ?? locationNoData,
-            studentLocationMeta.flag
+            studentLocationMeta.lastName ?? locationNoData
         ) as String
         
         cell?.lblStudentMapString.text = NSString(
@@ -81,6 +80,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         ) as String
         
         cell?.lblStudentDistance.text = studentLocationMeta.distance
+        cell?.lblStudentMapFlag.text = studentLocationMeta.flag
         
         return cell!
     }
@@ -103,7 +103,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             with: UITableViewRowActionStyle.default,
             title: "Profile",
             
-            backgroundColor: UIColor(netHex: 0x33383C),
+            backgroundColor: UIColor(netHex: 0x33383C), // 0x33383C
             image: UIImage(named: "icnTableCellProfile_v2"),
             forCellHeight: UInt(self.locationCellHeight)) { action, index in
                 
@@ -118,7 +118,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 with: UITableViewRowActionStyle.default,
                 title: " Edit ",
             
-                backgroundColor: UIColor(netHex: 0x174881),
+                backgroundColor: UIColor(netHex: 0x33383C), // 0x174881
                 image: UIImage(named: "icnTableCellEdit_v2"),
                 forCellHeight: UInt(self.locationCellHeight)) { action, index in
                 
@@ -130,7 +130,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 with: UITableViewRowActionStyle.destructive,
                 title: "Delete",
             
-                backgroundColor: UIColor(netHex: 0xD30038),
+                backgroundColor: UIColor(netHex: 0x33383C), // 0xD30038
                 image: UIImage(named: "icnTableCellDelete_v2"),
                 forCellHeight: UInt(self.locationCellHeight)) { action, index in
                 
