@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationPageViewController: UIPageViewController, PageSetViewControllerProtocol {
+class LocationPageViewController: UIPageViewController, ControllerCommandProtocol {
     
     //
     // MARK: Constants
@@ -76,9 +76,14 @@ class LocationPageViewController: UIPageViewController, PageSetViewControllerPro
     func handleDelegateCommand(
        _ command: String) {
         
+        if debugMode == true { print ("_received command: \(command)") }
+        
         if command == "scrollToNextViewController" {
-            if debugMode == true { print ("_received: \(command), execute: scroll") }
             scrollToNextViewController()
+        }
+        
+        if command == "updateStudentLocationAfterMetaChange" {
+            appDelegate.forceMapReload = true
         }
     }
     

@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, ControllerCommandProtocol {
     
     //
     // MARK: IBOutlet variables
@@ -60,8 +60,10 @@ class MapViewController: UIViewController {
         
         super.viewWillAppear(animated)
         activitySpinner.center = self.view.center
-        locationFetchStart()
-        updateStudentLocations()
+        if appDelegate.forceMapReload == true {
+            appDelegate.forceMapReload = false
+            updateStudentLocations()
+        }
     }
     
     override func viewDidLoad() {
@@ -70,6 +72,9 @@ class MapViewController: UIViewController {
         mapView.delegate = self
         mapView.showsUserLocation = true
         locationManager.delegate = self
+        
+        locationFetchStart()
+        updateStudentLocations()
     }
     
     //
@@ -94,6 +99,27 @@ class MapViewController: UIViewController {
                     self.present(alertController, animated: true, completion:nil)
                 }
             }
+        }
+    }
+    
+    //
+    // Delegate Methods (for external commands)
+    //
+    
+    /*
+     * handle string based commands from embedded controllers, here we can force a annotation/map
+     * reload after leaving corresponding editView
+     */
+    func handleDelegateCommand(
+        _ command: String) {
+        
+        print ("!!!")
+        
+        if command == "updateStudentLocationAfterMetaChange" {
+            
+            print ("_received command: \(command)")
+            //if debugMode == true { print ("_received command: \(command)") }
+            //updateStudentLocations()
         }
     }
 }
