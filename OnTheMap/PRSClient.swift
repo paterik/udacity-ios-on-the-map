@@ -24,7 +24,7 @@ class PRSClient: NSObject {
     // MARK: Constants (Normal)
     //
     
-    let debugMode: Bool = false
+    let debugMode: Bool = true
     let session = URLSession.shared
     let client = RequestClient.sharedInstance
     let clientUdacity = UDCClient.sharedInstance
@@ -33,13 +33,13 @@ class PRSClient: NSObject {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let students = PRSStudentLocations.sharedInstance
     let clientGoogleThreshold = 4 // request throttle, 4 means 1000/4 = 250ms
-    let metaCountryUnknown = "unknown country"
     
     //
     // MARK: Constants (Specials)
     //
     
     let metaCountryUnknownFlag = "🏴"
+    let metaCountryUnknown = "unknown country"
     
     //
     // MARK: Constants (API)
@@ -179,9 +179,7 @@ class PRSClient: NSObject {
                     
                     let meta = PRSStudentData(dictionary)
                     self.students.myLocations.append(meta)
-                    if self.debugMode == true {
-                        print ("\(meta)\n--")
-                    }
+                    if self.debugMode { print ("\(meta)\n--") }
                 }
                 
                 self.metaMyLocationsCount = self.students.myLocations.count
@@ -232,9 +230,7 @@ class PRSClient: NSObject {
                             self.students.myLocations.append(meta)
                         }
                         
-                        if self.debugMode == true {
-                            print ("\(meta)\n--")
-                        }
+                        if self.debugMode { print ("\(meta)\n--") }
                     }
                 }
                 

@@ -74,12 +74,11 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             studentLocationMeta.lastName ?? locationNoData
         ) as String
         
-        cell?.lblStudentMapString.text = NSString(
-            format: "%@",
-            studentLocationMeta.mapString ?? locationNoData
-        ) as String
-        
+        // set provided mapString, if nothing found take enriched meta for country
+        cell?.lblStudentMapString.text = studentLocationMeta.mapString ?? studentLocationMeta.country
+        // set distance to student
         cell?.lblStudentDistance.text = studentLocationMeta.distance
+        // set country flag for student using enriched data
         cell?.lblStudentMapFlag.text = studentLocationMeta.flag
         
         return cell!
