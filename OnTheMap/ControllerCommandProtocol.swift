@@ -1,5 +1,5 @@
 //
-//  PageSetViewControllerProtocol.swift
+//  ControllerCommandProtocol.swift
 //  OnTheMap
 //
 //  Created by Patrick Paechnatz on 25.03.17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PageSetViewControllerProtocol {
+protocol ControllerCommandProtocol {
     
     func handleDelegateCommand(_ command: String)
 }
