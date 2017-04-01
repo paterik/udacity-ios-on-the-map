@@ -5,6 +5,7 @@ use_frameworks!
 
 def baseCore
     pod 'BGTableViewRowActionWithImage'
+    pod 'CryptoSwift'
 end
 
 def amazonSDKCore
