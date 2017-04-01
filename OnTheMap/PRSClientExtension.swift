@@ -9,6 +9,7 @@
 import Foundation
 import MapKit
 import UIKit
+import CryptoSwift
 
 extension PRSClient {
 
@@ -130,9 +131,8 @@ extension PRSClient {
     
     /*
      * validate incoming student meta lines check for valid geo localization properties, return false if
-     * coordinates seems invalid (using regex validation process), uniqueKey and objectId are missing or
-     * objectId/uniqueId already stored in collection (this validator seems a little bit to strong, I'll
-     * rebuild/refine this one in future release(s))
+     * coordinates seems invalid (using regex validation process). Finally generate a hashed position key
+     * to prevent double entries in map and listView.
      */
     func validateStudentMeta(
        _ meta:PRSStudentData) -> Bool {
@@ -151,26 +151,45 @@ extension PRSClient {
         let _longitude: String = String(format:"%f", _longitudeRaw)
         let _latitudeRegex = "^(\\+|-)?(?:90(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,6})?))$"
         let _longitudeRegex = "^(\\+|-)?(?:180(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,6})?))$"
+        let _positionKey = getHashedPositionKey(_longitude, _latitude, _uniqueKey)
         
         if (_longitude.range(of: _longitudeRegex, options: .regularExpression) != nil &&
             _latitude.range(of: _latitudeRegex, options: .regularExpression) != nil &&
             _uniqueKey != "" && _objectId != "" &&
              students.locationObjectIds.contains(_objectId) == false &&
-             students.locationUniqueKeys.contains(_uniqueKey) == false) {
+             students.locationCoordinateKeys.contains(_positionKey) == false) {
             
             isValid = true
         }
         
         students.locationObjectIds.append(meta.objectId)
         students.locationUniqueKeys.append(meta.uniqueKey)
+        students.locationCoordinateKeys.append(_positionKey)
         
         return isValid
     }
     
     /*
+     * get a hashed position key hash(longitude,latitude,uniqueKey) for each student position used as
+     * unique identifier to prevent rendering of multiple (identical) positions
+     */
+    private func getHashedPositionKey(_ longitude: String, _ latitude: String, _ uniqueKey: String) -> String {
+        
+        let _positionKey = NSString(
+             format: "%@|%@|%@",
+             longitude,
+             latitude,
+             uniqueKey) as String
+        
+        let _bytes = Array(_positionKey.utf8)
+        
+        return _bytes.sha224().toHexString()
+    }
+    
+    /*
      * get a emoji flag by given country iso-code, return "🏴" on invalid/unknown code
      */
-    func getFlagByCountryISOCode(
+    private func getFlagByCountryISOCode(
         _ code: String) -> String {
         
         for localeISOCode in NSLocale.isoCountryCodes {
