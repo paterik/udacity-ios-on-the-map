@@ -51,7 +51,7 @@ class PRSClient: NSObject {
     let apiOrderParam: String = "order"
     let apiOrderValue: String = "-updatedAt"
     let apiLimitParam: String = "limit"
-    let apiLimitValue: String = "200"
+    let apiLimitValue: String = "100"
     
     let apiHeaderAuth = [
         "X-Parse-Application-Id": "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr",
@@ -175,6 +175,7 @@ class PRSClient: NSObject {
                 }
                 
                 self.students.myLocations.removeAll()
+                self.students.clearValidatorCache()
                 
                 for dictionary in results as [NSDictionary] {
                     
