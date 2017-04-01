@@ -82,10 +82,17 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         let dateObj = dateFormatter.date(from: studentLocationMeta._createdAtRaw as String)
         dateFormatter.dateFormat = metaDateTimeFormat
         
+        
+        // check mapString provided by student, take location country if mapstring seems empty
+        var _mapString: String? = studentLocationMeta.mapString ?? ""
+        if  _mapString!.isEmpty {
+            _mapString = studentLocationMeta.country
+        }
+        
         // set student meta createdAt timestamp as formatted date
         cell?.lblStudentDataTimeStamp.text = "\(dateFormatter.string(from: dateObj!))"
         // set provided mapString, if nothing found take enriched meta for country
-        cell?.lblStudentMapString.text = studentLocationMeta.mapString ?? studentLocationMeta.country
+        cell?.lblStudentMapString.text = _mapString
         // set distance to student
         cell?.lblStudentDistance.text = studentLocationMeta.distance
         // set country flag for student using enriched data
