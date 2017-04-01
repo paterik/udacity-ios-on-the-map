@@ -81,10 +81,6 @@ class LocationPageViewController: UIPageViewController, ControllerCommandProtoco
         if command == "scrollToNextViewController" {
             scrollToNextViewController()
         }
-        
-        if command == "updateStudentLocationAfterMetaChange" {
-            appDelegate.forceMapReload = true
-        }
     }
     
     /*
