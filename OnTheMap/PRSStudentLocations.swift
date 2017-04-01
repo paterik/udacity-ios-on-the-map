@@ -16,11 +16,16 @@ class PRSStudentLocations {
     var locations = [PRSStudentData]()
     // collection for my owned locations
     var myLocations = [PRSStudentData]()
-    // collection helper for location object id's (used to unique/cleanUp collection)
+    // collection helper for location object id's (used to unify student positions)
     var locationObjectIds = [String]()
-    // collection helper for location unique keys (used to unique/cleanUp collection)
+    // collection helper for location unique keys (used to unify student positions)
     var locationUniqueKeys = [String]()
+    // collection helper for location position keys (also used to unify student positions)
+    var locationCoordinateKeys = [String]()
     
+    /*
+     * clean up all collections
+     */
     func clearCollections() {
     
         locations.removeAll()
@@ -29,12 +34,19 @@ class PRSStudentLocations {
         clearValidatorCache()
     }
     
+    /*
+     * clean up my validation cache
+     */
     func clearValidatorCache() {
         
         locationObjectIds.removeAll()
         locationUniqueKeys.removeAll()
+        locationCoordinateKeys.removeAll()
     }
     
+    /*
+     * remove a specific object from all collections using objectId
+     */
     func removeByObjectId(_ objectId: String) {
     
         // remove object by given id from all locations stack
