@@ -44,9 +44,9 @@ class StudentMapAnnotation: UIView {
                 mediaURL = NSString(format: "https://%@", mediaURL) as String
             }
             
-            if validateMediaURL(mediaURL) == true, let nsURL = NSURL(string: mediaURL)  {
+            if mediaURL.validateMediaURL() == true, let nsURL = NSURL(string: mediaURL)  {
                 
-                if app.canOpenURL(nsURL as URL) == true {
+                if  app.canOpenURL(nsURL as URL) == true {
                     app.open(nsURL as URL, options: [:], completionHandler: nil)
                 }
                 
@@ -60,32 +60,5 @@ class StudentMapAnnotation: UIView {
             studentMediaURL.isEnabled = false
             
         }
-    }
-    
-    //
-    // MARK: Private Methods
-    //
-    
-    /*
-     * validate string as "linkable" url using quick and lowcost NSTextCheckingResult(link) method
-     * return false on any kind of missmatch
-     */
-    private func validateMediaURL(
-        _ urlString: String) -> Bool {
-        
-        let types: NSTextCheckingResult.CheckingType = [.link]
-        let detector = try? NSDataDetector(types: types.rawValue)
-        
-        guard (detector != nil && urlString.characters.count > 0) else { return false }
-        
-        if detector!.numberOfMatches(
-            in: urlString,
-            options: NSRegularExpression.MatchingOptions(rawValue: 0),
-            range: NSMakeRange(0, urlString.characters.count)) > 0 {
-            
-            return true
-        }
-        
-        return false
     }
 }
