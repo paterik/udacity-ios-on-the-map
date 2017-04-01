@@ -466,10 +466,12 @@
                             <constraint firstItem="0KD-Kp-XWp" firstAttribute="top" secondItem="Idn-70-bad" secondAttribute="bottom" constant="51" id="XAV-10-bJI"/>
                             <constraint firstItem="EzP-fd-ED1" firstAttribute="top" secondItem="HRs-66-vhg" secondAttribute="bottom" constant="1" id="Yut-OZ-xry"/>
                             <constraint firstItem="HRs-66-vhg" firstAttribute="leading" secondItem="Idn-70-bad" secondAttribute="trailing" constant="8" symbolic="YES" id="brU-Nn-HLx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0KD-Kp-XWp" secondAttribute="trailing" id="dYc-lT-3CD"/>
                             <constraint firstItem="HRs-66-vhg" firstAttribute="leading" secondItem="EzP-fd-ED1" secondAttribute="leading" id="dat-Lq-NII"/>
                             <constraint firstItem="G3w-Wd-f3y" firstAttribute="centerX" secondItem="0KD-Kp-XWp" secondAttribute="centerX" id="k97-Bd-vgy"/>
                             <constraint firstItem="HRs-66-vhg" firstAttribute="top" secondItem="G3w-Wd-f3y" secondAttribute="bottom" constant="38" id="kdZ-aX-hU7"/>
                             <constraint firstItem="HRs-66-vhg" firstAttribute="trailing" secondItem="EzP-fd-ED1" secondAttribute="trailing" id="lba-Db-LmI"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="0KD-Kp-XWp" secondAttribute="leading" id="pmI-o3-l06"/>
                             <constraint firstItem="nD5-aA-gLH" firstAttribute="bottom" secondItem="qSi-5s-qkx" secondAttribute="top" id="r5N-nU-GgI"/>
                             <constraint firstItem="G3w-Wd-f3y" firstAttribute="leading" secondItem="tiC-dB-NP1" secondAttribute="leading" id="sej-Bl-pXf"/>
                             <constraint firstItem="G3w-Wd-f3y" firstAttribute="top" secondItem="BqC-Pq-phu" secondAttribute="bottom" id="yJj-qs-I7G"/>
