@@ -27,6 +27,7 @@
 		B13384321E113DB300A23201 /* LocationTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13384311E113DB300A23201 /* LocationTabViewController.swift */; };
 		B14739551E82E93000041AFB /* PageSetLocationViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14739541E82E93000041AFB /* PageSetLocationViewControllerExtension.swift */; };
 		B150D1A71E740E9F001FF941 /* DateOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B150D1A61E740E9F001FF941 /* DateOperations.swift */; };
+		B1570E351E8FA8C600B5095C /* TableViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1570E341E8FA8C600B5095C /* TableViewControllerExtension.swift */; };
 		B1682AB91E70422F004CB17C /* PRSStudentLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1682AB81E70422F004CB17C /* PRSStudentLocations.swift */; };
 		B16F05F11E71EA6B00CED99B /* MapViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16F05F01E71EA6B00CED99B /* MapViewControllerExtension.swift */; };
 		B1748B4D1E7EABC3003D9A31 /* CLPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1748B4C1E7EABC3003D9A31 /* CLPlacemark.swift */; };
@@ -104,6 +105,7 @@
 		B13CFC5A1DEB0C6300C08272 /* OnTheMap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnTheMap.entitlements; sourceTree = "<group>"; };
 		B14739541E82E93000041AFB /* PageSetLocationViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSetLocationViewControllerExtension.swift; sourceTree = "<group>"; };
 		B150D1A61E740E9F001FF941 /* DateOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOperations.swift; sourceTree = "<group>"; };
+		B1570E341E8FA8C600B5095C /* TableViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewControllerExtension.swift; sourceTree = "<group>"; };
 		B1682AB81E70422F004CB17C /* PRSStudentLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSStudentLocations.swift; sourceTree = "<group>"; };
 		B16F05F01E71EA6B00CED99B /* MapViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerExtension.swift; sourceTree = "<group>"; };
 		B1748B4C1E7EABC3003D9A31 /* CLPlacemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPlacemark.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 		B13384341E113DF700A23201 /* locationTableView */ = {
 			isa = PBXGroup;
 			children = (
+				B1570E331E8FA8AD00B5095C /* extension */,
 				B1DB86261E1260E2006D827A /* TableViewController.swift */,
 			);
 			name = locationTableView;
@@ -346,6 +349,14 @@
 				B11812821DE4385600C1C91C /* common */,
 			);
 			name = model;
+			sourceTree = "<group>";
+		};
+		B1570E331E8FA8AD00B5095C /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				B1570E341E8FA8C600B5095C /* TableViewControllerExtension.swift */,
+			);
+			name = extension;
 			sourceTree = "<group>";
 		};
 		B16F05EF1E71EA4500CED99B /* extension */ = {
@@ -789,6 +800,7 @@
 				B12EB42B1E290F7D0048526A /* RequestClientExtension.swift in Sources */,
 				B11812851DE4388200C1C91C /* UIColor.swift in Sources */,
 				B1CA1B001E856AA400981A5A /* LocationPageViewControllerExtension.swift in Sources */,
+				B1570E351E8FA8C600B5095C /* TableViewControllerExtension.swift in Sources */,
 				B1FCE41F1E72F3840056FC00 /* DeviceLocation.swift in Sources */,
 				B1D68FB61E73340D008F73FA /* StudentMapAnnotation.swift in Sources */,
 				B1CA1AFE1E856A6300981A5A /* LocationEditViewControllerExtension.swift in Sources */,
