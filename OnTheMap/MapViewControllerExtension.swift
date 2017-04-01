@@ -51,8 +51,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
      * action wrapper for update userLocation using button click call from annotation directly
      * try to fetch object by given object id and set it as appDelegate.currentUserStudentLocation
      * after that call method userLocationAdd(_ editMode = true)
-     *
-     * bug: it seems to be that an update will create a second location :(
      */
     func userLocationEditProfileAction(
        _ sender: UIButton) {
