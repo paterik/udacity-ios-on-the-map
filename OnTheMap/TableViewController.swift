@@ -119,11 +119,11 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             with: UITableViewRowActionStyle.default,
             title: "Profile",
             
-            backgroundColor: UIColor(netHex: 0x33383C), // 0x33383C
+            backgroundColor: UIColor(netHex: 0x33383C), // alt.color = 0x33383C
             image: UIImage(named: "icnTableCellProfile_v2"),
-            forCellHeight: UInt(self.locationCellHeight)) { action, index in
+            forCellHeight: UInt(self.locationCellHeight)) { (action, index) in
                 
-                print (currentCellLocation)
+                self.openMediaURL(currentCellLocation.mediaURL)
         }
         
         // check if selected row is realy "owned" by current authenticated and show further options
@@ -134,11 +134,11 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 with: UITableViewRowActionStyle.default,
                 title: " Edit ",
             
-                backgroundColor: UIColor(netHex: 0x33383C), // 0x174881
+                backgroundColor: UIColor(netHex: 0x33383C), // alt.color = 0x174881
                 image: UIImage(named: "icnTableCellEdit_v2"),
-                forCellHeight: UInt(self.locationCellHeight)) { action, index in
+                forCellHeight: UInt(self.locationCellHeight)) { (action, index) in
                 
-                    print (currentCellLocation)
+                    self.userLocationEditFromRow(currentCellLocation)
             }
         
             // definition for my deleteButton also using 3rd party lib BGTableViewRowActionWithImage
@@ -146,9 +146,9 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 with: UITableViewRowActionStyle.destructive,
                 title: "Delete",
             
-                backgroundColor: UIColor(netHex: 0x33383C), // 0xD30038
+                backgroundColor: UIColor(netHex: 0x33383C), // alt.color = 0xD30038
                 image: UIImage(named: "icnTableCellDelete_v2"),
-                forCellHeight: UInt(self.locationCellHeight)) { action, index in
+                forCellHeight: UInt(self.locationCellHeight)) { (action, index) in
                 
                     let locationDestructionWarning = UIAlertController(
                         title: "Removal Warning ...",
@@ -158,8 +158,6 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     
                     let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
                         // execute api call to delete user location object
-                        print ("_ delete: ")
-                        print (currentCellLocation)
                         self.userLocationDeleteFromRow(currentCellLocation.objectId!, [indexPath])
                     }
                     
@@ -181,9 +179,43 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         return [link!]
     }
     
+    /*
+     * edit a aspecific userLocation
+     */
     func userLocationEditFromRow(
-       _ objectId: String!) {
-    
+       _ userLocationObject: PRSStudentData) {
+        
+        appDelegate.inEditMode = true
+        appDelegate.forceMapReload = true
+        appDelegate.currentUserStudentLocation = userLocationObject
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "PageSetRoot") as! LocationEditViewController
+        let locationRequestController = UIAlertController(
+            title: "Let's start ...",
+            message: "Do you want to use your current device location as default for your next steps?",
+            preferredStyle: UIAlertControllerStyle.alert
+        )
+        
+        vc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+        vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        
+        let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
+            
+            self.appDelegate.useCurrentDeviceLocation = true
+            self.present(vc, animated: true, completion: nil)
+        }
+        
+        let dlgBtnNoAction = UIAlertAction(title: "No", style: .default) { (action: UIAlertAction!) in
+            
+            self.appDelegate.useCurrentDeviceLocation = false
+            self.present(vc, animated: true, completion: nil)
+        }
+        
+        locationRequestController.addAction(dlgBtnYesAction)
+        locationRequestController.addAction(dlgBtnNoAction)
+        
+        present(locationRequestController, animated: true, completion: nil)
     }
     
     /*
