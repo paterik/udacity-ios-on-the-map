@@ -64,6 +64,7 @@ class MapViewController: UIViewController {
         if appDelegate.forceMapReload == true {
             appDelegate.forceMapReload = false
             updateStudentLocations()
+            updateDeviceLocation()
         }
     }
     
