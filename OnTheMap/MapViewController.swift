@@ -7,8 +7,9 @@
 //
 import UIKit
 import MapKit
+import YNDropDownMenu
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, ControllerCommandProtocol {
     
     //
     // MARK: IBOutlet variables
@@ -53,6 +54,8 @@ class MapViewController: UIViewController {
     var annotations = [PRSStudentMapAnnotation]()
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
+    var appMenu: YNDropDownMenu?
+    
     //
     // MARK: UIView Methods (overrides)
     //
@@ -60,47 +63,23 @@ class MapViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+        
         activitySpinner.center = self.view.center
         if appDelegate.forceMapReload == true {
             appDelegate.forceMapReload = false
-            updateStudentLocations()
-            updateDeviceLocation()
+           _callReloadMapAction()
         }
     }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         mapView.delegate = self
         mapView.showsUserLocation = true
         locationManager.delegate = self
+       _callReloadMapAction()
         
-        updateDeviceLocation()
-        updateStudentLocations()
-    }
-    
-    //
-    // MARK: IBAction Methods
-    //
-    
-    @IBAction func btnAddUserLocationAction(_ sender: Any) {
-        
-        clientParse.getMyStudentLocations() { (success, error) in
-            
-            if success == true {
-                
-                self.handleUserLocation()
-                
-            } else {
-                
-                let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.alert)
-                let Action = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in }
-                
-                alertController.addAction(Action)
-                OperationQueue.main.addOperation {
-                    self.present(alertController, animated: true, completion:nil)
-                }
-            }
-        }
+        initMenu()
     }
 }
