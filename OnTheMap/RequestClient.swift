@@ -83,12 +83,10 @@ class RequestClient {
      * none-idempotent http verb will found, application/json will be set as body/data-type
      */
     func requestPrepare (
-        _ url: String,
-        _ method: String,
-          headers: [String : String],
-          jsonDataBody: [String : AnyObject]?)
-        
-        -> URLRequest {
+       _ url: String,
+       _ method: String,
+         headers: [String : String],
+         jsonDataBody: [String : AnyObject]?) -> URLRequest {
         
         let request = NSMutableURLRequest(url: URL(string: url)!)
         
@@ -101,25 +99,26 @@ class RequestClient {
         }
         
         request.httpMethod = method
-        
-        /* identify udacity url requests and tag them as such 'special' request */
+            
+        // identify udacity url requests and tag them as such 'special' request
+        isUdacityRequest = false
         if _udcApiIdentUrls.contains(url) {
             isUdacityRequest = true
         }
         
-        /* extend header by defined parametric values */
+        // extend header by defined parametric values
         if !headers.isEmpty {
             for (key, value) in headers {
                 request.addValue(value, forHTTPHeaderField: key)
             }
         }
         
-        /* body dictionary data not empty? Handle this data as json-compatible type */
+        // body dictionary data not empty? Handle this data as json-compatible type
         if !(jsonDataBody?.values.isEmpty)! {
             
             if let requestBodyDictionary = jsonDataBody {
                 
-                /* try serialize incoming dictionary body data, set body to nil on any exception during conversion */
+                // try serialize incoming dictionary body data, set body to nil on any exception during conversion
                 let serializedData: Data?; do {
                     serializedData = try JSONSerialization.data(withJSONObject: requestBodyDictionary, options: [])
                 } catch {
@@ -138,12 +137,10 @@ class RequestClient {
      * we'll use another completionHandler (convertDataWithCompletionHandler) to convert json results
      */
     func requestExecute (
-         _ request: URLRequest,
-           completionHandlerForRequest: @escaping (_ data: AnyObject?, _ errorString: String?)
+       _ request: URLRequest,
+         completionHandlerForRequest: @escaping (_ data: AnyObject?, _ errorString: String?) -> Void) {
         
-        -> Void) {
-        
-        /* check connection availability and execute request process */
+        // check connection availability and execute request process
         if false == requestPossible() {
         
             completionHandlerForRequest(nil, "Up's, Your device seems not connected to the web, check your connection state!")
@@ -155,28 +152,26 @@ class RequestClient {
                 var parsedResult: Any!
                 var newData: Data!
                 
-                /* our internal error logging method */
+                // our internal error logging method
                 func sendError(error: String) {
                     
                     completionHandlerForRequest(nil, error)
-                    if self.debugMode {
-                        print(error)
-                    }
+                    if self.debugMode { print(error) }
                 }
                 
-                /* GUARD: Was there an error? */
+                // GUARD: Was there an error?
                 guard error == nil else {
                     sendError(error: "Up's, there was a general error with your request: \(String(describing: error))")
                     return
                 }
                 
-                /* GUARD: Was there any data returned? */
+                // GUARD: Was there any data returned?
                 guard let data = data else {
                     sendError(error: "Up's, no data returned after your request!")
                     return
                 }
                 
-                /* UNWRAP: http status code available? */
+                // UNWRAP: http status code available?
                 if let statusCode = (response as? HTTPURLResponse)?.statusCode {
                     
                     if statusCode == 403 {
@@ -184,7 +179,7 @@ class RequestClient {
                         return
                     }
                     
-                    /* sometimes status code 400 returned, we've to check what kind of error this code is involved with */
+                    // sometimes status code 400 returned, we've to check what kind of error this code is involved with
                     if (statusCode == 400 || statusCode == 404) || (statusCode >= 500 && statusCode <= 599) {
                         
                         sendError(error: "Up's, your request returned a status code other than 2xx! A service downtime may possible - try later")
@@ -204,7 +199,7 @@ class RequestClient {
                 do {
                     parsedResult = try JSONSerialization.jsonObject(with: newData as Data, options: .allowFragments)
                 } catch {
-                    completionHandlerForRequest(nil, "Up's, could not parse the api result data as JSON: '\(data)'")
+                    completionHandlerForRequest(nil, "Up's, could not parse the api result data as JSON: '\(newData)'")
                     if self.debugMode {
                         print(error)
                     }
@@ -216,7 +211,7 @@ class RequestClient {
                 
             }
             
-            /* Finaly start the corresponding request */
+            // Finaly start the corresponding request
             task.resume()
         }
     }
