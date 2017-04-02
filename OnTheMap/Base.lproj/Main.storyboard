@@ -520,7 +520,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Paechnatz" placeholder="Whats your lastname?" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tkb-42-ubc" userLabel="ui_inp_lastName">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Whats your lastname?" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tkb-42-ubc" userLabel="ui_inp_lastName">
                                 <rect key="frame" x="32" y="186" width="310" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="eXY-7a-zOw"/>
@@ -529,7 +529,7 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Patrick" placeholder="Whats your firstname" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IGg-uy-Obk" userLabel="ui_inp_firstName">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Whats your firstname" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IGg-uy-Obk" userLabel="ui_inp_firstName">
                                 <rect key="frame" x="32" y="100" width="310" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="x0c-eZ-gvA"/>
@@ -538,7 +538,7 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="www.dunkelfrosch.com" placeholder="What URL do you want to provide?" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i9C-5K-ywT" userLabel="ui_inp_mediaURL">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="What URL do you want to provide?" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i9C-5K-ywT" userLabel="ui_inp_mediaURL">
                                 <rect key="frame" x="32" y="271" width="310" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="SVi-I5-Qwz"/>
