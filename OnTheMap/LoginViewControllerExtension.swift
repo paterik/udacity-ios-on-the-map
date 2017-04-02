@@ -20,8 +20,8 @@ extension LoginViewController {
             preferredStyle: .alert)
         
         // Add Cancel action
-        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) {
-            UIAlertAction in return
+        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.cancel) {
+            UIAlertAction in return self.activateUI(true)
         })
         
         present(alertController, animated: true, completion: nil)
@@ -58,13 +58,22 @@ extension LoginViewController {
     
     func activateUI(_ enabled: Bool) {
         
+        
         inpUdacityUser.isEnabled = enabled
         inpUdacityPassword.isEnabled = enabled
         
         btnLoginUdactiy.alpha = 1.0
         btnLoginFacebook.alpha = 1.0
+        
+        // deactivate and remove activity spinner
+        activitySpinner.stopAnimating()
+        view.willRemoveSubview(self.activitySpinner)
 
         if !enabled {
+            // show activity spinner
+            activitySpinner.startAnimating()
+            view.addSubview(activitySpinner)
+            
             btnLoginUdactiy.alpha = 0.5
             btnLoginFacebook.alpha = 0.5
         }
