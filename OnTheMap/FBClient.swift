@@ -35,7 +35,10 @@ class FBClient: NSObject {
     
     //* handle facebook graph request result and persist facebook session object inside app delegate */
     func getFacebookUserData(
-         completionHandlerForGraph: @escaping (_ success: Bool, _ fbSession: FBSession?, _ message: String?) -> Void) {
+         completionHandlerForGraph: @escaping (
+       _ success: Bool,
+       _ fbSession: FBSession?,
+       _ message: String?) -> Void) {
         
         /* error 04: facebook token not available anymore */
         guard let currentFBAccessToken = FBSDKAccessToken.current() else {
@@ -84,9 +87,26 @@ class FBClient: NSObject {
         )
     }
     
+    func removeUserSessionTokenAndLogOut(
+         completionHandlerForLogOut: @escaping (
+       _ success: Bool?,
+       _ error: String?) -> Void) {
+        
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        
+        FBSDKAccessToken.setCurrent(nil)
+        FBSDKProfile.setCurrent(nil)
+        fbLoginManager.logOut()
+        
+        completionHandlerForLogOut(true, nil)
+    }
+    
     func getUserSessionToken(
          viewController: UIViewController!,
-         completionHandlerForToken: @escaping (_ success: Bool, _ fbSession: FBSession?, _ message: String?) -> Void) {
+         completionHandlerForToken: @escaping (
+       _ success: Bool,
+       _ fbSession: FBSession?,
+       _ message: String?) -> Void) {
 
         /* check if auth token still valid and return otherwise refresh FB Login */
         if FBSDKAccessToken.current() != nil {
