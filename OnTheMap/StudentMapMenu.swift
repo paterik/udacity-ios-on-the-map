@@ -27,11 +27,13 @@ class StudentMapMenu: UIView {
         if let del = delegate { del.handleDelegateCommand("reloadUserLocationMapFromMenu") }
     }
     
-    @IBAction func btnShowStatisticsAction(_ sender: UIButton) {
-        print ("show statistics")
+    @IBAction func btnLogoutAction(_ sender: UIButton) {
+        
+        if let del = delegate { del.handleDelegateCommand("logOutUserFromMenu") }
     }
     
-    @IBAction func btnLogoutAction(_ sender: UIButton) {
-        print ("logout")
+    @IBAction func btnShowStatisticsAction(_ sender: UIButton) {
+        
+        print ("show statistics")
     }
 }
