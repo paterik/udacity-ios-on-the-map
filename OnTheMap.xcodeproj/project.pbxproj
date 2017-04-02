@@ -48,6 +48,8 @@
 		B1CA1AFC1E85696200981A5A /* LocationPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CA1AFB1E85696200981A5A /* LocationPageViewControllerDelegate.swift */; };
 		B1CA1AFE1E856A6300981A5A /* LocationEditViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CA1AFD1E856A6300981A5A /* LocationEditViewControllerExtension.swift */; };
 		B1CA1B001E856AA400981A5A /* LocationPageViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CA1AFF1E856AA400981A5A /* LocationPageViewControllerExtension.swift */; };
+		B1CB21E51E911E570017883C /* StudentMapMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1CB21E41E911E570017883C /* StudentMapMenu.xib */; };
+		B1CB21E71E911F6C0017883C /* StudentMapMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CB21E61E911F6C0017883C /* StudentMapMenu.swift */; };
 		B1D40DDE1E84E2570063636E /* LocationPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D40DDD1E84E2570063636E /* LocationPageViewController.swift */; };
 		B1D40DE21E8505690063636E /* PageSetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D40DE11E8505690063636E /* PageSetDetailViewController.swift */; };
 		B1D40DE41E8505C60063636E /* PageSetDetailViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D40DE31E8505C60063636E /* PageSetDetailViewControllerExtension.swift */; };
@@ -133,6 +135,8 @@
 		B1CA1AFB1E85696200981A5A /* LocationPageViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPageViewControllerDelegate.swift; sourceTree = "<group>"; };
 		B1CA1AFD1E856A6300981A5A /* LocationEditViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditViewControllerExtension.swift; sourceTree = "<group>"; };
 		B1CA1AFF1E856AA400981A5A /* LocationPageViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPageViewControllerExtension.swift; sourceTree = "<group>"; };
+		B1CB21E41E911E570017883C /* StudentMapMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StudentMapMenu.xib; sourceTree = "<group>"; };
+		B1CB21E61E911F6C0017883C /* StudentMapMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentMapMenu.swift; sourceTree = "<group>"; };
 		B1D40DDD1E84E2570063636E /* LocationPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPageViewController.swift; sourceTree = "<group>"; };
 		B1D40DE11E8505690063636E /* PageSetDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSetDetailViewController.swift; sourceTree = "<group>"; };
 		B1D40DE31E8505C60063636E /* PageSetDetailViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSetDetailViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -497,6 +501,8 @@
 				B12009371E734D08006E2499 /* StudentMapAnnotationView.swift */,
 				B12AD3441E8C24A400BB9821 /* StudentTableCell.xib */,
 				B12AD3461E8C271F00BB9821 /* StudentTableCell.swift */,
+				B1CB21E41E911E570017883C /* StudentMapMenu.xib */,
+				B1CB21E61E911F6C0017883C /* StudentMapMenu.swift */,
 			);
 			name = partials;
 			sourceTree = "<group>";
@@ -680,6 +686,7 @@
 				B1A15B4D1DE040FD002A4307 /* Assets.xcassets in Resources */,
 				B12AD3451E8C24A400BB9821 /* StudentTableCell.xib in Resources */,
 				B1A15B4B1DE040FD002A4307 /* Main.storyboard in Resources */,
+				B1CB21E51E911E570017883C /* StudentMapMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -790,6 +797,7 @@
 				B18340D31E77108F0042A813 /* PageSetProfileViewController.swift in Sources */,
 				B1886DEB1DEE1DC5004026BE /* FBClient.swift in Sources */,
 				B1DA3A6B1E787D8000E66EE5 /* EditViewProtocol.swift in Sources */,
+				B1CB21E71E911F6C0017883C /* StudentMapMenu.swift in Sources */,
 				B13280FD1E86C56C00C03A8A /* NSDate.swift in Sources */,
 				B14739551E82E93000041AFB /* PageSetLocationViewControllerExtension.swift in Sources */,
 				B1DB862D1E126397006D827A /* PRSStudentData.swift in Sources */,
