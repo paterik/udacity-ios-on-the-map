@@ -72,16 +72,23 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
         return metaCreateSuccess
     }
     
+    /*
+     * load student default meta data during editMode
+     */
     func loadStudentMetaData() {
         
-        if appDelegate.currentUserStudentLocation != nil && appDelegate.inEditMode == true {
+        if appDelegate.inEditMode == true && appDelegate.currentUserStudentLocation != nil {
             
             inpFirstname.text = appDelegate.currentUserStudentLocation!.firstName
             inpLastname.text = appDelegate.currentUserStudentLocation!.lastName
             inpMediaURL.text = appDelegate.currentUserStudentLocation!.mediaURL
+            
         }
     }
     
+    /*
+     * validate student meta data for plausibility
+     */
     func validateStudentMetaData(
        _ completionHandlerForValidateData: @escaping (
        _ success: Bool?,
