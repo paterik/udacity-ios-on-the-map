@@ -92,35 +92,32 @@ extension PRSClient {
         students.clearValidatorCache()
         
         for (index, meta) in students.locations.enumerated() {
-        
-            if self.validateStudentMeta(meta) == true {
             
-                // try to evaluate cached response/result instead of using an "expensive" google api call first
-                self.clientGoogle.getMapMetaByCache(meta.longitude!, meta.latitude!) {
+            // try to evaluate cached response/result instead of using an "expensive" google api call first
+            self.clientGoogle.getMapMetaByCache(meta.longitude!, meta.latitude!) {
                     
-                    (success, message, gClientSession) in
+                (success, message, gClientSession) in
                     
-                    if success == true {
+                if success == true {
                         
-                        self.students.locations[index].flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
-                        self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
-                        if self.debugMode { print ("_ fetch cached flag: \(self.students.locations[index].flag)") }
+                    self.students.locations[index].flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
+                    self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
+                    if self.debugMode { print ("_ fetch cached flag: \(self.students.locations[index].flag)") }
                         
-                    } else {
+                } else {
                         
-                        // call googles map api using dispatch queue command-pipe with a 250ms execution delay to prevent "OVER_QUERY_LIMIT"
-                        DispatchQueue.main.asyncAfter(deadline: .now() + (Double(index) / 4 )) {
+                    // call googles map api using dispatch queue command-pipe with a 250ms execution delay to prevent "OVER_QUERY_LIMIT"
+                    DispatchQueue.main.asyncAfter(deadline: .now() + (Double(index) / 4 )) {
                             
-                            self.clientGoogle.getMapMetaByCoordinates(meta.longitude!, meta.latitude!) {
+                        self.clientGoogle.getMapMetaByCoordinates(meta.longitude!, meta.latitude!) {
                                 
-                                (success, message, gClientSession) in
+                            (success, message, gClientSession) in
                                 
-                                if success == true {
+                            if success == true {
                                     
-                                    self.students.locations[index].flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
-                                    self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
-                                    if self.debugMode { print ("_ fetch new flag:    \(self.students.locations[index].flag)") }
-                                }
+                                self.students.locations[index].flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
+                                self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
+                                if self.debugMode { print ("_ fetch new flag:    \(self.students.locations[index].flag)") }
                             }
                         }
                     }
