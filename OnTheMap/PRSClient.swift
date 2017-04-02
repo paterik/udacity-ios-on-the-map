@@ -209,7 +209,8 @@ class PRSClient: NSObject {
             (data, error) in
             
             if (error != nil) {
-                completionHandlerForGetAllLocations(false, "Up's, your request couln't be handled ... \(String(describing: error))")
+            
+                completionHandlerForGetAllLocations(false, "Up's, your request couln't be handled ... \(String(describing: error!))")
                 
             } else {
                 
