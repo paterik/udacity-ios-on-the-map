@@ -33,20 +33,6 @@ class UDCClient: NSObject {
     //
     var clientSession: UDCSession? = nil
     
-    func getUserSessionDeveloperToken (
-        completionHandlerForAuth: @escaping (_ udcSession: UDCSession?, _ error: String?) -> Void) {
-    
-        let _udcSession = UDCSession(
-            accountKey: "9237689572",
-            accountRegistered: true,
-            sessionId: "1520764715S97349d2a59440130528480c39dfdd1ee",
-            sessionExpirationDate: Date() + 2.months - 1.days - 1.minutes,
-            created: Date()
-        )
-        
-        completionHandlerForAuth(_udcSession, nil)
-    }
-    
     /*
      * global method to get udacity userSession by username and password or facebook auth token
      */
@@ -54,9 +40,7 @@ class UDCClient: NSObject {
          _ username: String?,
          _ password: String?,
          _ fbAuthToken: String?,
-           completionHandlerForAuth: @escaping (_ udcSession: UDCSession?, _ error: String?)
-        
-        -> Void) {
+           completionHandlerForAuth: @escaping (_ udcSession: UDCSession?, _ error: String?) -> Void) {
         
         var jsonBodyLogin: [String : AnyObject]?
         
@@ -112,4 +96,24 @@ class UDCClient: NSObject {
             }
         }
     }
+    
+    /*
+     * [ DBG/DEV ] handle quick login during development
+     */
+    func getUserSessionDeveloperToken (
+         completionHandlerForAuth: @escaping (
+       _ udcSession: UDCSession?,
+       _ error: String?) -> Void) {
+        
+        let _udcSession = UDCSession(
+            accountKey: "9237689572",
+            accountRegistered: true,
+            sessionId: "1520764715S97349d2a59440130528480c39dfdd1ee",
+            sessionExpirationDate: Date() + 2.months - 1.days - 1.minutes,
+            created: Date()
+        )
+        
+        completionHandlerForAuth(_udcSession, nil)
+    }
+    
 }
