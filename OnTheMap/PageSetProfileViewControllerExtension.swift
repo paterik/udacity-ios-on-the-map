@@ -73,11 +73,11 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
     }
     
     /*
-     * load student default meta data during editMode
+     * load student default meta data based on the last (own) generated one
      */
     func loadStudentMetaData() {
         
-        if appDelegate.inEditMode == true && appDelegate.currentUserStudentLocation != nil {
+        if appDelegate.currentUserStudentLocation != nil {
             
             inpFirstname.text = appDelegate.currentUserStudentLocation!.firstName
             inpLastname.text = appDelegate.currentUserStudentLocation!.lastName
