@@ -30,6 +30,7 @@ class MapViewController: UIViewController, ControllerCommandProtocol {
     let debugMode: Bool = false
     let clientParse = PRSClient.sharedInstance
     let clientUdacity = UDCClient.sharedInstance
+    let clientFacebook = FBClient.sharedInstance
     let deviceLocationManager = DeviceLocationManager.sharedInstance
     let students = PRSStudentLocations.sharedInstance
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -63,6 +64,8 @@ class MapViewController: UIViewController, ControllerCommandProtocol {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+        
+        appDelegate.forceQueueExit = false
         
         activitySpinner.center = self.view.center
         if appDelegate.forceMapReload == true {
