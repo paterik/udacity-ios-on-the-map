@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import YNDropDownMenu
 
 extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
@@ -509,6 +510,95 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
         locationFetchStartTime = nil
         locationFetchTrying = false
+    }
+    
+    /*
+     * handle add user location (delegatable) method call
+     */
+    func _callAddUserLocationAction() {
+        
+        clientParse.getMyStudentLocations() { (success, error) in
+            
+            if success == true {
+                
+                self.handleUserLocation()
+                
+            } else {
+                
+                let alertController = UIAlertController(title: "Alert", message: error, preferredStyle: UIAlertControllerStyle.alert)
+                let Action = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in }
+                
+                alertController.addAction(Action)
+                OperationQueue.main.addOperation {
+                    self.present(alertController, animated: true, completion:nil)
+                }
+            }
+        }
+    }
+    
+    /*
+     * handle reload map (delegatable) method call
+     */
+    func _callReloadMapAction() {
+        
+        updateStudentLocations()
+        updateDeviceLocation()
+    }
+    
+    /*
+     * handle delegate commands from other view (e.g. menu calls)
+     */
+    func handleDelegateCommand(
+        _ command: String) {
+        
+        if debugMode == true { print ("_received command: \(command)") }
+        
+        if command == "addUserLocationFromMenu" {
+            appMenu!.hideMenu()
+           _callAddUserLocationAction()
+        }
+        
+        if command == "reloadUserLocationMapFromMenu" {
+            appMenu!.hideMenu()
+           _callReloadMapAction()
+        }
+    }
+    
+    func initMenu() {
+        
+        let menuViews = Bundle.main.loadNibNamed("StudentMapMenu", owner: nil, options: nil) as? [StudentMapMenu]
+        
+        if let _menuViews = menuViews {
+            
+            // take first view definition as studentMapMenu and activate command delegation pipe
+            let backgroundView = UIView()
+            let _menuView = _menuViews[0] as StudentMapMenu
+                _menuView.delegate = self
+            
+            appMenu = YNDropDownMenu(
+                frame: CGRect(x: 0, y: 28, width: UIScreen.main.bounds.size.width, height: 38),
+                dropDownViews: [_menuView],
+                dropDownViewTitles: [""] // no title(s) required
+            )
+            
+            appMenu!.setImageWhen(
+                normal: UIImage(named: "icnMenu_v1"),
+                selected: UIImage(named: "icnCancel_v1"),
+                disabled: UIImage(named: "icnMenu_v1")
+            )
+            
+            appMenu!.setLabelColorWhen(normal: .black, selected: UIColor(netHex: 0xFFA409), disabled: .gray)
+            appMenu!.setLabelFontWhen(normal: .systemFont(ofSize: 12), selected: .boldSystemFont(ofSize: 12), disabled: .systemFont(ofSize: 12))
+            appMenu!.backgroundBlurEnabled = true
+            appMenu!.bottomLine.isHidden = false
+            
+            backgroundView.backgroundColor = .black
+            appMenu!.blurEffectView = backgroundView
+            appMenu!.blurEffectViewAlpha = 0.7
+            appMenu!.alwaysSelected(at: 0)
+            
+            self.view.addSubview(appMenu!)
+        }
     }
     
     //
