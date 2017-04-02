@@ -6,4 +6,32 @@
 //  Copyright © 2017 Patrick Paechnatz. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class StudentMapMenu: UIView {
+
+    @IBOutlet weak var btnReloadMap: UIButton!
+    @IBOutlet weak var btnShowStatistics: UIButton!
+    @IBOutlet weak var btnLogout: UIButton!
+    @IBOutlet weak var btnAddLocation: UIButton!
+
+    var delegate: ControllerCommandProtocol?
+    
+    @IBAction func btnAddLocationAction(_ sender: UIButton) {
+        
+        if let del = delegate { del.handleDelegateCommand("addUserLocationFromMenu") }
+    }
+    
+    @IBAction func btnReloadMapAction(_ sender: UIButton) {
+        
+        if let del = delegate { del.handleDelegateCommand("reloadUserLocationMapFromMenu") }
+    }
+    
+    @IBAction func btnShowStatisticsAction(_ sender: UIButton) {
+        print ("show statistics")
+    }
+    
+    @IBAction func btnLogoutAction(_ sender: UIButton) {
+        print ("logout")
+    }
+}
