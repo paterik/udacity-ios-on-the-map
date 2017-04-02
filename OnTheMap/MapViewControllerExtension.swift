@@ -537,6 +537,47 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     /*
+     * handle logout user (delegatable) method call for udacity and fb sessions
+     */
+    func _callLogOutAction() {
+    
+        if appDelegate.isAuthByUdacity == true {
+        
+            clientUdacity.removeUserSessionTokenAndLogOut {
+                
+                (success, error) in
+                
+                if success == true {
+                    
+                    OperationQueue.main.addOperation {
+                    
+                        self.appDelegate.currentUserStudentLocation = nil
+                        self.clientUdacity.clientSession = nil
+                        
+                    }
+                    
+                    self.dismiss( animated: true )
+                    
+                } else {
+                    
+                    // client error updating location? show corresponding message and return ...
+                    let btnOkAction = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction!) in return }
+                    let alertController = UIAlertController(
+                        title: "Alert",
+                        message: error,
+                        preferredStyle: UIAlertControllerStyle.alert
+                    )
+                    
+                    alertController.addAction(btnOkAction)
+                    OperationQueue.main.addOperation {
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+    
+    /*
      * handle reload map (delegatable) method call
      */
     func _callReloadMapAction() {
@@ -561,6 +602,11 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         if command == "reloadUserLocationMapFromMenu" {
             appMenu!.hideMenu()
            _callReloadMapAction()
+        }
+        
+        if command == "logOutUserFromMenu" {
+            appMenu!.hideMenu()
+           _callLogOutAction()
         }
     }
     
