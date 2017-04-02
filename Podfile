@@ -6,6 +6,7 @@ use_frameworks!
 def baseCore
     pod 'BGTableViewRowActionWithImage'
     pod 'CryptoSwift'
+    pod 'YNDropDownMenu'
 end
 
 def amazonSDKCore
