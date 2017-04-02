@@ -34,6 +34,29 @@ class UDCClient: NSObject {
     var clientSession: UDCSession? = nil
     
     /*
+     * logout user be calling delete command on udacity session handler uri
+     */
+    func removeUserSessionTokenAndLogOut(
+         completionHandlerForLogOut: @escaping (
+       _ success: Bool?,
+       _ error: String?) -> Void) {
+        
+        client.delete(apiURL, headers: [:]) { (data, error) in
+            
+            if (error != nil) {
+                
+                completionHandlerForLogOut(false, error)
+                
+            } else {
+            
+                self.clientSession = nil
+                completionHandlerForLogOut(true, nil)
+
+            }
+        }
+    }
+    
+    /*
      * global method to get udacity userSession by username and password or facebook auth token
      */
     func getUserSessionToken (
@@ -115,5 +138,4 @@ class UDCClient: NSObject {
         
         completionHandlerForAuth(_udcSession, nil)
     }
-    
 }
