@@ -214,35 +214,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLZ-WZ-G6Z">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="On The Map" id="Qxb-hW-9wy">
-                                        <barButtonItem key="leftBarButtonItem" tag="1" image="icnMenu_v1" id="5m5-OE-Vop" userLabel="btnOpenContextMenu">
-                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="icnAddPosition_v2" id="4y9-J9-5Hr" userLabel="btnAddUser">
-                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <connections>
-                                                <action selector="btnAddUserLocationAction:" destination="54A-vp-Lv2" id="Hua-NQ-eNh"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Qwt-vA-MdB">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Qwt-vA-MdB" firstAttribute="top" secondItem="zLZ-WZ-G6Z" secondAttribute="bottom" id="FdH-nX-Bl6"/>
-                            <constraint firstItem="Qwt-vA-MdB" firstAttribute="leading" secondItem="zLZ-WZ-G6Z" secondAttribute="leading" id="SRW-jj-H7v"/>
+                            <constraint firstItem="Qwt-vA-MdB" firstAttribute="leading" secondItem="Pej-jr-eon" secondAttribute="leading" id="Hy3-OZ-Nci"/>
+                            <constraint firstItem="Qwt-vA-MdB" firstAttribute="top" secondItem="RLH-Ie-Q1t" secondAttribute="bottom" constant="44" id="Krz-s4-tZq"/>
                             <constraint firstItem="Qwt-vA-MdB" firstAttribute="bottom" secondItem="dWV-2g-fNo" secondAttribute="top" id="W2Y-cZ-Mbl"/>
-                            <constraint firstAttribute="trailing" secondItem="zLZ-WZ-G6Z" secondAttribute="trailing" id="Yx9-IK-Boa"/>
-                            <constraint firstItem="Qwt-vA-MdB" firstAttribute="trailing" secondItem="zLZ-WZ-G6Z" secondAttribute="trailing" id="dZD-su-UUy"/>
-                            <constraint firstItem="zLZ-WZ-G6Z" firstAttribute="leading" secondItem="Pej-jr-eon" secondAttribute="leading" id="eEw-s4-DWe"/>
-                            <constraint firstItem="zLZ-WZ-G6Z" firstAttribute="top" secondItem="RLH-Ie-Q1t" secondAttribute="bottom" id="qYx-f7-u8X"/>
+                            <constraint firstAttribute="trailing" secondItem="Qwt-vA-MdB" secondAttribute="trailing" id="vCI-ou-Ft9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Uci-wh-T3S"/>
