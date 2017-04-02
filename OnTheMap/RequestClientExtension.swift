@@ -93,31 +93,4 @@ extension RequestClient {
             completionHandlerForRequest: completionHandlerForPatch
         )
     }
-    
-    /* 
-     * take a raw JSON NSData object and return a (real) usable foundation object 
-     */
-    func convertDataWithCompletionHandler(
-        data: NSData,
-        completionHandlerForConvertData: (_ result: Any?, _ errorString: String?)
-        
-        -> Void) {
-        
-        var parsedResult: Any!
-        
-        do {
-            
-            parsedResult = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments)
-            
-        } catch {
-            
-            completionHandlerForConvertData(nil, "Up's, could not parse the data as JSON: '\(data)'")
-            
-            if self.debugMode {
-                print(error)
-            }
-        }
-        
-        completionHandlerForConvertData(parsedResult, nil)
-    }
 }
