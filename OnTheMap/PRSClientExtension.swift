@@ -93,6 +93,8 @@ extension PRSClient {
         
         for (index, meta) in students.locations.enumerated() {
             
+            
+            
             // try to evaluate cached response/result instead of using an "expensive" google api call first
             self.clientGoogle.getMapMetaByCache(meta.longitude!, meta.latitude!) {
                     
@@ -106,18 +108,25 @@ extension PRSClient {
                         
                 } else {
                         
-                    // call googles map api using dispatch queue command-pipe with a 250ms execution delay to prevent "OVER_QUERY_LIMIT"
-                    DispatchQueue.main.asyncAfter(deadline: .now() + (Double(index) / 4 )) {
+                    // call googles map api using dispatch queue command-pipe with a 250ms execution delay to prevent
+                    // "OVER_QUERY_LIMIT". Also check for any queue breaking command (in this case, logout will be such
+                    // a queue exit command) and prevent fillin' out main queue on application halt
+                    if self.appDelegate.forceQueueExit == false {
+                    
+                        DispatchQueue.main.asyncAfter(deadline: .now() + (Double(index) / 4 )) {
                             
-                        self.clientGoogle.getMapMetaByCoordinates(meta.longitude!, meta.latitude!) {
+                            if self.appDelegate.forceQueueExit == true { return }
+                            
+                            self.clientGoogle.getMapMetaByCoordinates(meta.longitude!, meta.latitude!) {
                                 
-                            (success, message, gClientSession) in
+                                (success, message, gClientSession) in
                                 
-                            if success == true {
+                                if success == true {
                                     
-                                self.students.locations[index].flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
-                                self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
-                                if self.debugMode { print ("_ fetch new flag:    \(self.students.locations[index].flag)") }
+                                    self.students.locations[index].flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
+                                    self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
+                                    if self.debugMode { print ("_ fetch new flag:    \(self.students.locations[index].flag)") }
+                                }
                             }
                         }
                     }

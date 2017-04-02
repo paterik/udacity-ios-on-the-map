@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var useLongitude: Double?
     var useLatitude: Double?
     var forceMapReload: Bool = false
+    var forceQueueExit: Bool = false
 
     //
     // MARK: Variables for minor data "persitence" during app runtime
