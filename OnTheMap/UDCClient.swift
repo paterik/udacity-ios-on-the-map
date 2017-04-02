@@ -47,26 +47,44 @@ class UDCClient: NSObject {
         completionHandlerForAuth(_udcSession, nil)
     }
     
+    /*
+     * global method to get udacity userSession by username and password or facebook auth token
+     */
     func getUserSessionToken (
-        _ username: String,
-        _ password: String,
-          completionHandlerForAuth: @escaping (_ udcSession: UDCSession?, _ error: String?)
+         _ username: String?,
+         _ password: String?,
+         _ fbAuthToken: String?,
+           completionHandlerForAuth: @escaping (_ udcSession: UDCSession?, _ error: String?)
         
         -> Void) {
         
-        let jsonBodyLogin = [
-            "udacity" : [
-                "username": username,
-                "password": password
-            ]
-        ]
+        var jsonBodyLogin: [String : AnyObject]?
+        
+        if let _username = username,
+           let _password = password {
+        
+            jsonBodyLogin = [
+                "udacity" : [
+                    "username": _username,
+                    "password": _password
+                ]
+            ] as [String : AnyObject]
+        }
+        
+        if let _fbAuthToken = fbAuthToken {
+        
+            jsonBodyLogin = [
+                "facebook_mobile": [
+                    "access_token": _fbAuthToken
+                ]
+            ] as [String : AnyObject]
+        }
         
         client.post(apiURL, headers: [:], jsonBody: jsonBodyLogin as [String : AnyObject]?) { (data, error) in
             
             self.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
             
             if (error != nil) {
-                
                 completionHandlerForAuth(nil, error)
                 
             } else {
