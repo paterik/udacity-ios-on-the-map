@@ -11,6 +11,9 @@ import UIKit
 
 extension LoginViewController {
 
+    /*
+     * show error message inside loginViewController
+     */
     func showErrorMessage(_ _message: String) {
     
         // Instantiate the alertController, using _message as parameter
@@ -27,6 +30,9 @@ extension LoginViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    /*
+     * show redirect message(s) inside loginViewController
+     */
     func showRedirectMessage(_ _message: String, _ _link: String) {
 
         // Instantiate the alertController, using _message as parameter
@@ -56,6 +62,41 @@ extension LoginViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    /*
+     * check input fields for udacity login process and return error on any kind of problem
+     */
+    func validateUsernameAndPassword(completionHandlerFieldValidator: @escaping (
+       _ success: Bool,
+       _ message: String?,
+       _ username: String?,
+       _ password: String?)
+        
+        -> Void) {
+        
+        guard let _username = inpUdacityUser.text else {
+            completionHandlerFieldValidator(false, "Up's, missing username in your authentication request!", nil, nil)
+            
+            return
+        }
+        
+        guard let _password = inpUdacityPassword.text else {
+            completionHandlerFieldValidator(false, "Up's, missing password in your authentication request!", nil, nil)
+            
+            return
+        }
+        
+        if _password.isEmpty || _username.isEmpty {
+            completionHandlerFieldValidator(false, "Up's, missing field data for your authentication request!", nil, nil)
+            
+            return
+        }
+        
+        completionHandlerFieldValidator(true, nil, _username, _password)
+    }
+
+    /*
+     * handly ui behaviour
+     */
     func activateUI(_ enabled: Bool) {
         
         

@@ -63,37 +63,8 @@ class LoginViewController: UIViewController {
     }
     
     /*
-     * check input fields for udacity login process and return error on any kind of problem
+     * handle login / session persistence using udacity normal auth
      */
-    func validateUsernameAndPassword(completionHandlerFieldValidator: @escaping (
-       _ success: Bool,
-       _ message: String?,
-       _ username: String?,
-       _ password: String?)
-        
-        -> Void) {
-    
-        guard let _username = inpUdacityUser.text else {
-            completionHandlerFieldValidator(false, "Up's, missing username in your authentication request!", nil, nil)
-            
-            return
-        }
-        
-        guard let _password = inpUdacityPassword.text else {
-            completionHandlerFieldValidator(false, "Up's, missing password in your authentication request!", nil, nil)
-            
-            return
-        }
-        
-        if _password.isEmpty || _username.isEmpty {
-            completionHandlerFieldValidator(false, "Up's, missing field data for your authentication request!", nil, nil)
-            
-            return
-        }
-        
-        completionHandlerFieldValidator(true, nil, _username, _password)
-    }
-
     @IBAction func loginUdacityAction(_ sender: AnyObject) {
         
         activateUI(false)
@@ -137,6 +108,9 @@ class LoginViewController: UIViewController {
         }
     }
     
+    /*
+     * handle login / session persistence using facebook auth
+     */
     @IBAction func loginFacebookAction(_ sender: AnyObject) {
         
         activateUI(false)
@@ -177,6 +151,9 @@ class LoginViewController: UIViewController {
         }
     }
     
+    /*
+     * load primary controller for handling studen locations after login
+     */
     private func loadLocationViewController() {
     
         activateUI(true)
