@@ -44,14 +44,12 @@ class UDCClient: NSObject {
         client.delete(apiURL, headers: [:]) { (data, error) in
             
             if (error != nil) {
-                
                 completionHandlerForLogOut(false, error)
                 
             } else {
             
                 self.clientSession = nil
                 completionHandlerForLogOut(true, nil)
-
             }
         }
     }
@@ -60,10 +58,12 @@ class UDCClient: NSObject {
      * global method to get udacity userSession by username and password or facebook auth token
      */
     func getUserSessionToken (
-         _ username: String?,
-         _ password: String?,
-         _ fbAuthToken: String?,
-           completionHandlerForAuth: @escaping (_ udcSession: UDCSession?, _ error: String?) -> Void) {
+        _ username: String?,
+        _ password: String?,
+        _ fbAuthToken: String?,
+          completionHandlerForAuth: @escaping (
+        _ udcSession: UDCSession?,
+        _ error: String?) -> Void) {
         
         var jsonBodyLogin: [String : AnyObject]?
         
@@ -118,24 +118,5 @@ class UDCClient: NSObject {
                 completionHandlerForAuth(_udcSession, nil)
             }
         }
-    }
-    
-    /*
-     * [ DBG/DEV ] handle quick login during development
-     */
-    func getUserSessionDeveloperToken (
-         completionHandlerForAuth: @escaping (
-       _ udcSession: UDCSession?,
-       _ error: String?) -> Void) {
-        
-        let _udcSession = UDCSession(
-            accountKey: "9237689572",
-            accountRegistered: true,
-            sessionId: "1520764715S97349d2a59440130528480c39dfdd1ee",
-            sessionExpirationDate: Date() + 2.months - 1.days - 1.minutes,
-            created: Date()
-        )
-        
-        completionHandlerForAuth(_udcSession, nil)
     }
 }
