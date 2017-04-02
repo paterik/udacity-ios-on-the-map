@@ -31,6 +31,7 @@ class LoginViewController: UIViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let clientUdacity = UDCClient.sharedInstance
     let clientFacebook = FBClient.sharedInstance
+    let locationTabViewIndentifier = "LocationTabViewController"
     
     //
     // MARKS: Variables
@@ -181,7 +182,7 @@ class LoginViewController: UIViewController {
         activateUI(true)
         
         let locationViewController = self.storyboard!.instantiateViewController(
-            withIdentifier: "LocationTabViewController") as! LocationTabViewController
+            withIdentifier: locationTabViewIndentifier) as! LocationTabViewController
         
         locationViewController.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         
