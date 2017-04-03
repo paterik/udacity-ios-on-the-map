@@ -28,6 +28,7 @@ struct PRSStudentData {
     var _updatedAtRaw: NSString!
     
     private var _distance: String = ""
+    private var _distanceValue: Double = 0.0
     private var _country: String = ""
     private var _flag: String = ""
     private var _isHidden: Bool = false
@@ -35,6 +36,11 @@ struct PRSStudentData {
     public var distance: String {
         get { return self._distance }
         set { self._distance = newValue }
+    }
+    
+    public var distanceValue: Double {
+        get { return self._distanceValue }
+        set { self._distanceValue = newValue }
     }
     
     public var country: String {
