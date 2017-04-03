@@ -48,12 +48,12 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
         
         initMenu()
         initListView( false )
-        
-        print ("----------------------------")
-        print ("ListView: \(locations.count)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear( animated )
+        initListView( false )
         
         activitySpinner.center = self.view.center
     }
@@ -71,6 +71,22 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
         
         let cellNormal = tableView.dequeueReusableCell(withIdentifier: cellNormalIdentifier) as! StudentTableCell!
         let cellStatistic = tableView.dequeueReusableCell(withIdentifier: cellStatisticIdentifier) as! StudentTableCellStatistic!
+        
+        if indexPath.row == 0 {
+            
+            let _numberOfUniqueCountries: Int = clientParse.getNumberOfCountriesFromStudentMeta()
+            let _longestDistance: Double = clientParse.getLongestDistanceOfStudentMeta()
+            var _longestDistanceString: String! = NSString(format: "%.0f %@", _longestDistance, "m") as String
+            
+            if  _longestDistance >= 1000.0 {
+                _longestDistanceString = NSString(format: "%.0f %@", (_longestDistance / 1000.0), "km") as String
+            }
+            
+            cellStatistic?.lblMetaLocationsOwned.text = "\(clientParse.students.myLocations.count)"
+            cellStatistic?.lblMetaLocationsCount.text = "\(clientParse.students.locations.count)"
+            cellStatistic?.lblMetaLargestDistance.text = _longestDistanceString
+            cellStatistic?.lblMetaNumberOfCountries.text = "\(_numberOfUniqueCountries)"
+        }
         
         if indexPath.row > 0 {
             
