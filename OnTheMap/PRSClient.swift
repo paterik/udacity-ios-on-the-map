@@ -8,7 +8,6 @@
 //  this client will use the unity.com parse adaption due to the inavailability of parse.com
 //
 
-import Foundation
 import UIKit
 import MapKit
 
@@ -40,7 +39,6 @@ class PRSClient: NSObject {
     let metaDateTimeFormat: String! = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let students = PRSStudentLocations.sharedInstance
-    let clientGoogleThreshold = 4 // request throttle, 4 means 1000/4 = 250ms
 
     //
     // MARK: Constants (API)
@@ -51,7 +49,7 @@ class PRSClient: NSObject {
     let apiOrderParam: String = "order"
     let apiOrderValue: String = "-updatedAt"
     let apiLimitParam: String = "limit"
-    let apiLimitValue: String = "100"
+    let apiLimitValue: String = "50"
     
     let apiHeaderAuth = [
         "X-Parse-Application-Id": "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr",
@@ -247,27 +245,5 @@ class PRSClient: NSObject {
                 completionHandlerForGetAllLocations(true, nil)
             }
         }
-    }
-    
-    /*
-     * [ DBG/DEV ] add a sample (fixture) student location, only used during development (Loc: Dresden, Zwinger)
-     */
-    private func addSampleStudentLocation ()
-        
-        -> Void {
-    
-        let sampleStudentDict : NSDictionary =
-        [
-            "firstName": "Robert",
-            "lastName": "Heidmann",
-            "mediaURL": "https://dunkelfrosch.com",
-            "mapString": "Dresden, Germany",
-            "objectId": "xx9xxYY9ZZ",
-            "uniqueKey": "9999999999",
-            "latitude": 51.053059,
-            "longitude": 13.733758,
-        ]
-
-        self.students.locations.append(PRSStudentData(sampleStudentDict))
     }
 }
