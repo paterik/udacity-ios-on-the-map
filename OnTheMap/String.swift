@@ -20,6 +20,21 @@ extension String {
         return self.substring(to: self.characters.index(self.startIndex, offsetBy: count))
     }
     
+    /*
+     * get a emoji flag by given country iso-code, return "🏴" on invalid/unknown code
+     */
+    func getFlagByCountryISOCode() -> String {
+        
+        for localeISOCode in NSLocale.isoCountryCodes {
+            
+            if self == localeISOCode {
+                return self.unicodeScalars.flatMap { String.init(UnicodeScalar(127397 + $0.value)!) }.joined()
+            }
+        }
+        
+        return "🏴"
+    }
+    
     func validateMediaURL() -> Bool {
         
         let types: NSTextCheckingResult.CheckingType = [.link]
