@@ -10,7 +10,7 @@ import UIKit
 import BGTableViewRowActionWithImage
 import YNDropDownMenu
 
-class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ControllerCommandProtocol {
+class TableViewController: BaseController, UITableViewDataSource, UITableViewDelegate, ControllerCommandProtocol {
 
     //
     // MARK: IBOutlet variables
@@ -22,14 +22,9 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     // MARK: Constants (Normal)
     //
     
-    let debugMode: Bool = false
-    let clientParse = PRSClient.sharedInstance
-    let clientUdacity = UDCClient.sharedInstance
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let locationNoData = ""
     let locationCellHeight: CGFloat = 90.0
     let cellIdentifier = "studentLocationCell"
-    let metaDateTimeFormat = "dd.MM.Y hh:mm"
     
     //
     // MARK: Variables
@@ -37,7 +32,6 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var locations: [PRSStudentData]!
-    var appMenu: YNDropDownMenu?
     
     //
     // MARK: UIView Methods (overrides)

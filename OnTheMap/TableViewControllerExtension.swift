@@ -11,7 +11,8 @@ import YNDropDownMenu
 
 extension TableViewController {
 
-    func initListView(_ loadOwnDataOnly: Bool) {
+    func initListView(
+       _ loadOwnDataOnly: Bool) {
         
         locations = clientParse.students.locations
         if loadOwnDataOnly == true {
@@ -62,23 +63,22 @@ extension TableViewController {
      * handle delegate commands from other view (e.g. menu calls)
      */
     func handleDelegateCommand(
-        _ command: String) {
+       _ command: String) {
         
         if debugMode == true { print ("_received command: \(command)") }
         
         if command == "loadAllLocationsFromMenu" {
-            
             initListView( false )
             appMenu!.hideMenu()
         }
         
         if command == "loadOwnLocationsFromMenu" {
-            
             initListView( true )
             appMenu!.hideMenu()
         }
         
         if command == "logOutUserFromMenu" {
+           _callLogOutAction()
             appMenu!.hideMenu()
         }
     }
@@ -86,7 +86,8 @@ extension TableViewController {
     /*
      * open the student given mediaURL
      */
-    func openMediaURL(_ studentMediaUrl: String?) {
+    func openMediaURL(
+       _ studentMediaUrl: String?) {
         
         let app = UIApplication.shared
         

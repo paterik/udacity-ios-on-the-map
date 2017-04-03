@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import YNDropDownMenu
 
-class MapViewController: UIViewController, ControllerCommandProtocol {
+class MapViewController: BaseController, ControllerCommandProtocol {
     
     //
     // MARK: IBOutlet Variables
@@ -27,13 +27,8 @@ class MapViewController: UIViewController, ControllerCommandProtocol {
     // MARK: Constants (Normal)
     //
     
-    let debugMode: Bool = false
-    let clientParse = PRSClient.sharedInstance
-    let clientUdacity = UDCClient.sharedInstance
-    let clientFacebook = FBClient.sharedInstance
     let deviceLocationManager = DeviceLocationManager.sharedInstance
     let students = PRSStudentLocations.sharedInstance
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     let locationAccuracy : CLLocationAccuracy = 10 // accuracy factor for device location
     let locationCheckTimeout : TimeInterval = 10   // timeout for device location fetch
@@ -54,7 +49,6 @@ class MapViewController: UIViewController, ControllerCommandProtocol {
     var locationManager : CLLocationManager { return self.deviceLocationManager.locationManager }
     var annotations = [PRSStudentMapAnnotation]()
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-    var appMenu: YNDropDownMenu?
     
     //
     // MARK: UIView Methods (overrides)
