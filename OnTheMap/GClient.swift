@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 class GClient: NSObject {
 
@@ -35,6 +36,8 @@ class GClient: NSObject {
     // MARK: Variables
     //
     
+    lazy var geoCoder = CLGeocoder()
+    
     func getMapMetaByCache (
        _ longitude: Double,
        _ latitude: Double,
@@ -59,6 +62,52 @@ class GClient: NSObject {
         completionHandlerGetMapMetaFromCache(false, "no entry for \(latitude),\(longitude) in cached requests found ...", nil)
     }
     
+    func getMapMetaByReverseGeocodeLocation(
+       _ longitude: Double,
+       _ latitude: Double,
+       _ completionHandlerGetMapMeta: @escaping (
+       _ success: Bool?,
+       _ message: String?,
+       _ gClientSession: GClientSession?) -> Void) {
+        
+        geoCoder.reverseGeocodeLocation(CLLocation(latitude: latitude, longitude: longitude)) {
+            
+            (placemarks, error) -> Void in
+            
+            if error != nil {
+                
+                completionHandlerGetMapMeta(false, "Up's, reverse geocode location couldn't be handled ... \(String(describing: error))", nil)
+            
+            } else {
+            
+                if let placemarks = placemarks,
+                   let placemark = placemarks.first,
+                   let isoCountryCode = placemark.isoCountryCode,
+                   let country = placemark.country {
+                    
+                    
+                    let _gClientSession = GClientSession(
+                        
+                        cacheApiRequestURL: nil,
+                        cacheApiRequestParam: "\(latitude),\(longitude)",
+                        cacheApiRequestDate: Date(),
+                        
+                        countryName: country,
+                        countryCode: isoCountryCode
+                    )
+                    
+                    GClientCache.sharedInstance.metaData.append(_gClientSession)
+                    completionHandlerGetMapMeta(true, nil , _gClientSession)
+                    
+                } else {
+                    
+                    completionHandlerGetMapMeta(false, "Up's, unable to read results of reverse geocode location", nil)
+                    
+                }
+            }
+        }
+    }
+    
     /*
      * get additional meta information using googles map api, evaluating country name and country iso code for flag
      * emoji extension of student data. I've including caching "logic" to prevent double calls for location coord's
@@ -74,7 +123,7 @@ class GClient: NSObject {
         _ gClientSession: GClientSession?)
         
         -> Void) {
-
+        
         // add protective cache-call logic to prevent api-requests by calling this method natively
         getMapMetaByCache(longitude, latitude) {
             
@@ -135,8 +184,11 @@ class GClient: NSObject {
                     
                 } else {
                     
-                    completionHandlerGetMapMeta(false, "Up's, couldn't foind any plausible data for \(latitude),\(longitude) -> status=\(status)", nil)
-                    
+                    completionHandlerGetMapMeta(
+                        false,
+                        "Up's, couldn't foind any plausible data for \(latitude),\(longitude) -> status=\(status)",
+                        nil
+                    )
                 }
             }
         }
