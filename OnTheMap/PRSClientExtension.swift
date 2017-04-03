@@ -6,9 +6,8 @@
 //  Copyright © 2016 Patrick Paechnatz. All rights reserved.
 //
 
-import Foundation
-import MapKit
 import UIKit
+import MapKit
 import CryptoSwift
 
 extension PRSClient {
@@ -129,7 +128,7 @@ extension PRSClient {
     }
     
     /*
-     * add further meta information to our customer mota object using google maps api by delayed requests of 250ms
+     * add further meta information to our customer mota object using google maps api by delayed requests (e.g. 250ms)
      */
     func enrichStudentMeta() {
         
@@ -162,7 +161,7 @@ extension PRSClient {
                         // queue asynchronously to prevent api threshold limitiation of google and iOS.
                         //
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + (Double(index) / 7 )) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + (Double(index) / 4 )) {
                             
                             // 2nd - try to fetch meta information using ios internal reverse geolocation handler
                             self.clientGoogle.getMapMetaByReverseGeocodeLocation(meta.longitude!, meta.latitude!) {
@@ -220,7 +219,7 @@ extension PRSClient {
     /*
      * validate incoming student meta lines check for valid geo localization properties, return false if
      * coordinates seems invalid (using regex validation process). Finally generate a hashed position key
-     * to prevent double entries in map and listView.
+     * to prevent double equal-location entries in map-annotation and corresponding listView.
      */
     func validateStudentMeta(
        _ meta:PRSStudentData) -> Bool {
@@ -245,7 +244,7 @@ extension PRSClient {
         
         if (_longitude.range(of: _longitudeRegex, options: .regularExpression) != nil &&
             _latitude.range(of: _latitudeRegex, options: .regularExpression) != nil &&
-            _uniqueKey != "" && _objectId != "" &&
+            _uniqueKey.isEmpty == false && _objectId.isEmpty == false &&
              students.locationObjectIds.contains(_objectId) == false &&
              students.locationCoordinateKeys.contains(_positionKey) == false) {
             
@@ -266,7 +265,7 @@ extension PRSClient {
         
         let dummyStudentDict : NSDictionary = [:]
         var dummyStudentMeta = PRSStudentData(dummyStudentDict)
-        dummyStudentMeta.isHidden = true
+            dummyStudentMeta.isHidden = true
         
         self.students.locations.append(dummyStudentMeta)
         self.students.myLocations.append(dummyStudentMeta)

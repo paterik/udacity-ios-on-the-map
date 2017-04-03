@@ -23,7 +23,7 @@ class PRSClient: NSObject {
     // MARK: Constants (Normal)
     //
     
-    let debugMode: Bool = false
+    let debugMode: Bool = true
     let session = URLSession.shared
     let client = RequestClient.sharedInstance
     let clientUdacity = UDCClient.sharedInstance
