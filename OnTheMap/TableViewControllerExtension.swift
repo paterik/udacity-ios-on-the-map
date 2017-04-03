@@ -31,7 +31,7 @@ extension TableViewController {
             // take first view definition as studentMapMenu and activate command delegation pipe
             let backgroundView = UIView()
             let _menuView = _menuViews[0] as StudentListMenu
-            _menuView.delegate = self
+                _menuView.delegate = self
             
             appMenu = YNDropDownMenu(
                 frame: CGRect(x: 0, y: 28, width: UIScreen.main.bounds.size.width, height: 38),
