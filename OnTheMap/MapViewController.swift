@@ -12,7 +12,7 @@ import YNDropDownMenu
 class MapViewController: UIViewController, ControllerCommandProtocol {
     
     //
-    // MARK: IBOutlet variables
+    // MARK: IBOutlet Variables
     //
     
     @IBOutlet weak var mapView: MKMapView!
@@ -54,7 +54,6 @@ class MapViewController: UIViewController, ControllerCommandProtocol {
     var locationManager : CLLocationManager { return self.deviceLocationManager.locationManager }
     var annotations = [PRSStudentMapAnnotation]()
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-    
     var appMenu: YNDropDownMenu?
     
     //
@@ -81,6 +80,7 @@ class MapViewController: UIViewController, ControllerCommandProtocol {
         mapView.delegate = self
         mapView.showsUserLocation = true
         locationManager.delegate = self
+        
        _callReloadMapAction()
         
         initMenu()
