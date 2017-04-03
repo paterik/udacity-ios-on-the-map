@@ -28,6 +28,8 @@
 		B14739551E82E93000041AFB /* PageSetLocationViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14739541E82E93000041AFB /* PageSetLocationViewControllerExtension.swift */; };
 		B150D1A71E740E9F001FF941 /* DateOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B150D1A61E740E9F001FF941 /* DateOperations.swift */; };
 		B1570E351E8FA8C600B5095C /* TableViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1570E341E8FA8C600B5095C /* TableViewControllerExtension.swift */; };
+		B15C491D1E9179C5003A0CF0 /* StudentListMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B15C491C1E9179C5003A0CF0 /* StudentListMenu.xib */; };
+		B15C491F1E9179EE003A0CF0 /* StudentListMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15C491E1E9179EE003A0CF0 /* StudentListMenu.swift */; };
 		B1682AB91E70422F004CB17C /* PRSStudentLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1682AB81E70422F004CB17C /* PRSStudentLocations.swift */; };
 		B16F05F11E71EA6B00CED99B /* MapViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16F05F01E71EA6B00CED99B /* MapViewControllerExtension.swift */; };
 		B1748B4D1E7EABC3003D9A31 /* CLPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1748B4C1E7EABC3003D9A31 /* CLPlacemark.swift */; };
@@ -108,6 +110,8 @@
 		B14739541E82E93000041AFB /* PageSetLocationViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSetLocationViewControllerExtension.swift; sourceTree = "<group>"; };
 		B150D1A61E740E9F001FF941 /* DateOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateOperations.swift; sourceTree = "<group>"; };
 		B1570E341E8FA8C600B5095C /* TableViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewControllerExtension.swift; sourceTree = "<group>"; };
+		B15C491C1E9179C5003A0CF0 /* StudentListMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StudentListMenu.xib; sourceTree = "<group>"; };
+		B15C491E1E9179EE003A0CF0 /* StudentListMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentListMenu.swift; sourceTree = "<group>"; };
 		B1682AB81E70422F004CB17C /* PRSStudentLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSStudentLocations.swift; sourceTree = "<group>"; };
 		B16F05F01E71EA6B00CED99B /* MapViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerExtension.swift; sourceTree = "<group>"; };
 		B1748B4C1E7EABC3003D9A31 /* CLPlacemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPlacemark.swift; sourceTree = "<group>"; };
@@ -503,6 +507,8 @@
 				B12AD3461E8C271F00BB9821 /* StudentTableCell.swift */,
 				B1CB21E41E911E570017883C /* StudentMapMenu.xib */,
 				B1CB21E61E911F6C0017883C /* StudentMapMenu.swift */,
+				B15C491C1E9179C5003A0CF0 /* StudentListMenu.xib */,
+				B15C491E1E9179EE003A0CF0 /* StudentListMenu.swift */,
 			);
 			name = partials;
 			sourceTree = "<group>";
@@ -687,6 +693,7 @@
 				B12AD3451E8C24A400BB9821 /* StudentTableCell.xib in Resources */,
 				B1A15B4B1DE040FD002A4307 /* Main.storyboard in Resources */,
 				B1CB21E51E911E570017883C /* StudentMapMenu.xib in Resources */,
+				B15C491D1E9179C5003A0CF0 /* StudentListMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -820,6 +827,7 @@
 				B119B5861DE591F5002AF6AF /* String.swift in Sources */,
 				B1CA1AFC1E85696200981A5A /* LocationPageViewControllerDelegate.swift in Sources */,
 				B1E27CF41E82881900972B44 /* Double.swift in Sources */,
+				B15C491F1E9179EE003A0CF0 /* StudentListMenu.swift in Sources */,
 				B13280F81E867BB000C03A8A /* PageSetViewController.swift in Sources */,
 				B118128F1DE467B100C1C91C /* GDCBlackbox.swift in Sources */,
 			);
