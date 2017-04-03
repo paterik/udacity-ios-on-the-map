@@ -349,7 +349,6 @@
 				B1DAACE31E922DD000D59179 /* base */,
 				B1C5C4671E8DA5FE0053C40C /* protocol */,
 				B18340CF1E770F870042A813 /* locationEditView */,
-				B1DF14EB1E1258E20001D54C /* LeftSidebarView */,
 				B13384341E113DF700A23201 /* locationTableView */,
 				B13384331E113DE600A23201 /* locationMapView */,
 				B13384301E113D5300A23201 /* locationTabView */,
@@ -559,13 +558,6 @@
 				B1DB862E1E17A89B006D827A /* PRSClientExtension.swift */,
 			);
 			name = extension;
-			sourceTree = "<group>";
-		};
-		B1DF14EB1E1258E20001D54C /* LeftSidebarView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = LeftSidebarView;
 			sourceTree = "<group>";
 		};
 		B1F92E011E7C371800D7BE14 /* extension */ = {
