@@ -85,13 +85,55 @@ extension PRSClient {
     }
     
     /*
+     * get the longest distance to another student locations using simpleSort
+     */
+    func getLongestDistanceOfStudentMeta() -> Double {
+        
+        var _largestDistance: Double = 0.0
+        
+        for meta in students.locations {
+        
+            // ignore hidden and distance free location objects
+            if meta.isHidden == true || meta.distance.isEmpty == true {
+                continue
+            }
+            
+            if meta.distanceValue > _largestDistance {
+                _largestDistance = meta.distanceValue
+            }
+        }
+        
+        return _largestDistance
+    }
+    
+    /*
+     * get the numver of countries from all student locations
+     */
+    func getNumberOfCountriesFromStudentMeta() -> Int {
+        
+        var _allCountries: [String] = [""]
+        
+        if students.locations.count == 0 { return 0 }
+        
+        for meta in students.locations {
+            
+            // ignore hidden and country free location objects
+            if meta.isHidden == true || meta.country.isEmpty == true {
+                continue
+            }
+            
+            _allCountries.append(meta.country)
+        }
+        
+        return Array(Set(_allCountries)).count
+    }
+    
+    /*
      * add further meta information to our customer mota object using google maps api by delayed requests of 250ms
      */
     func enrichStudentMeta() {
         
         for (index, meta) in students.locations.enumerated() {
-            
-            print ("_ fetch index \(index)")
             
             // ignore hidden location object
             if meta.isHidden == true {
