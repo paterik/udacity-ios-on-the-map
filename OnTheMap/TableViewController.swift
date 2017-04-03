@@ -86,7 +86,6 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
             let dateObj = dateFormatter.date(from: studentLocationMeta._createdAtRaw as String)
             dateFormatter.dateFormat = metaDateTimeFormat
             
-            
             // check mapString provided by student, take location country if mapstring seems empty
             var _mapString: String? = studentLocationMeta.mapString ?? ""
             if  _mapString!.isEmpty {
@@ -101,7 +100,6 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
             cellNormal?.lblStudentDistance.text = studentLocationMeta.distance
             // set country flag for student using enriched data
             cellNormal?.lblStudentMapFlag.text = studentLocationMeta.flag
-            
         }
         
         return indexPath.row == 0
@@ -169,7 +167,6 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
                     )
                     
                     let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
-                        // execute api call to delete user location object
                         self.userLocationDeleteFromRow(currentCellLocation.objectId!, [indexPath])
                     }
                     
