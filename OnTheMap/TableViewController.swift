@@ -24,7 +24,8 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
     
     let locationNoData = ""
     let locationCellHeight: CGFloat = 90.0
-    let cellIdentifier = "studentLocationCell"
+    let cellNormalIdentifier = "studentLocationCell"
+    let cellStatisticIdentifier = "locationStatisticsCell"
     
     //
     // MARK: Variables
@@ -42,7 +43,8 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "StudentTableCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        tableView.register(UINib(nibName: "StudentTableCell", bundle: nil), forCellReuseIdentifier: cellNormalIdentifier)
+        tableView.register(UINib(nibName: "StudentTableCellStatistic", bundle: nil), forCellReuseIdentifier: cellStatisticIdentifier)
         
         initMenu()
     }
@@ -64,39 +66,47 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
        _ tableView: UITableView,
          cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! StudentTableCell!
-        let studentLocationMeta = locations[indexPath.row]
+        let cellNormal = tableView.dequeueReusableCell(withIdentifier: cellNormalIdentifier) as! StudentTableCell!
+        let cellStatistic = tableView.dequeueReusableCell(withIdentifier: cellStatisticIdentifier) as! StudentTableCellStatistic!
         
-        cell?.lblStudentName.text = NSString(
-            format: "%@ %@",
-            studentLocationMeta.firstName ?? locationNoData,
-            studentLocationMeta.lastName ?? locationNoData
-        ) as String
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = PRSClient.sharedInstance.metaDateTimeFormat
-        dateFormatter.locale = Locale.init(identifier: NSLocale.current.languageCode!)
-        
-        let dateObj = dateFormatter.date(from: studentLocationMeta._createdAtRaw as String)
-        dateFormatter.dateFormat = metaDateTimeFormat
-        
-        
-        // check mapString provided by student, take location country if mapstring seems empty
-        var _mapString: String? = studentLocationMeta.mapString ?? ""
-        if  _mapString!.isEmpty {
-            _mapString = studentLocationMeta.country
+        if indexPath.row > 0 {
+            
+            let studentLocationMeta = locations[indexPath.row]
+            
+            cellNormal?.lblStudentName.text = NSString(
+                format: "%@ %@",
+                studentLocationMeta.firstName ?? locationNoData,
+                studentLocationMeta.lastName ?? locationNoData
+                ) as String
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = PRSClient.sharedInstance.metaDateTimeFormat
+            dateFormatter.locale = Locale.init(identifier: NSLocale.current.languageCode!)
+            
+            let dateObj = dateFormatter.date(from: studentLocationMeta._createdAtRaw as String)
+            dateFormatter.dateFormat = metaDateTimeFormat
+            
+            
+            // check mapString provided by student, take location country if mapstring seems empty
+            var _mapString: String? = studentLocationMeta.mapString ?? ""
+            if  _mapString!.isEmpty {
+                _mapString = studentLocationMeta.country
+            }
+            
+            // set student meta createdAt timestamp as formatted date
+            cellNormal?.lblStudentDataTimeStamp.text = "\(dateFormatter.string(from: dateObj!))"
+            // set provided mapString, if nothing found take enriched meta for country
+            cellNormal?.lblStudentMapString.text = _mapString
+            // set distance to student
+            cellNormal?.lblStudentDistance.text = studentLocationMeta.distance
+            // set country flag for student using enriched data
+            cellNormal?.lblStudentMapFlag.text = studentLocationMeta.flag
+            
         }
         
-        // set student meta createdAt timestamp as formatted date
-        cell?.lblStudentDataTimeStamp.text = "\(dateFormatter.string(from: dateObj!))"
-        // set provided mapString, if nothing found take enriched meta for country
-        cell?.lblStudentMapString.text = _mapString
-        // set distance to student
-        cell?.lblStudentDistance.text = studentLocationMeta.distance
-        // set country flag for student using enriched data
-        cell?.lblStudentMapFlag.text = studentLocationMeta.flag
-        
-        return cell!
+        return indexPath.row == 0
+            ? cellStatistic!
+            : cellNormal!
     }
     
     func tableView(
@@ -109,6 +119,10 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
     func tableView(
        _ tableView: UITableView,
          editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        if indexPath.row == 0 {
+            return []
+        }
         
         let currentCellLocation = locations[indexPath.row] as PRSStudentData
         
