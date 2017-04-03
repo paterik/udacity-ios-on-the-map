@@ -340,6 +340,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         // remove all old annotations
         annotations.removeAll()
         
+        // update current device location
+        updateDeviceLocation()
+        
         // render distance to other students only if device location meta data available
         if appDelegate.currentDeviceLocations.count > 0 {
             currentDeviceLocation = appDelegate.currentDeviceLocations.first
@@ -355,9 +358,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
             // ignore zero index location, this one will be replaced by my statistic
             // cell in listView and should not be rendered as map valid annotation
-            if dictionary.isHidden == true {
-                continue
-            }
+            if dictionary.isHidden == true { continue }
             
             let coordinate = CLLocationCoordinate2D(latitude: dictionary.latitude!, longitude: dictionary.longitude!)
             let annotation = PRSStudentMapAnnotation(coordinate)
@@ -373,7 +374,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             if renderDistance {
                 targetLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
                 annotation.distance = getPrintableDistanceBetween(sourceLocation, targetLocation)
+                
                 students.locations[index].distance = annotation.distance!
+                students.locations[index].distanceValue = sourceLocation?.distance(from: targetLocation!) ?? 0.0
             }
             
             if dictionary.uniqueKey == clientParse.clientUdacity.clientSession?.accountKey! {
@@ -604,7 +607,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             appMenu!.setLabelFontWhen(normal: .systemFont(ofSize: 12), selected: .boldSystemFont(ofSize: 12), disabled: .systemFont(ofSize: 12))
             appMenu!.backgroundBlurEnabled = true
             appMenu!.bottomLine.isHidden = false
-            
             
             appMenu!.blurEffectView = backgroundView
             appMenu!.blurEffectViewAlpha = 0.7
