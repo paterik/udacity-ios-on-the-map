@@ -353,6 +353,12 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         for (index, dictionary) in students.locations.enumerated() {
             
+            // ignore zero index location, this one will be replaced by my statistic
+            // cell in listView and should not be rendered as map valid annotation
+            if dictionary.isHidden == true {
+                continue
+            }
+            
             let coordinate = CLLocationCoordinate2D(latitude: dictionary.latitude!, longitude: dictionary.longitude!)
             let annotation = PRSStudentMapAnnotation(coordinate)
             

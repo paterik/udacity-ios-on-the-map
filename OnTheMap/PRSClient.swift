@@ -174,7 +174,6 @@ class PRSClient: NSObject {
                 
                 self.students.myLocations.removeAll()
                 self.students.clearValidatorCache()
-                
                 for dictionary in results as [NSDictionary] {
                     
                     let meta = PRSStudentData(dictionary)
@@ -219,6 +218,7 @@ class PRSClient: NSObject {
                 }
                 
                 self.students.clearCollections()
+                self.addIndexZeroStudentLocation()
                 
                 for dictionary in results as [NSDictionary] {
                 

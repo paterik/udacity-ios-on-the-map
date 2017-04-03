@@ -30,6 +30,7 @@ struct PRSStudentData {
     private var _distance: String = ""
     private var _country: String = ""
     private var _flag: String = ""
+    private var _isHidden: Bool = false
     
     public var distance: String {
         get { return self._distance }
@@ -44,6 +45,11 @@ struct PRSStudentData {
     public var flag: String {
         get { return self._flag }
         set { self._flag = newValue }
+    }
+    
+    public var isHidden: Bool {
+        get { return self._isHidden }
+        set { self._isHidden = newValue }
     }
     
     var asArray: [String : Any] {

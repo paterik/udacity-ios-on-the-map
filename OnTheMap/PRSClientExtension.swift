@@ -91,6 +91,11 @@ extension PRSClient {
         
         for (index, meta) in students.locations.enumerated() {
             
+            // ignore hidden location object
+            if meta.isHidden == true {
+                continue
+            }
+            
             // 1st try to evaluate cached response/result instead of using an "expensive" Google/iOS api calls first
             self.clientGoogle.getMapMetaByCache(meta.longitude!, meta.latitude!) {
                     
@@ -206,6 +211,19 @@ extension PRSClient {
         students.locationCoordinateKeys.append(_positionKey)
         
         return isValid
+    }
+    
+    /*
+     * generate a dummy location as first entry to be overriden by statistic cell
+     */
+    func addIndexZeroStudentLocation() -> Void {
+        
+        let dummyStudentDict : NSDictionary = [:]
+        var dummyStudentMeta = PRSStudentData(dummyStudentDict)
+        dummyStudentMeta.isHidden = true
+        
+        self.students.locations.append(dummyStudentMeta)
+        self.students.myLocations.append(dummyStudentMeta)
     }
     
     /*
