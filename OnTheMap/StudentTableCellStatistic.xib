@@ -166,6 +166,12 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="lblMetaLargestDistance" destination="zJn-Y9-iJL" id="7JW-Op-1R4"/>
+                <outlet property="lblMetaLocationsCount" destination="7bb-hU-mdB" id="GlT-aj-gYW"/>
+                <outlet property="lblMetaLocationsOwned" destination="EEW-0b-cgJ" id="uBu-dy-Y1S"/>
+                <outlet property="lblMetaNumberOfCountries" destination="jAW-rQ-lZQ" id="QIU-2V-6WN"/>
+            </connections>
             <point key="canvasLocation" x="55" y="-154"/>
         </view>
     </objects>
