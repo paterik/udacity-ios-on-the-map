@@ -82,8 +82,8 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
                 _longestDistanceString = NSString(format: "%.0f %@", (_longestDistance / 1000.0), "km") as String
             }
             
-            cellStatistic?.lblMetaLocationsOwned.text = "\(clientParse.students.myLocations.count)"
-            cellStatistic?.lblMetaLocationsCount.text = "\(clientParse.students.locations.count)"
+            cellStatistic?.lblMetaLocationsOwned.text = "\(clientParse.students.myLocations.count-1)"
+            cellStatistic?.lblMetaLocationsCount.text = "\(clientParse.students.locations.count-1)"
             cellStatistic?.lblMetaLargestDistance.text = _longestDistanceString
             cellStatistic?.lblMetaNumberOfCountries.text = "\(_numberOfUniqueCountries)"
         }
