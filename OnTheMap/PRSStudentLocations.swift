@@ -51,14 +51,14 @@ class PRSStudentLocations {
     
         // remove object by given id from all locations stack
         for (index, location) in locations.enumerated() {
-            if location.objectId == objectId {
+            if location.isHidden == false && location.objectId == objectId {
                 locations.remove(at: index)
             }
         }
         
         // remove object by given id from my location stack
         for (index, location) in myLocations.enumerated() {
-            if location.objectId == objectId {
+            if location.isHidden == false && location.objectId == objectId {
                 locations.remove(at: index)
             }
         }

@@ -91,6 +91,8 @@ extension PRSClient {
         
         for (index, meta) in students.locations.enumerated() {
             
+            print ("_ fetch index \(index)")
+            
             // ignore hidden location object
             if meta.isHidden == true {
                 continue
@@ -118,7 +120,7 @@ extension PRSClient {
                         // queue asynchronously to prevent api threshold limitiation of google and iOS.
                         //
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + (Double(index) / 4 )) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + (Double(index) / 7 )) {
                             
                             // 2nd - try to fetch meta information using ios internal reverse geolocation handler
                             self.clientGoogle.getMapMetaByReverseGeocodeLocation(meta.longitude!, meta.latitude!) {
@@ -135,7 +137,7 @@ extension PRSClient {
                                     }
                                     
                                 } else {
-                            
+                                    
                                     // 3rd - try to fetch the required meta information using public google api service
                                     self.clientGoogle.getMapMetaByCoordinates(meta.longitude!, meta.latitude!) {
                                         
@@ -183,6 +185,8 @@ extension PRSClient {
         
         var isValid: Bool = false
         
+        if meta.isHidden == true { return isValid }
+
         guard let _latitudeRaw = meta.latitude,
               let _longitudeRaw = meta.longitude,
               let _objectId = meta.objectId,

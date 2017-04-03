@@ -47,12 +47,15 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
         tableView.register(UINib(nibName: "StudentTableCellStatistic", bundle: nil), forCellReuseIdentifier: cellStatisticIdentifier)
         
         initMenu()
+        initListView( false )
+        
+        print ("----------------------------")
+        print ("ListView: \(locations.count)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         activitySpinner.center = self.view.center
-        initListView( false )
     }
     
     func tableView(
@@ -86,20 +89,26 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
             let dateObj = dateFormatter.date(from: studentLocationMeta._createdAtRaw as String)
             dateFormatter.dateFormat = metaDateTimeFormat
             
-            // check mapString provided by student, take location country if mapstring seems empty
+            // check mapString provided by student, take location country if mapstring seems to be empty
             var _mapString: String? = studentLocationMeta.mapString ?? ""
             if  _mapString!.isEmpty {
                 _mapString = studentLocationMeta.country
+            }
+            
+            // check flagString for studentLocation, take default one if flagString seems to be empty
+            var _flagString: String? = studentLocationMeta.flag
+            if  _flagString!.isEmpty {
+                _flagString = ("--").getFlagByCountryISOCode()
             }
             
             // set student meta createdAt timestamp as formatted date
             cellNormal?.lblStudentDataTimeStamp.text = "\(dateFormatter.string(from: dateObj!))"
             // set provided mapString, if nothing found take enriched meta for country
             cellNormal?.lblStudentMapString.text = _mapString
-            // set distance to student
+            // set calculated distance from your device to student
             cellNormal?.lblStudentDistance.text = studentLocationMeta.distance
             // set country flag for student using enriched data
-            cellNormal?.lblStudentMapFlag.text = studentLocationMeta.flag
+            cellNormal?.lblStudentMapFlag.text = _flagString
         }
         
         return indexPath.row == 0
@@ -240,12 +249,10 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
             
             if success == true {
                 
-                // remove object id from all corresponding collections
-                self.clientParse.students.removeByObjectId(userLocationObjectId)
-                self.appDelegate.forceMapReload = true
-                
                 OperationQueue.main.addOperation {
-                    self.tableView.reloadData()
+                    self.clientParse.students.removeByObjectId(userLocationObjectId)
+                    self.appDelegate.forceMapReload = true
+                    self.initListView( false )
                 }
                 
             } else {
@@ -260,6 +267,7 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
                 
                 alertController.addAction(btnOkAction)
                 OperationQueue.main.addOperation {
+                    self.appDelegate.forceMapReload = true
                     self.present(alertController, animated: true, completion: nil)
                 }
             }

@@ -103,7 +103,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
             let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
                 // execute api call to delete user location object
-                self.userLocationDelete(objectId!)
+                self.userLocationDelete( objectId! )
             }
             
             let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
@@ -130,7 +130,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             if success == true {
                 
                 // remove object id from all corresponding collections
-                self.clientParse.students.removeByObjectId(userLocationObjectId)
+                self.clientParse.students.removeByObjectId( userLocationObjectId )
                 
                 // update locations stack *** not required if lists are cleared natively
                 OperationQueue.main.addOperation { self.updateStudentLocations() }
@@ -582,8 +582,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         if let _menuViews = menuViews {
             
-            // take first view definition as studentMapMenu and activate command delegation pipe
             let backgroundView = UIView()
+                backgroundView.backgroundColor = .black
+            
             let _menuView = _menuViews[0] as StudentMapMenu
                 _menuView.delegate = self
             
@@ -604,7 +605,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             appMenu!.backgroundBlurEnabled = true
             appMenu!.bottomLine.isHidden = false
             
-            backgroundView.backgroundColor = .black
+            
             appMenu!.blurEffectView = backgroundView
             appMenu!.blurEffectViewAlpha = 0.7
             appMenu!.alwaysSelected(at: 0)

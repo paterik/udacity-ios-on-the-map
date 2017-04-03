@@ -82,7 +82,9 @@ class PRSClient: NSObject {
             
             if (error != nil) {
                 
-                completionHandlerForSetCurrentLocation(false, "Up's, your request couln't be handled ... \(String(describing: error))")
+                completionHandlerForSetCurrentLocation(
+                    false, "Up's, your request couln't be handled ... \(String(describing: error))"
+                )
                 
             } else {
                 
@@ -108,7 +110,9 @@ class PRSClient: NSObject {
             
             if (error != nil) {
                 
-                completionHandlerForUpdateCurrentLocation(false, "Up's, your request couln't be handled ... \(String(describing: error))")
+                completionHandlerForUpdateCurrentLocation(
+                    false, "Up's, your request couln't be handled ... \(String(describing: error))"
+                )
                 
             } else {
                 
@@ -132,7 +136,9 @@ class PRSClient: NSObject {
             
             if (error != nil) {
                 
-                completionHandlerForDeleteCurrentLocation(false, "Up's, your request couln't be handled ... \(String(describing: error))")
+                completionHandlerForDeleteCurrentLocation(
+                    false, "Up's, your request couln't be handled ... \(String(describing: error))"
+                )
                 
             } else {
                 
@@ -148,7 +154,11 @@ class PRSClient: NSObject {
        _ completionHandlerForCurrentLocation: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
         guard let sessionUdacity = clientUdacity.clientSession else {
-            completionHandlerForCurrentLocation(false, "Up's, no active udacity user session were found! Are you still logged in?")
+            
+            completionHandlerForCurrentLocation(
+                false, "Up's, no active udacity user session were found! Are you still logged in?"
+            )
+            
             return
         }
         
@@ -162,11 +172,14 @@ class PRSClient: NSObject {
             
             if (error != nil) {
                 
-                completionHandlerForCurrentLocation(false, "Up's, your request couln't be handled ... \(String(describing: error))")
+                completionHandlerForCurrentLocation(
+                    false, "Up's, your request couln't be handled ... \(String(describing: error))"
+                )
                 
             } else {
                 
                 guard let results = data!["results"] as? [[String: AnyObject]] else {
+                    
                     completionHandlerForCurrentLocation(false, "Up's, missing result key in response data")
                     
                     return
@@ -195,7 +208,11 @@ class PRSClient: NSObject {
        _ completionHandlerForGetAllLocations: @escaping (_ success: Bool?, _ error: String?) -> Void) {
         
         guard let sessionUdacity = clientUdacity.clientSession else {
-            completionHandlerForGetAllLocations(false, "Up's, no active udacity user session were found! Are you still logged in?")
+            
+            completionHandlerForGetAllLocations(
+                false, "Up's, no active udacity user session were found! Are you still logged in?"
+            )
+            
             return
         }
         
@@ -207,17 +224,22 @@ class PRSClient: NSObject {
             
             if (error != nil) {
             
-                completionHandlerForGetAllLocations(false, "Up's, your request couln't be handled ... \(String(describing: error!))")
+                completionHandlerForGetAllLocations(
+                    false, "Up's, your request couln't be handled ... \(String(describing: error!))"
+                )
                 
             } else {
                 
                 guard let results = data!["results"] as? [[String: AnyObject]] else {
+                    
                     completionHandlerForGetAllLocations(false, "Up's, missing result key in response data")
                     
                     return
                 }
                 
+                // cleanUp all corresponding collections
                 self.students.clearCollections()
+                // add zeron index location as placeholder for my statistic cell
                 self.addIndexZeroStudentLocation()
                 
                 for dictionary in results as [NSDictionary] {
@@ -242,6 +264,11 @@ class PRSClient: NSObject {
                 self.metaStudentLocationsCountValid = self.students.locations.count
                 self.metaStudentLocationsCount = results.count
                 
+                print ("----------------------------")
+                print ("count valid: \(self.students.locations.count - 1)")
+                print ("count all: \(results.count - 1)")
+                print ("count owned: \(self.students.myLocations.count - 1)")
+
                 completionHandlerForGetAllLocations(true, nil)
             }
         }

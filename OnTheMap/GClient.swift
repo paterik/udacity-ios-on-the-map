@@ -76,7 +76,9 @@ class GClient: NSObject {
             
             if error != nil {
                 
-                completionHandlerGetMapMeta(false, "Up's, reverse geocode location couldn't be handled ... \(String(describing: error))", nil)
+                completionHandlerGetMapMeta(
+                    false, "Up's, reverse geocode location couldn't be handled ... \(String(describing: error))", nil
+                )
             
             } else {
             
@@ -130,7 +132,6 @@ class GClient: NSObject {
             (success, message, gClientSession) in
             
             if success == true {
-                
                 completionHandlerGetMapMeta(true, nil , gClientSession)
                 return
             }
@@ -185,9 +186,7 @@ class GClient: NSObject {
                 } else {
                     
                     completionHandlerGetMapMeta(
-                        false,
-                        "Up's, couldn't foind any plausible data for \(latitude),\(longitude) -> status=\(status)",
-                        nil
+                        false, "Up's, couldn't foind any plausible data for \(latitude),\(longitude) -> status=\(status)", nil
                     )
                 }
             }
