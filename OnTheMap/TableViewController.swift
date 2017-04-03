@@ -6,11 +6,11 @@
 //  Copyright © 2016 Patrick Paechnatz. All rights reserved.
 //
 
-
 import UIKit
 import BGTableViewRowActionWithImage
+import YNDropDownMenu
 
-class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ControllerCommandProtocol {
 
     //
     // MARK: IBOutlet variables
@@ -36,7 +36,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     //
     
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-    var locations: [PRSStudentData] { return clientParse.students.locations }
+    var locations: [PRSStudentData]!
+    var appMenu: YNDropDownMenu?
     
     //
     // MARK: UIView Methods (overrides)
@@ -48,18 +49,21 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "StudentTableCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        
+        initMenu()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tableView!.reloadData()
+        
         activitySpinner.center = self.view.center
+        initListView( false )
     }
     
     func tableView(
        _ tableView: UITableView,
          numberOfRowsInSection section: Int) -> Int {
         
-        return clientParse.students.locations.count
+        return locations.count
     }
     
     func tableView(
@@ -112,7 +116,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
        _ tableView: UITableView,
          editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        let currentCellLocation = self.locations[indexPath.row] as PRSStudentData
+        let currentCellLocation = locations[indexPath.row] as PRSStudentData
         
         // definition for my linkButton using 3rd party lib BGTableViewRowActionWithImage
         let link = BGTableViewRowActionWithImage.rowAction(
@@ -222,8 +226,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
      * delete a specific userLocation from parse api persitence layer
      */
     func userLocationDeleteFromRow(
-        _ userLocationObjectId: String!,
-        _ indexPath: [IndexPath]) {
+       _ userLocationObjectId: String!,
+       _ indexPath: [IndexPath]) {
         
         self.clientParse.deleteStudentLocation (userLocationObjectId) {
             
