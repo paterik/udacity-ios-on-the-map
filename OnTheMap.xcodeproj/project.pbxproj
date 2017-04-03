@@ -57,6 +57,8 @@
 		B1D40DE41E8505C60063636E /* PageSetDetailViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D40DE31E8505C60063636E /* PageSetDetailViewControllerExtension.swift */; };
 		B1D68FB61E73340D008F73FA /* StudentMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D68FB41E73340D008F73FA /* StudentMapAnnotation.swift */; };
 		B1DA3A6B1E787D8000E66EE5 /* EditViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DA3A6A1E787D8000E66EE5 /* EditViewProtocol.swift */; };
+		B1DAACE51E922DED00D59179 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DAACE41E922DED00D59179 /* BaseController.swift */; };
+		B1DAACE81E922F1000D59179 /* BaseControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DAACE71E922F1000D59179 /* BaseControllerExtension.swift */; };
 		B1DB86251E126029006D827A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB86241E126029006D827A /* MapViewController.swift */; };
 		B1DB86271E1260E2006D827A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB86261E1260E2006D827A /* TableViewController.swift */; };
 		B1DB862B1E1262BB006D827A /* PRSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB862A1E1262BB006D827A /* PRSClient.swift */; };
@@ -147,6 +149,8 @@
 		B1D68FB31E73340D008F73FA /* StudentMapAnnotation.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StudentMapAnnotation.xib; sourceTree = "<group>"; };
 		B1D68FB41E73340D008F73FA /* StudentMapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentMapAnnotation.swift; sourceTree = "<group>"; };
 		B1DA3A6A1E787D8000E66EE5 /* EditViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewProtocol.swift; sourceTree = "<group>"; };
+		B1DAACE41E922DED00D59179 /* BaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
+		B1DAACE71E922F1000D59179 /* BaseControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseControllerExtension.swift; sourceTree = "<group>"; };
 		B1DB86241E126029006D827A /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B1DB86261E1260E2006D827A /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		B1DB862A1E1262BB006D827A /* PRSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSClient.swift; sourceTree = "<group>"; };
@@ -338,6 +342,7 @@
 		B154718D1DE043D2000226D7 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				B1DAACE31E922DD000D59179 /* base */,
 				B1C5C4671E8DA5FE0053C40C /* protocol */,
 				B18340CF1E770F870042A813 /* locationEditView */,
 				B1DF14EB1E1258E20001D54C /* LeftSidebarView */,
@@ -511,6 +516,23 @@
 				B15C491E1E9179EE003A0CF0 /* StudentListMenu.swift */,
 			);
 			name = partials;
+			sourceTree = "<group>";
+		};
+		B1DAACE31E922DD000D59179 /* base */ = {
+			isa = PBXGroup;
+			children = (
+				B1DAACE61E922EFD00D59179 /* extension */,
+				B1DAACE41E922DED00D59179 /* BaseController.swift */,
+			);
+			name = base;
+			sourceTree = "<group>";
+		};
+		B1DAACE61E922EFD00D59179 /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				B1DAACE71E922F1000D59179 /* BaseControllerExtension.swift */,
+			);
+			name = extension;
 			sourceTree = "<group>";
 		};
 		B1DB86281E126295006D827A /* parse.com */ = {
@@ -801,6 +823,7 @@
 				B13280FB1E867F1A00C03A8A /* ControllerCommandProtocol.swift in Sources */,
 				B1DB86311E17B38B006D827A /* RequestClient.swift in Sources */,
 				B12009381E734D08006E2499 /* StudentMapAnnotationView.swift in Sources */,
+				B1DAACE81E922F1000D59179 /* BaseControllerExtension.swift in Sources */,
 				B18340D31E77108F0042A813 /* PageSetProfileViewController.swift in Sources */,
 				B1886DEB1DEE1DC5004026BE /* FBClient.swift in Sources */,
 				B1DA3A6B1E787D8000E66EE5 /* EditViewProtocol.swift in Sources */,
@@ -821,6 +844,7 @@
 				B1CA1AFE1E856A6300981A5A /* LocationEditViewControllerExtension.swift in Sources */,
 				B11812941DE4699B00C1C91C /* UDCClientExtension.swift in Sources */,
 				B118128C1DE4664600C1C91C /* LoginViewControllerExtension.swift in Sources */,
+				B1DAACE51E922DED00D59179 /* BaseController.swift in Sources */,
 				B12AD3471E8C271F00BB9821 /* StudentTableCell.swift in Sources */,
 				B1A15B461DE040FD002A4307 /* AppDelegate.swift in Sources */,
 				B1D40DDE1E84E2570063636E /* LocationPageViewController.swift in Sources */,
