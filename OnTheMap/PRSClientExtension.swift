@@ -89,43 +89,76 @@ extension PRSClient {
      */
     func enrichStudentMeta() {
         
-        students.clearValidatorCache()
-        
         for (index, meta) in students.locations.enumerated() {
             
-            
-            
-            // try to evaluate cached response/result instead of using an "expensive" google api call first
+            // 1st try to evaluate cached response/result instead of using an "expensive" Google/iOS api calls first
             self.clientGoogle.getMapMetaByCache(meta.longitude!, meta.latitude!) {
                     
                 (success, message, gClientSession) in
-                    
+
                 if success == true {
                         
-                    self.students.locations[index].flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
+                    self.students.locations[index].flag = gClientSession!.countryCode!.getFlagByCountryISOCode()
                     self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
-                    if self.debugMode { print ("_ fetch cached flag: \(self.students.locations[index].flag)") }
+                    if self.debugMode {
+                        print ("_ fetch cached flag for index \(index): \(self.students.locations[index].flag)")
+                    }
                         
                 } else {
-                        
-                    // call googles map api using dispatch queue command-pipe with a 250ms execution delay to prevent
-                    // "OVER_QUERY_LIMIT". Also check for any queue breaking command (in this case, logout will be such
-                    // a queue exit command) and prevent fillin' out main queue on application halt
+                    
                     if self.appDelegate.forceQueueExit == false {
                     
+                        //
+                        // add our final request as process within an execution call timer set of 250ms to main operation
+                        // queue asynchronously to prevent api threshold limitiation of google and iOS.
+                        //
+                        
                         DispatchQueue.main.asyncAfter(deadline: .now() + (Double(index) / 4 )) {
                             
-                            if self.appDelegate.forceQueueExit == true { return }
-                            
-                            self.clientGoogle.getMapMetaByCoordinates(meta.longitude!, meta.latitude!) {
+                            // 2nd - try to fetch meta information using ios internal reverse geolocation handler
+                            self.clientGoogle.getMapMetaByReverseGeocodeLocation(meta.longitude!, meta.latitude!) {
                                 
                                 (success, message, gClientSession) in
                                 
                                 if success == true {
                                     
-                                    self.students.locations[index].flag = self.getFlagByCountryISOCode(gClientSession!.countryCode!)
+                                    self.students.locations[index].flag = gClientSession!.countryCode!.getFlagByCountryISOCode()
                                     self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
-                                    if self.debugMode { print ("_ fetch new flag:    \(self.students.locations[index].flag)") }
+                                    
+                                    if self.debugMode {
+                                        print ("_ fetch intern flag for index \(index): \(self.students.locations[index].flag)")
+                                    }
+                                    
+                                } else {
+                            
+                                    // 3rd - try to fetch the required meta information using public google api service
+                                    self.clientGoogle.getMapMetaByCoordinates(meta.longitude!, meta.latitude!) {
+                                        
+                                        (success, message, gClientSession) in
+                                        
+                                        if success == true {
+                                            
+                                            self.students.locations[index].flag = gClientSession!.countryCode!.getFlagByCountryISOCode()
+                                            self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
+                                            if self.debugMode {
+                                                print ("_ fetch new flag for index \(index): \(self.students.locations[index].flag)")
+                                            }
+                                            
+                                        } else {
+                                            
+                                            // 4th - evaluate location meta block as default "unknown" try to set fallback values
+                                            var country = self.students.locations[index].mapString!
+                                            if  country.isEmpty {
+                                                country = self.metaCountryUnknown
+                                            }
+                                            
+                                            self.students.locations[index].country = country
+                                            self.students.locations[index].flag = self.metaCountryUnknownFlag
+                                            if self.debugMode {
+                                                print ("_ unable to fetch flag! Error: \(String(describing: message))")
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -190,21 +223,5 @@ extension PRSClient {
         let _bytes = Array(_positionKey.utf8)
         
         return _bytes.sha224().toHexString()
-    }
-    
-    /*
-     * get a emoji flag by given country iso-code, return "🏴" on invalid/unknown code
-     */
-    private func getFlagByCountryISOCode(
-        _ code: String) -> String {
-        
-        for localeISOCode in NSLocale.isoCountryCodes {
-            
-            if code == localeISOCode {
-                return code.unicodeScalars.flatMap { String.init(UnicodeScalar(127397 + $0.value)!) }.joined()
-            }
-        }
-        
-        return metaCountryUnknownFlag
     }
 }
