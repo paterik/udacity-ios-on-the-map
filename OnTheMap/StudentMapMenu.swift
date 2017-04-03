@@ -10,12 +10,24 @@ import UIKit
 
 class StudentMapMenu: UIView {
 
+    //
+    // MARK: IBOutlet Variables
+    //
+    
     @IBOutlet weak var btnReloadMap: UIButton!
     @IBOutlet weak var btnShowStatistics: UIButton!
     @IBOutlet weak var btnLogout: UIButton!
     @IBOutlet weak var btnAddLocation: UIButton!
 
+    //
+    // MARK: Variables
+    //
+    
     var delegate: ControllerCommandProtocol?
+    
+    //
+    // MARK: IBAction Methods
+    //
     
     @IBAction func btnAddLocationAction(_ sender: UIButton) {
         
