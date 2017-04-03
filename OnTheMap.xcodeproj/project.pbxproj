@@ -59,6 +59,8 @@
 		B1DA3A6B1E787D8000E66EE5 /* EditViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DA3A6A1E787D8000E66EE5 /* EditViewProtocol.swift */; };
 		B1DAACE51E922DED00D59179 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DAACE41E922DED00D59179 /* BaseController.swift */; };
 		B1DAACE81E922F1000D59179 /* BaseControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DAACE71E922F1000D59179 /* BaseControllerExtension.swift */; };
+		B1DAACEA1E9232E100D59179 /* StudentTableCellStatistic.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1DAACE91E9232E100D59179 /* StudentTableCellStatistic.xib */; };
+		B1DAACEC1E92331500D59179 /* StudentTableCellStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DAACEB1E92331500D59179 /* StudentTableCellStatistic.swift */; };
 		B1DB86251E126029006D827A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB86241E126029006D827A /* MapViewController.swift */; };
 		B1DB86271E1260E2006D827A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB86261E1260E2006D827A /* TableViewController.swift */; };
 		B1DB862B1E1262BB006D827A /* PRSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB862A1E1262BB006D827A /* PRSClient.swift */; };
@@ -151,6 +153,8 @@
 		B1DA3A6A1E787D8000E66EE5 /* EditViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewProtocol.swift; sourceTree = "<group>"; };
 		B1DAACE41E922DED00D59179 /* BaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
 		B1DAACE71E922F1000D59179 /* BaseControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseControllerExtension.swift; sourceTree = "<group>"; };
+		B1DAACE91E9232E100D59179 /* StudentTableCellStatistic.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StudentTableCellStatistic.xib; sourceTree = "<group>"; };
+		B1DAACEB1E92331500D59179 /* StudentTableCellStatistic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTableCellStatistic.swift; sourceTree = "<group>"; };
 		B1DB86241E126029006D827A /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B1DB86261E1260E2006D827A /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		B1DB862A1E1262BB006D827A /* PRSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSClient.swift; sourceTree = "<group>"; };
@@ -514,6 +518,8 @@
 				B1CB21E61E911F6C0017883C /* StudentMapMenu.swift */,
 				B15C491C1E9179C5003A0CF0 /* StudentListMenu.xib */,
 				B15C491E1E9179EE003A0CF0 /* StudentListMenu.swift */,
+				B1DAACE91E9232E100D59179 /* StudentTableCellStatistic.xib */,
+				B1DAACEB1E92331500D59179 /* StudentTableCellStatistic.swift */,
 			);
 			name = partials;
 			sourceTree = "<group>";
@@ -709,6 +715,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1DAACEA1E9232E100D59179 /* StudentTableCellStatistic.xib in Resources */,
 				B1A15B501DE040FD002A4307 /* LaunchScreen.storyboard in Resources */,
 				B120093A1E7355BC006E2499 /* StudentMapAnnotation.xib in Resources */,
 				B1A15B4D1DE040FD002A4307 /* Assets.xcassets in Resources */,
@@ -818,6 +825,7 @@
 				B1FCE41B1E72AD050056FC00 /* PRSStudentMapAnnotation.swift in Sources */,
 				B1748B4D1E7EABC3003D9A31 /* CLPlacemark.swift in Sources */,
 				B16F05F11E71EA6B00CED99B /* MapViewControllerExtension.swift in Sources */,
+				B1DAACEC1E92331500D59179 /* StudentTableCellStatistic.swift in Sources */,
 				B1DB862B1E1262BB006D827A /* PRSClient.swift in Sources */,
 				B1C5C46C1E8E573E0053C40C /* GClientSession.swift in Sources */,
 				B13280FB1E867F1A00C03A8A /* ControllerCommandProtocol.swift in Sources */,
