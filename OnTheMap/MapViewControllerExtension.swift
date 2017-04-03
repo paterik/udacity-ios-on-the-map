@@ -414,6 +414,9 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
        _ objectId: String) -> PRSStudentData? {
         
         for location in clientParse.students.myLocations {
+            
+            // ignore hidden locations
+            if location.isHidden == true { continue }
             if location.objectId == objectId {
                 return location
             }
@@ -735,7 +738,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         if view.annotation is MKUserLocation { return }
         
         let studentAnnotation = view.annotation as! PRSStudentMapAnnotation
-        let views = Bundle.main.loadNibNamed("StudentMapAnnotation", owner: nil, options: nil)
+        let views = Bundle.main.loadNibNamed(locationAnnotationIdent, owner: nil, options: nil)
         let calloutView = views?[0] as! StudentMapAnnotation
         
         calloutView.center = CGPoint(x: view.bounds.size.width / 2, y: -calloutView.bounds.size.height * 0.65)
@@ -747,7 +750,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         calloutView.studentImage.image = UIImage(named: "imgUserDefault_v2")
         if studentAnnotation.ownLocation == true {
-            calloutView.studentImage.image = UIImage(named: "icnUserSampleBig_v1")
+            calloutView.studentImage.image = UIImage(named: "imgUserDefault_v1")
             
             let btnDeleteImage = UIImage(named: "icnDelete_v1") as UIImage?
             let btnDelete = UIButton(type: UIButtonType.custom) as UIButton
