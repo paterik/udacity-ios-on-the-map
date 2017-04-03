@@ -23,7 +23,7 @@ class PRSClient: NSObject {
     // MARK: Constants (Normal)
     //
     
-    let debugMode: Bool = true
+    let debugMode: Bool = false
     let session = URLSession.shared
     let client = RequestClient.sharedInstance
     let clientUdacity = UDCClient.sharedInstance
@@ -239,7 +239,7 @@ class PRSClient: NSObject {
                 
                 // cleanUp all corresponding collections
                 self.students.clearCollections()
-                // add zeron index location as placeholder for my statistic cell
+                // add zero index location as placeholder for my statistic cell
                 self.addIndexZeroStudentLocation()
                 
                 for dictionary in results as [NSDictionary] {
@@ -264,11 +264,6 @@ class PRSClient: NSObject {
                 self.metaStudentLocationsCountValid = self.students.locations.count
                 self.metaStudentLocationsCount = results.count
                 
-                print ("----------------------------")
-                print ("count valid: \(self.students.locations.count - 1)")
-                print ("count all: \(results.count - 1)")
-                print ("count owned: \(self.students.myLocations.count - 1)")
-
                 completionHandlerForGetAllLocations(true, nil)
             }
         }
