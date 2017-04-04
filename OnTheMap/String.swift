@@ -9,15 +9,18 @@
 import Foundation
 
 extension String {
-    
-    func chopPrefix(_ count: Int = 1) -> String {
+
+    /*
+     * add capitalization for given strings
+     */
+    func capitalizingFirstLetter() -> String {
         
-        return self.substring(from: self.characters.index(self.startIndex, offsetBy: count))
-    }
-    
-    func chopSuffix(_ count: Int = 1) -> String {
+        if self.isEmpty { return self }
         
-        return self.substring(to: self.characters.index(self.startIndex, offsetBy: count))
+        let first = String(self.characters.prefix(1)).capitalized
+        let other = String(self.characters.dropFirst())
+        
+        return first + other
     }
     
     /*
@@ -35,7 +38,10 @@ extension String {
         return "🏴"
     }
     
-    func validateMediaURL() -> Bool {
+    /*
+     * validate string for usable url's using the simple way
+     */
+    func validateURL() -> Bool {
         
         let types: NSTextCheckingResult.CheckingType = [.link]
         let detector = try? NSDataDetector(types: types.rawValue)
