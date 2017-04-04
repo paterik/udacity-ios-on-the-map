@@ -170,7 +170,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
        _ editMode: Bool) {
         
         appDelegate.inEditMode = editMode
-        
+
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "PageSetRoot") as! LocationEditViewController
         let locationRequestController = UIAlertController(
@@ -340,7 +340,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         // remove all old annotations
         annotations.removeAll()
         
-        // update current device location
         updateDeviceLocation()
         
         // render distance to other students only if device location meta data available
@@ -368,13 +367,13 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             annotation.subtitle = annotation.url ?? locationNoData
             annotation.title = NSString(
                 format: "%@ %@",
-                dictionary.firstName ?? locationNoData,
-                dictionary.lastName ?? locationNoData) as String
+                dictionary.firstName,
+                dictionary.lastName) as String
             
-            if renderDistance {
+            if renderDistance == true {
                 targetLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-                annotation.distance = getPrintableDistanceBetween(sourceLocation, targetLocation)
-                
+                annotation.distance = appCommon.getDistanceWithUnitBetween(sourceLocation, targetLocation)
+
                 students.locations[index].distance = annotation.distance!
                 students.locations[index].distanceValue = sourceLocation?.distance(from: targetLocation!) ?? 0.0
             }
@@ -387,24 +386,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         }
         
         DispatchQueue.main.async { self.mapView.addAnnotations(self.annotations) }
-    }
-    
-    /*
-     * get the printable (human readable) distance between two locations (using fix metric system)
-     */
-    func getPrintableDistanceBetween(
-       _ sourceLocation: CLLocation!,
-       _ targetLocation: CLLocation!) -> String {
-        
-        let distanceValue = sourceLocation.distance(from: targetLocation)
-        
-        // todo(!) should be handle by localization manager instead using static metric definition here
-        var distanceOut: String! = NSString(format: "%.0f %@", distanceValue, "m") as String
-        if distanceValue >= locationDistanceDivider {
-            distanceOut = NSString(format: "%.0f %@", (distanceValue / locationDistanceDivider), "km") as String
-        }
-        
-        return distanceOut
     }
     
     /*
@@ -460,12 +441,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func updateCurrentLocationMeta(
        _ coordinate: CLLocationCoordinate2D) {
         
-        let center = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         let currentDeviceLocation : NSDictionary = [ "latitude": coordinate.latitude, "longitude": coordinate.longitude ]
-        let region = MKCoordinateRegion(
-            center: center,
-            span: MKCoordinateSpan(latitudeDelta: locationMapZoom, longitudeDelta: locationMapZoom)
-        )
         
         appDelegate.currentDeviceLocations.removeAll() // currently we won't persist all evaluated device locations
         appDelegate.currentDeviceLocations.append(DeviceLocation(currentDeviceLocation)) // persist device location
@@ -474,9 +450,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         appDelegate.useLatitude = coordinate.latitude
         
         locationFetchSuccess = true
-        
-        mapView.setRegion(region, animated: true)
-        
         if debugMode == true {
             print("-------------------------------------------------------------")
             print("You are at [\(coordinate.latitude)] [\(coordinate.longitude)]")
@@ -710,23 +683,33 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
        _ mapView: MKMapView,
          viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        if !(annotation is PRSStudentMapAnnotation) { return nil }
+        var studentAnnotation: PRSStudentMapAnnotation?
         
-        let identifier = "locPin_0"
+        if !(annotation is PRSStudentMapAnnotation) {
+            return nil
+            
+        } else {
+            
+            studentAnnotation = annotation as? PRSStudentMapAnnotation
+        }
+        
+        let identifier = "locPin_1"
         var annotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         
         if annotationView == nil {
             
-            annotationView = StudentMapAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView = StudentMapAnnotationView(annotation: studentAnnotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = false
             
         } else {
             
-            annotationView?.annotation = annotation
-            
+            annotationView?.annotation = studentAnnotation
         }
         
         annotationView?.image = UIImage(named: "icnUserDefault_v1")
+        if studentAnnotation?.ownLocation == true {
+            annotationView?.image = UIImage(named: "icnUserSelf_v1")
+        }
         
         return annotationView
     }
