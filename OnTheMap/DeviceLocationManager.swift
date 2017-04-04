@@ -14,22 +14,29 @@ class DeviceLocationManager {
     //
     // MARK: Constants (Statics)
     //
+    
     static let sharedInstance = DeviceLocationManager()
     
     //
     // MARK: Constants (Normal)
     //
+    
     let locationManager = CLLocationManager()
     let debugMode: Bool = false
     
     //
     // MARK: Variables
     //
+    
     var doThisWhenAuthorized : (() -> ())?
     
     //
-    // check authorization state for device location
+    // MARK: Methods (Public)
     //
+    
+    /*
+     * check authorization state for device location
+     */
     func checkForLocationAccess(always: Bool = false, andThen f: (()->())? = nil) {
         
         guard CLLocationManager.locationServicesEnabled() else {

@@ -11,6 +11,10 @@
 import UIKit
 
 struct DeviceLocation {
+   
+    //
+    // MARK: Constants (Normal)
+    //
     
     let latitude: Double?
     let longitude: Double?
