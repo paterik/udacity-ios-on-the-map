@@ -12,7 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="StudentMapMenu" customModule="OnTheMap" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="224"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="176"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="zkb-WH-eMp" userLabel="ui_btn_reloadMap">
@@ -27,20 +27,6 @@
                     </state>
                     <connections>
                         <action selector="btnReloadMapAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Xle-li-3do"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="53j-9t-Psf" userLabel="ui_btn_reloadMap">
-                    <rect key="frame" x="16" y="116" width="343" height="40"/>
-                    <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="y7f-HC-T40"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
-                    <state key="normal" title="SHOW STATISTICS">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="btnShowStatisticsAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="X4Z-SV-nWo"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="lxg-4H-JJK" userLabel="ui_btn_addLocation">
@@ -58,7 +44,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="r5L-Pq-1kU" userLabel="ui_btn_logout">
-                    <rect key="frame" x="16" y="164" width="343" height="40"/>
+                    <rect key="frame" x="16" y="116" width="343" height="40"/>
                     <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="esq-CP-MOh"/>
@@ -78,14 +64,11 @@
                 <constraint firstAttribute="trailing" secondItem="r5L-Pq-1kU" secondAttribute="trailing" constant="16" id="Ijp-R3-9Ee"/>
                 <constraint firstAttribute="trailing" secondItem="lxg-4H-JJK" secondAttribute="trailing" constant="16" id="RPV-VW-7j4"/>
                 <constraint firstItem="r5L-Pq-1kU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="RyB-vo-TWB"/>
+                <constraint firstItem="r5L-Pq-1kU" firstAttribute="top" secondItem="zkb-WH-eMp" secondAttribute="bottom" constant="8" id="VH6-MU-ylL"/>
                 <constraint firstItem="zkb-WH-eMp" firstAttribute="top" secondItem="lxg-4H-JJK" secondAttribute="bottom" constant="8" id="VSE-nT-L47"/>
                 <constraint firstAttribute="trailing" secondItem="zkb-WH-eMp" secondAttribute="trailing" constant="16" id="b4X-qp-JFd"/>
-                <constraint firstAttribute="trailing" secondItem="53j-9t-Psf" secondAttribute="trailing" constant="16" id="bcp-Dl-xmD"/>
-                <constraint firstItem="53j-9t-Psf" firstAttribute="top" secondItem="zkb-WH-eMp" secondAttribute="bottom" constant="8" id="eip-mV-kAs"/>
                 <constraint firstItem="lxg-4H-JJK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="mZs-FA-38r"/>
-                <constraint firstItem="53j-9t-Psf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="oeO-Dd-8mh"/>
                 <constraint firstItem="lxg-4H-JJK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="rA3-kN-Rad"/>
-                <constraint firstItem="r5L-Pq-1kU" firstAttribute="top" secondItem="53j-9t-Psf" secondAttribute="bottom" constant="8" id="zGP-pf-dcw"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -93,9 +76,8 @@
                 <outlet property="btnAddLocation" destination="lxg-4H-JJK" id="2Ld-ew-xiN"/>
                 <outlet property="btnLogout" destination="r5L-Pq-1kU" id="evL-Ms-FN5"/>
                 <outlet property="btnReloadMap" destination="zkb-WH-eMp" id="hfU-Uc-GHc"/>
-                <outlet property="btnShowStatistics" destination="53j-9t-Psf" id="zbm-5u-NyQ"/>
             </connections>
-            <point key="canvasLocation" x="36.5" y="66"/>
+            <point key="canvasLocation" x="36.5" y="42"/>
         </view>
     </objects>
 </document>

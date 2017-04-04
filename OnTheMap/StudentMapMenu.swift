@@ -43,9 +43,4 @@ class StudentMapMenu: UIView {
         
         if let del = delegate { del.handleDelegateCommand("logOutUserFromMenu") }
     }
-    
-    @IBAction func btnShowStatisticsAction(_ sender: UIButton) {
-        
-        print ("show statistics")
-    }
 }
