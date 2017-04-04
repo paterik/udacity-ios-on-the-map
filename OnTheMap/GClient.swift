@@ -38,6 +38,13 @@ class GClient: NSObject {
     
     lazy var geoCoder = CLGeocoder()
     
+    //
+    // MARK: Methods (Public)
+    //
+    
+    /*
+     * get map meta data (as google session object) using cache layer (collection)
+     */
     func getMapMetaByCache (
        _ longitude: Double,
        _ latitude: Double,
@@ -62,6 +69,9 @@ class GClient: NSObject {
         completionHandlerGetMapMetaFromCache(false, "no entry for \(latitude),\(longitude) in cached requests found ...", nil)
     }
     
+    /*
+     * get map meta data (as google session object) using iOS API internals (reverseGeocodeLocation)
+     */
     func getMapMetaByReverseGeocodeLocation(
        _ longitude: Double,
        _ latitude: Double,
@@ -69,6 +79,18 @@ class GClient: NSObject {
        _ success: Bool?,
        _ message: String?,
        _ gClientSession: GClientSession?) -> Void) {
+        
+        
+        // add protective cache-call logic to prevent api-requests by calling this method natively
+        getMapMetaByCache(longitude, latitude) {
+            
+            (success, message, gClientSession) in
+            
+            if success == true {
+                completionHandlerGetMapMeta(true, nil , gClientSession)
+                return
+            }
+        }
         
         geoCoder.reverseGeocodeLocation(CLLocation(latitude: latitude, longitude: longitude)) {
             
@@ -126,7 +148,7 @@ class GClient: NSObject {
         
         -> Void) {
         
-        // add protective cache-call logic to prevent api-requests by calling this method natively
+        // also add protective cache-call logic to prevent api-requests by calling this method natively
         getMapMetaByCache(longitude, latitude) {
             
             (success, message, gClientSession) in
