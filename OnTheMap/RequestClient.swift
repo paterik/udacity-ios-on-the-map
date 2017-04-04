@@ -6,12 +6,16 @@
 //
 //  - func requestPossible () -> Bool       :: check request/network connection
 //  - func requestPrepare  () -> URLRequest :: prepare global request object for upcoming request
-//  - func requestExecute  () -> [void]     :: execute the prepared base request used for helper methods (get, post, patch ...)
+//  - func requestExecute  () -> Void       :: execute the prepared base request used for helper methods (get, post, patch ...)
 //
 //
 //  Extension(s)
 //
-//  - func convertDataWithCompletionHandler :: special json converter / completion handler for handling json results
+//  - func get    () -> Void :: handle all GET requests
+//  - func delete () -> Void :: handle all DELETE requests
+//  - func post   () -> Void :: handle all POST requests
+//  - func put    () -> Void :: handle all PUT requests
+//  - func patch  () -> Void :: handle all PATCH requests
 //
 //  Created by Patrick Paechnatz on 31.12.16.
 //  Copyright © 2016 Patrick Paechnatz. All rights reserved.
@@ -25,11 +29,13 @@ class RequestClient {
     //
     // MARK: Constants (Statics)
     //
+    
     static let sharedInstance = RequestClient()
     
     //
     // MARK: Constants (Normal)
     //
+    
     let debugMode: Bool = true
     let session = URLSession.shared
     let _udcApiSkipCharCount: Int = 5
@@ -40,6 +46,7 @@ class RequestClient {
     //
     // MARK: Properties
     //
+    
     var username: String?
     var password: String?
     var jsonBody: String = "{}"

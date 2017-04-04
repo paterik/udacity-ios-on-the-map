@@ -26,7 +26,6 @@ extension RequestClient {
         )
     }
     
-    
     /*
      * base "DELETE" method for our request base client
      */
