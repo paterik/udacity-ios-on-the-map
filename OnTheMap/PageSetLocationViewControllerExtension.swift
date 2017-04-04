@@ -47,7 +47,9 @@ extension PageSetLocationViewController: MKMapViewDelegate, UIPageViewController
                     let Action = UIAlertAction(title: "Try again", style: .default) { (action:UIAlertAction!) in return }
                         alertController.addAction(Action)
                     
-                    OperationQueue.main.addOperation { self.present(alertController, animated: true, completion:nil)}
+                    OperationQueue.main.addOperation {
+                        self.present(alertController, animated: true, completion:nil)
+                    }
                 }
                 
                 if let placemark = placemarks?.first {
@@ -63,7 +65,7 @@ extension PageSetLocationViewController: MKMapViewDelegate, UIPageViewController
      * set mapView to parametric location coordinates
      */
     func generateMapLocationByCoordinates(
-        _ coordinate: CLLocationCoordinate2D) {
+       _ coordinate: CLLocationCoordinate2D) {
         
         let region = MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude),
@@ -135,7 +137,7 @@ extension PageSetLocationViewController: MKMapViewDelegate, UIPageViewController
                 inpLocationMapString.isEnabled = false
                 btnSubmit.setTitle("Set Your Profile", for: .normal)
                 btnState = 3
-            
+                
                 break
             
             default: break
