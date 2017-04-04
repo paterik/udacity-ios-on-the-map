@@ -44,7 +44,7 @@ class StudentMapAnnotation: UIView {
                 mediaURL = NSString(format: "https://%@", mediaURL) as String
             }
             
-            if mediaURL.validateMediaURL() == true, let nsURL = NSURL(string: mediaURL)  {
+            if mediaURL.validateURL() == true, let nsURL = NSURL(string: mediaURL)  {
                 
                 if  app.canOpenURL(nsURL as URL) == true {
                     app.open(nsURL as URL, options: [:], completionHandler: nil)
