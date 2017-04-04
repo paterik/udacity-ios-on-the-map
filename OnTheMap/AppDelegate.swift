@@ -14,11 +14,16 @@ import FBSDKLoginKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    //
+    // MARK: Variables (Intern)
+    //
+    
     var window: UIWindow?
 
     //
-    // MARK: Variables for API SessionHandling
+    // MARK: Variables (Global)
     //
+    
     var facebookSession: FBSession? = nil
     var udacitySession: UDCSession? = nil
     var isAuthByUdacity: Bool = false
@@ -29,16 +34,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var useLatitude: Double?
     var forceMapReload: Bool = false
     var forceQueueExit: Bool = false
-
-    //
-    // MARK: Variables for minor data "persitence" during app runtime
-    //
     var currentDeviceLocations = [DeviceLocation]()
     var currentUserStudentLocation : PRSStudentData? = nil
+
+    //
+    // MARK: Methods (Public/Getter/Setter)
+    //
     
-    //
-    // FIXME: refactoring of getter/setter functionally necessary !!!
-    //
     func setUdacitySession(_ _udacitySession: UDCSession) {
         
         udacitySession = _udacitySession
@@ -60,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     //
-    // MARK: FaceBookSDK overrides
+    // MARK: FaceBookSDK Overrides
     //
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         
@@ -83,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     //
-    // MARK: unused app delegates
+    // MARK: Unused App Delegates
     //
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
