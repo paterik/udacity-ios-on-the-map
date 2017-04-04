@@ -42,5 +42,4 @@ class StudentListMenu: UIView {
         
         if let del = delegate { del.handleDelegateCommand("logOutUserFromMenu") }
     }
-    
 }
