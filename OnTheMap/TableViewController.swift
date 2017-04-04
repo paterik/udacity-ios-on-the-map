@@ -19,6 +19,12 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
     @IBOutlet weak var tableView: UITableView!
     
     //
+    // MARK: Constants (Special)
+    //
+    
+    let appCommon = AppCommonClass.sharedInstance
+
+    //
     // MARK: Constants (Normal)
     //
     
@@ -58,6 +64,10 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
         activitySpinner.center = self.view.center
     }
     
+    //
+    // MARK: Delegates
+    //
+    
     func tableView(
        _ tableView: UITableView,
          numberOfRowsInSection section: Int) -> Int {
@@ -65,6 +75,10 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
         return locations.count
     }
     
+    /*
+     * render tableView cells using two different cellTypes (StudentTableCell and StudentTableCellStatistic). 
+     * Statistic cell will be always on position 0 and override the zeroIndex cell of out dataSource.
+     */
     func tableView(
        _ tableView: UITableView,
          cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -76,15 +90,10 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
             
             let _numberOfUniqueCountries: Int = clientParse.getNumberOfCountriesFromStudentMeta()
             let _longestDistance: Double = clientParse.getLongestDistanceOfStudentMeta()
-            var _longestDistanceString: String! = NSString(format: "%.0f %@", _longestDistance, "m") as String
-            
-            if  _longestDistance >= 1000.0 {
-                _longestDistanceString = NSString(format: "%.0f %@", (_longestDistance / 1000.0), "km") as String
-            }
             
             cellStatistic?.lblMetaLocationsOwned.text = "\(clientParse.students.myLocations.count-1)"
             cellStatistic?.lblMetaLocationsCount.text = "\(clientParse.students.locations.count-1)"
-            cellStatistic?.lblMetaLargestDistance.text = _longestDistanceString
+            cellStatistic?.lblMetaLargestDistance.text = appCommon.getDistanceWithUnit(_longestDistance)
             cellStatistic?.lblMetaNumberOfCountries.text = "\(_numberOfUniqueCountries)"
         }
         
@@ -94,8 +103,8 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
             
             cellNormal?.lblStudentName.text = NSString(
                 format: "%@ %@",
-                studentLocationMeta.firstName ?? locationNoData,
-                studentLocationMeta.lastName ?? locationNoData
+                studentLocationMeta.firstName,
+                studentLocationMeta.lastName
                 ) as String
             
             let dateFormatter = DateFormatter()
@@ -212,6 +221,10 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
         
         return [link!]
     }
+    
+    //
+    // MARK: Delegates
+    //
     
     /*
      * edit a aspecific userLocation
