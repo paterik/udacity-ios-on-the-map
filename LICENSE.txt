@@ -1,4 +1,4 @@
-Copyright (c) Patrick Paechnatz and other contributors
+Copyright (c) Patrick Paechnatz
 
 MIT License (MIT)
 
