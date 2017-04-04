@@ -10,10 +10,13 @@ import Foundation
 
 struct GClientSession {
     
+    //
+    // MARK: Constants (Normal)
+    //
+    
     let cacheApiRequestURL: String?
     let cacheApiRequestParam: String!
     let cacheApiRequestDate: Date!
-    
     let countryName: String!
     let countryCode: String!
 }

@@ -10,9 +10,21 @@ import Foundation
 
 class GClientCache {
 
+    //
+    // MARK: Constants (Statics)
+    //
+    
     static let sharedInstance = GClientCache()
     
+    //
+    // MARK: Variables
+    //
+    
     var metaData = [GClientSession]()
+    
+    //
+    // MARK: Methods (Public)
+    //
     
     func clearCache() {
     
