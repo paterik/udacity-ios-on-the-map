@@ -128,7 +128,8 @@ extension PRSClient {
     }
     
     /*
-     * add further meta information to our customer mota object using google maps api by delayed requests (e.g. 250ms)
+     * add further meta information to our customer mota object using google maps api by delayed requests (e.g. 100ms)
+     * this method is growen up to more lines than expected, I'll refactor this one in my upcoming release 1.0.n
      */
     func enrichStudentMeta() {
         
