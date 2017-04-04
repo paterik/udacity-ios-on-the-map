@@ -10,12 +10,12 @@ import UIKit
 
 class StudentTableCellStatistic: UITableViewCell {
  
+    //
+    // MARK: IBOutlet Variables
+    //
+    
     @IBOutlet weak var lblMetaLargestDistance: UILabel!
     @IBOutlet weak var lblMetaNumberOfCountries: UILabel!
     @IBOutlet weak var lblMetaLocationsOwned: UILabel!
     @IBOutlet weak var lblMetaLocationsCount: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 }

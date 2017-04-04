@@ -10,14 +10,14 @@ import UIKit
 
 class StudentTableCell: UITableViewCell {
     
+    //
+    // MARK: IBOutlet Variables
+    //
+    
     @IBOutlet weak var lblStudentDistance: UILabel!
     @IBOutlet weak var lblStudentName: UILabel!
     @IBOutlet weak var lblStudentMapString: UILabel!
     @IBOutlet weak var lblStudentDataTimeStamp: UILabel!
     @IBOutlet weak var lblStudentMapFlag: UILabel!
     @IBOutlet weak var lblStudentDistanceValueBar: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 }
