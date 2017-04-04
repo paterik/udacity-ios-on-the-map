@@ -13,6 +13,7 @@ class PageSetViewController: UIViewController {
     //
     // MARK: Constants
     //
+    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let clientParse = PRSClient.sharedInstance
     let clientUdacity = UDCClient.sharedInstance
@@ -21,5 +22,6 @@ class PageSetViewController: UIViewController {
     //
     // MARK: Variables
     //
+    
     var delegate: ControllerCommandProtocol?
 }
