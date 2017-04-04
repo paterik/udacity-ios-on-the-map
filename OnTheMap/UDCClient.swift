@@ -13,11 +13,13 @@ class UDCClient: NSObject {
     //
     // MARK: Constants (Statics)
     //
+    
     static let sharedInstance = UDCClient()
 
     //
     // MARK: Constants (Normal)
     //
+    
     let debugMode: Bool = true
     let session = URLSession.shared
     let client = RequestClient.sharedInstance
@@ -26,12 +28,18 @@ class UDCClient: NSObject {
     //
     // MARK: Constants (API)
     //
+    
     let apiURL: String = "https://www.udacity.com/api/session"
     
     //
     // MARK: Variables
     //
+    
     var clientSession: UDCSession? = nil
+    
+    //
+    // MARK: Methods (Public)
+    //
     
     /*
      * logout user be calling delete command on udacity session handler uri

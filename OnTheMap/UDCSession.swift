@@ -10,10 +10,13 @@ import Foundation
 
 struct UDCSession {
 
+    //
+    // MARK: Constants (Normal)
+    //
+    
     let accountKey: String!
     let accountRegistered: Bool!
     let sessionId: String!
     let sessionExpirationDate: Date!
-    
     let created: Date!
 }
