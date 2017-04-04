@@ -10,17 +10,17 @@ import Foundation
 
 struct FBSession {
     
-    let tokenString: String!
+    //
+    // MARK: Constants (Normal)
+    //
     
+    let tokenString: String!
     let email: String!
     let userID: String!
     let userImgUrl: String!
-    
     let appID: String!
     let permissions: Set<AnyHashable>?
-    
     let expirationDate: Date!
     let refreshDate: Date!
-    
     let created: Date!
 }

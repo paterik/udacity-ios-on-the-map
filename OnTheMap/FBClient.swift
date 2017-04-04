@@ -18,11 +18,13 @@ class FBClient: NSObject {
     //
     // MARK: Constants (Static)
     //
+    
     static let sharedInstance = FBClient()
 
     //
     // MARK: Constants (Normal)
     //
+    
     let debugMode: Bool = true
     let dateFormatter = DateFormatter()
     let fbReqPermissions = ["public_profile", "email"]
@@ -31,16 +33,23 @@ class FBClient: NSObject {
     //
     // MARK: Variables
     //
+    
     var clientSession: FBSession? = nil
     
-    //* handle facebook graph request result and persist facebook session object inside app delegate */
+    //
+    // MARK: Methods (Public)
+    //
+    
+    /*
+     * handle facebook graph request result and persist facebook session object inside app delegate 
+     */
     func getFacebookUserData(
          completionHandlerForGraph: @escaping (
        _ success: Bool,
        _ fbSession: FBSession?,
        _ message: String?) -> Void) {
         
-        /* error 04: facebook token not available anymore */
+        // error 04: facebook token not available anymore
         guard let currentFBAccessToken = FBSDKAccessToken.current() else {
             completionHandlerForGraph(false, nil, "Facebook token lost during graph api call!")
             return
@@ -52,7 +61,7 @@ class FBClient: NSObject {
             ).start(completionHandler: { (connection, result, error) -> Void in
                 
                 if error != nil {
-                    /* error 05: general exception/error during facebook graph call */
+                    // error 05: general exception/error during facebook graph call
                     completionHandlerForGraph(false, nil, "\(error!.localizedDescription)")
                     return
                 }
@@ -63,7 +72,7 @@ class FBClient: NSObject {
                     let _fbPictureUrl = fbPictureDataBlock["url"] as? String,
                     let _fbEmail = resultBlock["email"] as? String else
                 {
-                    /* error 06: unable to parse json response object from facebook graph call */
+                    // error 06: unable to parse json response object from facebook graph call
                     completionHandlerForGraph(false, nil, "Unable to parse facebook user data!")
                     return
                 }
@@ -81,12 +90,15 @@ class FBClient: NSObject {
                     created: Date()
                 )
                 
-                /* everything went fine, save the facebook session token object using lambda function */
+                // everything went fine, save the facebook session token object using lambda function
                 completionHandlerForGraph(true, fbSession, "Facebook authentication successfully done!")
             }
         )
     }
     
+    /*
+     * logOut handler for our facebook session management
+     */
     func removeUserSessionTokenAndLogOut(
          completionHandlerForLogOut: @escaping (
        _ success: Bool?,
@@ -101,6 +113,9 @@ class FBClient: NSObject {
         completionHandlerForLogOut(true, nil)
     }
     
+    /*
+     * logIn handker for our facebok session management
+     */
     func getUserSessionToken(
          viewController: UIViewController!,
          completionHandlerForToken: @escaping (
@@ -108,16 +123,16 @@ class FBClient: NSObject {
        _ fbSession: FBSession?,
        _ message: String?) -> Void) {
 
-        /* check if auth token still valid and return otherwise refresh FB Login */
+        // check if auth token still valid and return otherwise refresh FB Login
         if FBSDKAccessToken.current() != nil {
         
             self.getFacebookUserData { (success: Bool?, fbSession: FBSession?, message: String?) in
-                /* error 03: general exception/error during facebook graph call detected */
+                // error 03: general exception/error during facebook graph call detected
                 if success == false {
                     completionHandlerForToken(false, nil, message)
                 }
                 
-                /* authentication already done no 2nd login api call necessary, override result message for debugging/dev logs */
+                // authentication already done no 2nd login api call necessary, override result message for debugging/dev logs
                 completionHandlerForToken(true, fbSession, "Facebook authentication already done!")
             }
             
@@ -128,25 +143,26 @@ class FBClient: NSObject {
             fbLoginManager.logIn(withReadPermissions: self.fbReqPermissions, from: viewController) { (FBSDKLoginManagerLoginResult, error) in
                 
             if error != nil {
-                /* error 01: general exception/error during facebook login detected */
+                // error 01: general exception/error during facebook login detected
                 completionHandlerForToken(false, nil, "\(String(describing: error?.localizedDescription))")
                 return
                     
             } else if (FBSDKLoginManagerLoginResult?.isCancelled)! {
-                /* error 02: authorization cancelled during facebook login */
+                // error 02: authorization cancelled during facebook login
                 completionHandlerForToken(false, nil, "Facebook authorization process was cancelled!")
                 return
                     
             }
                     
             self.getFacebookUserData { (success: Bool?, fbSession: FBSession?, message: String?) in
-                /* error 03: general exception/error during facebook graph call detected */
+                // error 03: general exception/error during facebook graph call detected
                 if success == false {
                     completionHandlerForToken(false, nil, message)
                     return
                 }
                         
-                /* everything went fine, save the facebook session token object using lambda result of previously graph call function */
+                // everything went fine, save the facebook session token object using
+                // lambda result of previously graph call function
                 completionHandlerForToken(true, fbSession, message)
             }
         }
