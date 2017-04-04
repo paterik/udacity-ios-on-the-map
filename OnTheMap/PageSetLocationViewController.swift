@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PageSetLocationViewController: PageSetViewController {
+class PageSetLocationViewController: PageSetViewController, UITextFieldDelegate {
 
     //
     // MARK: Constants
@@ -45,6 +45,8 @@ class PageSetLocationViewController: PageSetViewController {
         
         mapView.delegate = self
         mapView.showsUserLocation = false
+        inpLocationMapString.delegate = self
+        
         prepareStep(1)
     }
     
@@ -52,6 +54,18 @@ class PageSetLocationViewController: PageSetViewController {
         
         super.viewWillAppear(animated)
         activitySpinner.center = self.view.center
+    }
+    
+    //
+    // MARK: Delegate Methods
+    //
+    
+    func textFieldShouldReturn(
+       _ textField: UITextField) -> Bool {
+        
+        self.view.endEditing(true)
+        
+        return false
     }
     
     //
@@ -103,6 +117,9 @@ class PageSetLocationViewController: PageSetViewController {
         self.dismiss(animated: true)
     }
     
+    /*
+     * not implemented yet
+     */
     @IBAction func btnSetLocationToCurrentDeviceLocationAction(_ sender: Any) { }
     
 }
