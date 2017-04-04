@@ -2,6 +2,28 @@
 //  PRSClient.swift
 //  OnTheMap
 //
+//  ClassMethod(s)
+//
+//  - func setStudentLocation     () -> Void :: set new student location
+//  - func updateStudentLocation  () -> Void :: update known student location
+//  - func deleteStudentLocation  () -> Void :: delete given student location
+//  - func getMyStudentLocations  () -> Void :: get my (owned) student location(s)
+//  - func getAllStudentLocations () -> Void :: get all student location(s)
+//
+//
+//  Extension(s)
+//
+//  - func prepareStudentMetaForPutRequest     () -> Void :: @inherit
+//  - func prepareStudentMetaForPostRequest    () -> Void :: @inherit
+//  - func getJSONFromStringArray              () -> Void :: @inherit
+//  - func getJSONFromStudentMetaDictionary    () -> Void :: @inherit
+//  - func getLongestDistanceOfStudentMeta     () -> Void :: @inherit
+//  - func getNumberOfCountriesFromStudentMeta () -> Void :: @inherit
+//  - func enrichStudentMeta                   () -> Void :: @inherit
+//  - func validateStudentMeta                 () -> Void :: @inherit
+//  - func addIndexZeroStudentLocation         () -> Void :: @inherit
+//  - func getHashedPositionKey                () -> Void :: @inherit
+//
 //  Created by Patrick Paechnatz on 27.12.16.
 //  Copyright © 2016 Patrick Paechnatz. All rights reserved.
 //
@@ -66,6 +88,10 @@ class PRSClient: NSObject {
     var metaMyLocationsCount: Int?
     var metaStudentLocationsCount: Int?
     var metaStudentLocationsCountValid: Int?
+    
+    //
+    // MARK: Methods (Public)
+    //
     
     /*
      * set current user location object (as new student location)
@@ -244,14 +270,30 @@ class PRSClient: NSObject {
                 
                 for dictionary in results as [NSDictionary] {
                 
-                    let meta = PRSStudentData(dictionary)
+                    var meta = PRSStudentData(dictionary)
                     if self.validateStudentMeta(meta) == true {
+                        
+                        // using firstUpper formatter for firstName
+                        meta.firstName = (dictionary["firstName"] as? String) ?? ""
+                        if meta.firstName.isEmpty == false {
+                           meta.firstName = meta.firstName.capitalizingFirstLetter()
+                        }
+                        
+                        // using firstUpper formatter for lastName
+                        meta.lastName  = (dictionary["lastName"] as? String) ?? ""
+                        if meta.lastName.isEmpty == false {
+                           meta.lastName = meta.lastName.capitalizingFirstLetter()
+                        }
+                        
                         // add all relevant locations in collection
                         self.students.locations.append(meta)
                         // add owned locations in separate collection
                         if meta.uniqueKey != nil && meta.uniqueKey == sessionUdacity.accountKey! {
-                            self.students.myLocations.append(meta)
+                           self.students.myLocations.append(meta)
                         }
+                        
+                        // future enhancement for object based dictionary vs normal array collection
+                        // --- self.students.locExt.append([ meta.objectId : meta ]) ---
                         
                         if self.debugMode { print ("\(meta)\n--") }
                     }

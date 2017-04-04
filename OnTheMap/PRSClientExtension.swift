@@ -132,7 +132,7 @@ extension PRSClient {
      */
     func enrichStudentMeta() {
         
-        for (index, meta) in students.locations.enumerated() {
+        for (idx, meta) in students.locations.enumerated() {
             
             // ignore hidden location object
             if meta.isHidden == true {
@@ -145,13 +145,16 @@ extension PRSClient {
                 (success, message, gClientSession) in
 
                 if success == true {
-                        
-                    self.students.locations[index].flag = gClientSession!.countryCode!.getFlagByCountryISOCode()
-                    self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
-                    if self.debugMode {
-                        print ("_ fetch cached flag for index \(index): \(self.students.locations[index].flag)")
+                    
+                    if let index = self.students.findIndexByObjectId( meta.objectId ) {
+                    
+                        self.students.locations[index].flag = gClientSession!.countryCode!.getFlagByCountryISOCode()
+                        self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
+                        if self.debugMode {
+                            print ("_ fetch cached flag for index \(index): \(self.students.locations[index].flag)")
+                        }
                     }
-                        
+                    
                 } else {
                     
                     if self.appDelegate.forceQueueExit == false {
@@ -161,7 +164,7 @@ extension PRSClient {
                         // queue asynchronously to prevent api threshold limitiation of google and iOS.
                         //
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + (Double(index) / 4 )) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + (Double(idx) / 10 )) {
                             
                             // 2nd - try to fetch meta information using ios internal reverse geolocation handler
                             self.clientGoogle.getMapMetaByReverseGeocodeLocation(meta.longitude!, meta.latitude!) {
@@ -170,11 +173,19 @@ extension PRSClient {
                                 
                                 if success == true {
                                     
-                                    self.students.locations[index].flag = gClientSession!.countryCode!.getFlagByCountryISOCode()
-                                    self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
+                                    //
+                                    // problem: if one location was removed during runtime of this task
+                                    // the queue manager will crash with out-of-index message ... (sad)
+                                    //
                                     
-                                    if self.debugMode {
-                                        print ("_ fetch intern flag for index \(index): \(self.students.locations[index].flag)")
+                                    if let index = self.students.findIndexByObjectId( meta.objectId ) {
+                                        
+                                        self.students.locations[index].flag = gClientSession!.countryCode!.getFlagByCountryISOCode()
+                                        self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
+                                    
+                                        if self.debugMode {
+                                            print ("_ fetch intern flag for index \(index): \(self.students.locations[index].flag)")
+                                        }
                                     }
                                     
                                 } else {
@@ -186,24 +197,30 @@ extension PRSClient {
                                         
                                         if success == true {
                                             
-                                            self.students.locations[index].flag = gClientSession!.countryCode!.getFlagByCountryISOCode()
-                                            self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
-                                            if self.debugMode {
-                                                print ("_ fetch new flag for index \(index): \(self.students.locations[index].flag)")
+                                            if let index = self.students.findIndexByObjectId( meta.objectId ) {
+                                                
+                                                self.students.locations[index].flag = gClientSession!.countryCode!.getFlagByCountryISOCode()
+                                                self.students.locations[index].country = gClientSession!.countryName ?? self.metaCountryUnknown
+                                                if self.debugMode {
+                                                    print ("_ fetch new flag for index \(index): \(self.students.locations[index].flag)")
+                                                }
                                             }
                                             
                                         } else {
                                             
-                                            // 4th - evaluate location meta block as default "unknown" try to set fallback values
-                                            var country = self.students.locations[index].mapString!
-                                            if  country.isEmpty {
-                                                country = self.metaCountryUnknown
-                                            }
+                                            if let index = self.students.findIndexByObjectId( meta.objectId ) {
                                             
-                                            self.students.locations[index].country = country
-                                            self.students.locations[index].flag = self.metaCountryUnknownFlag
-                                            if self.debugMode {
-                                                print ("_ unable to fetch flag! Error: \(String(describing: message))")
+                                                // 4th - evaluate location meta block as default "unknown" try to set fallback values
+                                                var country = self.students.locations[index].mapString!
+                                                if  country.isEmpty {
+                                                    country = self.metaCountryUnknown
+                                                }
+                                                
+                                                self.students.locations[index].country = country
+                                                self.students.locations[index].flag = self.metaCountryUnknownFlag
+                                                if self.debugMode {
+                                                    print ("_ unable to fetch flag! Error: \(String(describing: message))")
+                                                }
                                             }
                                         }
                                     }
