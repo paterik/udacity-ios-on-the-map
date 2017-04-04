@@ -11,7 +11,7 @@
 import UIKit
 import MapKit
 
-class PageSetProfileViewController: PageSetViewController {
+class PageSetProfileViewController: PageSetViewController, UITextFieldDelegate {
     
     //
     // MARK: Constants
@@ -45,13 +45,31 @@ class PageSetProfileViewController: PageSetViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        inpFirstname.delegate = self
+        inpLastname.delegate = self
+        inpMediaURL.delegate = self
+        
         loadStudentMetaData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+        
         activitySpinner.center = self.view.center
+    }
+    
+    //
+    // MARK: Delegate Methods
+    //
+    
+    func textFieldShouldReturn(
+       _ textField: UITextField) -> Bool {
+      
+        self.view.endEditing(true)
+        
+        return false
     }
     
     //

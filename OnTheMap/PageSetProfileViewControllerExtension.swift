@@ -144,24 +144,6 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
     }
     
     /*
-     * validate string as accessable url using the "expensive" canOpenURL method
-     * return false on any kind of missmatch
-     */
-    private func validateMediaURLDirectly (
-        _ urlString: String?) -> Bool {
-        
-        if let _urlString = urlString {
-            
-            if let url = NSURL(string: _urlString) {
-                
-                return UIApplication.shared.canOpenURL(url as URL)
-            }
-        }
-        
-        return false
-    }
-    
-    /*
      * get students profile as NSDictionary block from view input directly and generate (pre)json NSDictionary
      * format as return object block. The meta data will also be prepared (e.g. mediaUrl)
      */
@@ -177,6 +159,7 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
     
         let _geocoder = CLGeocoder()
         let _location = CLLocation(latitude: _latitude!, longitude: _longitude!)
+        
         var _mapString: String?
         var _objectId: String! = ""
         
@@ -206,7 +189,12 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
                     "mapString" : _mapString! as String
                 ]
             
-            completionHandlerForStudentMetaProfile(true, nil, PRSStudentData(currentStudentDict))
+            // handle firstName and lastName using capitalizing methods
+            var meta: PRSStudentData = PRSStudentData(currentStudentDict)
+                meta.firstName = self.inpFirstname.text!.capitalizingFirstLetter()
+                meta.lastName = self.inpLastname.text!.capitalizingFirstLetter()
+            
+            completionHandlerForStudentMetaProfile(true, nil, meta)
         }
     }
     
