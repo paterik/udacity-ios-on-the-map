@@ -31,7 +31,8 @@ class PRSStudentLocations {
     
     // collection for all student locations
     var locations = [PRSStudentData]()
-
+    
+    // collection for new student locations dictionary feature implementation
     var locExt = [NSDictionary]()
     
     // collection for my owned locations
@@ -88,18 +89,12 @@ class PRSStudentLocations {
      */
     func removeByObjectId(_ objectId: String) {
     
-        // remove object by given id from all locations stack
-        for (index, location) in locations.enumerated() {
-            if location.isHidden == false && location.objectId == objectId {
-                locations.remove(at: index)
-            }
+        if let objextIndex = findIndexByObjectId(objectId) {
+            locations.remove(at: objextIndex)
         }
         
-        // remove object by given id from my location stack
-        for (index, location) in myLocations.enumerated() {
-            if location.isHidden == false && location.objectId == objectId {
-                locations.remove(at: index)
-            }
+        if let objextIndex = findIndexByObjectId(objectId) {
+            myLocations.remove(at: objextIndex)
         }
         
         // clear validator cache
