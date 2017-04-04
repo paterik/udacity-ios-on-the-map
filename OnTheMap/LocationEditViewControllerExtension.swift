@@ -10,6 +10,10 @@ import Foundation
 
 extension LocationEditViewController: LocationPageViewControllerDelegate {
     
+    //
+    // MARK: LocationPageViewControllerDelegate
+    //
+    
     func locationPageViewController(
        _ locationPageViewController: LocationPageViewController,
          didUpdatePageCount count: Int) {

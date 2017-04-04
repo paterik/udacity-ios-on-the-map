@@ -65,7 +65,7 @@ class LocationEditViewController: UIViewController {
     }
     
     //
-    // MARK: Methods
+    // MARK: Methods (Public)
     //
     
     func btnPageControlAction() {
