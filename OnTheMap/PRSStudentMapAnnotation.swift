@@ -11,6 +11,10 @@ import MapKit
 
 class PRSStudentMapAnnotation: NSObject, MKAnnotation {
     
+    //
+    // MARK: Variables
+    //
+    
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
