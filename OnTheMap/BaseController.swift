@@ -21,11 +21,11 @@ class BaseController: UIViewController {
     let clientUdacity = UDCClient.sharedInstance
     let clientFacebook = FBClient.sharedInstance
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
     let metaDateTimeFormat = "dd.MM.Y hh:mm"
     
     //
     // MARK: Variables
     //
+    
     var appMenu: YNDropDownMenu?
 }

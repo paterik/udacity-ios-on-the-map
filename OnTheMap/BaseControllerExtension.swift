@@ -99,17 +99,17 @@ extension BaseController {
         if appDelegate.isAuthByFacebook == true {
             
             if debugMode { print (" <logout> execute facebook logout") }
-            _callLogOutFacebookAction()
+           _callLogOutFacebookAction()
             
         } else if appDelegate.isAuthByUdacity == true {
             
             if debugMode { print (" <logout> execute udacity logout") }
-            _callLogOutUdacityAction()
+           _callLogOutUdacityAction()
             
         } else {
             
             if debugMode { print (" <logout> execute fallback system logout") }
-            _callLogOutSystemAction()
+           _callLogOutSystemAction()
             
         }
     }
