@@ -11,10 +11,10 @@ import FBSDKCoreKit
 import FBSDKShareKit
 import FBSDKLoginKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     //
-    // MARKS: Outlets
+    // MARK: IBOutlet Variables
     //
     
     @IBOutlet weak var inpUdacityUser: UITextField!
@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var btnForgotUdacityPassword: UIButton!
     
     //
-    // MARKS: Constants
+    // MARKS: Constants (Normal)
     //
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -39,10 +39,34 @@ class LoginViewController: UIViewController {
     
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
+    //
+    // MARK: UIView Methods (overrides)
+    //
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         activitySpinner.center = self.view.center
+        inpUdacityUser.delegate = self
+        inpUdacityPassword.delegate = self
     }
+    
+    //
+    // MARK: Delegate Methods
+    //
+    
+    func textFieldShouldReturn(
+       _ textField: UITextField) -> Bool {
+       
+        self.view.endEditing(true)
+        
+        return false
+    }
+    
+    //
+    // MARK: IBAction Methods
+    //
     
     @IBAction func createUdacityAccountAction(_ sender: AnyObject) {
         
@@ -149,20 +173,5 @@ class LoginViewController: UIViewController {
                 self.showErrorMessage(message!)
             }
         }
-    }
-    
-    /*
-     * load primary controller for handling studen locations after login
-     */
-    private func loadLocationViewController() {
-    
-        activateUI(true)
-        
-        let locationViewController = self.storyboard!.instantiateViewController(
-            withIdentifier: locationTabViewIndentifier) as! LocationTabViewController
-        
-        locationViewController.modalTransitionStyle = UIModalTransitionStyle.coverVertical
-        
-        self.present(locationViewController, animated: true, completion: nil)
     }
 }

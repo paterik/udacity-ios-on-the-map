@@ -119,4 +119,19 @@ extension LoginViewController {
             btnLoginFacebook.alpha = 0.5
         }
     }
+    
+    /*
+     * load primary controller for handling studen locations after login
+     */
+    func loadLocationViewController() {
+        
+        activateUI(true)
+        
+        let locationViewController = self.storyboard!.instantiateViewController(
+            withIdentifier: locationTabViewIndentifier) as! LocationTabViewController
+        
+        locationViewController.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+        
+        self.present(locationViewController, animated: true, completion: nil)
+    }
 }
