@@ -8,9 +8,10 @@
 
 import Foundation
 
+/*
+ * out main queue update handler during asnyc web/api requests
+ */
 func performUIUpdatesOnMain(updates: @escaping () -> Void) {
     
-    DispatchQueue.main.async {
-        updates()
-    }
+    DispatchQueue.main.async { updates() }
 }
