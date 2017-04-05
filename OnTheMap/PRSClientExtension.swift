@@ -165,7 +165,7 @@ extension PRSClient {
                         // queue asynchronously to prevent api threshold limitiation of google and iOS.
                         //
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + (Double(idx) / 10 )) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + (Double(idx) / 5 )) {
                             
                             // 2nd - try to fetch meta information using ios internal reverse geolocation handler
                             self.clientGoogle.getMapMetaByReverseGeocodeLocation(meta.longitude!, meta.latitude!) {
