@@ -38,7 +38,6 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
     //
     
     var activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-    var locations: [PRSStudentData]!
     
     //
     // MARK: UIView Methods (overrides)
@@ -72,7 +71,7 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
        _ tableView: UITableView,
          numberOfRowsInSection section: Int) -> Int {
         
-        return locations.count
+        return clientParse.students.listLocations.count
     }
     
     /*
@@ -99,7 +98,7 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
         
         if indexPath.row > 0 {
             
-            let studentLocationMeta = locations[indexPath.row]
+            let studentLocationMeta = clientParse.students.listLocations[indexPath.row]
             
             cellNormal?.lblStudentName.text = NSString(
                 format: "%@ %@",
@@ -156,7 +155,7 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
             return []
         }
         
-        let currentCellLocation = locations[indexPath.row] as PRSStudentData
+        let currentCellLocation = clientParse.students.listLocations[indexPath.row] as PRSStudentData
         
         // definition for my linkButton using 3rd party lib BGTableViewRowActionWithImage
         let link = BGTableViewRowActionWithImage.rowAction(

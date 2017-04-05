@@ -14,9 +14,9 @@ extension TableViewController {
     func initListView(
        _ loadOwnDataOnly: Bool) {
         
-        locations = clientParse.students.locations
+        clientParse.students.listLocations = clientParse.students.locations
         if loadOwnDataOnly == true {
-            locations = clientParse.students.myLocations
+            clientParse.students.listLocations = clientParse.students.myLocations
         }
         
         tableView.reloadData()
