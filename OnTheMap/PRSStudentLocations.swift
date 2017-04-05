@@ -28,13 +28,13 @@ class PRSStudentLocations {
     //
     // MARK: Variables
     //
-    
-    // collection for all student locations
-    var locations = [PRSStudentData]()
-    
+
     // collection for new student locations dictionary feature implementation
     var locExt = [NSDictionary]()
-    
+    // collection for all student locations
+    var listLocations: [PRSStudentData]!
+    // collection for all student locations
+    var locations = [PRSStudentData]()
     // collection for my owned locations
     var myLocations = [PRSStudentData]()
     // collection helper for location object id's (used to unify student positions)
