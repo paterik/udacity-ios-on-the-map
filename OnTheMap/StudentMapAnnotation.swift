@@ -18,6 +18,7 @@ class StudentMapAnnotation: UIView {
     @IBOutlet weak var studentName: UILabel!
     @IBOutlet weak var studentMediaURL: UIButton!
     @IBOutlet weak var studentDistance: UILabel!
+    @IBOutlet weak var studentMediaURLLabel: UILabel!
     @IBOutlet weak var studentGraphDistanceBackground: UILabel!
     @IBOutlet weak var studentGraphDistanceValue: UILabel!
     

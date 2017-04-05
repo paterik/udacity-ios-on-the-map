@@ -20,14 +20,11 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgUserDefault_v2" translatesAutoresizingMaskIntoConstraints="NO" id="08t-aW-Ig0" userLabel="StudentImage">
                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="100" id="cGQ-74-y7s"/>
+                        <constraint firstAttribute="width" constant="100" id="z4v-bI-8oC"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Patrick R Paechnatz" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HF6-1M-H5a" userLabel="ui_lbl_studentName">
                     <rect key="frame" x="108" y="0.0" width="184" height="25"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="25" id="6Us-zf-rkH"/>
-                    </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -53,8 +50,14 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="www.dunkelfrosch.com" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ovc-52-1gP" userLabel="ui_lbl_studentMediaURL">
+                    <rect key="frame" x="108" y="22" width="184" height="14"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 m" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HfP-VC-EUR" userLabel="ui_lbl_studentDistance">
-                    <rect key="frame" x="108" y="26" width="184" height="14"/>
+                    <rect key="frame" x="107" y="42" width="184" height="14"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -62,26 +65,30 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="cZV-hT-ECm" secondAttribute="trailing" constant="9" id="1qF-IB-Ah8"/>
-                <constraint firstItem="VfI-A5-kVK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="99" id="2of-XO-OUJ"/>
-                <constraint firstItem="08t-aW-Ig0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5kE-vf-Q4K"/>
-                <constraint firstItem="VfI-A5-kVK" firstAttribute="firstBaseline" secondItem="UkQ-8Q-KOy" secondAttribute="firstBaseline" id="Adw-Fq-2GR"/>
-                <constraint firstAttribute="trailing" secondItem="UkQ-8Q-KOy" secondAttribute="trailing" id="B9T-hE-nQ9"/>
-                <constraint firstItem="HF6-1M-H5a" firstAttribute="leading" secondItem="HfP-VC-EUR" secondAttribute="leading" id="ELY-1B-v62"/>
-                <constraint firstItem="08t-aW-Ig0" firstAttribute="top" secondItem="HF6-1M-H5a" secondAttribute="top" id="FgL-3H-P9M"/>
-                <constraint firstItem="08t-aW-Ig0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="K9R-ow-B9c"/>
-                <constraint firstItem="UkQ-8Q-KOy" firstAttribute="baseline" secondItem="VfI-A5-kVK" secondAttribute="baseline" id="MCN-Jz-P8J"/>
-                <constraint firstAttribute="bottom" secondItem="08t-aW-Ig0" secondAttribute="bottom" constant="10" id="Qg6-pA-ImI"/>
-                <constraint firstItem="08t-aW-Ig0" firstAttribute="leading" secondItem="UkQ-8Q-KOy" secondAttribute="leading" id="WkW-bm-zQk"/>
-                <constraint firstItem="HF6-1M-H5a" firstAttribute="trailing" secondItem="HfP-VC-EUR" secondAttribute="trailing" id="aoJ-yj-l44"/>
-                <constraint firstItem="HfP-VC-EUR" firstAttribute="top" secondItem="HF6-1M-H5a" secondAttribute="bottom" constant="1" id="bRV-u9-Vjl"/>
-                <constraint firstItem="UkQ-8Q-KOy" firstAttribute="top" secondItem="cZV-hT-ECm" secondAttribute="bottom" constant="8" symbolic="YES" id="dPc-4H-BdL"/>
-                <constraint firstItem="08t-aW-Ig0" firstAttribute="trailing" secondItem="VfI-A5-kVK" secondAttribute="trailing" id="hbE-kR-FTs"/>
-                <constraint firstItem="cZV-hT-ECm" firstAttribute="leading" secondItem="08t-aW-Ig0" secondAttribute="trailing" constant="166" id="rGg-7f-MIQ"/>
-                <constraint firstItem="VfI-A5-kVK" firstAttribute="leading" secondItem="UkQ-8Q-KOy" secondAttribute="leading" id="uj0-ON-YQq"/>
-                <constraint firstItem="HF6-1M-H5a" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="v7U-xH-pzh"/>
-                <constraint firstAttribute="bottom" secondItem="UkQ-8Q-KOy" secondAttribute="bottom" id="wBD-oh-lz3"/>
-                <constraint firstItem="HF6-1M-H5a" firstAttribute="leading" secondItem="08t-aW-Ig0" secondAttribute="trailing" constant="8" symbolic="YES" id="xu2-6e-39c"/>
+                <constraint firstItem="HF6-1M-H5a" firstAttribute="leading" secondItem="Ovc-52-1gP" secondAttribute="leading" id="4yu-Nt-PGQ"/>
+                <constraint firstItem="08t-aW-Ig0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="A1d-Lx-upQ"/>
+                <constraint firstItem="HfP-VC-EUR" firstAttribute="top" secondItem="Ovc-52-1gP" secondAttribute="bottom" constant="6" id="ALy-Ef-Bhx"/>
+                <constraint firstItem="HfP-VC-EUR" firstAttribute="leading" secondItem="08t-aW-Ig0" secondAttribute="trailing" constant="7" id="BZb-4i-laX"/>
+                <constraint firstItem="08t-aW-Ig0" firstAttribute="trailing" secondItem="VfI-A5-kVK" secondAttribute="trailing" id="CG9-LW-1EP"/>
+                <constraint firstItem="08t-aW-Ig0" firstAttribute="leading" secondItem="VfI-A5-kVK" secondAttribute="leading" id="GpP-ND-Nxk"/>
+                <constraint firstItem="HF6-1M-H5a" firstAttribute="leading" secondItem="08t-aW-Ig0" secondAttribute="trailing" constant="8" symbolic="YES" id="HZ4-GR-5fI"/>
+                <constraint firstItem="VfI-A5-kVK" firstAttribute="firstBaseline" secondItem="UkQ-8Q-KOy" secondAttribute="firstBaseline" id="Idu-2n-Uma"/>
+                <constraint firstItem="Ovc-52-1gP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="22" id="Mye-nZ-oLc"/>
+                <constraint firstItem="VfI-A5-kVK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="99" id="Nn0-Xf-SZz"/>
+                <constraint firstItem="UkQ-8Q-KOy" firstAttribute="top" secondItem="cZV-hT-ECm" secondAttribute="bottom" constant="8" symbolic="YES" id="PPy-S5-HG7"/>
+                <constraint firstItem="HfP-VC-EUR" firstAttribute="top" secondItem="HF6-1M-H5a" secondAttribute="bottom" constant="17" id="SmJ-aP-JsG"/>
+                <constraint firstAttribute="bottom" secondItem="VfI-A5-kVK" secondAttribute="bottom" id="ZAr-cA-8u8"/>
+                <constraint firstItem="HF6-1M-H5a" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="Ze9-kc-gTm"/>
+                <constraint firstAttribute="bottom" secondItem="08t-aW-Ig0" secondAttribute="bottom" constant="10" id="aJd-hI-xD2"/>
+                <constraint firstItem="HF6-1M-H5a" firstAttribute="trailing" secondItem="Ovc-52-1gP" secondAttribute="trailing" id="akC-3G-XPE"/>
+                <constraint firstItem="VfI-A5-kVK" firstAttribute="baseline" secondItem="UkQ-8Q-KOy" secondAttribute="baseline" id="ay0-nD-nSm"/>
+                <constraint firstAttribute="trailing" secondItem="UkQ-8Q-KOy" secondAttribute="trailing" id="bjT-ry-dQM"/>
+                <constraint firstAttribute="trailing" secondItem="HfP-VC-EUR" secondAttribute="trailing" constant="9" id="g1w-w4-dIH"/>
+                <constraint firstItem="08t-aW-Ig0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hEj-CI-dvC"/>
+                <constraint firstItem="08t-aW-Ig0" firstAttribute="top" secondItem="HF6-1M-H5a" secondAttribute="top" id="ivW-I6-uhw"/>
+                <constraint firstItem="VfI-A5-kVK" firstAttribute="leading" secondItem="UkQ-8Q-KOy" secondAttribute="leading" id="mD4-vW-Evi"/>
+                <constraint firstItem="HfP-VC-EUR" firstAttribute="trailing" secondItem="cZV-hT-ECm" secondAttribute="trailing" id="wS7-ay-bkG"/>
+                <constraint firstItem="cZV-hT-ECm" firstAttribute="leading" secondItem="08t-aW-Ig0" secondAttribute="trailing" constant="166" id="wdl-ON-9Wu"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -91,6 +98,7 @@
                 <outlet property="studentGraphDistanceValue" destination="VfI-A5-kVK" id="znf-2q-AAf"/>
                 <outlet property="studentImage" destination="08t-aW-Ig0" id="I3a-lG-5re"/>
                 <outlet property="studentMediaURL" destination="cZV-hT-ECm" id="XGo-me-7L2"/>
+                <outlet property="studentMediaURLLabel" destination="Ovc-52-1gP" id="6qP-9L-X5T"/>
                 <outlet property="studentName" destination="HF6-1M-H5a" id="V3c-8r-N1e"/>
             </connections>
             <point key="canvasLocation" x="573" y="240"/>
