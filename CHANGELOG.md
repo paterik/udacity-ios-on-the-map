@@ -4,8 +4,26 @@ All notable changes of OnTheMap release series are documented in this file using
 
 _This OnTheMap changelog documentation start with version 0.9.9 (2016-11-19)_
 
-## [1.0.0], 2017-04-04:
+## [1.0.1], 2017-04-05:
 _current_
+
+### Added
+
+* missing mediaURL link text in student annotation block
+
+### Fixed
+
+* crash bug on missing device location
+
+### Changed
+
+* colorization of own location pin on map
+* location collection storage in tableView
+* student limitation grows from 50 to 100 students
+* message text for missing internet connection
+
+
+## [1.0.0], 2017-04-04:
 
 ### Added
 
