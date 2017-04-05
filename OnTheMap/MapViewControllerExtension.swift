@@ -170,7 +170,8 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
        _ editMode: Bool) {
         
         appDelegate.inEditMode = editMode
-
+        appDelegate.useCurrentDeviceLocation = false
+        
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "PageSetRoot") as! LocationEditViewController
         let locationRequestController = UIAlertController(
@@ -182,51 +183,60 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         vc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         vc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         
-        let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
-            // check device location again ...
-            self.updateDeviceLocation()
-            // useCurrentDeviceLocation: true means our pageViewController will use a smaller stack of pageSetControllers
-            self.appDelegate.useCurrentDeviceLocation = true
-            // check if last location doesn't match the current one ... if app in create mode only
-            if editMode == false && self.validateCurrentLocationAgainstLastPersistedOne() == false {
-                
-                let locationDuplicateWarningController = UIAlertController(
-                    title: "Duplication Warning ...",
-                    message: "Your current device location is already in use by one of your previous locations!\n" +
-                    "You can ignore this but you'll add a location duplicate doing this!",
-                    preferredStyle: UIAlertControllerStyle.alert
-                )
-                
-                let dlgBtnIgnoreWarningAction = UIAlertAction(title: "Ignore", style: .default) { (action: UIAlertAction!) in
+        // show user choice dialog for device based location service/preFetch
+        // if no device location allowed or provided, load manual loacation mode
+        if appDelegate.currentDeviceLocations.count == 0 {
+            
+            present(vc, animated: true, completion: nil)
+            
+        } else {
+            
+            let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
+                // check device location again ...
+                self.updateDeviceLocation()
+                // useCurrentDeviceLocation: true means our pageViewController will use a smaller stack of pageSetControllers
+                self.appDelegate.useCurrentDeviceLocation = true
+                // check if last location doesn't match the current one ... if app in create mode only
+                if editMode == false && self.validateCurrentLocationAgainstLastPersistedOne() == false {
+                    
+                    let locationDuplicateWarningController = UIAlertController(
+                        title: "Duplication Warning ...",
+                        message: "Your current device location is already in use by one of your previous locations!\n" +
+                        "You can ignore this but you'll add a location duplicate doing this!",
+                        preferredStyle: UIAlertControllerStyle.alert
+                    )
+                    
+                    let dlgBtnIgnoreWarningAction = UIAlertAction(title: "Ignore", style: .default) { (action: UIAlertAction!) in
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                    
+                    let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
+                        return
+                    }
+                    
+                    locationDuplicateWarningController.addAction(dlgBtnIgnoreWarningAction)
+                    locationDuplicateWarningController.addAction(dlgBtnCancelAction)
+                    
+                    self.present(locationDuplicateWarningController, animated: true, completion: nil)
+                    
+                } else {
+                    
                     self.present(vc, animated: true, completion: nil)
                 }
+            }
+            
+            let dlgBtnNoAction = UIAlertAction(title: "No", style: .default) { (action: UIAlertAction!) in
                 
-                let dlgBtnCancelAction = UIAlertAction(title: "Cancel", style: .default) { (action: UIAlertAction!) in
-                    return
-                }
-                
-                locationDuplicateWarningController.addAction(dlgBtnIgnoreWarningAction)
-                locationDuplicateWarningController.addAction(dlgBtnCancelAction)
-                
-                self.present(locationDuplicateWarningController, animated: true, completion: nil)
-                
-            } else {
-                
+                // useCurrentDeviceLocation: false means our pageViewController will use the full stack of pageSetControllers
+                self.appDelegate.useCurrentDeviceLocation = false
                 self.present(vc, animated: true, completion: nil)
             }
-        }
-        
-        let dlgBtnNoAction = UIAlertAction(title: "No", style: .default) { (action: UIAlertAction!) in
             
-            // useCurrentDeviceLocation: false means our pageViewController will use the full stack of pageSetControllers
-            self.appDelegate.useCurrentDeviceLocation = false
-            self.present(vc, animated: true, completion: nil)
+            locationRequestController.addAction(dlgBtnYesAction)
+            locationRequestController.addAction(dlgBtnNoAction)
+            
+            present(locationRequestController, animated: true, completion: nil)
         }
-        
-        locationRequestController.addAction(dlgBtnYesAction)
-        locationRequestController.addAction(dlgBtnNoAction)
-        
-        present(locationRequestController, animated: true, completion: nil)
     }
 
     /*
@@ -418,6 +428,11 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         // no local studen location for my account found? fine ...
         if lastStudentLocation == nil {
+            return true
+        }
+        
+        // no device location found? fine ...
+        if lastDeviceLocation == nil {
             return true
         }
         
@@ -708,7 +723,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         
         annotationView?.image = UIImage(named: "icnUserDefault_v1")
         if studentAnnotation?.ownLocation == true {
-            annotationView?.image = UIImage(named: "icnUserSelf_v1")
+            annotationView?.image = UIImage(named: "icnUserSelf_v2")
         }
         
         return annotationView
@@ -727,6 +742,11 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         calloutView.center = CGPoint(x: view.bounds.size.width / 2, y: -calloutView.bounds.size.height * 0.65)
         calloutView.studentName.text = studentAnnotation.title
         calloutView.studentMediaURL.setTitle(studentAnnotation.url, for: .normal)
+        
+        if studentAnnotation.url != nil {
+            calloutView.studentMediaURLLabel.text = studentAnnotation.url
+        }
+        
         if studentAnnotation.distance != nil {
             calloutView.studentDistance.text = studentAnnotation.distance
         }
