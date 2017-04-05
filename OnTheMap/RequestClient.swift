@@ -150,7 +150,7 @@ class RequestClient {
         // check connection availability and execute request process
         if false == requestPossible() {
         
-            completionHandlerForRequest(nil, "Up's, Your device seems not connected to the web, check your connection state!")
+            completionHandlerForRequest(nil, "Up's, Your device seems not connected to the internet, check your connection state!")
             
         } else {
             
