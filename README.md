@@ -33,6 +33,8 @@ OTM using additional features to comply with my self-imposed goals. I’ll use a
 
 OTM is following the MVC pattern by structural and logical definition. The app is using dedicated view partials instead of base sub views of table cells and annotations.
 
+![xcode project structure](github/media/otm_app_structure_v1.png) 
+
 ### Login
 *all users of this app must be authenticated against the udacity.com network using their student credentials or their bound facebook login using oauth2*
 
