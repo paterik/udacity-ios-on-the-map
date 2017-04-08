@@ -29,6 +29,30 @@ Splash Screen             |  Login-View
 :-------------------------:|:-------------------------:
 ![splash screen](github/media/otm_splash_01.png)  |  ![login view](github/media/otm_login_01.png)
 
+*all users of this app must be authenticated against the udacity.com network using their student credentials or their bound facebook login using oauth2*
+
+MapView Normal             |  MapView ZoomOut
+:-------------------------:|:-------------------------:
+![zoom in](github/media/otm_map_01.png)  |  ![zoom out](github/media/otm_map_01_zo.jpg)
+
+*each student location will marked by a specific pin, own locations will by colored blue, foreign locations will by toned black*
+
+Own Annotation             |  Foreign Annotation
+:-------------------------:|:-------------------------:
+![student owned location](github/media/otm_map_01_detail.png)  |  ![foreign student location](github/media/otm_map_02.png)
+
+*you can click on the annotation pins to bring up a detailed student meta view. You can control your location by delete or edit them. Foreign Student locations will be linked to the provided student url*
+
+ListView of Locations             |  ListView of own Locations
+:-------------------------:|:-------------------------:
+![all locations](github/media/otm_list_01.png)  |  ![your locations](github/media/otm_list_02.png)
+
+*to take a better view, you can also switch to listView of all locations or your locations. At the top of the listView you can see a statistic row containing information about the number of locations found, your locations, the largest distance between your device and another student and the numbers of countries identified*
+
+ShortMenu to student             |  ShortMenu to your location
+:-------------------------:|:-------------------------:
+![cell menu 1](github/media/otm_list_01_m2.png)  |  ![cell menu 2](github/media/otm_list_01_m1.png)
+
 ## Keywords
 
 swift, udacity, extension, uikit, foundation, app
