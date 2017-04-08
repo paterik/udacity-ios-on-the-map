@@ -6,24 +6,32 @@
 [![System Version](https://img.shields.io/badge/version-1.0.2-blue.svg)](VERSION)
 [![Language](https://img.shields.io/badge/swift-3.0-orange.svg)](http://swift.org)
 
-*This repository will hold my project submission for udacity.com project works on app "OnTheMap" during my iOS developer certification program.*
+*This repository will hold my project submission for udacity.com project works on app "OnTheMap" during my iOS developer certification program (course ND003).*
+
+## App Description
 
 „On The Map“ (OTM) is an iOS 10.3 mobile app that shows information posted by other students on a map. The map will contain pins that show the location where other students have reported studying. By tapping on the pin users can see a URL for something the student finds interesting. The user will be able to add their own data by posting a string that can be reverse geocoded to a location, and a URL.
 
-## Specifications
+## App Specifications
 
-OTM will be compile using the latest XCode 8.3 (8E162) Version and will run under iOS 9.n up to the latest iOS Version 10.3.
+OTM master (1.0.3) using the latest XCode 8.3 (8E162) version and will be able to run under iOS Version 9.n up to the latest iOS Version 10.n
  
-OTM using 4 API EndPoints by iOS native session methods:
+OTM using 4 API EndPoints by using iOS native http session handler:
 
 - udacity.com
 - parse.com (udacity clone)
 - facebook.com
 - google maps
 
-OTM using 3rd Party Libraries for better UX/UI behavior. A complete list can be found inside projects [COPYRIGHT.md](COPYRIGHT.md) file.
+OTM using 3rd Party Libraries for better UX/UI behavior and graphical elements from vectorstock licensed for use in my application source. A complete list can be found inside projects [COPYRIGHT.md](COPYRIGHT.md) file.
 
-## Structure
+## App Features
+
+OTM using additional features to comply with my self-imposed goals. I’ll use a dedicated process pipe to enhance the fetched student meta- information entity by distance to the app running device. In addition to this information the country and corresponding flag of each studend will also be added to map annotation and listView cell element.
+
+## App Structure
+
+OTM is following the MVC pattern by structural and logical definition. The app is using dedicated view partials instead of base sub views of table cells and annotations.
 
 ### Login
 *all users of this app must be authenticated against the udacity.com network using their student credentials or their bound facebook login using oauth2*
@@ -67,10 +75,18 @@ Map Menu             |  List Menu
 :-------------------------:|:-------------------------:
 ![map menu](github/media/otm_map_01_menu_v2.png)  |  ![list menu](github/media/otm_list_01_menu_v2.png)
 
-
 ## Keywords
 
-swift, udacity, extension, uikit, foundation, app
+swift-3, swift, udacity, extension, uikit, mapkit, foundation, swift-app
+
+## Releases
+
+OTM is currently available in 5 releases and will be following the Sequence-based version pattern _major.minor[.maintenance[.build]]_. The Build will be auto-generated during each XCode-Build-Prozess using 3rd-Party-Script [xcode-version-bump.sh](https://gist.github.com/sekati/3172554) of Jason Horwitz (sekati). 
+
+
+## Changelog
+
+All notable changes of OnTheMap release series are documented in project [CHANGELOG.md](CHANGELOG.md) file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles. The changelog documentation start with version 0.9.9 (2016-11-19).
 
 ## License-Term
 
