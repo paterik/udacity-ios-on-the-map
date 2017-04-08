@@ -3,7 +3,7 @@
 
 [![Udacity Course Id](https://img.shields.io/badge/course-ND003-37C6EE.svg)](COURSE)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
-[![System Version](https://img.shields.io/badge/version-1.0.1-blue.svg)](VERSION)
+[![System Version](https://img.shields.io/badge/version-1.0.2-blue.svg)](VERSION)
 [![Language](https://img.shields.io/badge/swift-3.0-orange.svg)](http://swift.org)
 
 *This repository will hold my project submission for udacity.com project works on app "OnTheMap" during my iOS developer certification program.*
