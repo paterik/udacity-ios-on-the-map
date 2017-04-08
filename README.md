@@ -51,11 +51,11 @@ ListView of Locations             |  ListView of own Locations
 
 ShortMenu to student             |  ShortMenu to your location
 :-------------------------:|:-------------------------:
-![cell menu 1](github/media/otm_list_01_m2.png)  |  ![cell menu 2](github/media/otm_list_01_m1.png)
+![cell menu 1](github/media/otm_list_01_m2_v2.png)  |  ![cell menu 2](github/media/otm_list_01_m1_v2.png)
 
 Map Menu             |  List Menu
 :-------------------------:|:-------------------------:
-![map menu](github/media/otm_map_menu_01)  |  ![list menu](github/media/otm_list_01_menu.png)
+![map menu](github/media/otm_map_01_menu_v2.png)  |  ![list menu](github/media/otm_list_01_menu_v2.png)
 
 *you can control the app using corresponding menu definition callable in map- and listView to add new locations, filter your list results or logOut from the OTM app*
 
