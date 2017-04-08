@@ -4,8 +4,23 @@ All notable changes of OnTheMap release series are documented in this file using
 
 _This OnTheMap changelog documentation start with version 0.9.9 (2016-11-19)_
 
-## [1.0.1], 2017-04-05:
+## [1.0.2], 2017-04-08:
 _current_
+
+### Added
+
+* media assets for documentation
+
+### Fixed
+
+* wlan location override bug
+
+### Changed
+
+* update documentation
+
+
+## [1.0.1], 2017-04-05:
 
 ### Added
 
