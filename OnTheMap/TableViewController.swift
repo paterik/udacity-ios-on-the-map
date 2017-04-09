@@ -22,7 +22,7 @@ class TableViewController: BaseController, UITableViewDataSource, UITableViewDel
     // MARK: Constants (Special)
     //
     
-    let appCommon = AppCommonClass.sharedInstance
+    let appCommon = AppCommon.sharedInstance
 
     //
     // MARK: Constants (Normal)
