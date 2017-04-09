@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PageSetLocationViewController: PageSetViewController, UITextFieldDelegate {
+class PageSetLocationViewController: PageSetViewController, UITextFieldDelegate, CLLocationManagerDelegate {
 
     //
     // MARK: Constants
@@ -118,8 +118,14 @@ class PageSetLocationViewController: PageSetViewController, UITextFieldDelegate 
     }
     
     /*
-     * not implemented yet
+     * set map location to current device location
      */
-    @IBAction func btnSetLocationToCurrentDeviceLocationAction(_ sender: Any) { }
+    @IBAction func btnSetLocationToCurrentDeviceLocationAction(_ sender: Any) {
+    
+        
+    }
+    
+    
+    
     
 }
