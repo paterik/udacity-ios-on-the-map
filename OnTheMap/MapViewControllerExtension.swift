@@ -193,7 +193,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             
             let dlgBtnYesAction = UIAlertAction(title: "Yes", style: .default) { (action: UIAlertAction!) in
                 // check device location again ...
-                self.updateDeviceLocation()
+                self.appLocation.updateDeviceLocation()
                 // useCurrentDeviceLocation: true means our pageViewController will use a smaller stack of pageSetControllers
                 self.appDelegate.useCurrentDeviceLocation = true
                 // check if last location doesn't match the current one ... if app in create mode only
@@ -350,7 +350,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         // remove all old annotations
         annotations.removeAll()
         
-        updateDeviceLocation()
+        appLocation.updateDeviceLocation()
         
         // render distance to other students only if device location meta data available
         if appDelegate.currentDeviceLocations.count > 0 {
@@ -436,10 +436,10 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
             return true
         }
         
-        let _lastDeviceLongitude: Double = lastDeviceLocation!.longitude!.roundTo(locationCoordRound)
-        let _lastDeviceLatitude: Double = lastDeviceLocation!.latitude!.roundTo(locationCoordRound)
-        let _lastUserStudentLongitude: Double = lastStudentLocation!.longitude!.roundTo(locationCoordRound)
-        let _lastUserStudentLatitude: Double = lastStudentLocation!.latitude!.roundTo(locationCoordRound)
+        let _lastDeviceLongitude: Double = lastDeviceLocation!.longitude!.roundTo(appLocation.locationCoordRound)
+        let _lastDeviceLatitude: Double = lastDeviceLocation!.latitude!.roundTo(appLocation.locationCoordRound)
+        let _lastUserStudentLongitude: Double = lastStudentLocation!.longitude!.roundTo(appLocation.locationCoordRound)
+        let _lastUserStudentLatitude: Double = lastStudentLocation!.latitude!.roundTo(appLocation.locationCoordRound)
         
         if _lastDeviceLongitude == _lastUserStudentLongitude &&
            _lastDeviceLatitude  == _lastUserStudentLatitude {
@@ -448,69 +448,6 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         }
         
         return true
-    }
-    
-    /*
-     * update location meta information and (re)positioning current mapView
-     */
-    func updateCurrentLocationMeta(
-       _ coordinate: CLLocationCoordinate2D) {
-        
-        let currentDeviceLocation : NSDictionary = [ "latitude": coordinate.latitude, "longitude": coordinate.longitude ]
-        
-        appDelegate.currentDeviceLocations.removeAll() // currently we won't persist all evaluated device locations
-        appDelegate.currentDeviceLocations.append(DeviceLocation(currentDeviceLocation)) // persist device location
-        appDelegate.useCurrentDeviceLocation = true
-        appDelegate.useLongitude = coordinate.longitude
-        appDelegate.useLatitude = coordinate.latitude
-        
-        locationFetchSuccess = true
-        if debugMode == true {
-            print("-------------------------------------------------------------")
-            print("You are at [\(coordinate.latitude)] [\(coordinate.longitude)]")
-            print("-------------------------------------------------------------")
-        }
-    }
-    
-    /*
-     * start location scan
-     */
-    func updateDeviceLocation() {
-        
-        deviceLocationManager.checkForLocationAccess {
-            
-            switch self.locationFetchMode
-            {
-                case 1:
-                
-                    if self.locationFetchTrying { return }
-                
-                    self.locationFetchTrying = true
-                    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-                    self.locationManager.activityType = .fitness
-                    self.locationManager.distanceFilter = self.locationDistanceHook
-                    self.locationFetchStartTime = nil
-                
-                    self.locationManager.startUpdatingLocation()
-                
-                case 2:
-                
-                    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-                    self.locationManager.requestLocation()
-                
-                default: break
-            }
-        }
-    }
-    
-    /*
-     * stop location scan
-     */
-    func locationFetchStop () {
-        
-        locationManager.stopUpdatingLocation()
-        locationFetchStartTime = nil
-        locationFetchTrying = false
     }
     
     /*
@@ -543,7 +480,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func _callReloadMapAction() {
         
         updateStudentLocations()
-        updateDeviceLocation()
+        appLocation.updateDeviceLocation()
     }
     
     /*
@@ -611,87 +548,11 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     // MARK: Delegates
     //
     
-    /*
-     * handle authorization change for location fetch permission using corresponding delegate call of locationManager
-     */
-    func locationManager(
-       _ manager: CLLocationManager,
-         didChangeAuthorization status: CLAuthorizationStatus) {
-        
-        if debugMode { print("locationManager: permission/authorization mode changed -> \(status.rawValue)") }
-        
-        switch status {
-            case .authorizedAlways, .authorizedWhenInUse:
-                deviceLocationManager.doThisWhenAuthorized?()
-                deviceLocationManager.doThisWhenAuthorized = nil
-            
-            default: break
-        }
-    }
-    
-    /*
-     * error handling of location fetch using corresponding delegate call of locationManager
-     */
-    func locationManager(
-       _ manager: CLLocationManager,
-         didFailWithError error: Error) {
-        
-        if debugMode { print("locationManager: localization request finally failed -> \(error)") }
-        
-        locationFetchSuccess = false
-        locationFetchStop()
-    }
-    
-    /*
-     * fetch current device location using corresponding delegate call of locationManager
-     */
-    func locationManager(
-       _ manager: CLLocationManager,
-         didUpdateLocations locations: [CLLocation]) {
-        
-        let _location = locations.last!
-        let _coordinate = _location.coordinate
-        
-        switch locationFetchMode
-        {
-            case 1:
-            
-                let _accuracy = _location.horizontalAccuracy
-                let _determinationTime = _location.timestamp
-            
-                // ignore first attempt
-                if locationFetchStartTime == nil {
-                    locationFetchStartTime = Date()
-                    
-                    return
-                }
-            
-                // ignore overtime requests
-                if _determinationTime.timeIntervalSince(self.locationFetchStartTime) > locationCheckTimeout {
-                    locationFetchStop()
-                
-                    return
-                }
-                
-                // wait for the next one
-                if _accuracy < 0 || _accuracy > locationAccuracy { return }
-            
-                locationFetchStop()
-                updateCurrentLocationMeta(_coordinate)
-            
-            case 2:
-                
-                updateCurrentLocationMeta(_coordinate)
-            
-            default: break
-        }
-    }
-    
     func mapView(
        _ mapView: MKMapView,
          didUpdate userLocation: MKUserLocation) {
         
-        updateCurrentLocationMeta(mapView.userLocation.coordinate)
+        appLocation.updateCurrentLocationMeta(mapView.userLocation.coordinate)
     }
     
     func mapView(
