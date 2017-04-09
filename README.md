@@ -64,7 +64,7 @@ ListView of Locations             |  ListView of own Locations
 ![all locations](github/media/otm_list_01.png)  |  ![your locations](github/media/otm_list_02.png)
 
 ### ListView Controls
-*Behind each of the sliding rows you can find a menu. If this location a location belonging to you, you are able to edit, delete or jump to your provided mediaURL / student location profile. If the row entry is a location of  an other student you can visit the corresponding student profile by click on the link*
+*Behind each of the sliding rows you can find a menu. If this location is a location belonging to you, you are able to edit, delete or jump to your provided mediaURL / student location profile. If the row entry is a location of  an other student you can visit the corresponding student profile by click on the link*
 
 ShortMenu to student             |  ShortMenu to your location
 :-------------------------:|:-------------------------:
