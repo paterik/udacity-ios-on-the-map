@@ -607,23 +607,31 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Success" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVL-Ht-Mre">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Success" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVL-Ht-Mre" userLabel="lbl_ui_labelSuccess">
                                 <rect key="frame" x="16" y="100" width="343" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="4VF-EV-jy2"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fu4-na-aCf" userLabel="inp_ui_notification">
+                                <rect key="frame" x="16" y="129" width="343" height="518"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">This view will be used for s3 photo upload feature using students mediaURL property as container for s3 bucket upload public url. This feature is currently under development and will be available in version 2.0.0</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="bVL-Ht-Mre" firstAttribute="top" secondItem="4jg-S2-c5c" secondAttribute="bottom" constant="36" id="7Hn-cX-uzh"/>
-                            <constraint firstItem="4jg-S2-c5c" firstAttribute="top" secondItem="ThM-uO-zXP" secondAttribute="bottom" id="VDO-Ur-3BF"/>
-                            <constraint firstItem="4jg-S2-c5c" firstAttribute="leading" secondItem="CXe-yM-Xz6" secondAttribute="leading" id="cgN-fs-Kwr"/>
-                            <constraint firstItem="bVL-Ht-Mre" firstAttribute="leading" secondItem="CXe-yM-Xz6" secondAttribute="leadingMargin" id="ezc-6N-cxa"/>
-                            <constraint firstAttribute="trailing" secondItem="4jg-S2-c5c" secondAttribute="trailing" id="fL7-hy-OoU"/>
-                            <constraint firstItem="4jg-S2-c5c" firstAttribute="centerX" secondItem="bVL-Ht-Mre" secondAttribute="centerX" id="fvg-Mh-O0r"/>
+                            <constraint firstItem="fu4-na-aCf" firstAttribute="top" secondItem="bVL-Ht-Mre" secondAttribute="bottom" constant="8" symbolic="YES" id="0LC-7W-fx1"/>
+                            <constraint firstItem="bVL-Ht-Mre" firstAttribute="leading" secondItem="CXe-yM-Xz6" secondAttribute="leadingMargin" id="3v5-zi-C74"/>
+                            <constraint firstItem="4jg-S2-c5c" firstAttribute="top" secondItem="ThM-uO-zXP" secondAttribute="bottom" id="Aba-ZF-a4J"/>
+                            <constraint firstItem="bVL-Ht-Mre" firstAttribute="trailing" secondItem="fu4-na-aCf" secondAttribute="trailing" id="N68-gq-1t6"/>
+                            <constraint firstItem="bVL-Ht-Mre" firstAttribute="top" secondItem="4jg-S2-c5c" secondAttribute="bottom" constant="36" id="OH7-Db-Y3K"/>
+                            <constraint firstAttribute="trailing" secondItem="4jg-S2-c5c" secondAttribute="trailing" id="QZh-3a-Jkn"/>
+                            <constraint firstItem="bVL-Ht-Mre" firstAttribute="leading" secondItem="fu4-na-aCf" secondAttribute="leading" id="Scb-Du-hSl"/>
+                            <constraint firstItem="4jg-S2-c5c" firstAttribute="centerX" secondItem="bVL-Ht-Mre" secondAttribute="centerX" id="sMj-CI-F0J"/>
+                            <constraint firstAttribute="bottom" secondItem="fu4-na-aCf" secondAttribute="bottom" constant="20" symbolic="YES" id="y6r-LD-cc8"/>
+                            <constraint firstItem="4jg-S2-c5c" firstAttribute="leading" secondItem="CXe-yM-Xz6" secondAttribute="leading" id="yzy-Rd-bax"/>
                         </constraints>
                     </view>
                     <connections>
@@ -632,7 +640,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j3E-sS-eCq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6319" y="45"/>
+            <point key="canvasLocation" x="6317.6000000000004" y="44.527736131934034"/>
         </scene>
     </scenes>
     <resources>
