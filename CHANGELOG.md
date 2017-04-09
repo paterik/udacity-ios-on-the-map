@@ -10,6 +10,7 @@ _current_
 ### Added
 
 * media assets for documentation
+* activate location fetch inside manual map location edit
 
 ### Fixed
 
@@ -18,6 +19,7 @@ _current_
 ### Changed
 
 * update documentation
+* move location manager based methods to dedicated class
 
 
 ## [1.0.1], 2017-04-05:
