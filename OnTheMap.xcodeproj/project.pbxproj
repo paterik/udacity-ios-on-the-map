@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4339B69E1DDA64F1E487EFB3 /* Pods_OnTheMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF126A51B3920E5D6565196C /* Pods_OnTheMap.framework */; };
-		B110C5991E937AE9004F0268 /* AppCommonClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B110C5981E937AE9004F0268 /* AppCommonClass.swift */; };
+		B110C5991E937AE9004F0268 /* AppCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B110C5981E937AE9004F0268 /* AppCommon.swift */; };
 		B11812851DE4388200C1C91C /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11812841DE4388200C1C91C /* UIColor.swift */; };
 		B118128C1DE4664600C1C91C /* LoginViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B118128B1DE4664600C1C91C /* LoginViewControllerExtension.swift */; };
 		B118128F1DE467B100C1C91C /* GDCBlackbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B118128E1DE467B100C1C91C /* GDCBlackbox.swift */; };
@@ -66,6 +66,7 @@
 		B1DB862F1E17A89B006D827A /* PRSClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB862E1E17A89B006D827A /* PRSClientExtension.swift */; };
 		B1DB86311E17B38B006D827A /* RequestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB86301E17B38B006D827A /* RequestClient.swift */; };
 		B1E27CF41E82881900972B44 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E27CF31E82881900972B44 /* Double.swift */; };
+		B1F53E5F1E99FCB3009EA437 /* AppLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F53E5E1E99FCB3009EA437 /* AppLocation.swift */; };
 		B1F92E031E7C373A00D7BE14 /* PageSetProfileViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F92E021E7C373A00D7BE14 /* PageSetProfileViewControllerExtension.swift */; };
 		B1FCE41B1E72AD050056FC00 /* PRSStudentMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FCE41A1E72AD050056FC00 /* PRSStudentMapAnnotation.swift */; };
 		B1FCE41D1E72CE180056FC00 /* DeviceLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FCE41C1E72CE180056FC00 /* DeviceLocationManager.swift */; };
@@ -92,7 +93,7 @@
 /* Begin PBXFileReference section */
 		5F6793BE2EE06FD20412526D /* Pods-OnTheMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheMap/Pods-OnTheMap.debug.xcconfig"; sourceTree = "<group>"; };
 		AF126A51B3920E5D6565196C /* Pods_OnTheMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnTheMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B110C5981E937AE9004F0268 /* AppCommonClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCommonClass.swift; sourceTree = "<group>"; };
+		B110C5981E937AE9004F0268 /* AppCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCommon.swift; sourceTree = "<group>"; };
 		B11812841DE4388200C1C91C /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		B118128B1DE4664600C1C91C /* LoginViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerExtension.swift; sourceTree = "<group>"; };
 		B118128E1DE467B100C1C91C /* GDCBlackbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDCBlackbox.swift; sourceTree = "<group>"; };
@@ -158,6 +159,7 @@
 		B1DB862E1E17A89B006D827A /* PRSClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSClientExtension.swift; sourceTree = "<group>"; };
 		B1DB86301E17B38B006D827A /* RequestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestClient.swift; sourceTree = "<group>"; };
 		B1E27CF31E82881900972B44 /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		B1F53E5E1E99FCB3009EA437 /* AppLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLocation.swift; sourceTree = "<group>"; };
 		B1F92E021E7C373A00D7BE14 /* PageSetProfileViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSetProfileViewControllerExtension.swift; sourceTree = "<group>"; };
 		B1FCE41A1E72AD050056FC00 /* PRSStudentMapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRSStudentMapAnnotation.swift; sourceTree = "<group>"; };
 		B1FCE41C1E72CE180056FC00 /* DeviceLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceLocationManager.swift; sourceTree = "<group>"; };
@@ -195,7 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				B11812831DE4386700C1C91C /* extensions */,
-				B110C5981E937AE9004F0268 /* AppCommonClass.swift */,
+				B110C5981E937AE9004F0268 /* AppCommon.swift */,
+				B1F53E5E1E99FCB3009EA437 /* AppLocation.swift */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -787,7 +790,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1682AB91E70422F004CB17C /* PRSStudentLocations.swift in Sources */,
-				B110C5991E937AE9004F0268 /* AppCommonClass.swift in Sources */,
+				B110C5991E937AE9004F0268 /* AppCommon.swift in Sources */,
 				B1FCE41D1E72CE180056FC00 /* DeviceLocationManager.swift in Sources */,
 				B12DBEC41DECD0B100C5988A /* FBSession.swift in Sources */,
 				B18340D11E77105A0042A813 /* PageSetLocationViewController.swift in Sources */,
@@ -810,6 +813,7 @@
 				B1DB86311E17B38B006D827A /* RequestClient.swift in Sources */,
 				B12009381E734D08006E2499 /* StudentMapAnnotationView.swift in Sources */,
 				B1DAACE81E922F1000D59179 /* BaseControllerExtension.swift in Sources */,
+				B1F53E5F1E99FCB3009EA437 /* AppLocation.swift in Sources */,
 				B18340D31E77108F0042A813 /* PageSetProfileViewController.swift in Sources */,
 				B1886DEB1DEE1DC5004026BE /* FBClient.swift in Sources */,
 				B1CB21E71E911F6C0017883C /* StudentMapMenu.swift in Sources */,
