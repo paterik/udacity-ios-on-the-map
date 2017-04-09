@@ -1,5 +1,5 @@
 //
-//  AppCommonClass.swift
+//  AppCommon.swift
 //  OnTheMap
 //
 // This class hold all application related base/helper functions
@@ -11,13 +11,13 @@
 import UIKit
 import MapKit
 
-class AppCommonClass {
+class AppCommon {
 
     //
     // MARK: Constants (Statics)
     //
     
-    static let sharedInstance = AppCommonClass()
+    static let sharedInstance = AppCommon()
     
     //
     // MARK: Constants (Normal)
@@ -28,7 +28,7 @@ class AppCommonClass {
     let locationDistanceUnitKilometer: String = "km"
     
     //
-    // MARK: Constants (Normal)
+    // MARK: Public Methods
     //
     
     /*
