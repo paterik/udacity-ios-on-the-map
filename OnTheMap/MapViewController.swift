@@ -58,8 +58,8 @@ class MapViewController: BaseController, ControllerCommandProtocol {
         
         activitySpinner.center = self.view.center
         if appDelegate.forceMapReload == true {
-            appDelegate.forceMapReload = false
-           _callReloadMapAction()
+           appDelegate.forceMapReload = false
+          _callReloadMapAction()
         }
     }
     
