@@ -14,6 +14,7 @@ _current_
 
 ### Fixed
 
+* wording in dialog messages
 * wlan location override bug
 
 ### Changed
