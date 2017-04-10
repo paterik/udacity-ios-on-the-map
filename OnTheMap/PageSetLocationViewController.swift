@@ -17,6 +17,7 @@ class PageSetLocationViewController: PageSetViewController, UITextFieldDelegate,
     
     let debugMode: Bool = false
     let locationMapZoom : CLLocationDegrees = 0.03 // zoom factor (0.03 seems best for max zoom)
+    let appLocation = AppLocation.sharedInstance
     
     //
     // MARK: Variables
@@ -122,10 +123,21 @@ class PageSetLocationViewController: PageSetViewController, UITextFieldDelegate,
      */
     @IBAction func btnSetLocationToCurrentDeviceLocationAction(_ sender: Any) {
     
+        appLocation.updateDeviceLocation()
         
+        guard let latitude:CLLocationDegrees = appDelegate.currentDeviceLocations.first?.latitude,
+              let longitude:CLLocationDegrees = appDelegate.currentDeviceLocations.first?.longitude else {
+                
+                if debugMode { print ("Unable to fetch device location from current location stack :(") }
+                
+                return
+        }
+        
+        let latitudeDelta:CLLocationDegrees = 0.05
+        let longitudeDelta:CLLocationDegrees = 0.05
+        let location = CLLocationCoordinate2DMake(latitude, longitude)
+        let region = MKCoordinateRegionMake(location, MKCoordinateSpanMake(latitudeDelta, longitudeDelta))
+        
+        mapView.setRegion(region, animated: true)
     }
-    
-    
-    
-    
 }
