@@ -105,12 +105,12 @@ class UDCClient: NSObject {
             } else {
                 
                 guard let decodeJsonAccount = data!["account"] as? NSDictionary else {
-                    completionHandlerForAuth(nil, "Up's, account key is missing in api response")
+                    completionHandlerForAuth(nil, "Oops! Account key is missing in api response")
                     return
                 }
                 
                 guard let decodeJsonSession = data!["session"] as? NSDictionary else {
-                    completionHandlerForAuth(nil, "Up's, session key is missing in api response")
+                    completionHandlerForAuth(nil, "Oops! Session key is missing in api response")
                     return
                 }
                 

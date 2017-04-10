@@ -74,19 +74,19 @@ extension LoginViewController {
         -> Void) {
         
         guard let _username = inpUdacityUser.text else {
-            completionHandlerFieldValidator(false, "Up's, missing username in your authentication request!", nil, nil)
+            completionHandlerFieldValidator(false, "Oops! Missing username in your authentication request!", nil, nil)
             
             return
         }
         
         guard let _password = inpUdacityPassword.text else {
-            completionHandlerFieldValidator(false, "Up's, missing password in your authentication request!", nil, nil)
+            completionHandlerFieldValidator(false, "Oops! Missing password in your authentication request!", nil, nil)
             
             return
         }
         
         if _password.isEmpty || _username.isEmpty {
-            completionHandlerFieldValidator(false, "Up's, missing field data for your authentication request!", nil, nil)
+            completionHandlerFieldValidator(false, "Oops! Missing field data for your authentication request!", nil, nil)
             
             return
         }

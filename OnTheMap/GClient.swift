@@ -99,7 +99,7 @@ class GClient: NSObject {
             if error != nil {
                 
                 completionHandlerGetMapMeta(
-                    false, "Up's, reverse geocode location couldn't be handled ... \(String(describing: error))", nil
+                    false, "Oops! Reverse geocode location couldn't be handled ... \(String(describing: error))", nil
                 )
             
             } else {
@@ -125,7 +125,7 @@ class GClient: NSObject {
                     
                 } else {
                     
-                    completionHandlerGetMapMeta(false, "Up's, unable to read results of reverse geocode location", nil)
+                    completionHandlerGetMapMeta(false, "Oops! Unable to read results of reverse geocode location", nil)
                     
                 }
             }
@@ -166,17 +166,17 @@ class GClient: NSObject {
             (data, error) in
          
             if (error != nil) {
-                completionHandlerGetMapMeta(false, "Up's, your request couldn't be handled ... \(String(describing: error))", nil)
+                completionHandlerGetMapMeta(false, "Oops! Your request couldn't be handled ... \(String(describing: error))", nil)
                 
             } else {
                 
                 guard let results = data!["results"] as? [[String: AnyObject]] else {
-                    completionHandlerGetMapMeta(false, "Up's, missing result key in response data", nil)
+                    completionHandlerGetMapMeta(false, "Oops! Missing result key in response data", nil)
                     return
                 }
                 
                 guard let status = data!["status"] as? String else {
-                    completionHandlerGetMapMeta(false, "Up's, missing status key in response data", nil)
+                    completionHandlerGetMapMeta(false, "Oops! Missing status key in response data", nil)
                     return
                 }
                 
@@ -208,7 +208,7 @@ class GClient: NSObject {
                 } else {
                     
                     completionHandlerGetMapMeta(
-                        false, "Up's, couldn't foind any plausible data for \(latitude),\(longitude) -> status=\(status)", nil
+                        false, "Oops! Couldn't find any plausible data for \(latitude),\(longitude) -> status=\(status)", nil
                     )
                 }
             }

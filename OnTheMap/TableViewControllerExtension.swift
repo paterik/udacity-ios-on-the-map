@@ -96,7 +96,7 @@ extension TableViewController {
             let btnOkAction = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction!) in return }
             let alertController = UIAlertController(
                 title: "Alert",
-                message: "UP's, unable to open students URL \(mediaURL)! May be this URL is invalid :(",
+                message: "Oops! Unable to open students URL \(mediaURL)! May be this URL is invalid :(",
                 preferredStyle: UIAlertControllerStyle.alert
             )
             

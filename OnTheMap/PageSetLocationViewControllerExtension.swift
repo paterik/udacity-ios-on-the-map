@@ -40,7 +40,7 @@ extension PageSetLocationViewController: MKMapViewDelegate, UIPageViewController
                     
                     let alertController = UIAlertController(
                         title: "Alert",
-                        message: "Up's, I'm unable to find your defined location '\(address)' ... try another one!",
+                        message: "Oops! I'm unable to find your defined location '\(address)' ... try another one!",
                         preferredStyle: UIAlertControllerStyle.alert
                     )
                     

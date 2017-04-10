@@ -109,7 +109,7 @@ class PRSClient: NSObject {
             if (error != nil) {
                 
                 completionHandlerForSetCurrentLocation(
-                    false, "Up's, your request couln't be handled ... \(String(describing: error))"
+                    false, "Oops! Your request couln't be handled ... \(String(describing: error))"
                 )
                 
             } else {
@@ -137,7 +137,7 @@ class PRSClient: NSObject {
             if (error != nil) {
                 
                 completionHandlerForUpdateCurrentLocation(
-                    false, "Up's, your request couln't be handled ... \(String(describing: error))"
+                    false, "Oops! Your request couln't be handled ... \(String(describing: error))"
                 )
                 
             } else {
@@ -163,7 +163,7 @@ class PRSClient: NSObject {
             if (error != nil) {
                 
                 completionHandlerForDeleteCurrentLocation(
-                    false, "Up's, your request couln't be handled ... \(String(describing: error))"
+                    false, "Oops! Your request couln't be handled ... \(String(describing: error))"
                 )
                 
             } else {
@@ -182,7 +182,7 @@ class PRSClient: NSObject {
         guard let sessionUdacity = clientUdacity.clientSession else {
             
             completionHandlerForCurrentLocation(
-                false, "Up's, no active udacity user session were found! Are you still logged in?"
+                false, "Oops! No active udacity user session were found! Are you still logged in?"
             )
             
             return
@@ -199,14 +199,14 @@ class PRSClient: NSObject {
             if (error != nil) {
                 
                 completionHandlerForCurrentLocation(
-                    false, "Up's, your request couln't be handled ... \(String(describing: error))"
+                    false, "Oops! Your request couln't be handled ... \(String(describing: error))"
                 )
                 
             } else {
                 
                 guard let results = data!["results"] as? [[String: AnyObject]] else {
                     
-                    completionHandlerForCurrentLocation(false, "Up's, missing result key in response data")
+                    completionHandlerForCurrentLocation(false, "Oops! Missing result key in response data")
                     
                     return
                 }
@@ -236,7 +236,7 @@ class PRSClient: NSObject {
         guard let sessionUdacity = clientUdacity.clientSession else {
             
             completionHandlerForGetAllLocations(
-                false, "Up's, no active udacity user session were found! Are you still logged in?"
+                false, "Oops! No active udacity user session were found! Are you still logged in?"
             )
             
             return
@@ -251,14 +251,14 @@ class PRSClient: NSObject {
             if (error != nil) {
             
                 completionHandlerForGetAllLocations(
-                    false, "Up's, your request couln't be handled ... \(String(describing: error!))"
+                    false, "Oops! Your request couln't be handled ... \(String(describing: error!))"
                 )
                 
             } else {
                 
                 guard let results = data!["results"] as? [[String: AnyObject]] else {
                     
-                    completionHandlerForGetAllLocations(false, "Up's, missing result key in response data")
+                    completionHandlerForGetAllLocations(false, "Oops! Missing result key in response data")
                     
                     return
                 }

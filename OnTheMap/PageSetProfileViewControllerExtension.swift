@@ -98,7 +98,7 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
         // check for vaild input fields (firstName and lastName), return on any error here
         if inpFirstname.text?.isEmpty ?? true && inpLastname.text?.isEmpty ?? true {
             completionHandlerForValidateData(
-                false, "Up's, validation for your user profile failed! Check your firstname/lastname!", nil
+                false, "Oops! Validation for your user profile failed! Check your firstname/lastname!", nil
             )
             
             return
@@ -107,7 +107,7 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
         // check current session state, also return on any problem here
         guard let sessionUdacity = clientUdacity.clientSession else {
             completionHandlerForValidateData(
-                false, "Up's, no active udacity user session were found! Are you still logged in?", nil
+                false, "Oops! No active udacity user session were found! Are you still logged in?", nil
             )
             
             return
@@ -116,7 +116,7 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
         // check longitude availability
         guard let _longitude: Double = appDelegate.useLongitude else {
             completionHandlerForValidateData(
-                false, "Up's, unable to fetch longitude from map or device location!", nil
+                false, "Oops! Unable to fetch longitude from map or device location!", nil
             )
             
             return
@@ -125,7 +125,7 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
         // check latitude availability
         guard let _latitude: Double = appDelegate.useLatitude else {
             completionHandlerForValidateData(
-                false, "Up's, unable to fetch latitude from map or device location!", nil
+                false, "Oops! Unable to fetch latitude from map or device location!", nil
             )
             
             return
@@ -209,7 +209,7 @@ extension PageSetProfileViewController: UIPageViewControllerDelegate {
         
         if let _error = error {
             
-            if debugMode == true { print("problem to reverse ceocode location (\(_error))") }
+            if debugMode == true { print("problem in reverse geocode location (\(_error))") }
             
         } else {
             

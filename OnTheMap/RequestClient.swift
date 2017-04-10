@@ -150,7 +150,7 @@ class RequestClient {
         // check connection availability and execute request process
         if false == requestPossible() {
         
-            completionHandlerForRequest(nil, "Up's, Your device seems not connected to the internet, check your connection state!")
+            completionHandlerForRequest(nil, "Oops! Your device seems not connected to the internet, check your connection state!")
             
         } else {
             
@@ -168,13 +168,13 @@ class RequestClient {
                 
                 // GUARD: Was there an error?
                 guard error == nil else {
-                    sendError(error: "Up's, there was a general error with your request: \(String(describing: error))")
+                    sendError(error: "Oops! There was a general error with your request: \(String(describing: error))")
                     return
                 }
                 
                 // GUARD: Was there any data returned?
                 guard let data = data else {
-                    sendError(error: "Up's, no data returned after your request!")
+                    sendError(error: "Oops! No data returned after your request!")
                     return
                 }
                 
@@ -182,14 +182,14 @@ class RequestClient {
                 if let statusCode = (response as? HTTPURLResponse)?.statusCode {
                     
                     if statusCode == 403 {
-                        sendError(error: "Up's, the api authantication failed may be invalid credentials provided!")
+                        sendError(error: "Oops! The API authantication failed may be invalid credentials provided!")
                         return
                     }
                     
                     // sometimes status code 400 returned, we've to check what kind of error this code is involved with
                     if (statusCode == 400 || statusCode == 404) || (statusCode >= 500 && statusCode <= 599) {
                         
-                        sendError(error: "Up's, your request returned a status code other than 2xx! A service downtime may possible - try later")
+                        sendError(error: "Oops! Your request returned a status code other than 2xx! A service downtime may possible - try later")
                         if self.debugMode {
                             print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
                         }
@@ -206,7 +206,7 @@ class RequestClient {
                 do {
                     parsedResult = try JSONSerialization.jsonObject(with: newData as Data, options: .allowFragments)
                 } catch {
-                    completionHandlerForRequest(nil, "Up's, could not parse the api result data as JSON: '\(newData)'")
+                    completionHandlerForRequest(nil, "Oops! Couldn't parse the API result data as JSON: '\(newData)'")
                     if self.debugMode {
                         print(error)
                     }
