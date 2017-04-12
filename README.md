@@ -6,7 +6,7 @@
 [![System Version](https://img.shields.io/badge/version-1.0.2-blue.svg)](VERSION)
 [![Language](https://img.shields.io/badge/swift-3.0-orange.svg)](http://swift.org)
 
-*This repository contains the project submission for udacity.com project work  "OnTheMap" during my iOS developer certification program (course ND003).*
+*This repository contains the project submission for udacity.com project work "OnTheMap" during my iOS developer certification program (course ND003).*
 
 ## App Description
 
@@ -87,7 +87,7 @@ OTM is currently available in [4 releases](https://github.com/paterik/udacity-io
 
 ## Changelog
 
-All notable changes of the OnTheMap release series are documented in project [CHANGELOG.md](CHANGELOG.md) file using the [Keep a CHANGELOG](http://keepachangelog.com/) prtheinciples. The changelog documentation starts with version 0.9.9 (2016-11-19). The latest „reviewed“ version of OTM met the specifications to accomplish the course sub goal. 
+All notable changes of the OnTheMap release series are documented in project [CHANGELOG.md](CHANGELOG.md) file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles. The changelog documentation starts with version 0.9.9 (2016-11-19). The latest „reviewed“ version of OTM met the specifications to accomplish the course sub goal. 
 
 ## License-Term
 
